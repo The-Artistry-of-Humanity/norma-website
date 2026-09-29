@@ -1,32 +1,34 @@
-import type { Context } from "@netlify/functions";
-
 /**
  * Event-triggered function: Netlify invokes this automatically for every
  * verified (non-spam) form submission on the site. It mirrors early-access
  * sign-ups into the Notion database "nørma · early-access sign-ups".
  *
+ * Uses the classic handler signature, which is what Netlify's event-trigger
+ * wiring (submission-created) is documented against.
+ *
  * Dormant until both env vars exist on the site:
- *   NOTION_TOKEN  — internal Notion integration secret (the integration must
- *                   be connected to the target database in Notion)
- *   NOTION_DB_ID  — target Notion data source / database id
+ *   NOTION_TOKEN — internal Notion connection secret (the connection must
+ *                  have content access to the target database)
+ *   NOTION_DB_ID — target Notion database id
  */
-export default async (req: Request, _context: Context) => {
-  const token = Netlify.env.get("NOTION_TOKEN");
-  const db = Netlify.env.get("NOTION_DB_ID");
+export const handler = async (event) => {
+  const token = process.env.NOTION_TOKEN;
+  const db = process.env.NOTION_DB_ID;
   if (!token || !db) {
     console.log("submission-created: Notion sync not configured, skipping");
-    return new Response("skipped", { status: 200 });
+    return { statusCode: 200, body: "skipped" };
   }
 
-  const body = await req.json();
-  const payload = body?.payload ?? {};
+  let body = {};
+  try { body = JSON.parse(event.body || "{}"); } catch (e) { /* ignore */ }
+  const payload = body.payload ?? body;
   if (payload.form_name && payload.form_name !== "early-access") {
-    return new Response("ignored", { status: 200 });
+    return { statusCode: 200, body: "ignored" };
   }
   const data = payload.data ?? {};
-  const text = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+  const text = (v) => (typeof v === "string" ? v.trim() : "");
 
-  const properties: Record<string, unknown> = {
+  const properties = {
     Name: { title: [{ text: { content: text(data.name) || "(no name)" } }] },
     Company: { rich_text: [{ text: { content: text(data.company) } }] },
     Email: { email: text(data.email) || null },
@@ -46,8 +48,8 @@ export default async (req: Request, _context: Context) => {
 
   if (!res.ok) {
     console.error("submission-created: Notion API error", res.status, await res.text());
-    return new Response("notion error", { status: 200 });
+    return { statusCode: 200, body: "notion error" };
   }
   console.log("submission-created: synced to Notion");
-  return new Response("ok", { status: 200 });
+  return { statusCode: 200, body: "ok" };
 };
