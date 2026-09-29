@@ -1,0 +1,35 @@
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;background:#0A130D}
+a{color:#D9EA6E;text-decoration:none}a:hover{color:#EAF79B}
+::selection{background:rgba(217,234,110,.18);color:#F6F4E9}
+input,select,button{font-family:'DM Sans',sans-serif}
+input:focus,select:focus{outline:2px solid rgba(217,234,110,.6);outline-offset:2px}
+input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:rgba(244,242,230,.1);cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:999px;background:#D9EA6E;border:3px solid #0F2015;box-shadow:0 4px 14px rgba(217,234,110,.34);cursor:grab}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:999px;background:#D9EA6E;border:3px solid #0F2015;box-shadow:0 4px 14px rgba(217,234,110,.34);cursor:grab}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.06);opacity:1}}
+@keyframes nrmBreathe{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.07);opacity:1}}
+@keyframes nrmWave{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+@keyframes nrmSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes nrmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+html,body{overflow-x:clip}
+@media (max-width:900px){[data-r=g3],[data-r=g4]{grid-template-columns:repeat(2,minmax(0,1fr))!important}[data-r=navlinks]{display:none!important}}
+@media (max-width:760px){[data-r=heroart]{zoom:.72}}
+@media (max-width:900px){[data-r=lbody]{min-height:780px!important}}
+@media (max-width:1100px){[data-r=privvis]{flex-direction:column;flex-wrap:nowrap}[data-r=privarrow]{transform:rotate(90deg)}}
+@media (max-width:560px){[data-r=g3]{grid-template-columns:minmax(0,1fr)!important}[data-r=wrap]{padding-left:20px!important;padding-right:20px!important}[data-r=wrap][style*="padding:110px"],[data-r=wrap][style*="padding:100px"]{padding-top:72px!important}[data-r=panel]{padding:28px 20px!important}[data-r=heroart]{zoom:.5}}
+
+/* Hover styles ported from the reference's style-hover attributes.
+   !important replicates the reference runtime, where hover styles override
+   the element's inline base styles. */
+.hv-link:hover{color:#EAF79B!important}
+.hv-logo:hover{opacity:.85!important}
+.hv-btn-primary:hover{filter:brightness(1.06)!important;transform:translateY(-1px)!important;box-shadow:0 12px 30px rgba(217,234,110,.28)!important}
+.hv-btn-primary-404:hover{filter:brightness(1.06)!important;transform:translateY(-1px)!important}
+.hv-ghost:hover{background:rgba(228,240,214,.06)!important;border-color:rgba(228,240,214,.32)!important}
+.hv-ghost2:hover{background:rgba(228,240,214,.08)!important;border-color:rgba(228,240,214,.34)!important}
+.hv-chip:hover{border-color:rgba(217,234,110,.55)!important;color:#EAF79B!important}
+.hv-row:hover{background:rgba(217,234,110,.05)!important}
+.hv-row2:hover{background:rgba(228,240,214,.03)!important}
+.hv-tile:hover{border-color:rgba(217,234,110,.5)!important;transform:translateY(-1px)!important}
+.hv-play:hover{background:#24402D!important}
