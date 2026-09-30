@@ -19,6 +19,9 @@ html,body{overflow-x:clip}
 @media (max-width:1100px){[data-r=privvis]{flex-direction:column;flex-wrap:nowrap}[data-r=privarrow]{transform:rotate(90deg)}}
 @media (max-width:560px){[data-r=g3]{grid-template-columns:minmax(0,1fr)!important}[data-r=wrap]{padding-left:20px!important;padding-right:20px!important}[data-r=wrap][style*="padding:110px"],[data-r=wrap][style*="padding:100px"]{padding-top:72px!important}[data-r=panel]{padding:28px 20px!important}[data-r=heroart]{zoom:.5}}
 
+/* Burger menu appears where the nav links hide. */
+@media (max-width:900px){[data-r=burger]{display:flex!important}}
+
 /* Mobile refinements (2026-09-30, requested by AOH): phone-only adjustments
    for sections whose interactions were designed desktop-first. Everything in
    this block is scoped to ≤560px so wider layouts stay untouched. */
