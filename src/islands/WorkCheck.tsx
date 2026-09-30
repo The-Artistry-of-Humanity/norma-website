@@ -45,12 +45,12 @@ export default function WorkCheck() {
           </div>
         </div>
         <div style={s('display:flex;flex-wrap:wrap;gap:18px;margin-top:20px')}>
-          <div style={s('flex:2 1 520px;min-width:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:10px;align-content:start')}>
+          <div data-r="wctiles" style={s('flex:2 1 520px;min-width:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:10px;align-content:start')}>
             {HAZARDS.map((h, i) => {
               const v = S.v[i], k = rag(i, v), c = RAG[k], on = i === hazard;
               const dColor = S.d[i] > 0 ? '#EFB39B' : S.d[i] < 0 ? '#9FD6AB' : 'rgba(201,212,194,.7)';
               return (
-                <button key={h.name} onClick={() => setHazard(i)} className="hv-tile" style={{ ...s(`text-align:left;cursor:pointer;padding:12px 14px 13px;border-radius:14px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:92px;box-sizing:border-box;font-family:'DM Sans',sans-serif;transition:all .3s ease`), background: on ? 'rgba(217,234,110,.10)' : c[1], border: `1px solid ${on ? 'rgba(217,234,110,.6)' : c[2]}` }}>
+                <button key={h.name} data-r="wctile" onClick={() => setHazard(i)} className="hv-tile" style={{ ...s(`text-align:left;cursor:pointer;padding:12px 14px 13px;border-radius:14px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:92px;box-sizing:border-box;font-family:'DM Sans',sans-serif;transition:all .3s ease`), background: on ? 'rgba(217,234,110,.10)' : c[1], border: `1px solid ${on ? 'rgba(217,234,110,.6)' : c[2]}` }}>
                   <div style={s('display:flex;align-items:flex-start;justify-content:space-between;gap:8px;width:100%')}><span style={s(`font:500 12px/1.3 'DM Sans',sans-serif;color:#F4F2E6`)}>{h.name}</span><span style={{ ...s('flex:none;width:9px;height:9px;margin-top:3px;border-radius:999px'), background: c[0], boxShadow: `0 0 8px ${c[0]}` }}></span></div>
                   <div style={s('display:flex;align-items:baseline;justify-content:space-between;width:100%')}><span style={{ ...s(`font:400 24px/1 'DM Serif Display',serif`), color: c[3] }}>{v}%</span><span style={{ ...s(`font:500 10.5px 'DM Mono',monospace`), color: dColor }}>{fmtD(S.d[i])}</span></div>
                 </button>
@@ -59,7 +59,7 @@ export default function WorkCheck() {
           </div>
           <div style={s('flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:12px')}>
             <div style={{ ...s('padding:20px 22px;border-radius:18px;background:rgba(6,11,7,.55)'), border: `1px solid ${hc2[2]}` }}>
-              <div style={s('display:flex;align-items:center;justify-content:space-between;gap:10px')}><span style={s(`font:600 9px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(201,212,194,.78)`)}>{cadence}</span><span style={{ ...s(`padding:4px 10px;border-radius:999px;font:500 10.5px 'DM Sans',sans-serif`), background: hc2[1], border: `1px solid ${hc2[2]}`, color: hc2[3] }}>{status}</span></div>
+              <div style={s('display:flex;align-items:center;justify-content:space-between;gap:10px')}><span style={s(`font:600 9px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(201,212,194,.78)`)}>{cadence}</span><span style={{ ...s(`padding:4px 10px;border-radius:999px;font:500 10.5px 'DM Sans',sans-serif;white-space:nowrap`), background: hc2[1], border: `1px solid ${hc2[2]}`, color: hc2[3] }}>{status}</span></div>
               <div style={s(`margin-top:10px;font:400 24px/1.15 'DM Serif Display',serif;color:#F6F4E9`)}>{hz.name}</div>
               <p style={s(`margin:6px 0 0;font:400 13px/1.45 'DM Sans',sans-serif;color:rgba(201,212,194,.78);text-wrap:pretty`)}>{hz.desc}</p>
               <div style={s('display:flex;align-items:baseline;gap:10px;margin-top:10px')}><span style={{ ...s(`font:400 40px/1 'DM Serif Display',serif`), color: hc2[3] }}>{hv}%</span><span style={s(`font:400 12.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.78)`)}>affected · {fmtD(S.d[hazard])} vs Q2</span></div>

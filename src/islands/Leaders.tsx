@@ -57,7 +57,7 @@ export default function Leaders() {
           <div style={s('padding:22px 24px;border-radius:18px;background:rgba(217,234,110,.06);border:1px solid rgba(217,234,110,.22)')}>
             <div style={s('display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;min-height:22px')}><span style={s(`font:600 9px 'DM Sans',sans-serif;letter-spacing:2px;color:#DCEC85`)}>FULFILMENT · HOW PEOPLE ARE</span><span style={s(`font:500 10.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>{L.part}% took part</span></div>
             <div style={s('display:flex;align-items:center;justify-content:space-between;gap:16px;height:84px;margin-top:14px')}>
-              <div><div style={s('display:flex;align-items:baseline;gap:10px')}><span style={s(`font:400 54px/1 'DM Serif Display',serif;color:#F6F4E9`)}>{L.ful}</span><span style={s(`padding:4px 9px;border-radius:999px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.14);font:500 10.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.85)`)}>{L.fulD}</span></div><div style={s(`margin-top:8px;font:400 12px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>Average of personal scores. Never a person&rsquo;s.</div></div>
+              <div><div style={s('display:flex;align-items:baseline;gap:10px')}><span style={s(`font:400 54px/1 'DM Serif Display',serif;color:#F6F4E9`)}>{L.ful}</span><span style={s(`padding:4px 9px;border-radius:999px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.14);font:500 10.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.85);white-space:nowrap`)}>{L.fulD}</span></div><div style={s(`margin-top:8px;font:400 12px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>Average of personal scores. Never a person&rsquo;s.</div></div>
             </div>
             <div style={s(`display:flex;flex-direction:column;gap:9px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(228,240,214,.08);font:400 12px 'DM Sans',sans-serif`)}>
               {bars.map(b => barRow(b.name, b.v, b.fill, b.color))}
@@ -66,7 +66,7 @@ export default function Leaders() {
           <div style={s('padding:22px 24px;border-radius:18px;background:rgba(217,234,110,.06);border:1px solid rgba(217,234,110,.22)')}>
             <div style={s('display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;min-height:22px')}><span style={s(`font:600 9px 'DM Sans',sans-serif;letter-spacing:2px;color:#DCEC85`)}>CULTURE · WILL THEY TELL YOU</span><span style={s(`font:500 10.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>3 questions a month</span></div>
             <div style={s('display:flex;align-items:center;justify-content:space-between;gap:16px;height:84px;margin-top:14px')}>
-              <div><div style={s('display:flex;align-items:baseline;gap:10px')}><span style={{ ...s(`font:400 54px/1 'DM Serif Display',serif`), color: culColor }}>{cul}</span><span style={s(`padding:4px 9px;border-radius:999px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.14);font:500 10.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.85)`)}>{L.culD}</span></div><div style={s(`margin-top:8px;font:400 12px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>The ring around the pillars.</div></div>
+              <div><div style={s('display:flex;align-items:baseline;gap:10px')}><span style={{ ...s(`font:400 54px/1 'DM Serif Display',serif`), color: culColor }}>{cul}</span><span style={s(`padding:4px 9px;border-radius:999px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.14);font:500 10.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.85);white-space:nowrap`)}>{L.culD}</span></div><div style={s(`margin-top:8px;font:400 12px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>The ring around the pillars.</div></div>
               <svg width="84" height="84" viewBox="0 0 150 150" style={s('flex:none')} aria-hidden="true">
                 <circle cx="75" cy="75" r="62" fill="none" stroke="rgba(228,240,214,.08)" strokeWidth="6" />
                 <circle cx="75" cy="75" r="62" fill="none" stroke={ringColor} strokeWidth="6" strokeLinecap="round" strokeDasharray={`${dash} 389.6`} transform="rotate(-90 75 75)" opacity=".9" style={s('transition:all .5s ease')} />
@@ -106,7 +106,8 @@ export default function Leaders() {
                 <span style={s('display:flex;align-items:center;gap:6px')}><span style={s('width:10px;height:10px;border-radius:3px;background:rgba(231,142,113,.22);border:1px solid rgba(231,142,113,.5)')}></span>Attention 45 and under</span>
               </div>
             </div>
-            <div style={s('overflow-x:auto')}>
+            <span data-r="scrollhint" style={s(`display:none;padding:0 20px 10px;font:400 11px 'DM Sans',sans-serif;color:rgba(201,212,194,.6)`)}>Swipe sideways for all scores →</span>
+            <div data-r="hscroll" style={s('overflow-x:auto')}>
               <div style={s('min-width:760px')}>
                 <div style={s(rowGrid + `;align-items:end;padding:0 12px 10px 20px;font:600 9px 'DM Sans',sans-serif;letter-spacing:1.6px;color:rgba(201,212,194,.72);text-align:center`)}>
                   <span style={s('text-align:left')}>{heatCol}</span><span>HEALTH</span><span>INTERNAL</span><span>LOVE</span><span>SOCIAL</span><span>FLOW</span><span></span><span>HEARD</span><span>VALUED</span><span>SAFE</span><span></span>
@@ -114,7 +115,7 @@ export default function Leaders() {
                 {rows.map((h) => {
                   if (h.withheld) {
                     return (
-                      <div key={h.name} style={s('display:grid;grid-template-columns:minmax(170px,1.8fr) 1fr;align-items:center;padding:0 12px 0 20px;border-top:1px solid rgba(228,240,214,.06)')}>
+                      <div key={h.name} data-r="withheld" style={s('display:grid;grid-template-columns:minmax(170px,1.8fr) 1fr;align-items:center;padding:0 12px 0 20px;border-top:1px solid rgba(228,240,214,.06)')}>
                         <span style={s('display:flex;flex-direction:column;gap:2px;padding:10px 0')}><span style={s(`font:400 16px/1.2 'DM Serif Display',serif;color:rgba(244,242,230,.6)`)}>{h.name}</span><span style={s(`font:400 11px 'DM Sans',sans-serif;color:rgba(201,212,194,.6)`)}>{h.people}</span></span>
                         <span style={s(`font:400 12.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.7)`)}>Fewer than five people. Nothing is shown.</span>
                       </div>

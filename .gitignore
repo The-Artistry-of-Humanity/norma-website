@@ -3,3 +3,4 @@ dist/
 .astro/
 .DS_Store
 design_handoff_norma_website/
+*.local.mjs

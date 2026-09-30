@@ -41,7 +41,7 @@ export default function EarlyAccess() {
           <input type="text" placeholder="Company" value={company} onChange={e => setCompany(e.target.value)} style={{ ...inputStyle, ...s('flex:1;min-width:140px') }} aria-label="Company" autoComplete="organization" />
         </div>
         <input type="email" placeholder="you@company.com" value={email} onChange={e => setEmail(e.target.value)} style={{ ...inputStyle, ...s('width:100%') }} aria-label="Email for early access" autoComplete="email" />
-        <input type="tel" placeholder="Phone (optional) · +61 400 000 000" value={phone} onChange={e => setPhone(e.target.value)} style={{ ...inputStyle, ...s('width:100%') }} aria-label="Phone, optional" autoComplete="tel" />
+        <input type="tel" placeholder="Phone (optional)" value={phone} onChange={e => setPhone(e.target.value)} style={{ ...inputStyle, ...s('width:100%') }} aria-label="Phone, optional" autoComplete="tel" />
         <div>
           <button onClick={sendEmail} disabled={sending} className="hv-ghost2" style={s(`height:46px;padding:0 20px;border-radius:999px;border:1px solid rgba(228,240,214,.2);background:rgba(228,240,214,.06);color:#F4F2E6;font:500 14px 'DM Sans',sans-serif;cursor:pointer;transition:all .2s ease`)}>{sending ? 'Sending…' : 'Request early access'}</button>
         </div>

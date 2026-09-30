@@ -34,7 +34,7 @@ export default function PillarsRadar() {
 
   return (
     <div style={s('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:40px;align-items:center;margin-top:40px')}>
-      <div style={s('position:relative;width:100%;max-width:520px;aspect-ratio:1;margin:0 auto')}>
+      <div data-r="radar" style={s('position:relative;width:100%;max-width:520px;aspect-ratio:1;margin:0 auto')}>
         <div style={s('position:absolute;inset:8%;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.12),rgba(0,0,0,0) 72%);animation:nrmBreathe 6s ease-in-out infinite;pointer-events:none')}></div>
         <svg viewBox="0 0 400 400" style={s('position:absolute;inset:0;width:100%;height:100%')} aria-hidden="true">
           <path d={HEPT} fill="none" stroke="rgba(228,240,214,.12)" vectorEffect="non-scaling-stroke" transform="translate(200 200) scale(1.74) translate(-95 -95)" />
@@ -50,7 +50,7 @@ export default function PillarsRadar() {
           const bc = on ? 'rgba(217,234,110,.65)' : 'rgba(228,240,214,.16)';
           const color = on ? '#EAF79B' : 'rgba(244,242,230,.85)';
           return (
-            <button key={i} onClick={() => setPillar(i)} className="hv-chip" style={{ ...s(`position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;cursor:pointer;font:500 13px 'DM Sans',sans-serif;transition:all .3s ease`), left: VERT_POS[i].left, top: VERT_POS[i].top, background: bg, border: `1px solid ${bc}`, color }}>
+            <button key={i} data-r="vertex" onClick={() => setPillar(i)} className="hv-chip" style={{ ...s(`position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;cursor:pointer;font:500 13px 'DM Sans',sans-serif;transition:all .3s ease`), left: VERT_POS[i].left, top: VERT_POS[i].top, background: bg, border: `1px solid ${bc}`, color }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{VERT_ICONS[i]}</svg>
               {VERT_LABELS[i]}
             </button>
