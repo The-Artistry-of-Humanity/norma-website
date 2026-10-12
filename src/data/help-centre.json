@@ -1,0 +1,446 @@
+{
+  "route": "/help",
+  "note": "Titles and summaries are final draft copy. body is null for every article: placeholder until written.",
+  "paths": {
+    "app": {
+      "label": "The app",
+      "groups": [
+        {
+          "name": "Getting started",
+          "articles": [
+            {
+              "id": "a-signin",
+              "slug": "signin",
+              "title": "Download and sign in",
+              "summary": "Get nørma from the App Store or Google Play and sign in with the work email your organisation invited.",
+              "keywords": "login password",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "a-first",
+              "slug": "first",
+              "title": "Your first check-in",
+              "summary": "What to expect from the first twenty questions, and how long they take.",
+              "keywords": "",
+              "phoneScreen": "checkin",
+              "body": null
+            },
+            {
+              "id": "a-reminders",
+              "slug": "reminders",
+              "title": "Reminders and notifications",
+              "summary": "Choose when nørma nudges you, or turn reminders off.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Check-in and your score",
+          "articles": [
+            {
+              "id": "a-checkin",
+              "slug": "checkin",
+              "title": "How the monthly check-in works",
+              "summary": "Twenty questions once a month: four per pillar, three on culture.",
+              "keywords": "",
+              "phoneScreen": "checkin",
+              "body": null
+            },
+            {
+              "id": "a-pillars",
+              "slug": "pillars",
+              "title": "The five pillars",
+              "summary": "Health, Internal, Love, Social and Work & Life Flow, and what each one covers.",
+              "keywords": "",
+              "phoneScreen": "home",
+              "body": null
+            },
+            {
+              "id": "a-score",
+              "slug": "score",
+              "title": "Reading your Fulfilment score",
+              "summary": "What the number and the shape on Home tell you, and what they don’t.",
+              "keywords": "",
+              "phoneScreen": "home",
+              "body": null
+            },
+            {
+              "id": "a-mirror",
+              "slug": "mirror",
+              "title": "The mirror",
+              "summary": "The short written reflection you get back after each check-in.",
+              "keywords": "",
+              "phoneScreen": "mirror",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Reflect",
+          "articles": [
+            {
+              "id": "a-reflect",
+              "slug": "reflect",
+              "title": "Voice and text reflections",
+              "summary": "Say it or type it. Speech is turned into text on your device.",
+              "keywords": "privacy voice",
+              "phoneScreen": "reflect",
+              "body": null
+            },
+            {
+              "id": "a-who",
+              "slug": "who",
+              "title": "Who can hear my reflections",
+              "summary": "Only you. Not your employer, not your manager, not us.",
+              "keywords": "privacy voice recording private",
+              "phoneScreen": "reflect",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Grow",
+          "articles": [
+            {
+              "id": "a-habits",
+              "slug": "habits",
+              "title": "Habits",
+              "summary": "Small things you do on repeat, each one tied to a pillar.",
+              "keywords": "",
+              "phoneScreen": "habits",
+              "body": null
+            },
+            {
+              "id": "a-journeys",
+              "slug": "journeys",
+              "title": "Growth journeys",
+              "summary": "Short illustrated chapters, one pillar at a time, with one thing to try.",
+              "keywords": "",
+              "phoneScreen": "journey",
+              "body": null
+            },
+            {
+              "id": "a-reset",
+              "slug": "reset",
+              "title": "Reset",
+              "summary": "Tools for the next few minutes, picked by how you feel right now.",
+              "keywords": "",
+              "phoneScreen": "reset",
+              "body": null
+            },
+            {
+              "id": "a-gratitude",
+              "slug": "gratitude",
+              "title": "Gratitude",
+              "summary": "Three things a day, and what it does over a month.",
+              "keywords": "",
+              "phoneScreen": "gratitude",
+              "body": null
+            },
+            {
+              "id": "a-momentum",
+              "slug": "momentum",
+              "title": "Momentum",
+              "summary": "How your tree grows each time you do something.",
+              "keywords": "",
+              "phoneScreen": "grow",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Privacy and your data",
+          "articles": [
+            {
+              "id": "a-sees",
+              "slug": "sees",
+              "title": "What my employer sees",
+              "summary": "Aggregated results for groups of five or more. Never your answers.",
+              "keywords": "privacy anonymous aggregated five manager employer",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "a-export",
+              "slug": "export",
+              "title": "Download my data",
+              "summary": "Export everything you have entered as a single file.",
+              "keywords": "privacy data export download",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "a-delete",
+              "slug": "delete",
+              "title": "Delete my account",
+              "summary": "Delete from settings at any time. You have 30 days to change your mind.",
+              "keywords": "privacy data erase remove",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "a-crisis",
+              "slug": "crisis",
+              "title": "When you need more support",
+              "summary": "Where to turn if you’d like to talk to someone now.",
+              "keywords": "emergency lifeline danger",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        }
+      ]
+    },
+    "dashboard": {
+      "label": "The dashboard",
+      "groups": [
+        {
+          "name": "Getting started",
+          "articles": [
+            {
+              "id": "d-setup",
+              "slug": "setup",
+              "title": "Set up your organisation",
+              "summary": "Departments, teams and who belongs where.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-invite",
+              "slug": "invite",
+              "title": "Invite your people",
+              "summary": "Send invites, track enrolment and resend.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-roles",
+              "slug": "roles",
+              "title": "Leaders and administrators",
+              "summary": "Who sees the dashboard, who manages people, and what neither can see.",
+              "keywords": "privacy individual answers permissions",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Reading the signal",
+          "articles": [
+            {
+              "id": "d-scores",
+              "slug": "scores",
+              "title": "Fulfilment and Culture",
+              "summary": "The two organisation numbers and the six months behind them.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-depts",
+              "slug": "depts",
+              "title": "By department",
+              "summary": "Every group of five or more, and the ten numbers behind each.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-focus",
+              "slug": "focus",
+              "title": "Focus area",
+              "summary": "Why one department is named this month, and what to do next.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-five",
+              "slug": "five",
+              "title": "Why some groups show nothing",
+              "summary": "The five-person minimum, and the rule that stops a small group being worked out by subtraction.",
+              "keywords": "privacy anonymous aggregated minimum hidden",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Acting on it",
+          "articles": [
+            {
+              "id": "d-growth",
+              "slug": "growth",
+              "title": "Growth work",
+              "summary": "Run a session from the library and log it against the signal.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-playbooks",
+              "slug": "playbooks",
+              "title": "Playbooks",
+              "summary": "What each session is for, who it suits and how long it takes.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-moved",
+              "slug": "moved",
+              "title": "Did it move?",
+              "summary": "Reading next month’s numbers against what you did.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Check-ins",
+          "articles": [
+            {
+              "id": "d-schedule",
+              "slug": "schedule",
+              "title": "Check-in schedule",
+              "summary": "When check-ins open and close, and when the signal arrives.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-participation",
+              "slug": "participation",
+              "title": "Raising participation",
+              "summary": "What helps people take part, and what to avoid.",
+              "keywords": "participation response rate",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Psychosocial duty",
+          "articles": [
+            {
+              "id": "d-workcheck",
+              "slug": "workcheck",
+              "title": "Work Check",
+              "summary": "The optional quarterly check mapped to the 14 WHS hazards.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-evidence",
+              "slug": "evidence",
+              "title": "Your evidence trail",
+              "summary": "A dated record of what you identified, did and reviewed.",
+              "keywords": "regulator iso 45003 audit export",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Administration",
+          "articles": [
+            {
+              "id": "d-people",
+              "slug": "people",
+              "title": "People and structure",
+              "summary": "Move people between teams and handle leavers.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-sso",
+              "slug": "sso",
+              "title": "Sign-in and SSO",
+              "summary": "Connect your identity provider.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            },
+            {
+              "id": "d-billing",
+              "slug": "billing",
+              "title": "Seats and billing",
+              "summary": "How enrolment is counted.",
+              "keywords": "",
+              "phoneScreen": null,
+              "body": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "topArticles": {
+    "app": [
+      "a-who",
+      "a-checkin",
+      "a-reflect",
+      "a-delete"
+    ],
+    "dashboard": [
+      "d-focus",
+      "d-five",
+      "d-growth",
+      "d-participation"
+    ]
+  },
+  "problems": {
+    "app": [
+      {
+        "articleId": "a-sees",
+        "question": "I’m worried my manager can see my answers",
+        "linkLabel": "What your employer sees"
+      },
+      {
+        "articleId": "a-delete",
+        "question": "I want to delete everything",
+        "linkLabel": "Delete your account"
+      },
+      {
+        "articleId": "a-signin",
+        "question": "I can’t sign in",
+        "linkLabel": "Signing in"
+      },
+      {
+        "articleId": "a-crisis",
+        "question": "I need to talk to someone now",
+        "linkLabel": "Where to turn"
+      }
+    ],
+    "dashboard": [
+      {
+        "articleId": "d-five",
+        "question": "A team shows no numbers",
+        "linkLabel": "The five-person minimum"
+      },
+      {
+        "articleId": "d-participation",
+        "question": "Participation is low",
+        "linkLabel": "Raising participation"
+      },
+      {
+        "articleId": "d-roles",
+        "question": "Someone asks to see individual answers",
+        "linkLabel": "What leaders can see"
+      },
+      {
+        "articleId": "d-evidence",
+        "question": "A regulator asks for evidence",
+        "linkLabel": "Your evidence trail"
+      }
+    ]
+  }
+}

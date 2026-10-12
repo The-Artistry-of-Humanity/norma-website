@@ -37,6 +37,16 @@ html,body{overflow-x:clip}
   [data-r=scrollhint]{display:block!important}
 }
 
+/* For leaders dashboard on narrow screens (2026-10, AOH): the reference is a
+   1120px desktop app screen. Below 760px the app sidebar hides and the main
+   panel scrolls sideways with a hint, instead of shrinking to unreadable size. */
+@media (max-width:760px){
+  [data-r=ldaside]{display:none!important}
+  [data-r=ldinner]{min-width:924px!important}
+  [data-r=ldhint]{display:block!important}
+  [data-r=ldscroll]{mask-image:linear-gradient(90deg,#000 calc(100% - 32px),rgba(0,0,0,.2));-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),rgba(0,0,0,.2))}
+}
+
 /* Hover styles ported from the reference's style-hover attributes.
    !important replicates the reference runtime, where hover styles override
    the element's inline base styles. */
