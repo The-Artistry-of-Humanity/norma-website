@@ -65,8 +65,9 @@ export default class HelpCentre extends React.Component {
       <>
       {(V.isHome) ? (
         <>
-          <div style={s(`position:relative;background:linear-gradient(178deg,#17301F 0%,#0F2015 45%,#0A130D 100%);overflow:hidden`)}>
-            <div style={s(`position:absolute;left:50%;top:-140px;width:900px;height:560px;margin-left:-450px;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.13),rgba(0,0,0,0) 72%);pointer-events:none`)}></div>
+          <div style={s(`position:relative;z-index:5;background:linear-gradient(178deg,#17301F 0%,#0F2015 45%,#0A130D 100%)`)}>
+            {/* Glow clipped in its own layer so the search results can overlap the cards below. */}
+            <div style={s(`position:absolute;inset:0;overflow:hidden;pointer-events:none`)}><div style={s(`position:absolute;left:50%;top:-140px;width:900px;height:560px;margin-left:-450px;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.13),rgba(0,0,0,0) 72%)`)}></div></div>
             <div data-r="wrap" style={s(`position:relative;max-width:1180px;margin:0 auto;padding:96px 40px 72px;box-sizing:border-box;text-align:center`)}>
               <span style={s(`font:600 10px 'DM Sans',sans-serif;letter-spacing:2.4px;color:#D9EA6E`)}>NØRMA HELP CENTRE</span>
               <h1 style={s(`margin:18px 0 0;font:400 clamp(42px,5.4vw,66px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#F6F4E9`)}>How can we help?</h1>
@@ -177,12 +178,12 @@ export default class HelpCentre extends React.Component {
               <button onClick={V.pickDash} style={s(`flex:1;padding:8px 10px;border-radius:10px;border:0;cursor:pointer;background:${V.segDash.bg ?? ''};color:${V.segDash.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The dashboard</button>
             </div>
             <div data-r="topsearch" style={s(`position:relative;z-index:30;flex:1;max-width:340px;margin-left:auto`)}>
-              <div style={s(`display:flex;align-items:center;gap:10px;height:36px;padding:0 10px 0 13px;border-radius:12px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.1)`)}>
+              <div style={s(`display:flex;align-items:center;gap:10px;height:36px;padding:0 10px 0 13px;border-radius:12px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.1)`)} className="hc-topsearch">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(201,212,194,.7)" strokeWidth="2" strokeLinecap="round">
                   <circle cx="11" cy="11" r="6.5"></circle>
                   <path d="M16 16 L20.5 20.5"></path>
                 </svg>
-                <input ref={V.searchRef} value={V.q} onChange={V.setQ} placeholder="Search the help centre" aria-label="Search the help centre" style={s(`flex:1;min-width:0;height:100%;border:0;background:transparent;font:400 14px 'DM Sans',sans-serif;color:#F6F4E9`)} />
+                <input ref={V.searchRef} value={V.q} onChange={V.setQ} placeholder="Search the help centre" aria-label="Search the help centre" style={s(`flex:1;min-width:0;height:100%;border:0;outline:none;background:transparent;font:400 14px 'DM Sans',sans-serif;color:#F6F4E9`)} />
                 <span style={s(`flex:none;padding:2px 7px;border-radius:6px;border:1px solid rgba(228,240,214,.16);font:500 11px 'DM Mono',monospace;color:rgba(201,212,194,.7)`)}>⌘K</span>
               </div>
               {(V.hasQ) ? (
