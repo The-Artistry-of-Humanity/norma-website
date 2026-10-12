@@ -16,7 +16,7 @@ export default class TwoSides extends L.HomeBase {
       <div style={s(`display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px`)}>
         <div style={s(`max-width:620px`)}>
           <span style={s(`font:600 10px 'DM Sans',sans-serif;letter-spacing:2.4px;color:#D9EA6E`)}>ONE SYSTEM, TWO SIDES</span>
-          <h2 style={s(`margin:16px 0 0;font:400 clamp(34px,4vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:pretty`)}>Your people get a live companion. You get a signal to act on.</h2>
+          <h2 style={s(`margin:16px 0 0;font:400 clamp(34px,4vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:pretty`)}>Your people get a life companion. You get a signal to act on.</h2>
         </div>
         <div style={s(`display:inline-flex;padding:4px;border-radius:999px;border:1px solid rgba(228,240,214,.12);background:rgba(10,19,13,.4)`)}>
           <button onClick={V.pickPeople} style={s(`padding:10px 18px;border-radius:999px;border:0;cursor:pointer;background:${V.sidePeople.bg ?? ''};color:${V.sidePeople.c ?? ''};font:500 14px 'DM Sans',sans-serif;transition:all .3s ease`)} className="tws-ho950d73">Employee app</button>
@@ -214,41 +214,86 @@ export default class TwoSides extends L.HomeBase {
                 {(V.youIs1) ? (
                   <>
                     <div style={s(`padding:18px 20px 16px;border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:rgba(228,240,214,.05);display:flex;flex-direction:column;gap:12px`)}>
-                      <div style={s(`display:grid;grid-template-columns:150px 80px 20px 80px 1fr;gap:4px;align-items:end;padding:0 4px`)}>
-                        <span></span>
-                        <span style={s(`font:600 9.5px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(244,242,230,.85);text-align:center;padding-bottom:4px`)}>FULFILMENT</span>
-                        <span></span>
-                        <span style={s(`font:600 9.5px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(244,242,230,.85);text-align:center;padding-bottom:4px`)}>CULTURE</span>
-                        <span style={s(`font:600 9.5px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(201,212,194,.55);padding:0 0 4px 24px`)}>SIX MONTHS</span>
-                      </div>
-                      <div style={s(`display:flex;flex-direction:column;gap:2px`)}>
-                        {(V.L.rows || []).map((r, $index) => (
-                          <React.Fragment key={$index}>
-                            <div style={s(`display:grid;grid-template-columns:150px 80px 20px 80px 1fr;gap:4px;align-items:center;padding:3px 4px;border-radius:12px;transition:background .2s ease`)} className="tws-hob7451d">
-                              <span style={s(`display:flex;align-items:center;gap:9px;font:400 16px 'DM Serif Display',serif;color:#F6F4E9`)}>
-                                <span style={s(`width:8px;height:8px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:#E78E71;display:${r.lookDisplay ?? ''}`)}></span>
-                                {r.name}
-                              </span>
-                              <span style={s(`display:flex;align-items:center;justify-content:center;gap:4px;height:44px;border-radius:12px;background:${r.fT.bg ?? ''};color:${r.fT.fg ?? ''};font:400 20px 'DM Serif Display',serif;font-variant-numeric:tabular-nums`)}>
-                                <span>{r.fT.v}</span>
-                                <span style={s(`font:400 11px 'DM Sans',sans-serif;opacity:.7`)}>{r.fT.a}</span>
-                              </span>
-                              <span></span>
-                              <span style={s(`display:flex;align-items:center;justify-content:center;gap:4px;height:44px;border-radius:12px;background:${r.cT.bg ?? ''};color:${r.cT.fg ?? ''};font:400 20px 'DM Serif Display',serif;font-variant-numeric:tabular-nums`)}>
-                                <span>{r.cT.v}</span>
-                                <span style={s(`font:400 11px 'DM Sans',sans-serif;opacity:.7`)}>{r.cT.a}</span>
-                              </span>
-                              <span style={s(`padding-left:24px`)}>
-                                <svg viewBox="0 0 200 30" width="200" height="30" preserveAspectRatio="none" style={s(`display:block;overflow:visible`)}>
-                                  <polyline fill="none" stroke="rgba(217,234,110,.7)" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" points={r.spark}></polyline>
-                                </svg>
-                              </span>
+                      <span data-r="scrollhint" style={s(`display:none;font:400 11px 'DM Sans',sans-serif;color:rgba(201,212,194,.6)`)}>Swipe sideways to see every number →</span>
+                      <div data-r="hscroll" style={s(`overflow-x:auto`)}>
+                        <div style={s(`min-width:820px;display:flex;flex-direction:column;gap:12px`)}>
+                          <div style={s(`display:grid;grid-template-columns:minmax(150px,1.5fr) 80px 6px repeat(5,minmax(50px,1fr)) 20px 80px 6px repeat(3,minmax(50px,1fr));gap:4px;align-items:end;padding:0 4px`)}>
+                            <span></span>
+                            <span style={s(`font:600 9.5px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(244,242,230,.85);text-align:center;padding-bottom:4px`)}>FULFILMENT</span>
+                            <span></span>
+                            {(V.pillarHeads || []).map((p, $index) => (
+                              <React.Fragment key={$index}>
+                                <span style={s(`display:flex;flex-direction:column;align-items:center;gap:4px`)}>
+                                  <span style={s(`width:24px;height:24px;border-radius:${p.disc ?? ''};background:${p.tint ?? ''};display:flex;align-items:center;justify-content:center;color:${p.fg ?? ''}`)}>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d={p.d1}></path>
+                                      <path d={p.d2}></path>
+                                      <circle cx="9" cy="8.5" r={p.r1}></circle>
+                                      <circle cx="16.8" cy="10.3" r={p.r2}></circle>
+                                    </svg>
+                                  </span>
+                                  <span style={s(`font:400 10px 'DM Sans',sans-serif;color:rgba(201,212,194,.62)`)}>{p.short}</span>
+                                </span>
+                              </React.Fragment>
+                            ))}
+                            <span></span>
+                            <span style={s(`font:600 9.5px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(244,242,230,.85);text-align:center;padding-bottom:4px`)}>CULTURE</span>
+                            <span></span>
+                            {(V.cultureHeads || []).map((p, $index) => (
+                              <React.Fragment key={$index}>
+                                <span style={s(`display:flex;flex-direction:column;align-items:center;gap:4px`)}>
+                                  <span style={s(`width:24px;height:24px;border-radius:${p.disc ?? ''};background:rgba(228,240,214,.1);display:flex;align-items:center;justify-content:center;color:rgba(244,242,230,.85)`)}>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d={p.d1}></path>
+                                      <path d={p.d2}></path>
+                                    </svg>
+                                  </span>
+                                  <span style={s(`font:400 10px 'DM Sans',sans-serif;color:rgba(201,212,194,.62)`)}>{p.short}</span>
+                                </span>
+                              </React.Fragment>
+                            ))}
+                          </div>
+                          <div style={s(`display:flex;flex-direction:column;gap:2px`)}>
+                            {(V.L.rows || []).map((r, $index) => (
+                              <React.Fragment key={$index}>
+                                <div style={s(`display:grid;grid-template-columns:minmax(150px,1.5fr) 80px 6px repeat(5,minmax(50px,1fr)) 20px 80px 6px repeat(3,minmax(50px,1fr));gap:4px;align-items:center;padding:3px 4px;border-radius:12px;transition:background .2s ease`)} className="tws-hob7451d">
+                                  <span style={s(`display:flex;align-items:center;gap:9px;font:400 16px 'DM Serif Display',serif;color:#F6F4E9`)}>
+                                    <span style={s(`width:8px;height:8px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:#E78E71;display:${r.lookDisplay ?? ''}`)}></span>
+                                    {r.name}
+                                  </span>
+                                  <span style={s(`display:flex;align-items:center;justify-content:center;gap:4px;height:44px;border-radius:12px;background:${r.fT.bg ?? ''};color:${r.fT.fg ?? ''};font:400 20px 'DM Serif Display',serif;font-variant-numeric:tabular-nums`)}>
+                                    <span>{r.fT.v}</span>
+                                    <span style={s(`font:400 11px 'DM Sans',sans-serif;opacity:.7`)}>{r.fT.a}</span>
+                                  </span>
+                                  <span></span>
+                                  {(r.pcells || []).map((c, $index) => (
+                                    <React.Fragment key={$index}>
+                                      <span style={s(`display:flex;align-items:center;justify-content:center;height:44px;font:400 13.5px 'DM Sans',sans-serif;font-variant-numeric:tabular-nums;color:${c.ink ?? ''}`)}>
+                                        <span style={s(`display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;background:${c.dot ?? ''}`)}>{c.v}</span>
+                                      </span>
+                                    </React.Fragment>
+                                  ))}
+                                  <span></span>
+                                  <span style={s(`display:flex;align-items:center;justify-content:center;gap:4px;height:44px;border-radius:12px;background:${r.cT.bg ?? ''};color:${r.cT.fg ?? ''};font:400 20px 'DM Serif Display',serif;font-variant-numeric:tabular-nums`)}>
+                                    <span>{r.cT.v}</span>
+                                    <span style={s(`font:400 11px 'DM Sans',sans-serif;opacity:.7`)}>{r.cT.a}</span>
+                                  </span>
+                                  <span></span>
+                                  {(r.qcells || []).map((c, $index) => (
+                                    <React.Fragment key={$index}>
+                                      <span style={s(`display:flex;align-items:center;justify-content:center;height:44px;font:400 13.5px 'DM Sans',sans-serif;font-variant-numeric:tabular-nums;color:${c.ink ?? ''}`)}>
+                                        <span style={s(`display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;background:${c.dot ?? ''}`)}>{c.v}</span>
+                                      </span>
+                                    </React.Fragment>
+                                  ))}
+                                </div>
+                              </React.Fragment>
+                            ))}
+                            <div style={s(`display:grid;grid-template-columns:150px 1fr;gap:4px;align-items:center;padding:3px 4px`)}>
+                              <span style={s(`font:400 16px 'DM Serif Display',serif;color:#F6F4E9`)}>People & Finance</span>
+                              <span style={s(`display:flex;align-items:center;height:44px;padding:0 16px;border-radius:12px;background:repeating-linear-gradient(135deg,rgba(228,240,214,.05) 0 5px,rgba(0,0,0,0) 5px 13px);font:400 12.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>Fewer than five people</span>
                             </div>
-                          </React.Fragment>
-                        ))}
-                        <div style={s(`display:grid;grid-template-columns:150px 1fr;gap:4px;align-items:center;padding:3px 4px`)}>
-                          <span style={s(`font:400 16px 'DM Serif Display',serif;color:#F6F4E9`)}>People & Finance</span>
-                          <span style={s(`display:flex;align-items:center;height:44px;padding:0 16px;border-radius:12px;background:repeating-linear-gradient(135deg,rgba(228,240,214,.05) 0 5px,rgba(0,0,0,0) 5px 13px);font:400 12.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.72)`)}>Fewer than five people</span>
+                          </div>
                         </div>
                       </div>
                       <div style={s(`display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 18px;padding:6px 4px 0;font:400 11.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.62)`)}>
@@ -262,7 +307,7 @@ export default class TwoSides extends L.HomeBase {
                             </React.Fragment>
                           ))}
                         </span>
-                        <span>↑ ↓ moved two points or more since September · open a row for the five pillars and three culture questions</span>
+                        <span>↑ ↓ moved two points or more since September</span>
                       </div>
                     </div>
                   </>

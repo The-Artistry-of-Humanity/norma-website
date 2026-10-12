@@ -113,7 +113,7 @@ export const FEAT_PEOPLE = [
 ];
 export const FEAT_YOU = [
   { title: 'Fulfilment and Culture', line: 'Two numbers for the organisation, with six months behind them. Every one comes from the app.', d1: 'M4 17 L9 11 L13 14.5 L20 6', d2: 'M15 6 L20 6 L20 11' },
-  { title: 'By department', line: 'Every group of five or more, nothing smaller. Open a row for the ten numbers behind it.', d1: 'M4 5h16M4 12h16M4 19h16', d2: 'M9 5v14' },
+  { title: 'By department', line: 'Every group of five or more, nothing smaller, with the five pillars and three culture questions behind each.', d1: 'M4 5h16M4 12h16M4 19h16', d2: 'M9 5v14' },
   { title: 'Focus area', line: 'The one department to look at this month, named once, with the reason: which pillar dropped, and by how much.', d1: 'M12 3 A9 9 0 1 1 11.9 3', d2: 'M12 8.5 A3.5 3.5 0 1 1 11.9 8.5' },
   { title: 'Growth work', line: 'Sessions from the library you can run this week, each logged against the signal it answers, so next month shows what moved.', d1: 'M4 13 L9 18 L20 6', d2: '' },
 ];
