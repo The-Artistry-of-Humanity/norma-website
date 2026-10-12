@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LegalDoc from '../islands/LegalDoc';
+---
+<Layout title="Privacy policy · nørma" description="The nørma Privacy policy: what we collect, who sees what, and your choices." canonical="https://joinnorma.com/privacy">
+  <div style="position:relative;overflow-x:clip;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0A130D;min-height:100vh">
+    <Header />
+    <LegalDoc doc="privacy" />
+    <Footer />
+  </div>
+  <style is:global>
+    @media (max-width:900px){[data-r=side]{display:none!important}}
+  </style>
+</Layout>

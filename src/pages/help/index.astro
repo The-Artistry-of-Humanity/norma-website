@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import HelpCentre from '../../islands/HelpCentre';
+---
+<Layout title="Help centre · nørma" description="Help for the nørma app and the leader dashboard: check-ins, reflections, privacy, and reading the signal." canonical="https://joinnorma.com/help">
+  <div style="position:relative;overflow-x:clip;min-height:100vh;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0A130D">
+    <Header current="help" />
+    <HelpCentre client:load view="home" />
+    <div style="margin-top:110px"><Footer /></div>
+  </div>
+  <style is:global>
+    @media (max-width:1080px){[data-r=toc]{display:none!important}}
+    @media (max-width:860px){[data-r=side]{display:none!important}[data-r=navlinks]{display:none!important}[data-r=mpath]{display:flex!important}}
+    @media (max-width:560px){[data-r=topsearch]{display:none!important}}
+  </style>
+</Layout>
