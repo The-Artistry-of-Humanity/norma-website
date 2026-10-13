@@ -1,0 +1,25 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import HelpStyles from '../../../components/HelpStyles.astro';
+import HelpCentre from '../../../islands/HelpCentre';
+import { DOCS, URL_SEGMENT, PATH_URL } from '../../../data/help';
+
+export function getStaticPaths() {
+  return (['app', 'dash'] as const).map((p) => ({ params: { path: URL_SEGMENT[p] }, props: { p } }));
+}
+const { p } = Astro.props;
+const label = DOCS[p].label;
+const description = p === 'app'
+  ? 'Every help article for the nørma app: check-ins, reflections, habits, journeys and your privacy.'
+  : 'Every help article for the nørma dashboard: reading the signal, acting on it, check-ins and administration.';
+---
+<Layout title={`${label} · nørma help`} description={description} canonical={`https://joinnorma.com${PATH_URL[p]}`} og skip>
+  <div style="position:relative;overflow-x:clip;min-height:100vh;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0A130D">
+    <Header current="help" />
+    <HelpCentre client:load view="path" path={p} />
+    <div style="margin-top:80px"><Footer /></div>
+  </div>
+  <HelpStyles />
+</Layout>

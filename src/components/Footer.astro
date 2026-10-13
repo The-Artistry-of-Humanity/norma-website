@@ -1,6 +1,7 @@
 ---
 /* Shared footer (handoff v3 §1.6): PRODUCT / TRUST / TALK columns, with the
    legal links in their own muted row under a hairline. */
+import { BY } from '../data/help';
 interface Props { home?: boolean }
 const { home = false } = Astro.props;
 const p = home ? '' : '/';
@@ -27,7 +28,8 @@ const link = 'color:rgba(244,242,230,.85);transition:all .2s ease';
         <span style={head}>TRUST</span>
         <a href={`${p}#privacy`} class="hv-link" style={link}>Privacy</a>
         <a href={`${p}#duty`} class="hv-link" style={link}>Psychosocial duty</a>
-        <a href="/help" class="hv-link" style={link}>Help centre</a>
+        <a href="/help/" class="hv-link" style={link}>Help centre</a>
+        <a href={BY['a-crisis'].url} class="hv-link" style={link}>Urgent support</a>
       </div>
       <div style={col}>
         <span style={head}>TALK</span>
@@ -38,8 +40,8 @@ const link = 'color:rgba(244,242,230,.85);transition:all .2s ease';
   <div data-r="wrap" style="max-width:1180px;margin:0 auto;padding:18px 40px 28px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 28px;border-top:1px solid rgba(228,240,214,.06);font:400 12.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.62)">
     <span>© 2026 The Artistry of Humanity Pty Ltd</span>
     <span style="display:flex;flex-wrap:wrap;gap:20px">
-      <a href="/privacy" class="hv-link" style="color:rgba(201,212,194,.75);transition:all .2s ease">Privacy policy</a>
-      <a href="/terms" class="hv-link" style="color:rgba(201,212,194,.75);transition:all .2s ease">Terms of use</a>
+      <a href="/privacy/" class="hv-link" style="color:rgba(201,212,194,.75);transition:all .2s ease">Privacy policy</a>
+      <a href="/terms/" class="hv-link" style="color:rgba(201,212,194,.75);transition:all .2s ease">Terms of use</a>
     </span>
   </div>
 </div>
