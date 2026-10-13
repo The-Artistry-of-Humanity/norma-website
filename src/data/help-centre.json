@@ -41,7 +41,7 @@
               "id": "a-signin",
               "slug": "download-and-sign-in",
               "title": "Download and sign in",
-              "summary": "Get nørma from the App Store or Google Play and sign in with the email your organisation invited.",
+              "summary": "Install nørma and sign in with the email your organisation invited.",
               "keywords": "login log in sign in signin password reset forgot invitation invite link expired download install app store google play email account access",
               "callout": "privacy",
               "updated": "2026-10-13",
@@ -53,7 +53,7 @@
                 ],
                 "steps": [
                   "Open the invitation email and tap “Set your password”. Skip this if the email says your organisation uses its own work sign-in.",
-                  "Install nørma from the App Store or Google Play.",
+                  "Install nørma on your phone. Your organisation will tell you where to get it.",
                   "Open nørma, type the email you were invited on under “Sign in to your account” and tap “Continue”.",
                   "Sign in on the page that opens, then return to the app.",
                   "The first time, read “Before you start” and agree to the Terms of Service and Privacy Policy."
