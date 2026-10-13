@@ -131,8 +131,8 @@ export default class LegalDoc extends React.Component {
     const p = (this.props.doc ?? 'privacy') === 'privacy';
     const seg = on => ({ bg: on ? 'rgba(217,234,110,.14)' : 'transparent', c: on ? '#EAF79B' : 'rgba(244,242,230,.8)' });
     const doc = p
-      ? { title: 'Privacy policy', sections: DOCS.privacy, otherLine: 'The terms each person accepts when they create an account.', otherLabel: 'Read the Terms of use', otherHref: '/terms' }
-      : { title: 'Terms of use', sections: DOCS.terms, otherLine: 'What we collect, who sees what, and your choices.', otherLabel: 'Read the Privacy policy', otherHref: '/privacy' };
+      ? { title: 'Privacy policy', sections: DOCS.privacy, otherLine: 'The terms each person accepts when they create an account.', otherLabel: 'Read the Terms of use', otherHref: '/terms/' }
+      : { title: 'Terms of use', sections: DOCS.terms, otherLine: 'What we collect, who sees what, and your choices.', otherLabel: 'Read the Privacy policy', otherHref: '/privacy/' };
     return { doc, segP: seg(p), segT: seg(!p), isPrivacy: p };
   }
 
@@ -156,8 +156,8 @@ export default class LegalDoc extends React.Component {
           <div style={s(`display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px`)}>
             <span style={s(`font:600 10px 'DM Sans',sans-serif;letter-spacing:2.4px;color:#D9EA6E`)}>LEGAL</span>
             <div style={s(`display:inline-flex;padding:4px;border-radius:999px;border:1px solid rgba(228,240,214,.12);background:rgba(10,19,13,.4)`)}>
-              <a href="/privacy" aria-current={V.isPrivacy ? "page" : undefined} style={s(`padding:8px 16px;border-radius:999px;background:${V.segP.bg ?? ''};color:${V.segP.c ?? ''};font:500 13.5px 'DM Sans',sans-serif;transition:all .3s ease`)} className="lgl-ho950d73">Privacy policy</a>
-              <a href="/terms" aria-current={V.isPrivacy ? undefined : "page"} style={s(`padding:8px 16px;border-radius:999px;background:${V.segT.bg ?? ''};color:${V.segT.c ?? ''};font:500 13.5px 'DM Sans',sans-serif;transition:all .3s ease`)} className="lgl-ho950d73">Terms of use</a>
+              <a href="/privacy/" aria-current={V.isPrivacy ? "page" : undefined} style={s(`padding:8px 16px;border-radius:999px;background:${V.segP.bg ?? ''};color:${V.segP.c ?? ''};font:500 13.5px 'DM Sans',sans-serif;transition:all .3s ease`)} className="lgl-ho950d73">Privacy policy</a>
+              <a href="/terms/" aria-current={V.isPrivacy ? undefined : "page"} style={s(`padding:8px 16px;border-radius:999px;background:${V.segT.bg ?? ''};color:${V.segT.c ?? ''};font:500 13.5px 'DM Sans',sans-serif;transition:all .3s ease`)} className="lgl-ho950d73">Terms of use</a>
             </div>
           </div>
           <h1 style={s(`margin:16px 0 0;font:400 clamp(40px,5vw,58px)/1.05 'DM Serif Display',serif;letter-spacing:-.8px;color:#F6F4E9`)}>{V.doc.title}</h1>

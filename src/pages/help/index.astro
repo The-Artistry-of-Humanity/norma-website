@@ -2,17 +2,26 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import HelpStyles from '../../components/HelpStyles.astro';
 import HelpCentre from '../../islands/HelpCentre';
+import { BY, PROBLEMS } from '../../data/help';
+
+// FAQ structured data from the "Solve a problem" cards; each answer is the
+// summary of the article the card links to.
+const faq = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: [...PROBLEMS.app, ...PROBLEMS.dash].map(([id, q]) => ({
+    '@type': 'Question', name: q,
+    acceptedAnswer: { '@type': 'Answer', text: `${BY[id].summary} Read more: https://joinnorma.com${BY[id].url}` },
+  })),
+};
 ---
-<Layout title="Help centre · nørma" description="Help for the nørma app and the leader dashboard: check-ins, reflections, privacy, and reading the signal." canonical="https://joinnorma.com/help">
+<Layout title="Help centre · nørma" description="Help for the nørma app and the leader dashboard: check-ins, reflections, privacy, and reading the signal." canonical="https://joinnorma.com/help/" og skip>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faq)} />
   <div style="position:relative;overflow-x:clip;min-height:100vh;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0A130D">
     <Header current="help" />
     <HelpCentre client:load view="home" />
     <div style="margin-top:110px"><Footer /></div>
   </div>
-  <style is:global>
-    @media (max-width:1080px){[data-r=toc]{display:none!important}}
-    @media (max-width:860px){[data-r=side]{display:none!important}[data-r=navlinks]{display:none!important}[data-r=mpath]{display:flex!important}}
-    @media (max-width:560px){[data-r=topsearch]{display:none!important}}
-  </style>
+  <HelpStyles />
 </Layout>

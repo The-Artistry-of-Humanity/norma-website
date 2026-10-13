@@ -5,10 +5,10 @@
 # Old URLs from the first version of the site (footer linked to these).
 [[redirects]]
   from = "/documentation"
-  to = "/help"
+  to = "/help/"
   status = 301
 
 [[redirects]]
   from = "/privacy-policy"
-  to = "/privacy"
+  to = "/privacy/"
   status = 301

@@ -5,8 +5,12 @@ interface Props {
   description?: string;
   noindex?: boolean;
   canonical?: string;
+  /** Adds Open Graph and Twitter tags built from title, description and canonical. */
+  og?: boolean;
+  /** Adds a "Skip to content" link pointing at #main. */
+  skip?: boolean;
 }
-const { title, description, noindex = false, canonical } = Astro.props;
+const { title, description, noindex = false, canonical, og = false, skip = false } = Astro.props;
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -21,9 +25,17 @@ const { title, description, noindex = false, canonical } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    {og && <meta property="og:title" content={title} />}
+    {og && description && <meta property="og:description" content={description} />}
+    {og && canonical && <meta property="og:url" content={canonical} />}
+    {og && <meta property="og:type" content="article" />}
+    {og && <meta property="og:site_name" content="nørma" />}
+    {og && <meta property="og:image" content="https://joinnorma.com/og-image.png" />}
+    {og && <meta name="twitter:card" content="summary_large_image" />}
     <slot name="head" />
   </head>
   <body>
+    {skip && <a href="#main" class="skip-link">Skip to content</a>}
     <slot />
   </body>
 </html>

@@ -93,7 +93,7 @@ class Phone extends React.Component {
       { text: 'Maya called back.', c: '#F6F4E9', stone: '#C4BEEE', bg: 'rgba(185,178,232,.12)', bc: 'rgba(185,178,232,.3)', r: '18px 28px 16px 26px / 28px 18px 26px 16px', sr: '45% 55% 50% 50% / 50% 50% 55% 45%' },
       { text: 'One more…', c: 'rgba(201,212,194,.55)', stone: 'rgba(196,190,238,.35)', bg: 'rgba(228,240,214,.04)', bc: 'rgba(228,240,214,.14)', r: '22px 14px 24px 18px / 14px 24px 18px 22px', sr: '55% 45% 50% 50% / 45% 55% 50% 50%' },
     ];
-    const active = { home: 'Home', grow: 'Grow', habits: 'Grow', reset: 'Grow', gratitude: 'Home', reflect: 'Reflect', journey: 'Grow' }[screen];
+    const active = { home: 'Home', grow: 'Grow', habits: 'Grow', reset: 'Grow', gratitude: 'Grow', reflect: 'Reflect', journey: 'Grow' }[screen];
     const TABI = { Home: ['M12 3.2l8.4 6.1-3.2 9.9H6.8L3.6 9.3z'], Grow: ['M12 21v-8', 'M12 13c0-4.5 3-7 7.5-7 0 4.5-3 7-7.5 7z', 'M12 13c0-3.5-2.5-5.5-6-5.5 0 3.5 2.5 5.5 6 5.5z'], Reflect: ['M6.5 20V10a5.5 5.5 0 0 1 11 0v10', 'M4 20h16', 'M9.5 12.5l3.5-4.5', 'M9.5 16l5-6.5'], You: ['M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z', 'M4.5 21c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5'] };
     const tabs = ['Home', 'Grow', 'Reflect', 'You'].map(label => ({ label, icon: svg(TABI[label].map(d => P(d)), 22, 1.6), c: label === active ? '#D9EA6E' : 'rgba(244,242,230,.7)', w: label === active ? 600 : 500 }));
     return {
