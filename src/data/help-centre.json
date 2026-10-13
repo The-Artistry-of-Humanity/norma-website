@@ -121,6 +121,122 @@
                   "nørma emails you the day your organisation’s check-in opens, and the day before if nudges are Daily or Weekly. “Pause everything” stops these emails too."
                 ]
               }
+            },
+            {
+              "id": "a-invite-help",
+              "slug": "invitation-not-received-or-expired",
+              "title": "I didn’t get my invitation, or the link expired",
+              "summary": "Check spam and the address you were invited on, then ask your administrator to resend. Links last 72 hours.",
+              "keywords": "invitation invite email missing not received expired link resend spam junk set password sign up join",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Your invitation comes by email from no-reply@joinnorma.com, with the subject “Your space in nørma is ready”. In most organisations it has a “Set your password” button. If your organisation uses its own work sign-in, the email has no button, because there’s no password to set.",
+                  "Sometimes the email simply hasn’t been sent yet. Administrators can add people first and send the invitations later, so nothing arrives until they do."
+                ],
+                "steps": [
+                  "Search your inbox, spam and junk folders for “Your space in nørma is ready”.",
+                  "Check you’re looking in the right inbox. The invitation goes to the exact address your organisation added, which may not be your main one.",
+                  "If the link says the invitation has expired or is no longer valid, ask your organisation’s nørma administrator to resend it.",
+                  "Open the new email and tap “Set your password” soon.",
+                  "Then open the nørma app and sign in with the same email."
+                ],
+                "know": [
+                  "The link works once and expires after 72 hours. A resent invitation has a fresh link.",
+                  "Already set your password? You don’t need the link again. Sign in in the app, and use “Forgot your password?” on the sign-in page if you need to.",
+                  "If the app says “We couldn’t find that email. Check the address and try again.”, tap “Get help”. Whoever shared nørma with you can check which address was invited.",
+                  "If it says your organisation’s nørma is still being set up, your organisation isn’t ready yet. Try again later."
+                ]
+              }
+            },
+            {
+              "id": "a-account-details",
+              "slug": "change-name-email-or-team",
+              "title": "Changing your name, email or team",
+              "summary": "What you can change in the app, and what your organisation’s administrator changes for you.",
+              "keywords": "change name surname email address team department move wrong name update details profile about you relationship children",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Your name, email, organisation and team come from your organisation. You can see them under You, in “About you”, where each one says “set by your organisation”. You can’t edit them in the app.",
+                  "Two things in “About you” are yours to change. Your relationship status changes the wording of the Love & Relationships questions. The optional “Do you have children?” decides whether habits and growth work written for parents are offered."
+                ],
+                "steps": [
+                  "Open the You tab and tap “About you”.",
+                  "Check the details under “Account”.",
+                  "To change your relationship status or the children question, tap your answer under “Personal data”. It saves straight away.",
+                  "For a wrong name or the wrong team, ask your organisation’s nørma administrator."
+                ],
+                "know": [
+                  "Administrators can correct your name and move you to another team. If your organisation imports its roster again, the name in that file is the one used.",
+                  "Your email is how you sign in, and password codes go to it. If your work email is changing, talk to your administrator before you lose access to the old one.",
+                  "When you move teams, your answers count in your new team’s figures from this month. Past months stay as they were.",
+                  "Only you can see your relationship status and your answer about children."
+                ]
+              }
+            },
+            {
+              "id": "a-new-phone",
+              "slug": "new-phone-or-reinstall",
+              "title": "Using nørma on a new phone",
+              "summary": "Install, sign in with the email you were invited on, and your history is still in your account.",
+              "keywords": "new phone reinstall switch phone lost phone upgrade transfer restore history sign in again backup",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Your check-ins, reflections, voice recordings, habits, gratitude entries and growth work are kept in your nørma account, not only on your phone. When you sign in on a new phone, or after reinstalling, they come back.",
+                  "A few settings belong to the phone itself, so you set them again. Your phone needs to allow notifications from nørma, and the gratitude reminder goes back to 20:30."
+                ],
+                "steps": [
+                  "Install nørma on the new phone the same way you did the first time.",
+                  "Open it, type the email you were invited on and tap “Continue”.",
+                  "Sign in on the page that opens, then return to the app.",
+                  "Go through the welcome screens. Your history is waiting on Home and under You.",
+                  "Open You, then “Preferences”, and check your reminders and your gratitude reminder time."
+                ],
+                "know": [
+                  "Before your first reflection on the new phone, nørma shows the AI notice again.",
+                  "Forgotten your password? Use “Forgot your password?” on the sign-in page. The code goes to the email you were invited on.",
+                  "Signed in but your history looks empty? Check you used the same email as before.",
+                  "Passing on or selling the old phone? Open You and tap “Sign out” on it first."
+                ]
+              }
+            },
+            {
+              "id": "a-notifications-help",
+              "slug": "not-getting-notifications",
+              "title": "I’m not getting notifications",
+              "summary": "Check nørma’s notification permission on your phone, Focus or Do Not Disturb, and your Preferences.",
+              "keywords": "notifications not working no reminders push alerts focus do not disturb silent permission nudges gratitude reminder missing",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "nørma can only reach you if your phone lets it. Your phone’s settings come first, then your choices in the app. Focus or Do Not Disturb can also hold notifications back until they end.",
+                  "nørma sends a few kinds: one when your monthly check-in opens, occasional nudges, and an evening gratitude reminder at 20:30 unless you change it."
+                ],
+                "steps": [
+                  "Open your phone’s Settings, find nørma and make sure notifications are allowed.",
+                  "Check whether Focus or Do Not Disturb is on.",
+                  "In nørma, open You, then “Preferences”.",
+                  "Turn on “Remind me when the window opens” for your monthly check-in.",
+                  "Under “How often can nørma send you nudges?”, choose Daily or Weekly. If your phone hasn’t asked about notifications yet, this lets it ask.",
+                  "Make sure “Gratitude reminder” is on and “Pause everything” is off."
+                ],
+                "know": [
+                  "If Preferences says your phone isn’t letting nørma send notifications, the fix is in your phone’s Settings, not in the app.",
+                  "The gratitude reminder never comes on a day you’ve already written or skipped. If you don’t open nørma for two weeks, it stops until you come back.",
+                  "Check-in emails only come when your organisation has set a check-in window.",
+                  "Choosing Off for nudges doesn’t stop your check-in reminder. Only its own switch or “Pause everything” does."
+                ]
+              }
             }
           ]
         },
@@ -258,7 +374,7 @@
                 "how": [
                   "Reflect is your space to put a thought down, whenever you like. nørma offers a question to start with, such as “What’s on your mind?”, and you can type your answer or say it out loud.",
                   "If you speak, the app turns your speech into text on your phone. If your phone can’t do that on the device, nørma won’t record rather than send your voice somewhere else to be transcribed. In a web browser, transcription also runs inside the browser. Your recording is saved to your account so you can play it back.",
-                  "When you save, nørma sends your reflection, latest check-in answers, earlier themes and chosen habits to a third-party AI service to write your mirror, pick a small step and note the themes. Your name isn’t sent."
+                  "When you save, nørma sends your reflection, latest check-in answers, earlier themes and chosen habits to a third-party AI service to write your mirror, suggest small steps and note the themes. Your name isn’t sent."
                 ],
                 "steps": [
                   "Open the Reflect tab.",
@@ -298,6 +414,31 @@
                   "The AI gets your reflection as given, plus your latest check-in answers. If you’d rather a name or detail didn’t leave your phone, leave it out.",
                   "If you delete your account, your reflections and recordings are erased after 30 days.",
                   "Before your first reflection, nørma shows you a short notice about the AI. You can say “Not now” and come back to it."
+                ]
+              }
+            },
+            {
+              "id": "a-ai-not-now",
+              "slug": "saying-not-now-to-ai",
+              "title": "If you say “Not now” to the AI notice",
+              "summary": "What changes if you don’t want a third-party AI to read your reflections.",
+              "keywords": "not now ai artificial intelligence opt out decline refuse third party anthropic reflections without ai privacy",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Before your first reflection, nørma shows “A third-party AI reads your reflections”. It explains that when you save a reflection, nørma sends it to a third-party AI service, which writes your mirror, picks one small step and notes the themes in it. To pick the step, it also sees your latest check-in answers.",
+                  "If you tap “Not now”, the reflection screen closes and nothing is sent. You can’t write a reflection without agreeing, because every saved reflection goes to the AI. The notice shows again the next time you start one."
+                ],
+                "steps": [],
+                "know": [
+                  "Everything else works as normal. Your check-in and its mirror don’t use AI: the check-in mirror is built from your answers by fixed rules.",
+                  "Habits, growth work, Gratitude, Reset and growth journeys don’t use AI. Nor do the private note at the end of your check-in or “How did it go?” on growth work.",
+                  "Changed your mind? Start a reflection and tap “Continue”.",
+                  "The AI is run by Anthropic, outside Australia. Besides your reflection and latest check-in answers, it gets the names of habits and growth work you’ve chosen and a summary of earlier themes, never your name.",
+                  "Nobody where you work can read your entries. Your answers and habits reach them only inside group figures, never with your name.",
+                  "Groups smaller than 5 people never show. In a small team, a figure can come from one person."
                 ]
               }
             }
@@ -442,6 +583,35 @@
                   "A fresh start each month is deliberate. A quiet month is fine."
                 ]
               }
+            },
+            {
+              "id": "a-growth-work",
+              "slug": "growth-work-in-the-app",
+              "title": "Growth work in the app",
+              "summary": "What growth work is, and what you’ll see when your leader shares theirs with your team.",
+              "keywords": "growth work actions to do one off tasks leader shared team what your leader is working on mark as done skip",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Growth work is a short list of one-off things you’ve decided to do, then tick off: a call you keep putting off, a conversation, an appointment. Each one is tied to a pillar.",
+                  "Your leader may also share growth work with your team. When they do, Home shows “What your leader is working on”, with up to three items. Each shows its pillar, the month and the reason your leader gave. It doesn’t say who logged it, and it makes no claim about what it changed."
+                ],
+                "steps": [
+                  "Open Grow and go to Growth work.",
+                  "Tap “Add growth work” for “Ideas from nørma, by pillar”, or take one your check-in mirror suggests.",
+                  "Tap the circle, or “Mark as done”, when you’ve done it.",
+                  "Answer “How did it go?” if you like, or tap “Skip”.",
+                  "Not for you? Tap “Skip this one”. There’s no mark against you."
+                ],
+                "know": [
+                  "Taking on growth work and finishing it both build your Momentum.",
+                  "Which growth work you choose, and what you write about it, is never shown to your organisation.",
+                  "Nobody where you work can read your entries. Your answers and habits reach them only inside group figures, never with your name.",
+                  "Groups smaller than 5 people never show. In a small team, a figure can come from one person."
+                ]
+              }
             }
           ]
         },
@@ -527,6 +697,114 @@
                   "Group figures your answers already went into aren’t recalculated. They never show your name. Records of sign-ins are kept for security, and backups clear on their normal cycle.",
                   "If you leave your organisation and it removes you from nørma, you can’t sign in from that day, and your account is erased after 30 days. Meanwhile your administrator can send your data to a personal email you give them, without seeing it. Work addresses are refused, and the link lasts a week at most. If you know you’re leaving, export your data before your last day.",
                   "If your organisation restores your access within those 30 days, nothing is lost."
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Help and access",
+          "articles": [
+            {
+              "id": "a-accessibility",
+              "slug": "accessibility",
+              "title": "Accessibility",
+              "summary": "Using nørma with a screen reader, larger text, less motion and captions.",
+              "keywords": "accessibility screen reader voiceover talkback text size large text font reduce motion captions subtitles deaf blind low vision typing instead of speaking",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "nørma follows the accessibility settings on your phone. Its controls carry labels for screen readers such as VoiceOver on iPhone and TalkBack on Android. Text follows your phone’s text size, and nørma’s looping animations stay still when you turn on reduce motion.",
+                  "The growth journey films have captions built into the picture. In Reflect you can type instead of speaking. If you do speak, your words are turned into text you can read, and “Fix a word” lets you correct it."
+                ],
+                "steps": [
+                  "To use a screen reader, turn on VoiceOver or TalkBack in your phone’s accessibility settings.",
+                  "To make text bigger, change the text size in your phone’s settings.",
+                  "To calm movement, turn on reduce motion, or remove animations on Android.",
+                  "In Reflect, type your reflection if speaking doesn’t suit you."
+                ],
+                "know": [
+                  "At the largest text sizes, some screens need scrolling to see everything.",
+                  "Check-in answers are always the same four buttons: No, Not really, Mostly and Yes.",
+                  "If something in nørma doesn’t work with your setup, tell your organisation’s nørma administrator so they can pass it on."
+                ]
+              }
+            },
+            {
+              "id": "a-languages",
+              "slug": "languages",
+              "title": "Languages",
+              "summary": "nørma is in English today. What that means if you write in another language.",
+              "keywords": "language languages english translation translate other language multilingual spanish chinese german french",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "nørma is in English today, written with Australian spelling. That covers the app, the check-in questions, the growth journeys and their films, and the dashboard leaders use. There’s no setting to change the language.",
+                  "You can write a reflection in whatever words come naturally. One thing to know: nørma checks reflections for words that suggest someone may be at risk, and that check looks for English words and phrases. In another language it may not pick them up."
+                ],
+                "steps": [
+                  "If you need to talk to someone now, open You and tap “Support” for people to talk to in your region.",
+                  "Check “At work” on the same screen for support your organisation offers, such as an Employee Assistance Program."
+                ],
+                "know": [
+                  "Don’t rely on a reflection to get help in a crisis, in any language. Call someone directly.",
+                  "If your organisation needs nørma in another language, your organisation’s nørma administrator can raise it with the nørma team."
+                ]
+              }
+            },
+            {
+              "id": "a-offline-web",
+              "slug": "offline-or-in-a-browser",
+              "title": "Using nørma offline or in a browser",
+              "summary": "nørma lives in the phone app. What still works when you lose your connection.",
+              "keywords": "offline no internet no signal no connection wifi web browser computer laptop desktop website online",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "nørma is made to be used in the phone app. The web page in your invitation email is only there to set your password. After that, everything happens in the app.",
+                  "Most of nørma needs a connection, because your entries are kept in your account rather than only on your phone. A few things still work without one."
+                ],
+                "steps": [],
+                "know": [
+                  "The helplines on the Support screen work offline. The “At work” section needs a connection.",
+                  "If your connection drops during a check-in, your answers are kept on your phone and sent when you’re back online.",
+                  "Saving a reflection and getting its mirror need a connection, because the mirror is written after you save.",
+                  "Reset practices and most journey films stream, so they need a connection too.",
+                  "Leaders and admins read the dashboard in a web browser. That’s a different tool from the app."
+                ]
+              }
+            },
+            {
+              "id": "a-contact",
+              "slug": "contact-support",
+              "title": "Getting help with nørma",
+              "summary": "Who to ask first, and where to go if you need to talk to someone now.",
+              "keywords": "contact support help helpdesk email phone who to ask administrator admin problem report bug get help",
+              "phoneScreen": null,
+              "callout": "crisis",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "nørma comes to you through your organisation, so your first stop is whoever looks after nørma there. That’s your organisation’s nørma administrator, often the person who invited you.",
+                  "Your administrator can resend an invitation, check which email you were invited on, correct your name, move you to the right team and restore your access. They can also raise questions with the nørma team."
+                ],
+                "steps": [
+                  "Can’t sign in? On the sign-in screen, tap “Get help”.",
+                  "For your account, invitation or team, contact your organisation’s nørma administrator.",
+                  "For how something works, search this help centre.",
+                  "If you need to talk to someone now, open You and tap “Support”."
+                ],
+                "know": [
+                  "If you or someone else is in danger right now, call 000 in Australia or 911 in the United States.",
+                  "You never need to share your answers or reflections to get help. Nobody needs them to fix a problem.",
+                  "Leaving, or want a copy of your data? See “Download my data” and “Delete my account”.",
+                  "Leaders and admins can contact their nørma contact."
                 ]
               }
             }
@@ -621,6 +899,94 @@
                   "Admins can see account details on the People page: name, email, team, role and invitation status. That’s there so admins can manage access.",
                   "Growth work logs stay yours; leaders above you and admins read your answers to “What have you actioned this month for your team?”.",
                   "Please never try to work out who gave a particular answer."
+                ]
+              }
+            },
+            {
+              "id": "d-leader-app",
+              "slug": "people-leader-using-the-app",
+              "title": "Using the app as a People Leader",
+              "summary": "Your own check-in is private like everyone’s, and it counts in your team’s figures like everyone’s.",
+              "keywords": "people leader manager my own check-in leader questions how you lead app private counts in team figures",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "As a People Leader you use nørma in two places. The dashboard is where you read your team’s signal. The phone app is your own private space, the same as everyone else’s, and you sign in to it with the same email.",
+                  "Your entries are private like everyone’s. Your check-in still counts in your team’s figures, exactly as your team’s do. So when you read your team on the dashboard, your own answers are part of what you see, and in a small team they can be a large part of it.",
+                  "Your monthly check-in has four extra questions, headed “As a leader of” and your group’s name. Your answers to the first three join every other leader’s in your part of the organisation to make one score, which leaders at your level and above can see. The fourth, “What behaviour do I need to change or reinforce?”, is just for you."
+                ],
+                "steps": [
+                  "Install the nørma app and sign in with the email you were invited on.",
+                  "Do your monthly check-in when it opens, like your team.",
+                  "Answer the three “How you lead” questions honestly, then the one marked “Just for you”.",
+                  "Read your team on the dashboard, remembering your own answers are in there."
+                ],
+                "know": [
+                  "Figures show once a group reaches your organisation’s minimum. The minimum counts the people in the group, you included, not how many answered, so a figure can come from one person.",
+                  "Your leadership answers don’t change your own Fulfilment score.",
+                  "Don’t use your own answers to work out anyone else’s."
+                ]
+              }
+            },
+            {
+              "id": "d-dashboard-access",
+              "slug": "getting-to-the-dashboard",
+              "title": "Getting to the dashboard",
+              "summary": "Where to open the dashboard, how to sign in, and what you’ll see first.",
+              "keywords": "dashboard console web address url link login sign in browser computer where is the dashboard portal bookmark",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "The dashboard is a website you open in a browser on your computer. It’s separate from the phone app. Your organisation has its own dashboard address, and the button in your invitation email takes you there.",
+                  "People Leaders get an email called “Your People Leader space in nørma is ready”, with an “Accept invitation and get started” button. Organisation Admins get “Your nørma admin access is ready”, with “Set your password and open the console”."
+                ],
+                "steps": [
+                  "Open your invitation email and tap the button.",
+                  "Choose a password and tap “Set password and continue”.",
+                  "Bookmark the page you land on, so you can find the dashboard again.",
+                  "Next time, open your bookmark. Under “Sign in to nørma”, type your “Work email” and tap “Continue”.",
+                  "Enter your password on the page that opens."
+                ],
+                "know": [
+                  "You land on Dashboard, showing the group you lead, or the whole organisation if you’re an Organisation Admin. Admins also see pages for people, structure and settings.",
+                  "Invitation links work once and last three days. If yours has expired, ask your organisation’s nørma administrator to resend it.",
+                  "Forgotten your password? Use “Forgot your password?” on the page where you enter it.",
+                  "If you see “That address belongs to a different organisation.”, you’re on another organisation’s address. Use the link from your own invitation.",
+                  "Lost the address? Ask your Organisation Admin, or your nørma contact if you’re the admin."
+                ]
+              }
+            },
+            {
+              "id": "d-launch",
+              "slug": "introducing-norma-to-your-team",
+              "title": "Introducing nørma to your team",
+              "summary": "What to say when you launch nørma, and what to avoid so people can trust it.",
+              "keywords": "launch rollout introduce announce team meeting what to say communication trust privacy talking points kickoff",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "People take part when they trust nørma is private and see something change. How you introduce it matters more than any reminder.",
+                  "Keep the privacy message true, and don’t make it bigger than it is. Nobody at work can read anyone’s entries, and the dashboard never puts a name against an answer. But in a small team a figure can come from one person, and it’s better to say so."
+                ],
+                "steps": [
+                  "Say what it is: a private space to check in with yourself once a month, reflect and build small habits.",
+                  "Say what to expect: an email called “Your space in nørma is ready”, a password to set, then the app.",
+                  "Share when the check-in opens. It takes about five minutes.",
+                  "Explain what you see: group figures once the team reaches the minimum size, how many checked in but never who, and theme labels, never anyone’s words.",
+                  "Say that a third-party AI reads reflections to write each person’s mirror, without their name.",
+                  "Tell people your own check-in counts in the team’s figures too.",
+                  "Show them “See it the way a leader does”, under You, then “Privacy & data”."
+                ],
+                "know": [
+                  "Avoid “only you can see your answers” or “completely anonymous”. Answers feed group figures.",
+                  "Don’t make it compulsory, ask who has checked in, or link it to performance.",
+                  "nørma isn’t therapy or a crisis service. Point people to “Support” in the app and to your EAP."
                 ]
               }
             }
@@ -737,6 +1103,94 @@
                   "An honest limit: a group of five shows results from its first check-in, so a figure, theme or alert can rest on one answer, yours included. Comparing figures over time can narrow down who might have changed. That’s why we ask everyone never to try to work out who said what.",
                   "If a group you need shows nothing, combine it with a neighbouring group in Structure, or read the level above it.",
                   "“Privacy & Safety” explains a new minimum; check group sizes in Structure."
+                ]
+              }
+            },
+            {
+              "id": "d-themes",
+              "slug": "themes",
+              "title": "Themes: what they are and how they’re made",
+              "summary": "How reflections become group theme labels, and why you’ll never see anyone’s words.",
+              "keywords": "themes topics what people are saying reflections labels going well needs support where themes are building heat map words ai",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Themes are short labels for what people are reflecting on, such as feeling apart from others. They let you see what’s on a group’s mind without anyone’s words.",
+                  "When someone saves a reflection in the app, a third-party AI, Anthropic, picks one to three themes from a fixed list of 52. Anything not on the list is dropped. nørma rewords each theme into a label for leaders and counts it for the person’s team and the groups above it. Only the top few per group are shown."
+                ],
+                "steps": [
+                  "Open Themes and choose your scope.",
+                  "Read “What’s going well” and “What needs support”.",
+                  "Use “Where themes are building” to see which groups below yours a theme is building in, from “a few” to “many”, this month or against the last 3 months.",
+                  "Pick one theme to talk about with your team, as a group."
+                ],
+                "know": [
+                  "You never see anyone’s words or name, or how many people raised a theme.",
+                  "Seven sensitive themes never reach the dashboard, and reflections that suggest someone may be at risk add no themes.",
+                  "Themes follow your organisation’s minimum group size, which counts members, not people who wrote. In a small team a theme can still come from one person, and it could be yours.",
+                  "The AI processes reflections outside Australia, without the person’s name.",
+                  "Never ask who raised a theme."
+                ]
+              }
+            },
+            {
+              "id": "d-alerts",
+              "slug": "alerts",
+              "title": "Alerts",
+              "summary": "What an alert means, what it doesn’t yet do, and what to do next.",
+              "keywords": "alerts risk warning red flag burnout wellbeing drop severity high medium low dismiss hazard whs psychosocial",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Alerts, under Measure, points you to groups whose signal has dropped far enough to be worth a look. An alert is raised when a group’s Fulfilment is low this month, or has fallen sharply since last month.",
+                  "Each alert names the group and shows a severity of High, Medium or Low, a short line on what it means, and “Anonymous, segment-level”. Alerts follow your organisation’s minimum group size. The minimum counts people in the group, not answers, so an alert can rest on very few check-ins, including yours.",
+                  "Alerts don’t map signals to psychosocial hazards yet, and there’s no hazard register to export."
+                ],
+                "steps": [
+                  "Open Alerts and choose your scope.",
+                  "Read “What triggers an alert”.",
+                  "Switch your scope to the group and open Dashboard to see which pillar or culture question sits behind it.",
+                  "Talk with the team, choose a session in Playbooks, and log what you do as growth work.",
+                  "Tap “Dismiss” once you’ve acted on it or noted it."
+                ],
+                "know": [
+                  "These insights support your organisation’s WHS processes and professional consultation. They don’t replace them.",
+                  "Dismissing tidies your list. It doesn’t change any figure, and a button at the bottom of the page brings dismissed alerts back.",
+                  "“Where to point people” lists your organisation’s support services, so you can share them."
+                ]
+              }
+            },
+            {
+              "id": "d-trends-shift",
+              "slug": "trends-and-signal-shift",
+              "title": "Trends and Signal shift",
+              "summary": "Reading your numbers over 3, 6 or 12 months, and setting what you did beside what moved.",
+              "keywords": "trends over time history months line chart signal shift before after movement board export pdf did it work",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Trends shows how Fulfilment and the five pillars have moved for the scope you choose. Pick 3 months, 6 months or 12 months; six is the default. A gap in a line means that month was held back.",
+                  "Signal shift, under Measure, sets what you did beside what moved. Growth work you logged sits next to the movement in its pillar since that month, and recorded sessions show a before and an after."
+                ],
+                "steps": [
+                  "Open Trends and choose your scope.",
+                  "Pick 3, 6 or 12 months.",
+                  "Read the overall line first, then each pillar.",
+                  "To share with a board, tap “Export for Board” and save the page as a PDF.",
+                  "Open Signal shift to read your logged growth work beside its pillar’s movement."
+                ],
+                "know": [
+                  "Movement isn’t cause. nørma doesn’t claim your action moved a number.",
+                  "Signal shift only lists growth work you logged yourself.",
+                  "When a group is below your organisation’s minimum, the movement figures are withheld, but what you logged still shows.",
+                  "Trends only shows the scope you choose. To compare groups, use Teams.",
+                  "Small groups swing a lot. Look across a few months before drawing conclusions."
                 ]
               }
             }
@@ -1030,6 +1484,236 @@
                 "know": [
                   "Employees never pay for nørma and are never asked for payment in the app.",
                   "Roster status shows access only. It never shows how anyone uses the app or what they entered."
+                ]
+              }
+            },
+            {
+              "id": "d-privacy-settings",
+              "slug": "privacy-and-safety-settings",
+              "title": "Privacy & Safety settings",
+              "summary": "Raise your organisation’s minimum group size, and check what it will hide first.",
+              "keywords": "privacy safety minimum group size floor threshold anonymity raise five suppress hide small groups settings",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Organisation Admins can raise your organisation’s minimum group size, called the “Min-group floor”, in “Privacy & Safety”. A group with fewer members than the floor shows no figures, themes or alerts. The platform minimum is 5. You can raise the floor, but never set it below 5.",
+                  "The floor counts everyone in a group, leaders included, not how many people answered. A group at the floor shows figures from its first check-in."
+                ],
+                "steps": [
+                  "Open Structure and check how many people are in each group.",
+                  "Open “Privacy & Safety”, under Organisation.",
+                  "Type the new number in “Min-group floor”. The line below it says what the new floor will mean.",
+                  "Tap “Save settings”. A line starting “Min-group floor saved” confirms it.",
+                  "Open Teams to see which groups now show “Too few to show”."
+                ],
+                "know": [
+                  "The page doesn’t list which groups will be hidden. Use Structure for group sizes.",
+                  "A higher floor hides more small groups. It can also hide a department, when subtracting its visible teams would expose a small one.",
+                  "People see your organisation’s floor in the app, under You, then “Privacy & data”.",
+                  "Members of a hidden group still count in the group above it."
+                ]
+              }
+            },
+            {
+              "id": "d-integrations",
+              "slug": "integrations",
+              "title": "Integrations",
+              "summary": "What the Integrations page shows today, and how to ask for a connection.",
+              "keywords": "integrations slack microsoft teams bamboohr culture amp okta calendar hris connect api sync connector",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "The Integrations page, under Organisation, lists connections to other tools and the honest state of each. It’s read only. There’s no button to connect anything from here.",
+                  "Today it lists Slack, Microsoft Teams, Calendar, BambooHR, Culture Amp and Okta SSO. Each card shows one of three states. “Not built yet” is a placeholder, and nothing is exchanged with that tool. “Not connected” means it’s built but has no credentials set up. “Connected” means credentials are in place."
+                ],
+                "steps": [
+                  "Open Integrations, under Organisation.",
+                  "Read the state on each card.",
+                  "To load your people, use “Import a roster” on the People page.",
+                  "For single sign-on, ask your nørma contact.",
+                  "To ask for an integration, talk to your nørma contact."
+                ],
+                "know": [
+                  "nørma doesn’t need any integration to run. You add people by invitation or a CSV file, and nørma emails them itself.",
+                  "The “Okta SSO” card is a placeholder. Single sign-on that AOH sets up for you works whatever that card says.",
+                  "Most cards show “Not built yet” for now."
+                ]
+              }
+            },
+            {
+              "id": "d-value-at-stake",
+              "slug": "value-at-stake",
+              "title": "Value at Stake",
+              "summary": "How the estimate is worked out, which inputs you set, and what it does and doesn’t claim.",
+              "keywords": "value at stake roi return on investment cost of turnover attrition salary effect factor board business case estimate",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Value at Stake, under Measure, estimates what staff turnover costs your organisation in a year. Only Organisation Admins see it. nørma works it out from three figures your organisation agrees and the number of active people on your roster, and shows the working.",
+                  "The sum is average salary × attrition rate × effect factor × active employees. Average salary times the effect factor is the value per employee: the full cost of losing someone, from hiring and retraining to the value lost while the role is empty."
+                ],
+                "steps": [
+                  "Open Value at Stake.",
+                  "Under “Value at stake inputs”, enter “Average salary”, “Attrition rate (% a year)” and “Effect factor”.",
+                  "Tap “Save”.",
+                  "Check the working line against figures you recognise."
+                ],
+                "know": [
+                  "It’s an estimate from your own inputs. It makes no claim that nørma causes or saves anything.",
+                  "nørma never guesses an input. Until all three are set, there’s no estimate to show.",
+                  "Active employees are people whose status on People is Active. Invited people, and people whose access was removed, aren’t counted.",
+                  "Figures are in Australian dollars.",
+                  "Agree the inputs with your finance team before showing the figure to a board."
+                ]
+              }
+            },
+            {
+              "id": "d-change-admin",
+              "slug": "changing-who-administers-norma",
+              "title": "Changing who administers nørma",
+              "summary": "Add or change an Organisation Admin, and hand over before someone leaves.",
+              "keywords": "organisation admin administrator change admin add admin remove admin handover leaving role owner transfer access",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Organisation Admins manage people, structure and settings. You can make someone an admin, or change their role back, on the People page. The change applies the next time they use nørma.",
+                  "It’s wise to keep at least two admins, so nobody is locked out when one is away or leaves."
+                ],
+                "steps": [
+                  "To add someone new as an admin, open People, use “Invite someone”, set Role to Organisation Admin and tap “Send invitation”. They get an email called “Your nørma admin access is ready”.",
+                  "To promote someone already on the roster, choose Organisation Admin in the Role column on their row.",
+                  "When an admin is leaving, make the new admin first.",
+                  "Then change the leaver’s role, or use “Remove access” on their last day.",
+                  "If they led a group, assign a new leader in Structure, under Leaders."
+                ],
+                "know": [
+                  "Admins see account details by name on People: name, email, team, role and status. No screen shows anyone’s answers or reflections.",
+                  "An admin is also an employee with their own private app, and their check-in counts in their group’s figures.",
+                  "If you’re the only admin and you’re leaving, contact your nørma contact before your last day."
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "For HR and procurement",
+          "articles": [
+            {
+              "id": "d-security",
+              "slug": "security-and-data-residency",
+              "title": "Security, data residency and sub-processors",
+              "summary": "Where data is stored, who processes it, who can see it, and how to get the security pack.",
+              "keywords": "security data residency australia sovereignty hosting aws encryption sub processors subprocessors anthropic ai it review vendor assessment",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "nørma runs on Amazon Web Services in its Sydney region. Accounts, check-ins, reflections and voice recordings are stored there, encrypted at rest, and the apps reach it over encrypted connections.",
+                  "One part runs outside Australia. When someone saves a reflection, its text, their latest check-in answers and the names of habits and growth work they’ve chosen go to Anthropic, a third-party AI provider, to write that person’s mirror, suggest small steps and note themes. The request carries no name, email or organisation. Reflections are the only thing nørma uses AI for. Spoken reflections are turned into text on the person’s phone."
+                ],
+                "steps": [
+                  "Ask your nørma contact for the security pack.",
+                  "Share it with your IT, privacy and procurement teams.",
+                  "Send follow-up questions back through your nørma contact."
+                ],
+                "know": [
+                  "Employers see group figures only, for groups at or above your organisation’s minimum. Admins see roster details: name, email, team, role and sign-in status.",
+                  "People sign in with a password of at least 12 characters, mixing upper and lower case, a number and a symbol, or through your own identity provider with single sign-on (SAML 2.0 or OpenID Connect), set up by AOH.",
+                  "When someone deletes their account, or is removed, their data is erased after 30 days.",
+                  "This page isn’t a full sub-processor list or a contract term. Rely on the security pack and your agreement."
+                ]
+              }
+            },
+            {
+              "id": "d-buyer-faq",
+              "slug": "faq-hr-and-procurement",
+              "title": "Questions from HR and procurement",
+              "summary": "The questions HR, IT, legal and procurement ask most, answered in one place.",
+              "keywords": "faq procurement hr legal it questions clinical therapy eap compulsory mandatory privacy policy terms dpa contract pricing cost implementation",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "This page answers what buyers ask most. For price, contract terms, a data processing agreement or a rollout plan, talk to your nørma contact."
+                ],
+                "steps": [],
+                "know": [
+                  "Is nørma clinical? No. It supports wellbeing day to day. It doesn’t diagnose or treat anything, it isn’t therapy and it isn’t a crisis service. The app lists crisis lines and any support you add, such as your EAP.",
+                  "What does IT need to do? Very little. You add people by invitation or CSV import. Single sign-on is optional and AOH sets it up. Employees use the phone app. Leaders and admins use the dashboard in a browser.",
+                  "Do employees pay? No. They’re never asked for payment in the app.",
+                  "Can we make it compulsory? There’s no feature for that, and the dashboard never lists who has or hasn’t checked in.",
+                  "What can we see? Group figures and theme labels for groups at or above your organisation’s minimum size, never a name against an answer. See “How nørma protects anonymity”.",
+                  "Where is data stored? In Australia, encrypted. Reflection text is processed by a third-party AI outside Australia. See “Security, data residency and sub-processors”.",
+                  "Where are the privacy policy and terms? Employees can read the “Privacy policy” and “Terms of use” in the app, under You, then “Privacy & data”.",
+                  "Which languages? English only, for now.",
+                  "Is there a psychosocial hazard register? Not yet. See “Work Check”."
+                ]
+              }
+            },
+            {
+              "id": "d-anonymity",
+              "slug": "how-norma-protects-anonymity",
+              "title": "How nørma protects anonymity",
+              "summary": "The five-person minimum, subtraction protection, what nobody can see, and the limits we’re honest about.",
+              "keywords": "anonymity anonymous privacy model union works council employee representatives legal identify re identification minimum group size five",
+              "phoneScreen": null,
+              "callout": "privacy",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "This page sets out the whole privacy model, limits included, for HR, legal and employee representatives.",
+                  "Each person’s entries live in their own account, and nobody at their organisation can open them. The dashboard shows figures for groups only, and only for groups with at least five people, or your organisation’s minimum if it has set a higher one. A smaller group shows “Too few to show.”, and its members still count in the group above it.",
+                  "The minimum counts everyone in the group, the leader included, not how many people answered. A group is also held back when subtracting one figure from another would reveal a smaller group."
+                ],
+                "steps": [],
+                "know": [
+                  "Nobody at work sees a name against any answer, anyone’s reflections or voice recordings, habit names, gratitude entries or private notes, or a list of who has checked in.",
+                  "Admins see a roster by name: email, team, role and whether someone has signed in.",
+                  "Honest limit: a group at the minimum shows figures from its first check-in, so a figure, theme or alert can come from one person.",
+                  "Honest limit: comparing months can narrow down who changed, colleagues who share their own answers can narrow down the rest, and leaders know their own answers.",
+                  "Reflection text is read by a third-party AI, Anthropic, outside Australia, without the person’s name.",
+                  "Employees can check what leaders see in the app, under You, then “Privacy & data”, then “See it the way a leader does”."
+                ]
+              }
+            },
+            {
+              "id": "d-glossary",
+              "slug": "glossary",
+              "title": "Glossary",
+              "summary": "The words nørma uses, in one place.",
+              "keywords": "glossary definitions terms meaning pillar fulfilment momentum mirror scope growth work foundations signal theme psychosocial hazard culture",
+              "phoneScreen": null,
+              "callout": "none",
+              "updated": "2026-10-13",
+              "body": {
+                "how": [
+                  "Short definitions of the words you’ll meet in the app and the dashboard."
+                ],
+                "steps": [],
+                "know": [
+                  "Pillar: one of five areas of life nørma asks about: Health & Fitness, Internal Work, Love & Relationships, Social Connection, and Work & Life Flow.",
+                  "Check-in: the monthly set of twenty pillar questions and three workplace questions.",
+                  "Fulfilment score: the average of a person’s five pillar scores, from 0 to 100. On the dashboard, the same average for a group.",
+                  "Culture: the average of “Do you feel heard?”, “Do you feel valued?” and “Do you feel safe to speak your truth?”.",
+                  "Mirror: what a person gets back after a check-in or a reflection. The check-in mirror uses fixed rules. The reflection mirror is written by AI.",
+                  "Momentum: a private 0 to 100 measure of what someone has done for themselves this month.",
+                  "Growth work: one-off things a person or a leader decides to do, each tied to a pillar.",
+                  "Foundations: the first growth journey everyone starts with.",
+                  "Theme: a short label for what people reflect on, shown for groups, never in their words.",
+                  "Signal: the group figures, themes and alerts leaders read on the dashboard.",
+                  "Scope: the group you’re viewing on the dashboard.",
+                  "Minimum group size: the smallest group that shows figures. At least five, counting everyone in the group.",
+                  "Psychosocial hazard: something about work that can harm mental health, such as high job demands or poor role clarity."
                 ]
               }
             }
