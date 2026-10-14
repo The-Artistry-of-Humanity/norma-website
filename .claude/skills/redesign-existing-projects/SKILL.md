@@ -81,7 +81,7 @@ To adapt this skill to a different design system, edit only the Design Values se
 - **Default or instant transitions.** Every transition uses a custom cubic bezier with real weight, not `ease` or `linear`. Baseline: `transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]`. Micro interactions such as color shifts may run shorter, but never below 200ms and never on a default curve.
 - **Elements appearing statically on scroll.** Content entering the viewport fades up heavily: `translate-y-16 blur-md opacity-0` resolving to `translate-y-0 blur-0 opacity-100` over 800ms or longer.
 - **`window.addEventListener('scroll')` for reveals.** Replace with `IntersectionObserver` or Framer Motion `whileInView`. Scroll listeners cause continuous reflow and destroy mobile performance.
-- **Standard docked navbar.** The floating glass pill is itself an AI house style tell and does not apply here. nørma's sticky translucent header stays.
+- **Standard docked navbar.** Replace with the floating island pattern: a detached glass pill, `mt-6 mx-auto w-max rounded-full`.
 - **Hamburger icon that swaps or disappears.** The lines must rotate and translate into a true X using `rotate-45` and `-rotate-45` with absolute positioning.
 - **Mobile menu as a dropdown.** Open a screen filling overlay with `backdrop-blur-3xl` over `bg-black/80` or `bg-white/80`, with links staggered in from `translate-y-12 opacity-0` using incremental delays.
 - **No hover states on buttons.** Add a background shift, slight scale, or translate.
@@ -275,19 +275,21 @@ Pillar tints, used only for the five pillars: health `#A9DDB4` · internal `#C4B
 `#F0BDB5` · social `#F2DAAC` · flow `#AAD7E3`. Status: needs care `#E6C77E`, attention
 `#E78E71`.
 
-**Light and dark alternate on purpose, and the ratio is the main thing being fixed.** The
-original skill calls a dark section inside a light page a copy paste accident. That rule does
-not apply here, on one condition: the switch has to carry meaning rather than decorate. The
-rule for this site is
+**Cream is the base. Dark is punctuation.** The original skill calls a dark section inside a
+light page a copy paste accident. That rule does not apply here, on one condition: dark has to
+earn its place rather than set a mood.
 
-> cream for what a person gets, dark for what a leader sees.
+The product itself is dark, both the app and the dashboard, so dark belongs to the product.
+Cream is the page the product sits on. A dark section is how a product screen, a privacy
+promise or a leader's view is framed, and it should feel like looking into the app. Everything
+else, including all explanation and story, is cream.
 
-Employee material (check-in, reflections, Reset, habits, journeys, gratitude, momentum) is
-cream with the character art. Leader and dashboard material is dark, where dark reads as
-product UI instead of as a mood. Anything that is neither sits on cream by default.
+Decided 14 Oct 2026 (Hendryk): do not map cream to employees and dark to leaders. The app is
+dark for everyone, so that split would contradict the product.
 
 Before this change the live site was 24 of 25 phone screens dark. Flat dark everywhere is what
-"too dark" and "too agentic" mean in practice.
+"too dark" and "too agentic" mean in practice, and it leaves the real product screens nothing
+to stand out against.
 
 ## Gradients
 
@@ -326,10 +328,10 @@ Content max width 1180px, help centre 1320px, prose measure about 65 characters.
 `transition: all .2s ease` for colour and border changes, `.3s ease` for anything that moves.
 Existing keyframes: `breathe`, `nrmBreathe`, `nrmWave`, `nrmSpin`, `nrmFloat`.
 
-The original skill's 700 to 800ms blur and fade up scroll reveals do **not** apply. Heavy
-blur-and-rise reveals on every section are themselves part of the AI house style this site is
-trying to get away from, and they hurt on mobile. Keep motion short, and keep it on things the
-person is actually touching. Respect `prefers-reduced-motion`.
+Scroll reveals and the other craft techniques in the audit above stay available. They are
+normal web craft and the client feedback that prompted this fork was not about them. Use
+`IntersectionObserver`, never a scroll listener, keep reveals off the critical first paint on
+mobile, and respect `prefers-reduced-motion`.
 
 ## Imagery
 

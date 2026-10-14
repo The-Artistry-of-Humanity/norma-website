@@ -18,11 +18,11 @@ several of its rules would have fought nørma's brand. Changed:
 | One typeface per site | Two plus a mono | The handoff pairs them deliberately |
 | Fixed dark palette, `#000000` to `#313131` | nørma greens and creams | Brand |
 | Remove all background gradients | Hero and panel gradients stay, rationed | They are in the handoff; everything else goes |
-| Alternating light and dark is a mistake | Alternating is the point, when it carries meaning | Cream for what a person gets, dark for what a leader sees |
+| Alternating light and dark is a mistake | Cream is the base, dark is punctuation | The product is dark, so dark frames product screens |
 | All radii from the Tailwind scale | Organic blob and asymmetric panel radii | The most distinctive thing in the visual language |
 | Tailwind type scale | The handoff's own sizes | The site uses inline styles, not Tailwind |
-| 700 to 800ms blur and fade up scroll reveals | Short motion, reduced-motion respected | Heavy reveals are part of the look being fixed |
-| Floating glass pill navbar | Existing sticky header | Same reason |
+| (kept) scroll reveals and nav patterns | Unchanged from upstream | Normal web craft; the client note was not about these |
+
 | `picsum.photos` placeholders | Never | Real character art or nothing |
 
 Added a Words section (Australian English, no dashes, a ban list of machine sounding words) and
