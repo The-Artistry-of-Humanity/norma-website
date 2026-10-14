@@ -1,0 +1,78 @@
+---
+/* The new leader dashboard home (handoff "Leader dashboard", 14 Oct 2026, screen
+   01, signed off 13 Oct): nørma Score dial, Fulfilment, Culture, Focus area.
+   Northwind sample data and values exactly as the handoff draws them.
+   Score = (Fulfilment + Culture) ÷ 20 = (61 + 68) ÷ 20 = 6.45, shown 6.5.
+   Band colours are the site's own legend (70+ lime, 55–69 steady, 46–54 amber,
+   45 and under coral). DRAFT ONLY: this is the v2 console design, not yet built. */
+interface Props { variant?: 'hero' | 'full' }
+const { variant = 'full' } = Astro.props;
+const hero = variant === 'hero';
+
+// Dial: 240° sweep, 0 at bottom left, 10 at bottom right.
+const CX = 100, CY = 96, R = 74;
+const polar = (v: number, r = R) => { const a = (-120 + 24 * v) * Math.PI / 180; return [CX + r * Math.sin(a), CY - r * Math.cos(a)]; };
+const arc = (v0: number, v1: number) => {
+  const [x0, y0] = polar(v0), [x1, y1] = polar(v1);
+  return `M${x0.toFixed(1)} ${y0.toFixed(1)} A${R} ${R} 0 ${(v1 - v0) * 24 > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+};
+const BANDS: [number, number, string][] = [[0, 4.6, '#E78E71'], [4.6, 5.5, '#E6C77E'], [5.5, 7.0, 'rgba(228,240,214,.2)'], [7.0, 10, '#D9EA6E']];
+const SCORE = 6.5;
+const [nx, ny] = polar(SCORE, R - 16);
+
+// Six months to October. Ends match the handoff: Fulfilment 61 (59 in Sep), Culture 68 (71 in Sep).
+const MONTHS = ['MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT'];
+const spark = (vals: number[], w: number, h: number, lo = Math.min(...vals) - 4, hi = Math.max(...vals) + 4) =>
+  vals.map((v, i) => `${((i / (vals.length - 1)) * w).toFixed(1)},${(h - ((v - lo) / (hi - lo)) * h).toFixed(1)}`).join(' ');
+const FUL = [57, 58, 58, 59, 59, 61], CUL = [70, 71, 71, 72, 71, 68];
+const card = 'border-radius:22px;background:rgba(228,240,214,.045);border:1px solid rgba(228,240,214,.09);box-sizing:border-box';
+const pill = "padding:4px 10px;border-radius:999px;background:rgba(228,240,214,.08);font:500 11.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.86)";
+---
+<div style={`display:grid;grid-template-columns:${hero ? '196px 1fr' : 'repeat(3,minmax(0,1fr))'};gap:12px;color:#F4F2E6`} data-r={hero ? undefined : 'dash3'}>
+  <div style={`${card};padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:space-between`}>
+    <div style="display:flex;justify-content:space-between;align-items:center;font:500 13px 'DM Sans',sans-serif;color:#F6F4E9">nørma Score<span style="color:rgba(201,212,194,.6)">›</span></div>
+    <svg viewBox="0 0 200 150" width="100%" style="display:block;margin-top:4px" aria-hidden="true">
+      {BANDS.map(([a, b, c]) => <path d={arc(a, b)} fill="none" stroke={c} stroke-width="9" stroke-linecap="butt" />)}
+      <line x1={CX} y1={CY} x2={nx.toFixed(1)} y2={ny.toFixed(1)} stroke="#F6F4E9" stroke-width="4" stroke-linecap="round" />
+      <circle cx={CX} cy={CY} r="7" fill="#0F1C13" stroke="#D9EA6E" stroke-width="3" />
+    </svg>
+    <div style="display:flex;align-items:flex-end;gap:10px;margin-top:-30px">
+      <img src="/assets/norma-happy.png" alt="" width="34" height="46" style="flex:none" />
+      <span style="font:400 40px/1 'DM Serif Display',serif;color:#F6F4E9">6.5</span>
+      <span style={`${pill};margin-left:auto;margin-bottom:4px`}>Steady</span>
+    </div>
+  </div>
+  <div style={`display:flex;flex-direction:column;gap:12px;${hero ? '' : 'display:contents'}`}>
+    {[
+      { name: 'Fulfilment', v: 61, d: '↑ 2 since Sep', dc: '#E4F290', pts: FUL },
+      { name: 'Culture', v: 68, d: '↓ 3 since Sep', dc: '#EFB39B', pts: CUL },
+    ].map((c) => (
+      <div style={`${card};padding:${hero ? '13px 15px 12px' : '16px 18px 14px'};display:flex;flex-direction:column;gap:6px`}>
+        <div style="display:flex;justify-content:space-between;align-items:center;font:500 13px 'DM Sans',sans-serif;color:#F6F4E9">{c.name}<span style="color:rgba(201,212,194,.6)">›</span></div>
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <span style={`font:400 ${hero ? 34 : 44}px/1 'DM Serif Display',serif;color:#F6F4E9`}>{c.v}</span>
+          <span style={`font:500 11.5px 'DM Mono',monospace;color:${c.dc};white-space:nowrap`}>{c.d}</span>
+          {!hero && <span style={`${pill};margin-left:auto`}>Steady</span>}
+        </div>
+        <svg viewBox={`0 0 220 ${hero ? 30 : 92}`} width="100%" height={hero ? 26 : 92} preserveAspectRatio="none" style={`display:block;${hero ? '' : 'margin-top:auto'}`} aria-hidden="true">
+          {!hero && <polygon fill="rgba(217,234,110,.08)" points={`0,92 ${spark(c.pts, 220, 84)} 220,92`} />}
+          <polyline fill="none" stroke="#D9EA6E" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" points={spark(c.pts, 220, hero ? 26 : 84)} transform="translate(0,3)" />
+        </svg>
+        {!hero && (
+          <div style="display:flex;justify-content:space-between;font:500 10px 'DM Mono',monospace;color:rgba(201,212,194,.5)">
+            {MONTHS.map((m) => <span>{m}</span>)}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+{!hero && (
+  <div style={`${card};margin-top:12px;padding:18px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px`}>
+    <div style="flex:1 1 320px">
+      <div style="display:flex;align-items:center;gap:8px;font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;color:rgba(201,212,194,.75)"><span style="width:7px;height:7px;border-radius:50%;background:#E78E71"></span>FOCUS AREA</div>
+      <div style="margin-top:6px;font:400 15px/1.5 'DM Sans',sans-serif;color:rgba(244,242,230,.88)"><span style="font:400 19px 'DM Serif Display',serif;color:#F6F4E9">Field Services</span>&nbsp; Fulfilment 44 and culture 43, both down again. Feeling safe is the lowest answer in the company.</div>
+    </div>
+    <span style="flex:none;padding:10px 18px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 13.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 10px 30px rgba(217,234,110,.22)">Open Field Services ›</span>
+  </div>
+)}
