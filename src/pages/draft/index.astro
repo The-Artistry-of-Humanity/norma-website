@@ -72,6 +72,15 @@ const ROWS: [string, number][] = [['Field Services', 44], ['Sales', 52], ['Custo
 const MOVE = [['AUG', 47], ['SEP', 46], ['OCT', 43], ['NOV', 47]] as [string, number][];
 const mx = (i: number) => 14 + i * 64, my = (v: number) => 88 - (v - 38) * 5.2;
 const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#17301F);color:#F4F2E6;box-sizing:border-box';
+
+// The nørma Score dial for the two-sides bridge: same 240° sweep and band
+// colours as the dashboard, drawn large on cream. Cropped just below the
+// pivot so its ends disappear behind the two cards.
+const DR = 270, DS = 30, DP = 20, DCX = DR + DS / 2 + DP, DCY = DR + DS / 2 + DP, DW = DCX * 2, DH = DCY + 22;
+const dpt = (v: number, r = DR) => { const a = (-120 + 24 * v) * Math.PI / 180; return [DCX + r * Math.sin(a), DCY - r * Math.cos(a)]; };
+const darc = (v0: number, v1: number) => { const [x0, y0] = dpt(v0), [x1, y1] = dpt(v1); return `M${x0.toFixed(1)} ${y0.toFixed(1)} A${DR} ${DR} 0 ${(v1 - v0) * 24 > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+const DBANDS: [number, number, string][] = [[0, 4.6, '#E78E71'], [4.6, 5.5, '#E6C77E'], [5.5, 7.0, 'rgba(20,35,26,.14)'], [7.0, 10, '#D9EA6E']];
+const [dnx, dny] = dpt(6.5, DR - 58);
 ---
 <Layout title="nørma · draft home v3" description="Draft home page for review. Not public." noindex>
   <div style={`background:${CREAM};color:${INK};font-family:'DM Sans',sans-serif;overflow-x:clip`}>
@@ -95,7 +104,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
     </div>
 
     <!-- 1 · Hero. One line, then what nørma is, then the product itself. -->
-    <section style={`${wrap};padding-top:clamp(56px,8vw,104px);padding-bottom:clamp(56px,7vw,96px)`}>
+    <section style={`${wrap};padding-top:clamp(56px,8vw,104px);padding-bottom:clamp(88px,10vw,136px)`}>
       <div data-r="herogrid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:clamp(32px,4vw,56px);align-items:center">
         <div>
           <h1 style={`margin:0;max-width:10em;font:400 clamp(44px,4.9vw,68px)/1.02 'DM Serif Display',serif;letter-spacing:-1.2px;text-wrap:balance`}>
@@ -127,7 +136,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
 
     <!-- 2 · What it costs. Second person, mixed moments that roll on without
          snapping back, one icon per cost. -->
-    <section id="dark" style="background:#0A130D;color:#F4F2E6">
+    <section id="dark" style="background:#0F2015;color:#F4F2E6">
       <div style={`${wrap};padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,96px)`}>
         <h2 style={`${h2};max-width:15em;color:#F6F4E9`}>Somewhere in your organisation, this is happening today.</h2>
         <div style="display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px">
@@ -144,7 +153,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
           <div id="mtrack" data-r="mtrack" tabindex="0" aria-label="Moments, scroll sideways" style="display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none">
             {[0, 1].map((copy) => moments.map((m) => (
               <figure data-slide data-clone={copy ? '' : undefined} aria-hidden={copy ? 'true' : undefined} style="flex:0 0 calc((100% - 28px) / 3);scroll-snap-align:start;margin:0;display:flex;flex-direction:column;gap:14px">
-                <div style="position:relative;height:300px;border-radius:20px;border:1px solid rgba(228,240,214,.11);background:#070D08;overflow:hidden;padding:18px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
+                <div style="position:relative;height:300px;border-radius:20px;border:1px solid rgba(228,240,214,.11);background:#0D1B12;overflow:hidden;padding:18px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
                   <span title={m.cost} style="position:absolute;left:14px;top:14px;width:32px;height:32px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(217,234,110,.14);display:flex;align-items:center;justify-content:center;color:#EAF79B">
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label={m.cost}>{ICON[m.cost].map((d) => <path d={d} />)}</svg>
                   </span>
@@ -235,7 +244,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
 
     <!-- 3 · Running in the dark. A lime flashlight searches the dark: it drifts on
          its own and follows the pointer on a desktop. Still for reduced motion. -->
-    <section id="search" data-r="search" style="position:relative;overflow:hidden;background:#060B07;color:#F4F2E6">
+    <section id="search" data-r="search" style="position:relative;overflow:hidden;background:#0D1B12;color:#F4F2E6">
       <div id="beam" aria-hidden="true" style="position:absolute;left:30%;top:45%;width:min(720px,120vw);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(217,234,110,.17),rgba(217,234,110,.06) 45%,rgba(217,234,110,0) 72%);pointer-events:none;animation:nrmSearch 18s ease-in-out infinite alternate"></div>
       <div style={`${wrap};position:relative;min-height:clamp(420px,62vh,620px);display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:96px`}>
         <h2 style={`${h2};max-width:12em;font-size:clamp(38px,5vw,64px);color:#F6F4E9`}>Right now, you’re running in the dark.</h2>
@@ -319,7 +328,15 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
          open each of the two sections below. Together they make the score. -->
     <section style={`${wrap};padding-top:clamp(24px,4vw,40px);padding-bottom:clamp(72px,9vw,112px)`}>
       <h2 style={`${h2};max-width:16em`}>The problem has two sides. So does nørma.</h2>
-      <div data-r="sides" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:36px">
+      <div style="position:relative;margin-top:28px">
+      <svg viewBox={`0 0 ${DW} ${DH}`} data-r="bigdial" style="display:block;position:relative;z-index:0;width:min(610px,100%);height:auto;margin:0 auto -14px" aria-hidden="true">
+        {DBANDS.map(([a, b, c]) => <path d={darc(a, b)} fill="none" stroke={c} stroke-width={DS} />)}
+        <line x1={DCX} y1={DCY} x2={dnx.toFixed(1)} y2={dny.toFixed(1)} stroke="#14231A" stroke-width="7" stroke-linecap="round" />
+        <circle cx={DCX} cy={DCY} r="13" fill="#14231A" stroke="#D9EA6E" stroke-width="5" />
+        <text x={DCX - 112} y={DCY - 96} text-anchor="middle" fill="rgba(20,35,26,.62)" style="font:500 15px 'DM Sans',sans-serif">nørma Score</text>
+        <text x={DCX - 112} y={DCY - 30} text-anchor="middle" fill="#14231A" style="font:400 64px 'DM Serif Display',serif">6.5</text>
+      </svg>
+      <div data-r="sides" style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
         <a href="#people" style={`display:flex;flex-direction:column;gap:14px;padding:28px 28px 24px;border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:${CREAM_2};border:1px solid rgba(20,35,26,.08);color:${INK}`}>
           <span style="display:flex;gap:6px">
             {PILLAR_HEADS.map((p) => (
@@ -332,7 +349,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
           <span style={`font:400 15.5px/1.5 'DM Sans',sans-serif;color:${MUTED}`}>The five pillars of a whole life. This becomes their Fulfilment.</span>
           <span style="margin-top:4px;font:600 14px 'DM Sans',sans-serif">↓</span>
         </a>
-        <a href="#leaders" style="display:flex;flex-direction:column;gap:14px;padding:28px 28px 24px;border-radius:20px 30px 22px 32px / 30px 20px 32px 22px;background:#0A130D;color:#F4F2E6">
+        <a href="#leaders" style="display:flex;flex-direction:column;gap:14px;padding:28px 28px 24px;border-radius:20px 30px 22px 32px / 30px 20px 32px 22px;background:#0F2015;color:#F4F2E6">
           <span style="display:flex;gap:6px">
             {CULTURE_HEADS.map((p) => (
               <span style={`width:34px;height:34px;border-radius:${p.disc};background:rgba(228,240,214,.1);display:flex;align-items:center;justify-content:center;color:rgba(244,242,230,.9)`}>
@@ -345,7 +362,8 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
           <span style="margin-top:4px;font:600 14px 'DM Sans',sans-serif;color:#EAF79B">↓</span>
         </a>
       </div>
-      <p style={`margin:24px 0 0;font:400 19px/1.5 'DM Serif Display',serif;color:${INK}`}>Together, they make the nørma Score.</p>
+      </div>
+      <p style={`margin:24px 0 0;font:400 19px/1.5 'DM Serif Display',serif;color:${INK};text-align:center`}>Together, they make the nørma Score.</p>
     </section>
 
     <!-- 6 · Their side. Five pillars first, then nørma the character, who goes
@@ -393,7 +411,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
     </section>
 
     <!-- 7 · Your side. The culture they walk into, shown with the nørma Score. -->
-    <section id="leaders" style="background:#0A130D;color:#F4F2E6">
+    <section id="leaders" style="background:#0F2015;color:#F4F2E6">
       <div style={`${wrap};padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)`}>
         <span style="font:500 13px 'DM Sans',sans-serif;color:rgba(201,212,194,.75)">Your side</span>
         <h2 style={`${h2};margin-top:8px;max-width:14em;color:#F6F4E9`}>The culture they walk into is yours to shape.</h2>
@@ -410,7 +428,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
             </span>
           ))}
         </div>
-        <div style="margin-top:40px;padding:clamp(14px,2vw,22px);border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:linear-gradient(165deg,#0F2015,#17301F);border:1px solid rgba(228,240,214,.08)">
+        <div style="margin-top:40px;padding:clamp(14px,2vw,22px);border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:linear-gradient(165deg,#17301F,#0F2015);border:1px solid rgba(228,240,214,.14)">
           <div style="display:flex;align-items:center;justify-content:space-between;margin:2px 4px 14px;gap:12px">
             <span style="font:400 22px 'DM Serif Display',serif;color:#F6F4E9">Northwind</span>
             <span style="font:500 11px 'DM Mono',monospace;color:#DCEC85">October signal · 184 people</span>
@@ -510,6 +528,7 @@ const card = 'border-radius:22px;background:linear-gradient(165deg,#0F2015,#1730
     }
     @media (max-width:760px){
       [data-r=costs],[data-r=steps],[data-r=sides]{grid-template-columns:minmax(0,1fr)!important}
+      [data-r=bigdial]{margin-bottom:-2px!important}
     }
     /* The hero composite is a fixed 560 by 440 picture; on narrow screens it
        scales down as one piece so the dashboard and phone keep their layout. */
