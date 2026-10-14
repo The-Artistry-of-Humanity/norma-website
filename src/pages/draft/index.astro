@@ -1,282 +1,333 @@
 ---
-/* DRAFT home page, 14 Oct 2026. Not linked from anywhere, noindex.
-   Built to answer the 12 Oct client feedback: too agentic, too dark, too much,
-   no clear why. The story is not new: it is the demo film's own spine
-   (norma-demo-concept-2026-07-27.md), which the live site never tells.
-   Palette rule: cream is the base, dark is punctuation for the product and the
-   "before" moments. Nothing here touches the live pages. */
+/* DRAFT home page v2, 14 Oct 2026. Not linked from anywhere, noindex.
+   Story, from Hendryk's notes on v1: you are running in the dark, and it costs
+   you (absenteeism, presenteeism, turnover). nørma turns the lights on: see it,
+   act on it, see if it moved. Two sides because the problem has two sides:
+   their life comes to work with them (the five pillars, a companion that shows
+   them where they are), and the culture they walk into is yours to shape (the
+   nørma Score). Fulfilled people. Honest culture.
+   Palette: cream is the base, dark is punctuation. The page goes dark for the
+   cost of not knowing and turns light at "nørma turns the lights on".
+   Cost figures are the live ROI calculator's published defaults (AHRI Work
+   Outlook 2025–26, ABS, APSC), never new numbers. Nothing here touches live pages. */
 import Layout from '../../layouts/Layout.astro';
 import Phone from '../../islands/Phone';
+import Dash from '../../components/draft/Dash.astro';
+import { PILLAR_HEADS, CULTURE_HEADS } from '../../islands/v3/home-logic.js';
 
 const INK = '#14231A';
-const MUTED = 'rgba(20,35,26,.68)';
+const MUTED = 'rgba(20,35,26,.7)';
 const CREAM = '#F4F2E6';
-const CREAM_2 = '#EFEBDC';
-const LIME = '#D9EA6E';
+const CREAM_2 = '#ECE8D7';
 
 const wrap = 'max-width:1120px;margin:0 auto;padding-left:40px;padding-right:40px;box-sizing:border-box';
-const h2 = `margin:0;font:400 clamp(30px,3.6vw,44px)/1.1 'DM Serif Display',serif;letter-spacing:-.6px;text-wrap:pretty`;
+const h2 = `margin:0;font:400 clamp(32px,3.8vw,46px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;text-wrap:balance`;
 const lede = `font:400 18px/1.6 'DM Sans',sans-serif;text-wrap:pretty`;
+// The brand's primary button, kept from the live site: lime with its glow.
+// On cream it gets a hairline edge so it still reads as a button.
+const LIME_BTN = `display:inline-flex;align-items:center;padding:15px 26px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 0 1px rgba(20,35,26,.10),0 12px 32px rgba(190,210,60,.38)`;
+const GHOST_BTN = `display:inline-flex;align-items:center;padding:15px 26px;border-radius:999px;border:1px solid rgba(20,35,26,.22);color:${INK};font:600 15px 'DM Sans',sans-serif`;
 
-// The film's cold open, scene 1: four everyday screens, four quiet cost words.
-const pains = [
-  { word: 'absent', cap: '11:52 PM, still scrolling', kind: 'lock' },
-  { word: 'disengaged', cap: 'The "all good" that isn’t', kind: 'chat' },
-  { word: 'quiet', cap: 'The meeting where nobody speaks', kind: 'meet' },
-  { word: 'gone', cap: 'The resignation nobody saw coming', kind: 'mail' },
+// Moments, in second person, two per cost. Absenteeism, then presenteeism
+// (the biggest and the one nobody sees), then turnover.
+const moments = [
+  { cost: 'Absenteeism', kind: 'sick', cap: 'The 7 am text.', line: 'One unplanned day costs about A$520.' },
+  { cost: 'Absenteeism', kind: 'mondays', cap: 'The third Monday this month.', line: 'Nine days a person a year, on average.' },
+  { cost: 'Presenteeism', kind: 'chat', cap: 'The "all good" that isn’t.', line: 'At work, not really there.' },
+  { cost: 'Presenteeism', kind: 'meet', cap: 'The meeting where nobody says what they think.', line: 'The idea nobody raises.' },
+  { cost: 'Turnover', kind: 'mail', cap: 'The resignation nobody saw coming.', line: 'Replacing one person: about half a year’s salary.' },
+  { cost: 'Turnover', kind: 'exit', cap: 'The exit interview.', line: '"It wasn’t one thing. It just built up."' },
 ];
 
-const appFeatures = [
-  ['Check in', 'Twenty questions about a whole life, once a month.'],
-  ['Reflect', 'Say it or type it. Nobody at work can read it.'],
-  ['Reset', 'Breath work and short practices, picked by how you feel.'],
-  ['Grow', 'Habits, illustrated chapters, one thing to try tonight.'],
+const costs = [
+  { k: 'Absenteeism', v: 'A$4,700', d: 'Unplanned days off, nine a person a year.' },
+  { k: 'Presenteeism', v: 'A$10,800', d: 'At work, not really there. The biggest, and the one you can’t see.' },
+  { k: 'Turnover', v: 'A$6,750', d: 'People who leave, at about half a year’s salary each to replace.' },
 ];
 
-const leaderFeatures = [
-  ['Fulfilment and Culture', 'Two numbers for a group, with the months behind them.'],
-  ['Focus area', 'The one thing to look at this month, and why.'],
-  ['Growth work', 'Sessions to run, logged against what moved.'],
-  ['Psychosocial duty', 'A dated record of what you saw and what you did.'],
+const PILLAR_LINES = [
+  'How they care for their body and energy.',
+  'Their inner life: mind, attention and self.',
+  'Closeness, romance and feeling at peace.',
+  'Friends, community and belonging.',
+  'How work sits within the rest of their life.',
 ];
+const PILLAR_NAMES = ['Health & Fitness', 'Internal Work', 'Love & Relationships', 'Social Connection', 'Work & Life Flow'];
 ---
-<Layout title="nørma · draft home" description="Draft home page for review. Not public." noindex>
+<Layout title="nørma · draft home v2" description="Draft home page for review. Not public." noindex>
   <div style={`background:${CREAM};color:${INK};font-family:'DM Sans',sans-serif;overflow-x:clip`}>
 
-    <div style="position:sticky;top:0;z-index:50;background:rgba(244,242,230,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(20,35,26,.08)">
+    <div style="position:sticky;top:0;z-index:50;background:rgba(244,242,230,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(20,35,26,.08)">
       <div style={`${wrap};height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px`}>
         <span style="display:flex;align-items:center;gap:10px">
           <img src="/assets/norma-logo.png" alt="" width="30" height="30" style="border-radius:9px" />
           <span style={`font:400 23px 'DM Serif Display',serif;color:${INK}`}>nørma</span>
         </span>
         <span style="display:flex;align-items:center;gap:26px">
-          <span data-r="dnav" style={`display:flex;gap:26px;font:500 14px 'DM Sans',sans-serif;color:${MUTED}`}>
+          <span data-r="dnav" style={`display:flex;gap:26px;font:500 14px 'DM Sans',sans-serif`}>
             <a href="#people" style={`color:${MUTED}`}>Your people</a>
             <a href="#leaders" style={`color:${MUTED}`}>For leaders</a>
-            <a href="#promise" style={`color:${MUTED}`}>Privacy</a>
+            <a href="/#roi" style={`color:${MUTED}`}>ROI</a>
+            <a href="/help/" style={`color:${MUTED}`}>Help</a>
           </span>
-          <a href="#demo" style={`display:inline-flex;align-items:center;padding:11px 20px;border-radius:999px;background:${INK};color:${CREAM};font:600 13.5px 'DM Sans',sans-serif`}>Book a demo</a>
+          <a href="#demo" style={`${LIME_BTN};padding:11px 20px;font-size:13.5px`}>Book a demo</a>
         </span>
       </div>
     </div>
 
-    <!-- 1 · Hero. The film's opening line, which says in one breath what the live
-         hero never says: why nørma exists and why it has two sides. -->
-    <section style={`${wrap};padding-top:clamp(64px,9vw,118px);padding-bottom:clamp(48px,6vw,84px)`}>
-      <div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:center" data-r="herogrid">
+    <!-- 1 · Hero. The hook, then in plain words what nørma is, then the product
+         itself, so a visitor knows in one glance this is software. -->
+    <section style={`${wrap};padding-top:clamp(56px,8vw,104px);padding-bottom:clamp(56px,7vw,96px)`}>
+      <div data-r="herogrid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:clamp(32px,4vw,56px);align-items:center">
         <div>
-          <h1 style={`margin:0;font:400 clamp(40px,5.6vw,68px)/1.02 'DM Serif Display',serif;letter-spacing:-1.2px;text-wrap:balance`}>
+          <h1 style={`margin:0;font:400 clamp(40px,5.2vw,64px)/1.03 'DM Serif Display',serif;letter-spacing:-1.1px;text-wrap:balance`}>
             Nobody leaves their life at the door. Nobody tells the truth at work.
           </h1>
-          <p style={`margin:26px 0 0;max-width:30em;font:400 20px/1.55 'DM Sans',sans-serif;color:${MUTED};text-wrap:pretty`}>
-            You pay for both, every day. nørma runs one loop, twice. Your people run it on their own
-            fulfilment. You run it on your culture. Both from day one.
+          <p style={`margin:24px 0 0;max-width:30em;font:400 19px/1.55 'DM Sans',sans-serif;color:${MUTED};text-wrap:pretty`}>
+            nørma is an app for your people and a dashboard for you. They see where their life is at.
+            You see where your culture is at, and what to do about it.
           </p>
-          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:34px">
-            <a href="#demo" style={`display:inline-flex;align-items:center;padding:15px 26px;border-radius:999px;background:${INK};color:${CREAM};font:600 15px 'DM Sans',sans-serif`}>Book a demo</a>
-            <a href="#loop" style={`display:inline-flex;align-items:center;padding:15px 26px;border-radius:999px;border:1px solid rgba(20,35,26,.22);color:${INK};font:600 15px 'DM Sans',sans-serif`}>See how it works</a>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+            <a href="#demo" style={LIME_BTN}>Book a demo</a>
+            <a href="#dark" style={GHOST_BTN}>See why it matters</a>
           </div>
         </div>
-        <div style="display:flex;justify-content:center">
-          <div style="position:relative;width:100%;max-width:400px">
-            <img src="/assets/norma-world-day.png" alt="" style="width:100%;height:auto;display:block" />
-            <img src="/assets/norma-sprout.png" alt="" style="position:absolute;left:50%;top:50%;width:36%;height:auto;transform:translate(-50%,-50%);filter:drop-shadow(0 10px 18px rgba(10,19,13,.22));animation:nrmFloat 6s ease-in-out infinite" />
+        <div data-r="herovis" style="position:relative;width:560px;height:440px;justify-self:center">
+          <div data-r="herovisin" style="position:absolute;left:0;top:0;width:560px;height:440px;transform-origin:top left">
+            <div style="position:absolute;left:0;top:0;width:470px;padding:18px;border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:linear-gradient(165deg,#0F2015,#17301F);box-shadow:0 40px 80px rgba(20,35,26,.28);box-sizing:border-box">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin:2px 4px 14px">
+                <span style="font:400 21px 'DM Serif Display',serif;color:#F6F4E9">Northwind</span>
+                <span style="font:500 11px 'DM Mono',monospace;color:#DCEC85">October signal</span>
+              </div>
+              <Dash variant="hero" />
+            </div>
+            <div style="position:absolute;right:0;top:118px;width:290px;transform:scale(.66);transform-origin:top right;filter:drop-shadow(0 30px 50px rgba(10,19,13,.35))"><Phone screen="home" /></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2 · The four pains, dark. Scene 1 of the film: everyday screens, not nørma
-         screens. Dark earns its place here because this is the "before". -->
-    <section style="background:#0A130D;color:#F4F2E6">
-      <div style={`${wrap};padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(56px,7vw,96px)`}>
-        <h2 style={`${h2};max-width:16em;color:#F6F4E9`}>Four moments every organisation recognises.</h2>
-        <div data-r="pains" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px">
-          {pains.map((p) => (
-            <figure style="margin:0;display:flex;flex-direction:column;gap:14px">
-              <div style="position:relative;aspect-ratio:9/13;border-radius:18px;border:1px solid rgba(228,240,214,.12);background:#070D08;overflow:hidden;padding:14px;box-sizing:border-box">
-                {p.kind === 'lock' && (
-                  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;color:rgba(244,242,230,.85)">
-                    <span style="font:400 13px 'DM Mono',monospace;opacity:.6">Tuesday</span>
-                    <span style="font:400 38px 'DM Serif Display',serif">11:52</span>
-                    <span style="margin-top:12px;width:70%;height:5px;border-radius:3px;background:rgba(244,242,230,.16)"></span>
-                    <span style="width:84%;height:5px;border-radius:3px;background:rgba(244,242,230,.1)"></span>
-                    <span style="width:60%;height:5px;border-radius:3px;background:rgba(244,242,230,.07)"></span>
-                  </div>
-                )}
-                {p.kind === 'chat' && (
-                  <div style="height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:8px">
-                    <span style="align-self:flex-start;max-width:80%;padding:8px 11px;border-radius:14px 14px 14px 4px;background:rgba(228,240,214,.08);font:400 11.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.8)">You good?</span>
-                    <span style="align-self:flex-end;max-width:80%;padding:8px 11px;border-radius:14px 14px 4px 14px;background:rgba(217,234,110,.16);font:400 11.5px 'DM Sans',sans-serif;color:#EAF79B">All good 👍</span>
-                    <span style="margin-top:6px;padding:7px 10px;border-radius:999px;border:1px solid rgba(228,240,214,.1);font:400 10.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.28);white-space:nowrap;overflow:hidden;text-overflow:clip">Honestly, pretty burnt out|</span>
-                  </div>
-                )}
-                {p.kind === 'meet' && (
-                  <div style="height:100%;display:flex;flex-direction:column;gap:6px;justify-content:center">
-                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px">
-                      {[0,1,2,3,4,5,6,7,8].map((i) => (
-                        <span style={`aspect-ratio:4/3;border-radius:5px;background:rgba(228,240,214,${i === 7 ? '.02' : '.07'})`}></span>
+    <!-- 2 · The cost of not knowing. Dark, because this is the dark you are
+         running in. Second person: these are your people, not "every organisation". -->
+    <section id="dark" style="background:#0A130D;color:#F4F2E6">
+      <div style={`${wrap};padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)`}>
+        <h2 style={`${h2};max-width:15em;color:#F6F4E9`}>Somewhere in your organisation, this is happening today.</h2>
+
+        <div style="position:relative;margin-top:40px">
+          <div id="mtrack" data-r="mtrack" tabindex="0" aria-label="Moments, scroll sideways" style="display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none">
+            {moments.map((m) => (
+              <figure data-slide style="flex:0 0 calc((100% - 28px) / 3);scroll-snap-align:start;margin:0;display:flex;flex-direction:column;gap:14px">
+                <div style="position:relative;height:300px;border-radius:20px;border:1px solid rgba(228,240,214,.11);background:#070D08;overflow:hidden;padding:18px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
+                  {m.kind === 'sick' && (
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                      <span style="align-self:center;font:400 12px 'DM Mono',monospace;color:rgba(244,242,230,.5)">7:12 am</span>
+                      <div style="padding:12px 14px;border-radius:16px;background:rgba(228,240,214,.07)">
+                        <div style="font:600 12px 'DM Sans',sans-serif;color:#F6F4E9">Sam</div>
+                        <div style="margin-top:4px;font:400 13px/1.45 'DM Sans',sans-serif;color:rgba(244,242,230,.82)">Morning. Not feeling great, won’t make it in today. Sorry 🤒</div>
+                      </div>
+                    </div>
+                  )}
+                  {m.kind === 'mondays' && (
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px">
+                      {['M','T','W','T','F'].map((d) => <span style="text-align:center;font:500 10px 'DM Mono',monospace;color:rgba(244,242,230,.4)">{d}</span>)}
+                      {Array.from({ length: 20 }).map((_, i) => (
+                        <span style={`height:30px;border-radius:6px;background:${i % 5 === 0 && i < 15 ? 'rgba(231,142,113,.32)' : 'rgba(228,240,214,.05)'};display:flex;align-items:center;justify-content:center;font:500 9.5px 'DM Sans',sans-serif;color:#FBDFD0`}>{i % 5 === 0 && i < 15 ? 'Sick' : ''}</span>
                       ))}
                     </div>
-                    <span style="margin-top:8px;font:400 11px 'DM Sans',sans-serif;color:rgba(244,242,230,.45)">Any thoughts?</span>
-                  </div>
-                )}
-                {p.kind === 'mail' && (
-                  <div style="height:100%;display:flex;flex-direction:column;gap:9px;justify-content:center">
-                    <span style="display:flex;flex-direction:column;gap:4px;padding-bottom:9px;border-bottom:1px solid rgba(228,240,214,.07)">
-                      <span style="width:52%;height:5px;border-radius:3px;background:rgba(244,242,230,.1)"></span>
-                      <span style="width:76%;height:5px;border-radius:3px;background:rgba(244,242,230,.06)"></span>
-                    </span>
-                    <span style="display:flex;flex-direction:column;gap:5px">
-                      <span style="font:500 12px 'DM Sans',sans-serif;color:#F6F4E9">Resignation</span>
-                      <span style="font:400 11px 'DM Sans',sans-serif;color:rgba(244,242,230,.5)">Jordan Lee · 9:04 AM</span>
-                    </span>
-                  </div>
-                )}
-              </div>
-              <figcaption style="display:flex;flex-direction:column;gap:5px">
-                <span style="font:500 10.5px 'DM Mono',monospace;letter-spacing:1.6px;color:rgba(217,234,110,.78)">{p.word}</span>
-                <span style="font:400 13.5px/1.45 'DM Sans',sans-serif;color:rgba(201,212,194,.8);text-wrap:pretty">{p.cap}</span>
-              </figcaption>
-            </figure>
+                  )}
+                  {m.kind === 'chat' && (
+                    <div style="display:flex;flex-direction:column;gap:9px">
+                      <span style="align-self:flex-start;padding:9px 13px;border-radius:16px 16px 16px 5px;background:rgba(228,240,214,.08);font:400 13px 'DM Sans',sans-serif;color:rgba(244,242,230,.85)">You good?</span>
+                      <span style="align-self:flex-end;padding:9px 13px;border-radius:16px 16px 5px 16px;background:rgba(217,234,110,.16);font:400 13px 'DM Sans',sans-serif;color:#EAF79B">All good 👍</span>
+                      <span style="margin-top:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(228,240,214,.1);font:400 12px 'DM Sans',sans-serif;color:rgba(244,242,230,.3);text-decoration:line-through;text-decoration-color:rgba(244,242,230,.25)">Honestly, I’m pretty burnt out</span>
+                    </div>
+                  )}
+                  {m.kind === 'meet' && (
+                    <div>
+                      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+                        {Array.from({ length: 9 }).map((_, i) => (
+                          <span style={`aspect-ratio:4/3;border-radius:6px;background:rgba(228,240,214,${i === 4 ? '.02' : '.07'});position:relative`}><span style="position:absolute;right:5px;bottom:5px;width:6px;height:6px;border-radius:50%;background:rgba(231,142,113,.7)"></span></span>
+                        ))}
+                      </div>
+                      <div style="margin-top:12px;padding:9px 12px;border-radius:12px;background:rgba(228,240,214,.05);font:400 12.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.6)">“Any thoughts?” <span style="color:rgba(244,242,230,.32)">· no replies</span></div>
+                    </div>
+                  )}
+                  {m.kind === 'mail' && (
+                    <div style="display:flex;flex-direction:column;gap:12px">
+                      {[0, 1].map(() => <span style="display:block;height:8px;width:70%;border-radius:4px;background:rgba(244,242,230,.07)"></span>)}
+                      <div style="padding:12px 14px;border-radius:14px;background:rgba(228,240,214,.06);border-left:3px solid #E78E71">
+                        <div style="font:600 13.5px 'DM Sans',sans-serif;color:#F6F4E9">Resignation</div>
+                        <div style="margin-top:3px;font:400 12px 'DM Sans',sans-serif;color:rgba(244,242,230,.55)">Jordan Lee · 9:04 am</div>
+                      </div>
+                      {[0, 1].map(() => <span style="display:block;height:8px;width:56%;border-radius:4px;background:rgba(244,242,230,.05)"></span>)}
+                    </div>
+                  )}
+                  {m.kind === 'exit' && (
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                      <span style="font:500 10.5px 'DM Mono',monospace;letter-spacing:1.2px;color:rgba(244,242,230,.45)">EXIT INTERVIEW · NOTES</span>
+                      <div style="font:400 20px/1.3 'DM Serif Display',serif;color:#F6F4E9">“It wasn’t one thing. It just built up.”</div>
+                      <span style="font:400 12px 'DM Sans',sans-serif;color:rgba(244,242,230,.45)">Two years, eleven months</span>
+                    </div>
+                  )}
+                </div>
+                <figcaption style="display:flex;flex-direction:column;gap:5px">
+                  <span style="font:600 11px 'DM Sans',sans-serif;letter-spacing:1.6px;color:#DCEC85">{m.cost.toUpperCase()}</span>
+                  <span style="font:400 18px/1.3 'DM Serif Display',serif;color:#F6F4E9;text-wrap:pretty">{m.cap}</span>
+                  <span style="font:400 14px/1.45 'DM Sans',sans-serif;color:rgba(201,212,194,.8);text-wrap:pretty">{m.line}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:22px">
+            <button id="mprev" type="button" aria-label="Previous moment" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(228,240,214,.18);background:transparent;color:#F4F2E6;font:400 18px 'DM Sans',sans-serif;cursor:pointer">‹</button>
+            <button id="mnext" type="button" aria-label="Next moment" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(228,240,214,.18);background:transparent;color:#F4F2E6;font:400 18px 'DM Sans',sans-serif;cursor:pointer">›</button>
+            <span id="mcount" aria-live="polite" style="margin-left:6px;font:500 12px 'DM Mono',monospace;color:rgba(201,212,194,.6)"></span>
+          </div>
+        </div>
+
+        <div data-r="costs" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(48px,6vw,72px)">
+          {costs.map((c) => (
+            <div style="padding:22px 22px 20px;border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;background:rgba(228,240,214,.045);border:1px solid rgba(228,240,214,.09)">
+              <div style="font:600 11px 'DM Sans',sans-serif;letter-spacing:1.6px;color:rgba(201,212,194,.75)">{c.k.toUpperCase()}</div>
+              <div style="margin-top:10px;font:400 36px/1 'DM Serif Display',serif;color:#F6F4E9">{c.v}</div>
+              <div style="margin-top:4px;font:400 13px 'DM Sans',sans-serif;color:rgba(201,212,194,.7)">a person, every year</div>
+              <p style="margin:12px 0 0;font:400 14.5px/1.5 'DM Sans',sans-serif;color:rgba(244,242,230,.82);text-wrap:pretty">{c.d}</p>
+            </div>
           ))}
         </div>
-        <p style={`margin:40px 0 0;max-width:34em;${lede};color:rgba(201,212,194,.85)`}>
-          An annual survey is a photograph of a year ago. An EAP is used by one in twenty. In between,
-          nothing tells you which team is sliding, or whether what you did last quarter worked.
-        </p>
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 28px;margin-top:22px">
+          <p style="margin:0;font:400 18px/1.5 'DM Sans',sans-serif;color:#F6F4E9">Together, about <strong style="font-weight:600;color:#EAF79B">A$22,000 a person, every year.</strong></p>
+          <a href="/#roi" style="font:600 14.5px 'DM Sans',sans-serif;color:#EAF79B;border-bottom:2px solid rgba(217,234,110,.45);padding-bottom:2px">Work it out for your organisation ›</a>
+        </div>
+        <p style="margin:10px 0 0;font:400 12px/1.5 'DM Sans',sans-serif;color:rgba(201,212,194,.55)">Industry benchmarks on a A$100,000 salary: AHRI Work Outlook 2025–26, ABS, APSC.</p>
+
+        <div style="margin-top:clamp(56px,7vw,88px);max-width:40em">
+          <h2 style={`${h2};color:#F6F4E9`}>Right now, you’re running in the dark.</h2>
+          <p style={`margin:18px 0 0;${lede};color:rgba(201,212,194,.86)`}>
+            An annual survey is a photograph of a year ago. An EAP is used by one in twenty. In between,
+            nothing tells you which team is sliding, so you find out at the resignation.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- 3 · The one idea. This is the "why nørma" the client said was missing:
-         not another survey, not another EAP. One loop, run on both sides. -->
-    <section id="loop" style={`${wrap};padding-top:clamp(64px,8vw,110px);padding-bottom:clamp(56px,7vw,96px)`}>
-      <h2 style={`${h2};max-width:14em`}>One loop, run twice.</h2>
-      <p style={`margin:20px 0 0;max-width:34em;${lede};color:${MUTED}`}>
-        Reflect, understand, act. Your people run it on the five pillars of a whole life, the part only
-        they hold. You run it on culture, heard, valued and safe to speak, the part only you hold.
-        Shared accountability, built into the product.
-      </p>
-      <div data-r="loops" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:44px">
+    <!-- 3 · The turn. The page goes light here on purpose. -->
+    <section style={`${wrap};padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(56px,7vw,88px)`}>
+      <h2 style={`${h2};max-width:14em`}>nørma turns the lights on.</h2>
+      <p style={`margin:18px 0 0;max-width:34em;${lede};color:${MUTED}`}>Every month, for every team. So you can see what’s going on, act on it, and know if it worked.</p>
+      <ol data-r="steps" style="list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px">
         {[
-          { who: 'Your people run it on', what: 'their fulfilment', items: ['Health & Fitness', 'Internal Work', 'Love & Relationships', 'Social Connection', 'Work & Life Flow'], note: 'Theirs. Nobody at work can read it.' },
-          { who: 'You run it on', what: 'your culture', items: ['Do you feel heard?', 'Do you feel valued?', 'Do you feel safe to speak your truth?'], note: 'Group figures only, never a person.' },
-        ].map((c) => (
-          <div style={`padding:34px 32px 30px;border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:${CREAM_2};border:1px solid rgba(20,35,26,.09)`}>
-            <span style={`font:400 15px 'DM Sans',sans-serif;color:${MUTED}`}>{c.who}</span>
-            <div style={`margin-top:4px;font:400 30px/1.15 'DM Serif Display',serif;color:${INK}`}>{c.what}</div>
-            <ul style="list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:10px">
-              {c.items.map((i) => (
-                <li style={`display:flex;align-items:center;gap:11px;font:400 15.5px 'DM Sans',sans-serif;color:${INK}`}>
-                  <span style={`flex:none;width:7px;height:7px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:${LIME}`}></span>
-                  {i}
+          ['See what’s going on', 'Your people check in once a month. You see how every team is doing, as group figures, never a person’s answers.'],
+          ['Act on it', 'nørma names the one place to look first, and gives you a session to run with that team.'],
+          ['See if it moved', 'Next month tells you whether it worked. No more guessing, and no waiting a year to find out.'],
+        ].map(([t, d], i) => (
+          <li style={`padding-top:20px;border-top:2px solid ${i === 0 ? '#D3E45F' : 'rgba(20,35,26,.14)'}`}>
+            <span style={`font:500 12px 'DM Mono',monospace;color:${MUTED}`}>0{i + 1}</span>
+            <div style={`margin-top:8px;font:400 24px/1.2 'DM Serif Display',serif;color:${INK}`}>{t}</div>
+            <p style={`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:${MUTED};text-wrap:pretty`}>{d}</p>
+          </li>
+        ))}
+      </ol>
+      <p style={`margin:44px 0 0;max-width:32em;font:400 19px/1.5 'DM Serif Display',serif;color:${INK}`}>And because the problem has two sides, so does nørma.</p>
+    </section>
+
+    <!-- 4 · Their side. Personal accountability: their life comes with them.
+         Leads with the five pillars, because that is where they start. -->
+    <section id="people" style={`background:${CREAM_2}`}>
+      <div style={`${wrap};padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)`}>
+        <div data-r="split" style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(32px,5vw,72px);align-items:center">
+          <div>
+            <h2 style={`${h2};max-width:13em`}>Their life comes to work with them.</h2>
+            <p style={`margin:18px 0 0;max-width:33em;${lede};color:${MUTED}`}>
+              Work is one pillar of five. So nørma gives each person a companion that shows them where they are
+              across all five, where the gaps are, and helps them work on them. It’s theirs. Nobody at work can read it.
+            </p>
+            <ul style="list-style:none;margin:32px 0 0;padding:0;display:flex;flex-direction:column">
+              {PILLAR_HEADS.map((p, i) => (
+                <li style="display:flex;align-items:center;gap:16px;padding:13px 0;border-top:1px solid rgba(20,35,26,.1)">
+                  <span style={`flex:none;width:38px;height:38px;border-radius:${p.disc};background:#16261B;display:flex;align-items:center;justify-content:center;color:${p.fg}`}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d={p.d1}></path>{p.d2 && <path d={p.d2}></path>}
+                      {p.r1 ? <circle cx="9" cy="8.5" r={p.r1}></circle> : null}{p.r2 ? <circle cx="16.8" cy="10.3" r={p.r2}></circle> : null}
+                    </svg>
+                  </span>
+                  <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px">
+                    <span style={`font:500 16px 'DM Sans',sans-serif;color:${INK}`}>{PILLAR_NAMES[i]}</span>
+                    <span style={`font:400 14.5px 'DM Sans',sans-serif;color:${MUTED}`}>{PILLAR_LINES[i]}</span>
+                  </span>
                 </li>
               ))}
             </ul>
-            <p style={`margin:24px 0 0;padding-top:18px;border-top:1px solid rgba(20,35,26,.1);font:400 14px/1.5 'DM Sans',sans-serif;color:${MUTED}`}>{c.note}</p>
-          </div>
-        ))}
-      </div>
-      <p style={`margin:34px 0 0;max-width:30em;font:400 17px/1.55 'DM Sans',sans-serif;color:${INK}`}>
-        Always both, from day one. That is the whole product in one sentence.
-      </p>
-    </section>
-
-    <!-- 4 · The product, employee side. Short on the home page; the depth moves to
-         /your-people, shown the way the help centre does it. -->
-    <section id="people" style={`background:${CREAM_2}`}>
-      <div style={`${wrap};padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(56px,7vw,96px)`}>
-        <div data-r="split" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:clamp(32px,5vw,64px);align-items:center">
-          <div>
-            <h2 style={`${h2};max-width:15em`}>What your people get.</h2>
-            <p style={`margin:18px 0 0;max-width:32em;${lede};color:${MUTED}`}>
-              A private space that is theirs. They keep using it because it gives them something back,
-              which is the only reason the signal you see is real.
+            <p style={`margin:28px 0 0;max-width:33em;font:400 16px/1.6 'DM Sans',sans-serif;color:${INK};text-wrap:pretty`}>
+              A monthly check-in shows them where they stand. Then they work on it in the moments in between:
+              reflections they can say out loud, habits, short illustrated chapters, and <strong style="font-weight:600">Reset</strong>, breath work and short
+              practices for when they need to settle.
             </p>
-            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 26px;margin-top:34px" data-r="feat">
-              {appFeatures.map(([t, d]) => (
-                <div>
-                  <div style={`font:500 16px 'DM Sans',sans-serif;color:${INK}`}>{t}</div>
-                  <div style={`margin-top:4px;font:400 14.5px/1.5 'DM Sans',sans-serif;color:${MUTED};text-wrap:pretty`}>{d}</div>
-                </div>
-              ))}
-            </div>
-            <div data-r="chaps" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:34px">
-              {[['ch-intro-health-b.jpg','Health & Fitness'],['ch-intro-love-b.jpg','Love & Relationships'],['ch-intro-social-b.jpg','Social Connection']].map(([f,label]) => (
-                <figure style="margin:0;display:flex;flex-direction:column;gap:8px">
-                  <img src={`/assets/journey/${f}`} alt="" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:16px;display:block" />
-                  <figcaption style={`font:400 12px 'DM Sans',sans-serif;color:${MUTED}`}>{label}</figcaption>
-                </figure>
-              ))}
-            </div>
-            <p style={`margin:16px 0 0;max-width:30em;font:400 14.5px/1.5 'DM Sans',sans-serif;color:${MUTED}`}>
-              Growth Journeys: short illustrated chapters about one pillar, then one thing to try tonight.
-            </p>
-            <a href="/draft/your-people/" style={`display:inline-block;margin-top:28px;font:600 15px 'DM Sans',sans-serif;color:${INK};border-bottom:2px solid ${LIME};padding-bottom:3px`}>See the whole app ›</a>
+            <a href="/draft/your-people/" style={`display:inline-block;margin-top:26px;font:600 15px 'DM Sans',sans-serif;color:${INK};border-bottom:2px solid #D3E45F;padding-bottom:3px`}>See the whole app ›</a>
           </div>
           <div style="display:flex;justify-content:center">
-            <div style="width:290px;flex:none"><Phone screen="home" /></div>
+            <div style="width:290px;flex:none;filter:drop-shadow(0 40px 60px rgba(20,35,26,.25))"><Phone screen="home" /></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5 · Leaders and the promise, together on dark. The film answers the biggest
-         objection right after showing the dashboard, so this does too. -->
+    <!-- 5 · Your side. Organisational responsibility for the culture, shown with
+         the new dashboard (nørma Score, handoff 14 Oct). -->
     <section id="leaders" style="background:#0A130D;color:#F4F2E6">
-      <div style={`${wrap};padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(56px,7vw,96px)`}>
-        <h2 style={`${h2};max-width:15em;color:#F6F4E9`}>All of it flows into one signal you can act on.</h2>
-        <p style={`margin:18px 0 0;max-width:34em;${lede};color:rgba(201,212,194,.85)`}>
-          Not a report you read once a year. A monthly picture of how each group is doing, what moved,
-          and what to do about it next.
+      <div style={`${wrap};padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(64px,8vw,104px)`}>
+        <h2 style={`${h2};max-width:14em;color:#F6F4E9`}>The culture they walk into is yours to shape.</h2>
+        <p style={`margin:18px 0 0;max-width:36em;${lede};color:rgba(201,212,194,.86)`}>
+          Everything your people share flows into one number for each group, the nørma Score, made of two
+          halves: how their lives are going, and how your culture is. You see where to look first, and what to do.
         </p>
-        <div data-r="feat2" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 30px;margin-top:36px">
-          {leaderFeatures.map(([t, d]) => (
-            <div style="padding-top:18px;border-top:1px solid rgba(228,240,214,.1)">
-              <div style="font:500 16px 'DM Sans',sans-serif;color:#F6F4E9">{t}</div>
-              <div style="margin-top:4px;font:400 14.5px/1.5 'DM Sans',sans-serif;color:rgba(201,212,194,.8);text-wrap:pretty">{d}</div>
-            </div>
+        <div data-r="culture" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px">
+          {['Do you feel heard?', 'Do you feel valued?', 'Do you feel safe to speak your truth?'].map((q, i) => (
+            <span style="display:inline-flex;align-items:center;gap:10px;padding:9px 16px 9px 10px;border-radius:999px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.1);font:400 14.5px 'DM Sans',sans-serif;color:#F4F2E6">
+              <span style="width:24px;height:24px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(228,240,214,.1);display:flex;align-items:center;justify-content:center;color:rgba(244,242,230,.85)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={CULTURE_HEADS[i].d1}></path>{CULTURE_HEADS[i].d2 && <path d={CULTURE_HEADS[i].d2}></path>}</svg>
+              </span>{q}
+            </span>
           ))}
         </div>
-        <a href="/draft/for-leaders/" style="display:inline-block;margin-top:32px;font:600 15px 'DM Sans',sans-serif;color:#EAF79B;border-bottom:2px solid rgba(217,234,110,.5);padding-bottom:3px">See the dashboard ›</a>
+        <div style="margin-top:40px;padding:clamp(14px,2vw,22px);border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:linear-gradient(165deg,#0F2015,#17301F);border:1px solid rgba(228,240,214,.08)">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin:2px 4px 14px;gap:12px">
+            <span style="font:400 22px 'DM Serif Display',serif;color:#F6F4E9">Northwind</span>
+            <span style="font:500 11px 'DM Mono',monospace;color:#DCEC85">October signal · 184 people</span>
+          </div>
+          <Dash variant="full" />
+        </div>
+        <a href="/draft/for-leaders/" style="display:inline-block;margin-top:28px;font:600 15px 'DM Sans',sans-serif;color:#EAF79B;border-bottom:2px solid rgba(217,234,110,.5);padding-bottom:3px">See the dashboard ›</a>
 
-        <div id="promise" style="margin-top:clamp(48px,6vw,80px);padding:clamp(28px,4vw,44px);border-radius:30px 20px 32px 22px / 20px 30px 22px 32px;background:rgba(228,240,214,.04);border:1px solid rgba(228,240,214,.1)">
-          <h3 style="margin:0;font:400 clamp(24px,2.8vw,32px)/1.15 'DM Serif Display',serif;color:#F6F4E9;max-width:18em;text-wrap:pretty">
-            Names fall away in flight. Leaders see patterns, never people.
-          </h3>
-          <p style="margin:16px 0 0;max-width:36em;font:400 16px/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.86);text-wrap:pretty">
-            Individual answers dissolve into a group figure before anything reaches a dashboard. Groups
-            below five never appear at all. Nobody where someone works can read their check-in answers,
-            their reflections or their recordings. It is a design decision, not a setting.
-          </p>
-          <p style="margin:14px 0 0;max-width:36em;font:400 14.5px/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.62);text-wrap:pretty">
-            One honest limit we publish rather than hide: the minimum counts the people in a group, not
-            the people who answered, so in a small team a figure can come from one person.
-          </p>
+        <div style="margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(20px,4vw,56px);align-items:start" data-r="split2">
+          <h3 style="margin:0;font:400 clamp(24px,2.8vw,32px)/1.15 'DM Serif Display',serif;color:#F6F4E9;text-wrap:balance">Leaders see patterns, never people.</h3>
+          <div>
+            <p style="margin:0;font:400 16px/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.88);text-wrap:pretty">
+              Nobody where someone works can read their check-in answers, reflections or recordings. Answers become
+              a group figure before anything reaches a dashboard, and groups below five never appear. A design
+              decision, not a setting.
+            </p>
+            <p style="margin:12px 0 0;font:400 14.5px/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.62);text-wrap:pretty">
+              One honest limit we publish rather than hide: the five counts the people in a group, not the people
+              who answered, so in a small team a figure can come from one person.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 6 · Close. The film's bookend, which is also the clearest statement of
-         what the buyer is actually buying. -->
-    <section id="demo" style={`${wrap};padding-top:clamp(64px,8vw,110px);padding-bottom:clamp(72px,9vw,120px);text-align:center`}>
-      <img src="/assets/norma-sprout.png" alt="" width="84" height="84" style="margin:0 auto;display:block" />
-      <h2 style={`margin:26px 0 0;font:400 clamp(36px,5vw,58px)/1.06 'DM Serif Display',serif;letter-spacing:-1px;text-wrap:balance`}>
-        Fulfilled people. Honest culture.
-      </h2>
-      <p style={`margin:18px auto 0;max-width:26em;${lede};color:${MUTED}`}>
-        One system, both sides. Challenging the nørm of employee wellbeing.
-      </p>
-      <a href="#demo" style={`display:inline-flex;align-items:center;margin-top:30px;padding:16px 30px;border-radius:999px;background:${INK};color:${CREAM};font:600 16px 'DM Sans',sans-serif`}>Book a demo</a>
-      <p style={`margin:22px 0 0;font:400 13.5px 'DM Sans',sans-serif;color:${MUTED}`}>
-        Minimum group of five · a mirror that never advises · built in Australia
-      </p>
+    <!-- 6 · Close. -->
+    <section id="demo" style={`${wrap};padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(72px,9vw,120px);text-align:center`}>
+      <img src="/assets/norma-happy.png" alt="" width="70" height="94" style="margin:0 auto;display:block" />
+      <h2 style={`margin:22px 0 0;font:400 clamp(38px,5.2vw,62px)/1.05 'DM Serif Display',serif;letter-spacing:-1px;text-wrap:balance`}>Fulfilled people. Honest culture.</h2>
+      <p style={`margin:18px auto 0;max-width:26em;${lede};color:${MUTED}`}>One system, both sides. Challenging the nørm of employee wellbeing.</p>
+      <a href="#demo" style={`${LIME_BTN};margin-top:30px;padding:17px 32px;font-size:16px`}>Book a demo</a>
     </section>
 
-    <div style={`border-top:1px solid rgba(20,35,26,.1)`}>
+    <div style="border-top:1px solid rgba(20,35,26,.1)">
       <div style={`${wrap};padding-top:28px;padding-bottom:40px;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;font:400 12.5px 'DM Sans',sans-serif;color:${MUTED}`}>
         <span>© 2026 The Artistry of Humanity Pty Ltd</span>
-        <span style="display:flex;gap:20px">
+        <span style="display:flex;flex-wrap:wrap;gap:20px">
           <a href="/privacy/" style={`color:${MUTED}`}>Privacy policy</a>
           <a href="/terms/" style={`color:${MUTED}`}>Terms of use</a>
           <a href="/help/" style={`color:${MUTED}`}>Help centre</a>
@@ -285,22 +336,53 @@ const leaderFeatures = [
     </div>
   </div>
 
+  <script is:inline>
+    // Moments carousel: click through, and it drifts on by itself. Pauses on
+    // hover, focus or touch and when off screen; still for reduced motion.
+    (function () {
+      var t = document.getElementById('mtrack'); if (!t) return;
+      var slides = t.querySelectorAll('[data-slide]'), n = slides.length;
+      var prev = document.getElementById('mprev'), next = document.getElementById('mnext'), count = document.getElementById('mcount');
+      function step() { return slides[0].getBoundingClientRect().width + 14; }
+      function idx() { return Math.round(t.scrollLeft / step()); }
+      function perView() { return Math.max(1, Math.round(t.clientWidth / step())); }
+      function last() { return Math.max(0, n - perView()); }
+      function go(i) { t.scrollTo({ left: Math.max(0, Math.min(i, last())) * step(), behavior: 'smooth' }); }
+      function label() { var i = idx(); count.textContent = (i + 1) + ' of ' + n; }
+      prev.addEventListener('click', function () { go(idx() - 1); });
+      next.addEventListener('click', function () { go(idx() >= last() ? 0 : idx() + 1); });
+      t.addEventListener('scroll', function () { window.requestAnimationFrame(label); }, { passive: true });
+      label();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var paused = false, visible = false;
+      ['mouseenter', 'focusin', 'touchstart', 'pointerdown'].forEach(function (e) { t.addEventListener(e, function () { paused = true; }, { passive: true }); });
+      ['mouseleave', 'focusout'].forEach(function (e) { t.addEventListener(e, function () { paused = false; }); });
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(t);
+      setInterval(function () { if (!paused && visible) go(idx() >= last() ? 0 : idx() + 1); }, 4500);
+    })();
+  </script>
+
   <style is:global>
+    [data-r=mtrack]::-webkit-scrollbar{display:none}
+    @media (max-width:1100px){
+      [data-r=herogrid]{grid-template-columns:minmax(0,1fr)!important}
+      [data-r=herovis]{justify-self:start!important}
+    }
     @media (max-width:900px){
       [data-r=dnav]{display:none!important}
-      [data-r=herogrid]{grid-template-columns:minmax(0,1fr)!important}
-      [data-r=split]{grid-template-columns:minmax(0,1fr)!important}
-      [data-r=pains]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      [data-r=split],[data-r=split2]{grid-template-columns:minmax(0,1fr)!important}
+      [data-r=mtrack] [data-slide]{flex-basis:calc((100% - 14px) / 2)!important}
+      [data-r=dash3]{grid-template-columns:minmax(0,1fr)!important}
     }
-    /* Chapter art is the warmest thing on the page, so on a phone it scrolls
-       sideways at a readable size instead of shrinking to three thumbnails. */
     @media (max-width:760px){
-      [data-r=chaps]{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:-20px;margin-right:-20px;padding:0 20px;gap:12px}
-      [data-r=chaps] figure{flex:0 0 58%;scroll-snap-align:start}
+      [data-r=costs],[data-r=steps]{grid-template-columns:minmax(0,1fr)!important}
     }
+    /* The hero composite is a fixed 560 by 440 picture; on narrow screens it
+       scales down as one piece so the dashboard and phone keep their layout. */
     @media (max-width:620px){
-      [data-r=loops]{grid-template-columns:minmax(0,1fr)!important}
-      [data-r=feat],[data-r=feat2]{grid-template-columns:minmax(0,1fr)!important}
+      [data-r=herovis]{width:336px!important;height:264px!important;justify-self:center!important}
+      [data-r=herovisin]{transform:scale(.6)}
+      [data-r=mtrack] [data-slide]{flex-basis:80%!important}
     }
   </style>
 </Layout>
