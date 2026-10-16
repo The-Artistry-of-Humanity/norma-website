@@ -1,0 +1,16 @@
+---
+/* Round 5 page (handoff design_handoff_v5, 16 Oct 2026). The page is one React
+   component generated from the reference: markup, styles and behaviour. */
+import LayoutV5 from '../layouts/LayoutV5.astro';
+import BookDemo from '../islands/v5/live/BookDemoLive';
+---
+<LayoutV5 title={'Book a demo · nørma'} description={'Book a thirty-minute nørma demo, or tell us about your organisation and we’ll reply within one working day.'} canonical="https://joinnorma.com/book-a-demo/">
+  <BookDemo client:load />
+  <!-- Netlify Forms detects fields from static HTML at deploy time; the visible
+       form is rendered by React and posts to this name (BookDemoLive.tsx). -->
+  <form name="book-a-demo" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input name="bot-field" /><input name="name" /><input name="role" /><input name="phone" /><input name="email" />
+    <input name="company" /><input name="country" /><input name="headcount" /><textarea name="message"></textarea>
+  </form>
+</LayoutV5>
+<style is:global>input[type=range]{accent-color:#D9EA6E}::placeholder{color:rgba(20,35,26,.42);font-weight:400}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}</style>

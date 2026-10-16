@@ -1,23 +1,22 @@
 ---
-/* Shared top menu for every page (handoff v3 §1.6). On sub-pages the section
-   links point back to the home page; "Help centre" turns lime on /help.
+/* Dark top menu for the help centre, legal pages and 404 (the round 5 pages
+   carry their own cream header). Links match the round 5 site; "Help centre"
+   turns lime on /help.
    The burger menu takes over below 900px, where the links hide. */
 interface Props { home?: boolean; current?: 'help' }
 const { home = false, current } = Astro.props;
 const p = home ? '' : '/';
 const links = [
-  { href: `${p}#product`, label: 'Product' },
-  { href: `${p}#pillars`, label: 'Five pillars' },
-  { href: `${p}#leaders`, label: 'For leaders' },
-  { href: `${p}#duty`, label: 'Psychosocial duty' },
-  { href: `${p}#roi`, label: 'ROI' },
+  { href: '/your-people/', label: 'Your people' },
+  { href: '/for-leaders/', label: 'For leaders' },
+  { href: '/roi/', label: 'ROI' },
   { href: '/help/', label: 'Help centre', key: 'help' },
 ];
-const demo = `${p}#demo`;
+const demo = '/book-a-demo/';
 ---
 <div style="position:sticky;top:0;z-index:50;background:rgba(12,20,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(228,240,214,.06)">
   <div data-r="wrap" style="max-width:1180px;margin:0 auto;padding:0 40px;height:68px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px">
-    <a href={home ? '#top' : '/'} class="hv-logo" style="display:flex;align-items:center;gap:10px;flex:none;transition:all .2s ease"><img src="/assets/norma-logo.png" alt="" style="width:30px;height:30px;border-radius:9px" /><span style="font:400 23px 'DM Serif Display',serif;color:#F6F4E9">nørma</span></a>
+    <a href={home ? '#top' : '/'} class="hv-logo" style="display:flex;align-items:center;gap:10px;flex:none;transition:all .2s ease"><img src="/assets/v5/norma-icon.png" alt="" style="width:30px;height:30px;border-radius:9px" /><span style="font:400 23px 'DM Serif Display',serif;color:#F6F4E9">nørma</span></a>
     <div data-r="navlinks" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 20px;min-width:0;font:500 14px 'DM Sans',sans-serif">
       {links.map((l) => (
         <a href={l.href} class="hv-link" aria-current={l.key && l.key === current ? 'page' : undefined} style={`color:${l.key && l.key === current ? '#EAF79B' : 'rgba(244,242,230,.8)'};transition:all .2s ease`}>{l.label}</a>
@@ -33,7 +32,7 @@ const demo = `${p}#demo`;
 <div id="nrm-menu" hidden style="position:fixed;inset:0;z-index:60;background:rgba(7,13,8,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">
   <div style="position:absolute;top:0;left:0;right:0;background:rgba(12,20,13,.97);border-bottom:1px solid rgba(228,240,214,.10);padding:0 20px 26px;box-shadow:0 30px 60px rgba(0,0,0,.5)">
     <div style="height:68px;display:flex;align-items:center;justify-content:space-between">
-      <span style="display:flex;align-items:center;gap:10px"><img src="/assets/norma-logo.png" alt="" style="width:30px;height:30px;border-radius:9px" /><span style="font:400 23px 'DM Serif Display',serif;color:#F6F4E9">nørma</span></span>
+      <span style="display:flex;align-items:center;gap:10px"><img src="/assets/v5/norma-icon.png" alt="" style="width:30px;height:30px;border-radius:9px" /><span style="font:400 23px 'DM Serif Display',serif;color:#F6F4E9">nørma</span></span>
       <button id="nrm-menu-close" aria-label="Close menu" style="width:40px;height:40px;border-radius:12px;border:1px solid rgba(228,240,214,.16);background:rgba(228,240,214,.05);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F4F2E6" stroke-width="2" stroke-linecap="round"><path d="M6 6 L18 18"></path><path d="M18 6 L6 18"></path></svg></button>
     </div>
     <nav style="display:flex;flex-direction:column;margin-top:6px;font:500 17px 'DM Sans',sans-serif">
