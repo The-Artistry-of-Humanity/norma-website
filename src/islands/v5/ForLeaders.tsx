@@ -993,7 +993,7 @@ class ForLeaders extends React.Component {
               <span style={s(`font:500 10.5px 'DM Mono',monospace;letter-spacing:1.2px;color:rgba(201,212,194,.7)`)}>SAMPLE</span>
             </div>
             <div style={s(`position:relative;margin-top:24px`)}>
-              <svg viewBox="0 0 1000 320" aria-hidden="true" style={s(`display:block;width:100%;height:auto;overflow:visible`)}>
+              <svg data-m="act-chart" viewBox="0 0 1000 320" aria-hidden="true" style={s(`display:block;width:100%;height:auto;overflow:visible`)}>
                 <defs>
                   <linearGradient id="actFill" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0" stopColor="#D9EA6E" stopOpacity=".2"></stop>
@@ -1035,7 +1035,7 @@ class ForLeaders extends React.Component {
                 <text x="940.0" y="81.1" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="#DCEC85"></text>
               </svg>
               {' '}
-              <span style={s(`position:absolute;left:64.17%;top:10.63%;font:600 11px 'DM Sans',sans-serif;letter-spacing:1.6px;text-transform:uppercase;color:#DCEC85`)}>Stop for Wellness running</span>
+              <span data-m="act-label" style={s(`position:absolute;left:64.17%;top:10.63%;font:600 11px 'DM Sans',sans-serif;letter-spacing:1.6px;text-transform:uppercase;color:#DCEC85`)}>Stop for Wellness running</span>
               {' '}
               <span data-reveal="pop" data-delay=".2" style={s(`position:absolute;left:56.29%;top:59.79%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#E6C77E;color:#2A2410;display:flex;align-items:center;justify-content:center;font:600 12px 'DM Sans',sans-serif;box-shadow:0 0 0 5px #10201A`)}>1</span>
               {' '}

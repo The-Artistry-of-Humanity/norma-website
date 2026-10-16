@@ -7,4 +7,13 @@ import ForLeaders from '../islands/v5/ForLeaders';
 <LayoutV5 title={'For leaders · nørma'} description={'The nørma dashboard brings Fulfilment and Culture together: where to look, what to do about it, and whether it worked. Group figures only.'} canonical="https://joinnorma.com/for-leaders/">
   <ForLeaders client:load />
 </LayoutV5>
-<style is:global>input[type=range]{accent-color:#14231A}</style>
+<style is:global>input[type=range]{accent-color:#14231A}
+/* Phone pass (not in the handoff). Act on it: the chart is drawn 1000 units wide,
+   so its 13-unit labels shrink to about 4px on a phone. Larger SVG text there,
+   and the running label (which collides with the markers) is left to the list
+   underneath, which says the same thing. */
+@media (max-width:759px){
+  [data-m=act-chart] text{font-size:34px}
+  [data-m=act-label]{display:none}
+}
+</style>

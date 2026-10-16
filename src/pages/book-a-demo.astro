@@ -13,4 +13,17 @@ import BookDemo from '../islands/v5/live/BookDemoLive';
     <input name="company" /><input name="country" /><input name="headcount" /><textarea name="message"></textarea>
   </form>
 </LayoutV5>
-<style is:global>input[type=range]{accent-color:#D9EA6E}::placeholder{color:rgba(20,35,26,.42);font-weight:400}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}</style>
+<style is:global>input[type=range]{accent-color:#D9EA6E}::placeholder{color:rgba(20,35,26,.42);font-weight:400}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}
+/* Phone pass (not in the handoff): the copy takes the card's full width, nørma
+   stands smaller beside the slot button, and the button stays on one line. */
+@media (max-width:520px){
+  [data-m=slot-btn]{white-space:nowrap}
+  [data-m=slot-text]{padding-right:0!important}
+  [data-m=slot-text] > p{padding-right:clamp(40px,14vw,72px)}
+  [data-m=slot-norma]{width:96px!important;right:2px!important;bottom:-22px!important}
+}
+@media (max-width:374px){
+  [data-m=slot-btn]{padding:0 18px!important;gap:6px!important}
+  [data-m=slot-norma]{width:78px!important;right:0!important;bottom:-18px!important}
+}
+</style>

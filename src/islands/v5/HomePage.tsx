@@ -1223,7 +1223,7 @@ class HomePage extends React.Component {
                     </div>
                     <div style={s(`display:flex;align-items:baseline;gap:16px`)}>
                       <span style={s(`font:400 62px/1 'DM Serif Display',serif;color:#F6F4E9;font-variant-numeric:tabular-nums`)}>61</span>
-                      <span style={s(`font:500 13px 'DM Mono',monospace;color:#10B981`)}>↑ 2 since Sep</span>
+                      <span data-m="delta" style={s(`font:500 13px 'DM Mono',monospace;color:#10B981`)}>↑ 2 since Sep</span>
                       <span style={s(`margin-left:auto;padding:5px 12px;border-radius:22px 14px 20px 12px / 14px 20px 12px 22px;background: rgba(235,245,255,.07);color: rgba(244,242,230,.9);font:500 12px 'DM Sans',sans-serif`)}>Steady</span>
                     </div>
                     <svg viewBox="0 0 400 56" width="100%" height="56" preserveAspectRatio="none" style={s(`display:block;overflow:visible`)}>
@@ -1260,7 +1260,7 @@ class HomePage extends React.Component {
                     </div>
                     <div style={s(`display:flex;align-items:baseline;gap:16px`)}>
                       <span style={s(`font:400 62px/1 'DM Serif Display',serif;color:#F6F4E9;font-variant-numeric:tabular-nums`)}>68</span>
-                      <span style={s(`font:500 13px 'DM Mono',monospace;color:#EF4444`)}>↓ 3 since Sep</span>
+                      <span data-m="delta" style={s(`font:500 13px 'DM Mono',monospace;color:#EF4444`)}>↓ 3 since Sep</span>
                       <span style={s(`margin-left:auto;padding:5px 12px;border-radius:12px 22px 14px 20px / 20px 12px 22px 14px;background: rgba(235,245,255,.07);color: rgba(244,242,230,.9);font:500 12px 'DM Sans',sans-serif`)}>Steady</span>
                     </div>
                     <svg viewBox="0 0 400 56" width="100%" height="56" preserveAspectRatio="none" style={s(`display:block;overflow:visible`)}>

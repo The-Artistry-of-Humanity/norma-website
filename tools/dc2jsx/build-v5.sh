@@ -2,8 +2,9 @@
 # Regenerate the round 5 pages (Oct 2026 handoff) from design_handoff_v5/reference.
 #   sh tools/dc2jsx/build-v5.sh
 # Copies reference assets to public/assets/v5/, writes one React component per
-# page to src/islands/v5/, then shrinks oversized images (optimise-v5.py). Each component is the reference's own markup and logic;
-# edit the reference and rerun rather than hand-tuning values in the output.
+# page to src/islands/v5/, shrinks oversized images (optimise-v5.py) and applies
+# the phone-layout hooks (patches-v5.py). Each component is the reference's own
+# markup and logic; edit the reference and rerun rather than hand-tuning output.
 set -e
 cd "$(dirname "$0")/../.."
 REF=design_handoff_v5/reference
@@ -28,3 +29,5 @@ gen "Book a Demo"   "Book a demo" bd  BookDemo     ""
 rm -rf "$GEN"
 # Images that ship far larger than shown: resize to ~2x shown width, WebP.
 python3 tools/dc2jsx/optimise-v5.py .
+# Hooks and small fixes for the phone layouts (styles live in src/pages/*.astro).
+python3 tools/dc2jsx/patches-v5.py .
