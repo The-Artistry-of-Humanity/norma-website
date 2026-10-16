@@ -1,0 +1,12 @@
+/* Page base for the round 5 pages (Home, Your people, For leaders, ROI, Book a
+   demo), from each reference's own <helmet> style. Help and legal keep
+   global.css. Per-page extras (range accent, placeholders) live in each page. */
+:root{color-scheme:light;--bg-base:#0A130D}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;background:#F4F2E6;overflow-x:clip}
+a{color:#14231A;text-decoration:none}
+a:hover{color:#0F2015}
+::selection{background:rgba(217,234,110,.5);color:#14231A}
+select,input,textarea{font-family:'DM Sans',sans-serif}
+@keyframes nrmFlow{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes nrmWave{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}

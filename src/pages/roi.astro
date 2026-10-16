@@ -1,0 +1,10 @@
+---
+/* Round 5 page (handoff design_handoff_v5, 16 Oct 2026). The page is one React
+   component generated from the reference: markup, styles and behaviour. */
+import LayoutV5 from '../layouts/LayoutV5.astro';
+import RoiPage from '../islands/v5/RoiPage';
+---
+<LayoutV5 title={'ROI · nørma'} description={'The human case and the business case are the same case. Work out what absence, presenteeism and turnover cost your organisation, and what nørma can win back.'} canonical="https://joinnorma.com/roi/">
+  <RoiPage client:load />
+</LayoutV5>
+<style is:global>input[type=range]{accent-color:#D9EA6E}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}</style>

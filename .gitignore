@@ -5,3 +5,5 @@ dist/
 design_handoff_norma_website/
 *.local.mjs
 design_handoff_v3/
+design_handoff_v5/
+*.local.py
