@@ -7,4 +7,17 @@ import RoiPage from '../islands/v5/RoiPage';
 <LayoutV5 title={'ROI · nørma'} description={'The human case and the business case are the same case. Work out what absence, presenteeism and turnover cost your organisation, and what nørma can win back.'} canonical="https://joinnorma.com/roi/">
   <RoiPage client:load />
 </LayoutV5>
-<style is:global>input[type=range]{accent-color:#D9EA6E}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}</style>
+<style is:global>input[type=range]{accent-color:#D9EA6E}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}
+/* Phone pass (not in the handoff): one column of tall tier cards is a lot of
+   scrolling for four numbers, so under 520px each becomes a row: the name with
+   its share beneath on the left, the count on the right. */
+@media (max-width:519px){
+  [data-m=tiers]{gap:8px!important}
+  [data-m=tiers] > div{display:grid!important;grid-template-columns:minmax(0,1fr) auto;column-gap:14px;row-gap:3px;align-items:center;padding:12px 12px 12px 18px!important}
+  [data-m=tiers] > div > span:first-child{grid-column:1;grid-row:1;min-height:0!important;align-items:center!important}
+  [data-m=tiers] > div > span:first-child > span:first-child{margin-top:0!important}
+  [data-m=tiers] > div > span:last-child{display:contents!important}
+  [data-m=tiers] > div > span:last-child > span:first-child{grid-column:2;grid-row:1 / span 2;min-width:40px;justify-content:center;padding:8px 14px!important}
+  [data-m=tiers] > div > span:last-child > span:last-child{grid-column:1;grid-row:2;padding-left:17px}
+}
+</style>

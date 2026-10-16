@@ -281,7 +281,7 @@ class RoiPage extends React.Component {
               </h2>
             </div>
           </div>
-          <div style={s(`margin-top:clamp(44px,5.5vw,72px);display:grid;grid-template-columns:repeat(${V.cardCols ?? ''},minmax(0,1fr));gap:12px`)}>
+          <div data-m="tiers" style={s(`margin-top:clamp(44px,5.5vw,72px);display:grid;grid-template-columns:repeat(${V.cardCols ?? ''},minmax(0,1fr));gap:12px`)}>
             <div onMouseEnter={V.h1.on} onMouseLeave={V.h1.off} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;background:${V.h1.bg ?? ''};box-shadow:${V.h1.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h1.op ?? ''};transform:${V.h1.tf ?? ''}`)}>
               <span style={s(`display:flex;align-items:flex-start;gap:9px;min-height:calc(2 * 1.15 * clamp(19px,1.8vw,22px))`)}>
                 <span style={s(`flex:none;margin-top:.45em;width:8px;height:8px;border-radius:50%;background:${V.h1.dot ?? ''}`)}></span>
