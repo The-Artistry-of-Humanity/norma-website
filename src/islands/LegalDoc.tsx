@@ -3,7 +3,8 @@
    (reference/Norma Legal.dc.html) by dc2jsx. Text started verbatim from
    the team's drafts "03 nørma Privacy Policy (draft v1)" and "04 nørma Terms
    of Use (draft v1)". Revised 13 Oct 2026 where the draft contradicted how the
-   product works; changes are logged outside the repo.
+   product works; changes are logged outside the repo. 17 Oct 2026: the
+   website form is now Book a demo (privacy sections 1, 3 and 5).
    Rendered server-side, no client JS. */
 import React from 'react';
 import { s } from '../lib/s';
@@ -17,7 +18,7 @@ const T = (head, rows) => ({ isT: true, head, rows: rows.map(r => ({ cells: r.ma
 const PRIVACY = [
   ['Who we are and what this covers', [
     P('nørma is made by The Artistry of Humanity Pty Ltd (ABN 61 676 269 579), Unit 17, 3 Alexander Street, Coogee NSW 2034, Australia. In this policy, "we", "us" and "AOH" mean The Artistry of Humanity Pty Ltd.'),
-    P('This policy explains what personal information we collect when you use the nørma app, why we collect it, who can see it, and what your choices are. It applies to everything that makes up nørma: the companion app on iOS, Android and the web; the leadership dashboard and admin console used by your organisation\'s nominated leaders and administrators, including the information we collect about them in that role; and our website at joinnorma.com. The website sets no tracking cookies; it loads its fonts from Google Fonts, which sends a request to Google. If you ask for early access through the form on the website, we collect the details you type into it (section 3).'),
+    P('This policy explains what personal information we collect when you use the nørma app, why we collect it, who can see it, and what your choices are. It applies to everything that makes up nørma: the companion app on iOS, Android and the web; the leadership dashboard and admin console used by your organisation\'s nominated leaders and administrators, including the information we collect about them in that role; and our website at joinnorma.com. The website sets no tracking cookies; it loads its fonts from Google Fonts, which sends a request to Google. If you ask for a demo through the form on the website, we collect the details you type into it (section 3).'),
     P('We are bound by the Privacy Act 1988 (Cth) and the Australian Privacy Principles. If you are in the European Union, the United Kingdom or a US state with its own privacy law, section 10 explains your additional rights.')]],
   ['The short version', [
     P('You use nørma because your organisation has made it available. Your organisation pays for it. But what you put into nørma is yours:'),
@@ -34,7 +35,7 @@ const PRIVACY = [
       ['**Reflections:** what you write or say in the reflection feature, any life context you choose to add, and the mirror responses, themes and indicators the app generates from it.', 'You. If you use voice, your speech is turned into text on your device; nothing is sent anywhere to be transcribed. We store the text and, separately, the recording so you can play it back. Only your account can access the recording.'],
       ['**Habits, commitments and journeys:** the habits you track, the commitments you make, your progress through growth journeys, your personal fulfilment score and your growth momentum.', 'You, as you use the app.'],
       ['**Notes:** anything you type into an optional note box, such as the one on a check-in. Notes are private to you.', 'You.'],
-      ['**Website enquiries:** the name, company, email address and optional phone number you type into the early-access form on joinnorma.com.', 'You, when you send the form.'],
+      ['**Website enquiries:** the name, role, work email address, company, country, headcount, optional phone number and message you type into the Book a demo form on joinnorma.com.', 'You, when you send the form.'],
       ['**Settings and device information:** your reminder preferences, notification token, device type, operating system, app version, language and time zone.', 'Your device and the app.'],
       ['**Usage information:** records of your sign-ins and the technical details of your sessions, kept for security, plus error and performance data. nørma contains no advertising or analytics trackers and does not follow you outside the app.', 'The app, automatically.'],
       ['**Support correspondence:** what you send us if you contact support.', 'You.']]),
@@ -56,8 +57,8 @@ const PRIVACY = [
       ['Anthropic', 'The AI model that generates your mirror and classifies themes. Receives the reflection text and any life context, your latest check-in answers, the names of the habits and growth work you have chosen and a summary of earlier themes, without your name, email or organisation. Not permitted to train on it.', 'United States'],
       ['Expo, Apple and Google', 'Delivering push notifications to your device (your device token and the notification text only)', 'Global'],
       ['Tensaria', 'Engineering and operations support for the platform, under confidentiality and access controls', 'Australia'],
-      ['Netlify', 'Hosting for joinnorma.com and receiving the early-access form', 'United States'],
-      ['Notion', 'Storing early-access requests so we can follow up', 'United States']]),
+      ['Netlify', 'Hosting for joinnorma.com and receiving the Book a demo form', 'United States'],
+      ['Notion', 'Storing demo requests so we can follow up', 'United States']]),
     P('Your speech is turned into text on your own device. No audio is sent to anyone to be transcribed.'),
     P('Some of these providers are outside Australia. Before we disclose your information overseas, we take the steps Australian privacy law requires to make sure it stays protected.')]],
   ['How long we keep it', [
@@ -127,7 +128,7 @@ const TERMS = [
     P('The Artistry of Humanity Pty Ltd, Unit 17, 3 Alexander Street, Coogee NSW 2034, Australia')]],
 ];
 
-const build = (key, list) => list.map(([title, blocks, hl], i) => ({ id: key + '-' + (i + 1), n: String(i + 1).padStart(2, '0'), title, blocks, bg: hl ? 'rgba(217,234,110,.06)' : 'transparent', pad: hl ? '28px 30px 30px' : '0' }));
+const build = (key, list) => list.map(([title, blocks, hl], i) => ({ id: key + '-' + (i + 1), n: String(i + 1).padStart(2, '0'), title, blocks, bg: hl ? 'linear-gradient(158deg,rgba(217,234,110,.09),rgba(217,234,110,.035))' : 'transparent', pad: hl ? '28px 30px 30px' : '0' }));
 const DOCS = { privacy: build('privacy', PRIVACY), terms: build('terms', TERMS) };
 
 export default class LegalDoc extends React.Component {
@@ -135,8 +136,8 @@ export default class LegalDoc extends React.Component {
     const p = (this.props.doc ?? 'privacy') === 'privacy';
     const seg = on => ({ bg: on ? 'rgba(217,234,110,.14)' : 'transparent', c: on ? '#EAF79B' : 'rgba(244,242,230,.8)' });
     const doc = p
-      ? { title: 'Privacy policy', sections: DOCS.privacy, otherLine: 'The terms each person accepts when they create an account.', otherLabel: 'Read the Terms of use', otherHref: '/terms/' }
-      : { title: 'Terms of use', sections: DOCS.terms, otherLine: 'What we collect, who sees what, and your choices.', otherLabel: 'Read the Privacy policy', otherHref: '/privacy/' };
+      ? { title: 'Privacy policy', updated: '17 OCTOBER 2026', sections: DOCS.privacy, otherLine: 'The terms each person accepts when they create an account.', otherLabel: 'Read the Terms of use', otherHref: '/terms/' }
+      : { title: 'Terms of use', updated: '13 OCTOBER 2026', sections: DOCS.terms, otherLine: 'What we collect, who sees what, and your choices.', otherLabel: 'Read the Privacy policy', otherHref: '/privacy/' };
     return { doc, segP: seg(p), segT: seg(!p), isPrivacy: p };
   }
 
@@ -165,7 +166,7 @@ export default class LegalDoc extends React.Component {
             </div>
           </div>
           <h1 style={s(`margin:16px 0 0;font:400 clamp(40px,5vw,58px)/1.05 'DM Serif Display',serif;letter-spacing:-.8px;color:#F6F4E9`)}>{V.doc.title}</h1>
-          <div style={s(`margin-top:14px;font:500 12px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.62)`)}>LAST UPDATED: 13 OCTOBER 2026</div>
+          <div style={s(`margin-top:14px;font:500 12px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.62)`)}>LAST UPDATED: {V.doc.updated}</div>
           <div style={s(`display:flex;flex-direction:column;gap:56px;margin-top:56px`)}>
             {(V.doc.sections || []).map((s_, $index) => (
               <React.Fragment key={$index}>
@@ -204,7 +205,7 @@ export default class LegalDoc extends React.Component {
                         ) : null}
                         {(bl.isT) ? (
                           <>
-                            <div style={s(`border-radius:20px;border:1px solid rgba(228,240,214,.1);overflow:hidden`)}>
+                            <div style={s(`border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;border:1px solid rgba(228,240,214,.1);overflow:hidden`)}>
                               <div style={s(`display:flex;flex-wrap:wrap;gap:0 24px;padding:12px 20px;background:rgba(228,240,214,.05)`)}>
                                 {(bl.head || []).map((hd, $index) => (
                                   <React.Fragment key={$index}>
@@ -236,7 +237,7 @@ export default class LegalDoc extends React.Component {
               </React.Fragment>
             ))}
           </div>
-          <div style={s(`display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:72px;padding:24px 28px;border-radius:22px;border:1px solid rgba(228,240,214,.1)`)}>
+          <div style={s(`display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:72px;padding:24px 28px;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;border:1px solid rgba(228,240,214,.1);background:linear-gradient(158deg,rgba(228,240,214,.085),rgba(228,240,214,.035))`)}>
             <span style={s(`font:400 15px/1.5 'DM Sans',sans-serif;color:rgba(201,212,194,.8)`)}>{V.doc.otherLine}</span>
             <a href={V.doc.otherHref} style={s(`font:500 14px 'DM Sans',sans-serif`)}>{V.doc.otherLabel}{" ›"}</a>
           </div>

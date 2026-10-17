@@ -29,7 +29,7 @@ const ld = [
 ---
 <Layout title={`${article.title} · nørma help`} description={article.summary} canonical={base + article.url} og skip>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(ld)} />
-  <div style="position:relative;overflow-x:clip;min-height:100vh;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0A130D">
+  <div style="position:relative;overflow-x:clip;min-height:100vh;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0F2015">
     <Header current="help" />
     <HelpCentre client:load view="article" path={article.path} id={article.id} />
     <Footer />

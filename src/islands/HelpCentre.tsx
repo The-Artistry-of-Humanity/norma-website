@@ -83,7 +83,7 @@ export default class HelpCentre extends React.Component {
       <>
         <div id={listId} role="listbox" aria-label="Search results" style={s(full ? `display:flex;flex-direction:column;gap:6px` : `display:flex;flex-direction:column;gap:2px`)}>
           {(full ? list : list.slice(0, 8)).map((a, i) => (
-            <a key={a.id} id={`${listId}-${i}`} role="option" aria-selected={i === st.active} href={a.url} style={s(full ? `display:flex;flex-direction:column;gap:6px;padding:18px 20px;border-radius:18px;border:1px solid rgba(228,240,214,.09);background:rgba(6,11,7,.4)` : `display:flex;flex-direction:column;gap:4px;text-align:left;padding:10px 12px;border-radius:14px;background:transparent`)} className="hc-ho0c9b04 hc-opt">
+            <a key={a.id} id={`${listId}-${i}`} role="option" aria-selected={i === st.active} href={a.url} style={s(full ? `display:flex;flex-direction:column;gap:6px;padding:18px 20px;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;border:1px solid rgba(228,240,214,.09);background:linear-gradient(158deg,rgba(228,240,214,.085),rgba(228,240,214,.035))` : `display:flex;flex-direction:column;gap:4px;text-align:left;padding:10px 12px;border-radius:14px;background:transparent`)} className="hc-ho0c9b04 hc-opt">
               <span style={s(`display:flex;align-items:center;gap:8px`)}>
                 <span style={s(`font:500 ${full ? 16 : 14}px 'DM Sans',sans-serif;color:#F6F4E9`)}>{a.title}</span>
                 <span style={s(`padding:2px 7px;border-radius:999px;background:rgba(228,240,214,.07);font:500 10.5px 'DM Mono',monospace;letter-spacing:.6px;color:rgba(201,212,194,.78)`)}>{a.path === 'app' ? 'APP' : 'DASHBOARD'}</span>
@@ -148,12 +148,12 @@ export default class HelpCentre extends React.Component {
   renderTopBar(V) {
     return (
       <div data-r="wrap" style={s(`max-width:1320px;margin:0 auto;padding:28px 32px 0;box-sizing:border-box;display:flex;align-items:center;gap:24px`)}>
-        <div data-r="side" style={s(`flex:none;width:250px;display:flex;padding:4px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(228,240,214,.1);background:rgba(10,19,13,.4)`)}>
-          <a href={PATH_URL.app} aria-current={V.segApp.bg !== 'transparent' ? 'true' : undefined} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:10px;background:${V.segApp.bg ?? ''};color:${V.segApp.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The app</a>
-          <a href={PATH_URL.dash} aria-current={V.segDash.bg !== 'transparent' ? 'true' : undefined} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:10px;background:${V.segDash.bg ?? ''};color:${V.segDash.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The dashboard</a>
+        <div data-r="side" style={s(`flex:none;width:250px;display:flex;padding:4px;box-sizing:border-box;border-radius:999px;border:1px solid rgba(228,240,214,.12);background:rgba(10,19,13,.4)`)}>
+          <a href={PATH_URL.app} aria-current={V.segApp.bg !== 'transparent' ? 'true' : undefined} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:999px;background:${V.segApp.bg ?? ''};color:${V.segApp.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The app</a>
+          <a href={PATH_URL.dash} aria-current={V.segDash.bg !== 'transparent' ? 'true' : undefined} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:999px;background:${V.segDash.bg ?? ''};color:${V.segDash.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The dashboard</a>
         </div>
         <div data-r="topsearch" style={s(`position:relative;z-index:30;flex:1;max-width:340px;margin-left:auto`)}>
-          <div style={s(`display:flex;align-items:center;gap:10px;height:36px;padding:0 10px 0 13px;border-radius:12px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.1)`)} className="hc-topsearch">
+          <div style={s(`display:flex;align-items:center;gap:10px;height:38px;padding:0 10px 0 15px;border-radius:999px;background:rgba(228,240,214,.06);border:1px solid rgba(228,240,214,.1)`)} className="hc-topsearch">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(201,212,194,.7)" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <circle cx="11" cy="11" r="6.5"></circle>
               <path d="M16 16 L20.5 20.5"></path>
@@ -161,7 +161,7 @@ export default class HelpCentre extends React.Component {
             {this.renderInput(this.searchRef, 'hc-top-results', false)}
           </div>
           {(V.hasQ) ? (
-            <div style={s(`position:absolute;left:0;right:0;top:48px;padding:8px;border-radius:20px;background:#0F1C13;border:1px solid rgba(228,240,214,.12);box-shadow:0 30px 70px rgba(0,0,0,.55);display:flex;flex-direction:column;gap:2px;max-height:440px;overflow:auto`)}>
+            <div style={s(`position:absolute;left:0;right:0;top:48px;padding:8px;border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;background:#14291C;border:1px solid rgba(228,240,214,.12);box-shadow:0 30px 70px rgba(0,0,0,.55);display:flex;flex-direction:column;gap:2px;max-height:440px;overflow:auto`)}>
               {this.renderResults('hc-top-results', V.all, false)}
             </div>
           ) : null}
@@ -177,7 +177,7 @@ export default class HelpCentre extends React.Component {
       <>
       {(V.isHome || V.isSearch) ? (
         <>
-          <div id="main" style={s(`position:relative;z-index:5;background:linear-gradient(178deg,#17301F 0%,#0F2015 45%,#0A130D 100%)`)}>
+          <div id="main" style={s(`position:relative;z-index:5;background:linear-gradient(178deg,#1A3524 0%,#0F2015 52%,#0F2015 100%)`)}>
             {/* Glow clipped in its own layer so the search results can overlap the cards below. */}
             <div style={s(`position:absolute;inset:0;overflow:hidden;pointer-events:none`)}><div style={s(`position:absolute;left:50%;top:-140px;width:900px;height:560px;margin-left:-450px;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.13),rgba(0,0,0,0) 72%)`)}></div></div>
             <div data-r="wrap" style={s(`position:relative;max-width:1180px;margin:0 auto;padding:96px 40px 72px;box-sizing:border-box;text-align:center`)}>
@@ -193,7 +193,7 @@ export default class HelpCentre extends React.Component {
                   {this.renderInput(this.heroRef, 'hc-hero-results', true)}
                 </label>
                 {(V.hasQ && V.isHome) ? (
-                  <div style={s(`position:absolute;z-index:20;left:0;right:0;top:66px;padding:8px;border-radius:20px;background:#0F1C13;border:1px solid rgba(228,240,214,.12);box-shadow:0 30px 70px rgba(0,0,0,.55);display:flex;flex-direction:column;gap:2px;max-height:440px;overflow:auto`)}>
+                  <div style={s(`position:absolute;z-index:20;left:0;right:0;top:66px;padding:8px;border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;background:#14291C;border:1px solid rgba(228,240,214,.12);box-shadow:0 30px 70px rgba(0,0,0,.55);display:flex;flex-direction:column;gap:2px;max-height:440px;overflow:auto`)}>
                     {this.renderResults('hc-hero-results', V.all, false)}
                   </div>
                 ) : null}
@@ -220,7 +220,7 @@ export default class HelpCentre extends React.Component {
             <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;margin-top:-8px`)}>
               {(V.pathCards || []).map((pc, $index) => (
                 <React.Fragment key={$index}>
-                  <div style={s(`display:flex;flex-direction:column;padding:34px 34px 30px;border-radius:${pc.r ?? ''};background:rgba(228,240,214,.045);border:1px solid rgba(228,240,214,.09)`)}>
+                  <div style={s(`display:flex;flex-direction:column;padding:34px 34px 30px;border-radius:${pc.r ?? ''};background:linear-gradient(158deg,rgba(228,240,214,.1),rgba(228,240,214,.04));border:1px solid rgba(228,240,214,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)`)}>
                     <div style={s(`display:flex;align-items:center;gap:14px`)}>
                       <span style={s(`flex:none;width:48px;height:48px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;display:flex;align-items:center;justify-content:center;background:rgba(217,234,110,.12);color:#EAF79B`)}>
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -260,8 +260,8 @@ export default class HelpCentre extends React.Component {
             <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px;margin-top:28px`)}>
               {(V.problems || []).map((pr, $index) => (
                 <React.Fragment key={$index}>
-                  <a href={pr.href} style={s(`display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:150px;padding:22px 22px 20px;box-sizing:border-box;text-align:left;border-radius:${pr.r ?? ''};background:rgba(6,11,7,.5);border:1px solid rgba(228,240,214,.09);font-family:'DM Sans',sans-serif;transition:all .3s ease`)} className="hc-ho648b7a">
-                    <span style={s(`font:400 19px/1.25 'DM Serif Display',serif;color:#F6F4E9;text-wrap:pretty`)}>{pr.q}</span>
+                  <a href={pr.href} style={s(`display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:150px;padding:22px 22px 20px;box-sizing:border-box;text-align:left;border-radius:${pr.r ?? ''};background:linear-gradient(158deg,rgba(228,240,214,.085),rgba(228,240,214,.035));box-shadow:inset 0 1px 0 rgba(255,255,255,.04);border:1px solid rgba(228,240,214,.09);font-family:'DM Sans',sans-serif;transition:all .3s ease`)} className="hc-ho648b7a">
+                    <span style={s(`font:600 16.5px/1.4 'DM Sans',sans-serif;letter-spacing:-.1px;color:#F6F4E9;text-wrap:pretty`)}>{pr.q}</span>
                     <span style={s(`font:500 12.5px 'DM Sans',sans-serif;color:#D9EA6E`)}>{pr.a}{" ›"}</span>
                   </a>
                 </React.Fragment>
@@ -337,9 +337,9 @@ export default class HelpCentre extends React.Component {
               </div>
             </nav>
             <main id="main" style={s(`flex:1;min-width:0;max-width:720px;padding:44px 0 120px`)}>
-              <div data-r="mpath" style={s(`display:none;margin-bottom:18px;padding:4px;border-radius:14px;border:1px solid rgba(228,240,214,.1)`)}>
-                <a href={PATH_URL.app} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:10px;background:${V.segApp.bg ?? ''};color:${V.segApp.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The app</a>
-                <a href={PATH_URL.dash} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:10px;background:${V.segDash.bg ?? ''};color:${V.segDash.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The dashboard</a>
+              <div data-r="mpath" style={s(`display:none;margin-bottom:18px;padding:4px;border-radius:999px;border:1px solid rgba(228,240,214,.12)`)}>
+                <a href={PATH_URL.app} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:999px;background:${V.segApp.bg ?? ''};color:${V.segApp.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The app</a>
+                <a href={PATH_URL.dash} style={s(`flex:1;text-align:center;padding:8px 10px;border-radius:999px;background:${V.segDash.bg ?? ''};color:${V.segDash.c ?? ''};font:500 13px 'DM Sans',sans-serif`)}>The dashboard</a>
               </div>
               <nav aria-label="Breadcrumb" style={s(`display:flex;flex-wrap:wrap;align-items:center;gap:8px;font:400 13px 'DM Sans',sans-serif;color:rgba(201,212,194,.7)`)}>
                 <a href="/help/" style={s(`color:rgba(201,212,194,.82)`)} className="hc-ho950d73">Help centre</a>
@@ -360,7 +360,7 @@ export default class HelpCentre extends React.Component {
                 <>
                   <figure aria-hidden="true" style={s(`position:relative;margin:36px 0 0;padding:34px 0 0;height:440px;overflow:hidden;border-radius:28px 20px 0 0 / 20px 28px 0 0;background:radial-gradient(60% 70% at 50% 20%,rgba(217,234,110,.12),rgba(0,0,0,0) 70%),rgba(228,240,214,.04);display:flex;justify-content:center`)}>
                     <div style={s(`width:290px;flex:none;transform:scale(.82);transform-origin:top center`)}><Phone screen={V.art.shot} /></div>
-                    <div style={s(`position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(180deg,rgba(10,19,13,0),#0A130D);pointer-events:none`)}></div>
+                    <div style={s(`position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(180deg,rgba(15,32,21,0),#0F2015);pointer-events:none`)}></div>
                   </figure>
                 </>
               ) : null}
@@ -375,7 +375,7 @@ export default class HelpCentre extends React.Component {
                   <h2 style={s(`margin:0;font:400 26px/1.2 'DM Serif Display',serif;color:#F6F4E9`)}>Step by step</h2>
                   <ol style={s(`list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px`)}>
                     {V.art.steps.map((t, i) => (
-                      <li key={i} style={s(`display:flex;gap:16px;align-items:center;padding:16px 18px;border-radius:18px;border:1px solid rgba(228,240,214,.09)`)}>
+                      <li key={i} style={s(`display:flex;gap:16px;align-items:center;padding:16px 18px;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;border:1px solid rgba(228,240,214,.09)`)}>
                         <span aria-hidden="true" style={s(`flex:none;width:30px;height:30px;border-radius:${STEP_DISCS[i % 3]};display:flex;align-items:center;justify-content:center;background:rgba(217,234,110,.12);font:500 12px 'DM Mono',monospace;color:#EAF79B`)}>{i + 1}</span>
                         <span style={s(`flex:1;font:400 15px/1.55 'DM Sans',sans-serif;color:rgba(244,242,230,.88);text-wrap:pretty`)}>{V.art.crisis ? withTel(t) : t}</span>
                       </li>
@@ -407,8 +407,8 @@ export default class HelpCentre extends React.Component {
                   </div>
                 ) : null}
               </section>
-              <section aria-labelledby="hc-contact" style={s(`margin-top:40px;padding:20px 22px;border-radius:18px;border:1px solid rgba(228,240,214,.09);background:rgba(228,240,214,.03)`)}>
-                <h2 id="hc-contact" style={s(`margin:0;font:400 20px/1.2 'DM Serif Display',serif;color:#F6F4E9`)}>Still need a hand?</h2>
+              <section aria-labelledby="hc-contact" style={s(`margin-top:40px;padding:20px 22px;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;border:1px solid rgba(228,240,214,.09);background:rgba(228,240,214,.03)`)}>
+                <h2 id="hc-contact" style={s(`margin:0;font:600 17px/1.3 'DM Sans',sans-serif;color:#F6F4E9`)}>Still need a hand?</h2>
                 <p style={s(`margin:8px 0 0;font:400 15px/1.55 'DM Sans',sans-serif;color:rgba(244,242,230,.82);text-wrap:pretty`)}>{V.art.contact}</p>
                 {V.art.crisis ? null : <p style={s(`margin:8px 0 0;font:400 14px/1.55 'DM Sans',sans-serif;color:rgba(201,212,194,.78)`)}>Need someone to talk to now? See <a href={BY['a-crisis'].url} style={s(`color:#D9EA6E`)}>When you need more support</a>.</p>}
               </section>
@@ -427,15 +427,15 @@ export default class HelpCentre extends React.Component {
               ) : null}
               <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin-top:48px`)}>
                 {V.prev ? (
-                  <a href={V.prev.href} rel="prev" style={s(`display:flex;flex-direction:column;gap:6px;text-align:left;padding:18px 20px;border-radius:18px;border:1px solid rgba(228,240,214,.1);background:transparent;font-family:'DM Sans',sans-serif`)} className="hc-hoc01b3c">
+                  <a href={V.prev.href} rel="prev" style={s(`display:flex;flex-direction:column;gap:6px;text-align:left;padding:18px 20px;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;border:1px solid rgba(228,240,214,.1);background:transparent;font-family:'DM Sans',sans-serif`)} className="hc-hoc01b3c">
                     <span style={s(`font:500 11px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.68)`)}>‹ PREVIOUS</span>
-                    <span style={s(`font:400 17px 'DM Serif Display',serif;color:#F6F4E9`)}>{V.prev.title}</span>
+                    <span style={s(`font:600 15.5px/1.35 'DM Sans',sans-serif;color:#F6F4E9`)}>{V.prev.title}</span>
                   </a>
                 ) : <span></span>}
                 {V.next ? (
-                  <a href={V.next.href} rel="next" style={s(`display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right;padding:18px 20px;border-radius:18px;border:1px solid rgba(228,240,214,.1);background:transparent;font-family:'DM Sans',sans-serif`)} className="hc-hoc01b3c">
+                  <a href={V.next.href} rel="next" style={s(`display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right;padding:18px 20px;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;border:1px solid rgba(228,240,214,.1);background:transparent;font-family:'DM Sans',sans-serif`)} className="hc-hoc01b3c">
                     <span style={s(`font:500 11px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.68)`)}>NEXT ›</span>
-                    <span style={s(`font:400 17px 'DM Serif Display',serif;color:#F6F4E9`)}>{V.next.title}</span>
+                    <span style={s(`font:600 15.5px/1.35 'DM Sans',sans-serif;color:#F6F4E9`)}>{V.next.title}</span>
                   </a>
                 ) : null}
               </div>
