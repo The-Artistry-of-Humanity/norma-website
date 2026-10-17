@@ -1,45 +1,48 @@
 ---
-/* Shared footer (handoff v3 §1.6): PRODUCT / TRUST / TALK columns, with the
-   legal links in their own muted row under a hairline. */
+/* Dark footer for the help centre, legal pages and 404: the round 5 footer
+   (logo and links, then the legal row under a hairline) in the brand dark
+   green, plus the not-a-medical-device note and the urgent support link. */
 import { BY } from '../data/help';
 interface Props { home?: boolean }
-const { home = false } = Astro.props;
-const p = home ? '' : '/';
-const col = "display:flex;flex-direction:column;gap:10px;font:400 13.5px 'DM Sans',sans-serif";
-const head = "font:600 9px 'DM Sans',sans-serif;letter-spacing:2px;color:rgba(201,212,194,.78)";
-const link = 'color:rgba(244,242,230,.85);transition:all .2s ease';
 ---
-<div style="border-top:1px solid rgba(228,240,214,.08)">
-  <div data-r="wrap" style="max-width:1180px;margin:0 auto;padding:40px 40px 56px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:28px">
-    <div style="max-width:360px">
-      <div style="display:flex;align-items:center;gap:10px"><img src="/assets/v5/norma-icon.png" alt="" style="width:26px;height:26px;border-radius:8px" /><span style="font:400 20px 'DM Serif Display',serif;color:#F6F4E9">nørma</span></div>
-      <p style="margin:12px 0 0;font:400 13.5px/1.5 'DM Sans',sans-serif;color:rgba(201,212,194,.78)">A well-being operating system by Artistry of Humanity. Built with 💚 in Australia.</p>
-      <p style="margin:14px 0 0;font:400 12px/1.55 'DM Sans',sans-serif;color:rgba(201,212,194,.72)">nørma is not a medical device, a diagnosis or a therapy tool. It supports, and does not replace, an organisation’s well-being and psychosocial processes.</p>
+<footer class="nf">
+  <div class="nf-wrap">
+    <div class="nf-top">
+      <a href="/" class="nf-logo"><img src="/assets/v5/norma-icon.png" alt="" width="26" height="26" /><span>nørma</span></a>
+      <nav class="nf-links" aria-label="Footer">
+        <a href="/your-people/">Your people</a>
+        <a href="/for-leaders/">For leaders</a>
+        <a href="/roi/">ROI</a>
+        <a href="/help/">Help</a>
+        <a href="/book-a-demo/">Book a demo</a>
+      </nav>
     </div>
-    <div style="display:flex;gap:56px;flex-wrap:wrap">
-      <div style={col}>
-        <span style={head}>PRODUCT</span>
-        <a href="/your-people/" class="hv-link" style={link}>Your people</a>
-        <a href="/for-leaders/" class="hv-link" style={link}>For leaders</a>
-        <a href="/roi/" class="hv-link" style={link}>ROI</a>
-      </div>
-      <div style={col}>
-        <span style={head}>TRUST</span>
-        <a href="/privacy/" class="hv-link" style={link}>Privacy</a>
-        <a href="/help/" class="hv-link" style={link}>Help centre</a>
-        <a href={BY['a-crisis'].url} class="hv-link" style={link}>Urgent support</a>
-      </div>
-      <div style={col}>
-        <span style={head}>TALK</span>
-        <a href="/book-a-demo/" class="hv-link" style={link}>Book a demo</a>
-      </div>
+    <p class="nf-note">nørma is not a medical device, a diagnosis or a therapy tool. It supports, and does not replace, an organisation’s well-being and psychosocial processes.</p>
+    <div class="nf-legal">
+      <span>© 2026 The Artistry of Humanity Pty Ltd</span>
+      <span class="nf-legal-links">
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms of use</a>
+        <a href="/help/">Help centre</a>
+        <a href={BY['a-crisis'].url}>Urgent support</a>
+      </span>
     </div>
   </div>
-  <div data-r="wrap" style="max-width:1180px;margin:0 auto;padding:18px 40px 28px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 28px;border-top:1px solid rgba(228,240,214,.06);font:400 12.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.62)">
-    <span>© 2026 The Artistry of Humanity Pty Ltd</span>
-    <span style="display:flex;flex-wrap:wrap;gap:20px">
-      <a href="/privacy/" class="hv-link" style="color:rgba(201,212,194,.75);transition:all .2s ease">Privacy policy</a>
-      <a href="/terms/" class="hv-link" style="color:rgba(201,212,194,.75);transition:all .2s ease">Terms of use</a>
-    </span>
-  </div>
-</div>
+</footer>
+
+<style>
+  .nf{border-top:1px solid rgba(228,240,214,.08)}
+  .nf-wrap{max-width:1200px;margin:0 auto;padding:36px clamp(20px,5vw,48px) 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px}
+  .nf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px}
+  .nf-logo{display:flex;align-items:center;gap:10px;color:#F6F4E9}
+  .nf-logo:hover{color:#F6F4E9}
+  .nf-logo img{display:block;border-radius:8px}
+  .nf-logo span{font:400 20px/1 'DM Serif Display',serif}
+  .nf-links{display:flex;flex-wrap:wrap;gap:12px 28px;font:500 14px 'DM Sans',sans-serif}
+  .nf-links a,.nf-legal a{color:rgba(244,242,230,.72);transition:color .2s ease}
+  .nf-links a:hover,.nf-legal a:hover{color:#F6F4E9}
+  .nf-note{margin:0;max-width:46em;font:400 12.5px/1.55 'DM Sans',sans-serif;color:rgba(201,212,194,.62)}
+  .nf-legal{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(228,240,214,.08);font:400 12.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.66)}
+  .nf-legal-links{display:flex;flex-wrap:wrap;gap:8px 20px}
+  .nf-legal a{color:rgba(201,212,194,.72)}
+</style>

@@ -16,7 +16,7 @@ const description = p === 'app'
   : 'Every help article for the nørma dashboard: reading the signal, acting on it, check-ins and administration.';
 ---
 <Layout title={`${label} · nørma help`} description={description} canonical={`https://joinnorma.com${PATH_URL[p]}`} og skip>
-  <div style="position:relative;overflow-x:clip;min-height:100vh;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0A130D">
+  <div style="position:relative;overflow-x:clip;min-height:100vh;font-family:'DM Sans',sans-serif;color:#F4F2E6;background:#0F2015">
     <Header current="help" />
     <HelpCentre client:load view="path" path={p} />
     <div style="margin-top:80px"><Footer /></div>
