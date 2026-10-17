@@ -753,7 +753,7 @@ class HomePage extends React.Component {
                 </span>
                 <span style={s(`font:400 clamp(24px,2.2vw,28px)/1.1 'DM Serif Display',serif;letter-spacing:-.3px;color:#F6F4E9`)}>Absenteeism</span>
               </div>
-              <div style={s(`margin-top:18px;font:400 clamp(32px,3.2vw,40px)/1 'DM Serif Display',serif;color:#EAF79B`)}>$4.7 million</div>
+              <div style={s(`margin-top:18px;font:400 clamp(32px,3.2vw,40px)/1 'DM Serif Display',serif;color:#EAF79B`)}>$4.7m</div>
               <p style={s(`margin:12px 0 0;max-width:24em;font:400 15px/1.5 'DM Sans',sans-serif;color:rgba(201,212,194,.86);text-wrap:pretty`)}>9,000 unplanned days off.</p>
               <p style={s(`margin:14px 0 0;font:500 10.5px/1.6 'DM Mono',monospace;letter-spacing:1.2px;color:rgba(201,212,194,.62)`)}>THE 7 AM TEXT · THE THIRD MONDAY</p>
             </div>
@@ -768,7 +768,7 @@ class HomePage extends React.Component {
                 </span>
                 <span style={s(`font:400 clamp(24px,2.2vw,28px)/1.1 'DM Serif Display',serif;letter-spacing:-.3px;color:#F6F4E9`)}>Presenteeism</span>
               </div>
-              <div style={s(`margin-top:18px;font:400 clamp(32px,3.2vw,40px)/1 'DM Serif Display',serif;color:#EAF79B`)}>$10.8 million</div>
+              <div style={s(`margin-top:18px;font:400 clamp(32px,3.2vw,40px)/1 'DM Serif Display',serif;color:#EAF79B`)}>$10.8m</div>
               <p style={s(`margin:12px 0 0;max-width:24em;font:400 15px/1.5 'DM Sans',sans-serif;color:rgba(201,212,194,.86);text-wrap:pretty`)}>At work, not really there. The biggest cost, and the one you can’t see.</p>
               <p style={s(`margin:14px 0 0;font:500 10.5px/1.6 'DM Mono',monospace;letter-spacing:1.2px;color:rgba(201,212,194,.62)`)}>THE “ALL GOOD” · THE SILENT MEETING</p>
             </div>
@@ -783,7 +783,7 @@ class HomePage extends React.Component {
                 </span>
                 <span style={s(`font:400 clamp(24px,2.2vw,28px)/1.1 'DM Serif Display',serif;letter-spacing:-.3px;color:#F6F4E9`)}>Turnover</span>
               </div>
-              <div style={s(`margin-top:18px;font:400 clamp(32px,3.2vw,40px)/1 'DM Serif Display',serif;color:#EAF79B`)}>$6.8 million</div>
+              <div style={s(`margin-top:18px;font:400 clamp(32px,3.2vw,40px)/1 'DM Serif Display',serif;color:#EAF79B`)}>$6.8m</div>
               <p style={s(`margin:12px 0 0;max-width:24em;font:400 15px/1.5 'DM Sans',sans-serif;color:rgba(201,212,194,.86);text-wrap:pretty`)}>135 people leave, each costing about half a year’s salary to replace.</p>
               <p style={s(`margin:14px 0 0;font:500 10.5px/1.6 'DM Mono',monospace;letter-spacing:1.2px;color:rgba(201,212,194,.62)`)}>THE RESIGNATION · THE EXIT INTERVIEW</p>
             </div>

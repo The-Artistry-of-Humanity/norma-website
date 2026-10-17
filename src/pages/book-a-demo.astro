@@ -4,7 +4,7 @@
 import LayoutV5 from '../layouts/LayoutV5.astro';
 import BookDemo from '../islands/v5/live/BookDemoLive';
 ---
-<LayoutV5 title={'Book a demo · nørma'} description={'Book a thirty-minute nørma demo, or tell us about your organisation and we’ll reply within one working day.'} canonical="https://joinnorma.com/book-a-demo/">
+<LayoutV5 title={'Book a demo · nørma'} description={'Book a thirty-minute nørma demo, or tell us about your organisation and we’ll reply within one working day.'} canonical="https://joinnorma.com/book-a-demo/" og="/og/book-a-demo.jpg">
   <BookDemo client:load />
   <!-- Netlify Forms detects fields from static HTML at deploy time; the visible
        form is rendered by React and posts to this name (BookDemoLive.tsx). -->

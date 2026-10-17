@@ -34,7 +34,7 @@ const K = {
   h3: { c: '#F0A58C', hi: '#F8C8B6', num: '#F5A98E', card: 'linear-gradient(180deg,rgba(240,165,140,.36),rgba(240,165,140,.06))', pill: 'rgba(240,165,140,.24)' },
   h4: { c: '#C85C44', hi: '#E78E71', num: '#F08A6C', card: 'linear-gradient(180deg,rgba(200,92,68,.5),rgba(200,92,68,.1))', pill: 'rgba(200,92,68,.36)' }
 };
-const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'B' : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : v >= 1e4 ? '$' + Math.round(v / 1e3) + 'k' : '$' + Math.round(v).toLocaleString('en-AU');
+const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'bn' : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'm' : v >= 1e4 ? '$' + Math.round(v / 1e3) + 'k' : '$' + Math.round(v).toLocaleString('en-AU');
 const num = v => Math.round(v).toLocaleString('en-AU');
 // Headcount slider: a log scale from 20 to 10,000, so a 60-person business and a
 // 6,000-person one both get room, snapping to round numbers. Typing allows 5 to 100,000.
