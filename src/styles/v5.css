@@ -10,3 +10,10 @@ a:hover{color:#0F2015}
 select,input,textarea{font-family:'DM Sans',sans-serif}
 @keyframes nrmFlow{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 @keyframes nrmWave{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+/* Phone pass (after the handoff): call-to-action buttons (the 54px pills) take
+   the full width under 520px, stacked when there are two. The booking card's
+   slot button stays beside nørma. */
+@media (max-width:520px){
+  section a:is([style*="height:54px"],[style*="height: 54px"]):not([data-m=slot-btn]),
+  section button:is([style*="height:54px"],[style*="height: 54px"]){width:100%;box-sizing:border-box;justify-content:center}
+}

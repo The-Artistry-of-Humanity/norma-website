@@ -26,6 +26,11 @@ import BookDemo from '../islands/v5/live/BookDemoLive';
 [data-m=thanks-btn]{white-space:nowrap}
 @media (max-width:419px){ .bd-cw{display:none} }
 @media (max-width:300px){ [data-m=thanks-btn]{padding:0 18px!important;font-size:14px!important} }
+/* Both cards use nearly the full width on a phone (10px gutters). */
+@media (max-width:520px){
+  [data-m=bd-cards]{width:calc(100% + 20px)!important;max-width:none!important;margin-left:-10px!important;margin-right:-10px!important}
+  [data-m=bd-cards] > div:not([aria-hidden]){padding-left:22px!important;padding-right:22px!important}
+}
 @media (max-width:374px){
   [data-m=slot-btn]{padding:0 18px!important;gap:6px!important}
   [data-m=slot-norma]{width:78px!important;right:0!important;bottom:-18px!important}

@@ -8,4 +8,12 @@ import YourPeople from '../islands/v5/YourPeople';
   <script is:inline slot="head" src="/assets/v5/journey/ch00-film.js" defer></script>
   <YourPeople client:load />
 </LayoutV5>
-<style is:global>input[type=range]{accent-color:#14231A}</style>
+<style is:global>input[type=range]{accent-color:#14231A}
+/* Phone pass (after the handoff): the check-in steps stack with a centred phone,
+   so their headings and lines are centred too. */
+@media (max-width:759px){
+  [data-m=ci-steps] > li{text-align:center}
+  [data-m=ci-steps] > li > div:first-child{justify-content:center}
+  [data-m=ci-steps] > li > p{max-width:30em;margin-left:auto!important;margin-right:auto!important}
+}
+</style>

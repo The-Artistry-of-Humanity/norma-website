@@ -117,7 +117,7 @@ class BookDemo extends React.Component {
                 Thirty minutes with the team behind nørma. Pick a time that suits you, or tell us about your organisation and we’ll come back to you.
               </p>
             </div>
-            <div style={s(`min-width:0;position:relative;max-width:820px;width:100%;margin:0 auto;box-sizing:border-box;display:flex;flex-direction:column;gap:18px`)}>
+            <div data-m="bd-cards" style={s(`min-width:0;position:relative;max-width:820px;width:100%;margin:0 auto;box-sizing:border-box;display:flex;flex-direction:column;gap:18px`)}>
               <div aria-hidden="true" style={s(`position:absolute;left:-10%;top:30%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(205,226,80,.7),rgba(217,234,110,0) 72%);pointer-events:none`)}></div>
               <div aria-hidden="true" style={s(`position:absolute;right:-8%;bottom:-6%;width:56%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(74,107,58,.38),rgba(74,107,58,0) 72%);pointer-events:none`)}></div>
               <div style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(26px,3vw,36px);border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;background:linear-gradient(150deg,rgba(11,24,16,.97),rgba(15,32,21,.92));backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);color:#F4F2E6;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.08),0 36px 70px -30px rgba(20,35,26,.5)`)}>
@@ -135,7 +135,7 @@ class BookDemo extends React.Component {
                   </div>
                 </div>
               </div>
-              <div ref={V.cardRef} style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(26px,3vw,36px);border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;background:linear-gradient(150deg,rgba(250,248,240,.62),rgba(244,242,230,.34));backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 0 0 1px rgba(255,255,255,.45),0 30px 60px -34px rgba(20,35,26,.35);min-height:${V.cardMin ?? ''};display:flex;flex-direction:column`)}>
+              <div data-m="form-card" ref={V.cardRef} style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(26px,3vw,36px);border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;background:linear-gradient(150deg,rgba(250,248,240,.62),rgba(244,242,230,.34));backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 0 0 1px rgba(255,255,255,.45),0 30px 60px -34px rgba(20,35,26,.35);min-height:${V.cardMin ?? ''};display:flex;flex-direction:column`)}>
                 {(V.notSent) ? (
                   <>
                     <form onSubmit={V.submit} style={s(`display:flex;flex-direction:column;gap:20px`)}>
