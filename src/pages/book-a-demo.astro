@@ -22,6 +22,10 @@ import BookDemo from '../islands/v5/live/BookDemoLive';
   [data-m=slot-text] > p{padding-right:clamp(40px,14vw,72px)}
   [data-m=slot-norma]{width:96px!important;right:2px!important;bottom:-22px!important}
 }
+/* Thank-you button: one line always; on phones "Can't wait?" drops so it fits the card. */
+[data-m=thanks-btn]{white-space:nowrap}
+@media (max-width:419px){ .bd-cw{display:none} }
+@media (max-width:300px){ [data-m=thanks-btn]{padding:0 18px!important;font-size:14px!important} }
 @media (max-width:374px){
   [data-m=slot-btn]{padding:0 18px!important;gap:6px!important}
   [data-m=slot-norma]{width:78px!important;right:0!important;bottom:-18px!important}
