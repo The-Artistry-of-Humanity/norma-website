@@ -1,8 +1,9 @@
 // @ts-nocheck
 /* Generated from the design handoff (design_handoff_v5/reference) by dc2jsx.
    Markup and styles are verbatim from the reference; logic is the reference's
-   own renderVals/state code. Edit the reference and regenerate rather than
-   hand-tuning values here. */
+   own renderVals/state code. Since 17 Oct 2026 this file also carries design
+   changes made here after the handoff (git log shows each), so regenerating
+   from the reference would drop them: diff before rerunning build-v5.sh. */
 import React from 'react';
 import { s } from '../../lib/s';
 import './HomePage.dc.css';
@@ -107,15 +108,27 @@ class HomePage extends React.Component {
     view.addEventListener('focusin', () => { c.focus = true; });
     view.addEventListener('focusout', () => { c.focus = false; });
     view.addEventListener('keydown', e => { if (e.key === 'ArrowRight') this.nudge(1); if (e.key === 'ArrowLeft') this.nudge(-1); });
-    view.addEventListener('pointerdown', e => { if (e.button !== 0) return; c.drag = { x: e.clientX, off: c.off, moved: false, id: e.pointerId }; c.anim = null; });
-    this.onPM = e => { const d = c.drag; if (!d || e.pointerId !== d.id) return; const dx = e.clientX - d.x; if (!d.moved && Math.abs(dx) > 6) { d.moved = true; view.style.cursor = 'grabbing'; } if (d.moved) c.off = d.off - dx; };
-    this.onPU = () => { if (c.drag) { c.drag = null; view.style.cursor = 'grab'; c.resumeAt = performance.now() + 2500; } };
+    // Swipe (added after the handoff): the strip follows the finger, keeps the flick's
+    // momentum when released, then eases onto the nearest card. A light tick on
+    // Android when it lands on a new one (iOS browsers don't allow vibration).
+    view.addEventListener('pointerdown', e => { if (e.button !== 0) return; const t = performance.now(); c.drag = { x: e.clientX, off: c.off, moved: false, id: e.pointerId, lx: e.clientX, lt: t, v: 0, touch: e.pointerType === 'touch' }; c.anim = null; });
+    this.onPM = e => { const d = c.drag; if (!d || e.pointerId !== d.id) return; const dx = e.clientX - d.x; if (!d.moved && Math.abs(dx) > 6) { d.moved = true; view.style.cursor = 'grabbing'; } if (d.moved) { const t = performance.now(), gap = Math.max(1, t - d.lt); d.v = d.v * .5 + (e.clientX - d.lx) / gap * .5; d.lx = e.clientX; d.lt = t; c.off = d.off - dx; } };
+    this.onPU = () => {
+      const d = c.drag; if (!d) return; c.drag = null; view.style.cursor = 'grab'; const t = performance.now(), st = this.carStep();
+      if (d.moved && st) {
+        const v = t - d.lt > 90 ? 0 : Math.max(-3, Math.min(3, d.v)), from = c.off;
+        let to = Math.round((from - v * 240) / st) * st; to = Math.max(from - 2 * st, Math.min(from + 2 * st, to)); to = Math.round(to / st) * st;
+        c.anim = { from, to, t0: t, dur: Math.min(720, Math.max(340, Math.abs(to - from) * 1.5)) };
+        if (d.touch && Math.round(to / st) !== Math.round(d.off / st) && navigator.vibrate) { try { navigator.vibrate(8); } catch (_) {} }
+      }
+      c.resumeAt = t + 4000;
+    };
     window.addEventListener('pointermove', this.onPM); window.addEventListener('pointerup', this.onPU); window.addEventListener('pointercancel', this.onPU);
     const tick = now => {
       const dt = Math.min(50, now - c.last); c.last = now;
       const st = this.carStep(), W = st * n;
       if (W > 0) {
-        if (c.anim) { const p = Math.min(1, (now - c.anim.t0) / 900), e = 1 - Math.pow(1 - p, 3); c.off = c.anim.from + (c.anim.to - c.anim.from) * e; if (p >= 1) c.anim = null; }
+        if (c.anim) { const p = Math.min(1, (now - c.anim.t0) / (c.anim.dur || 900)), e = 1 - Math.pow(1 - p, 3); c.off = c.anim.from + (c.anim.to - c.anim.from) * e; if (p >= 1) c.anim = null; }
         else if (!c.drag && !c.hover && !c.focus && this.vis.get(view) && this.motionOn() && now > c.resumeAt) c.off += dt * 0.034;
         if (c.off >= W) { c.off -= W; if (c.anim) { c.anim.from -= W; c.anim.to -= W; } if (c.drag) c.drag.off -= W; }
         if (c.off < 0) { c.off += W; if (c.anim) { c.anim.from += W; c.anim.to += W; } if (c.drag) c.drag.off += W; }
@@ -645,12 +658,12 @@ class HomePage extends React.Component {
           </div>
         </div>
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-bottom:clamp(80px,10vw,136px)`)}>
-          <div style={s(`display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 28px;margin-top:clamp(36px,4.5vw,56px)`)}>
+          <div data-m="car-ctrl" style={s(`display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 28px;margin-top:clamp(36px,4.5vw,56px)`)}>
             <div style={s(`display:flex;align-items:center;gap:10px`)}>
               <button type="button" onClick={V.prevMoment} aria-label="Previous moment" style={s(`width:44px;height:44px;border-radius:999px;border:1px solid rgba(228,240,214,.18);background:transparent;color:#F4F2E6;font:400 18px/1 'DM Sans',sans-serif;cursor:pointer;padding:0`)} className="hm-hob7451d hm-ac3e8255">‹</button>
               <button type="button" onClick={V.nextMoment} aria-label="Next moment" style={s(`width:44px;height:44px;border-radius:999px;border:1px solid rgba(228,240,214,.18);background:transparent;color:#F4F2E6;font:400 18px/1 'DM Sans',sans-serif;cursor:pointer;padding:0`)} className="hm-hob7451d hm-ac3e8255">›</button>
             </div>
-            <div style={s(`display:flex;flex-wrap:wrap;gap:12px 28px`)}>
+            <div data-m="car-legend" style={s(`display:flex;flex-wrap:wrap;gap:12px 28px`)}>
               <span style={s(`display:inline-flex;align-items:center;gap:10px;font:500 14px 'DM Sans',sans-serif;color:rgba(244,242,230,.86)`)}>
                 <span style={s(`width:32px;height:32px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(217,234,110,.14);display:flex;align-items:center;justify-content:center;color:#EAF79B`)}>
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -699,7 +712,7 @@ class HomePage extends React.Component {
               </>
             ) : null}
           </h3>
-          <div aria-hidden="true" style={s(`display:flex;gap:6px;margin-top:44px;height:56px`)}>
+          <div data-m="cost-bar" aria-hidden="true" style={s(`display:flex;gap:6px;margin-top:44px;height:56px`)}>
             <span style={s(`flex:4.7 1 0;min-width:0;display:flex;align-items:center;padding:0 10px;box-sizing:border-box;overflow:hidden;border-radius:16px 6px 6px 16px / 14px 6px 6px 14px;background:#D9EA6E`)}>
               <span style={s(`flex:none;width:36px;height:36px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:#0F2015;display:flex;align-items:center;justify-content:center;color:#EAF79B`)}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -728,7 +741,7 @@ class HomePage extends React.Component {
               </span>
             </span>
           </div>
-          <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));column-gap:clamp(24px,3vw,48px);row-gap:0;margin-top:-8px`)}>
+          <div data-m="cost-grid" style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));column-gap:clamp(24px,3vw,48px);row-gap:0;margin-top:-8px`)}>
             <div style={s(`display:grid;grid-template-rows:subgrid;grid-row:span 4;row-gap:0;min-width:0`)}>
               <div style={s(`margin-top:36px;display:flex;align-items:center;gap:12px`)}>
                 <span style={s(`flex:none;width:40px;height:40px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(217,234,110,.14);display:flex;align-items:center;justify-content:center;color:#EAF79B`)}>
@@ -893,7 +906,7 @@ class HomePage extends React.Component {
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(88px,11vw,152px)`)}>
           <h2 style={s(`margin:0 auto;max-width:13em;text-align:center;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>The problem has two sides. So does nørma.</h2>
           <div style={s(`position:relative;max-width:1040px;margin:clamp(40px,5vw,64px) auto 0`)}>
-            <svg viewBox="0 0 640 338" aria-hidden="true" style={s(`position:relative;z-index:2;display:block;width:min(640px,100%);height:auto;margin:0 auto -20px;overflow:visible`)}>
+            <svg data-m="dial" viewBox="0 0 640 338" aria-hidden="true" style={s(`position:relative;z-index:2;display:block;width:min(640px,100%);height:auto;margin:0 auto -20px;overflow:visible`)}>
               <path d="M14.0 320.0L0.0 320.0M29.0 225.4L21.4 223.0M72.4 140.1L66.0 135.4M140.1 72.4L135.4 66.0M225.4 29.0L223.0 21.4M320.0 14.0L320.0 0.0M414.6 29.0L417.0 21.4M499.9 72.4L504.6 66.0M567.6 140.1L574.0 135.4M611.0 225.4L618.6 223.0M626.0 320.0L640.0 320.0" stroke="rgba(20,35,26,.28)" strokeWidth="1.5" fill="none"></path>
               <path d="M34.0 320.0 A286 286 0 0 1 269.9 38.4" fill="none" stroke="#E78E71" strokeWidth="26"></path>
               <path d="M280.6 36.7 A286 286 0 0 1 359.4 36.7" fill="none" stroke="#E6C77E" strokeWidth="26"></path>

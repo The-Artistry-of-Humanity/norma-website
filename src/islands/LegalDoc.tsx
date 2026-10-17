@@ -4,7 +4,8 @@
    Hendryk's drafts "03 nørma Privacy Policy (draft v1)" and "04 nørma Terms
    of Use (draft v1)". Revised 13 Oct 2026 where the draft contradicted how the
    product works; changes are logged outside the repo. 17 Oct 2026: the
-   website form is now Book a demo (privacy sections 1, 3 and 5).
+   website form is now Book a demo (privacy sections 1, 3 and 5), and demo
+   bookings through Google's booking calendar are listed (sections 3 and 5).
    Rendered server-side, no client JS. */
 import React from 'react';
 import { s } from '../lib/s';
@@ -36,6 +37,7 @@ const PRIVACY = [
       ['**Habits, commitments and journeys:** the habits you track, the commitments you make, your progress through growth journeys, your personal fulfilment score and your growth momentum.', 'You, as you use the app.'],
       ['**Notes:** anything you type into an optional note box, such as the one on a check-in. Notes are private to you.', 'You.'],
       ['**Website enquiries:** the name, role, work email address, company, country, headcount, optional phone number and message you type into the Book a demo form on joinnorma.com.', 'You, when you send the form.'],
+      ['**Demo bookings:** the name, email address and anything else you enter when you book a demo call through the booking calendar linked from joinnorma.com.', 'You, when you book a time.'],
       ['**Settings and device information:** your reminder preferences, notification token, device type, operating system, app version, language and time zone.', 'Your device and the app.'],
       ['**Usage information:** records of your sign-ins and the technical details of your sessions, kept for security, plus error and performance data. nørma contains no advertising or analytics trackers and does not follow you outside the app.', 'The app, automatically.'],
       ['**Support correspondence:** what you send us if you contact support.', 'You.']]),
@@ -58,7 +60,8 @@ const PRIVACY = [
       ['Expo, Apple and Google', 'Delivering push notifications to your device (your device token and the notification text only)', 'Global'],
       ['Tensaria', 'Engineering and operations support for the platform, under confidentiality and access controls', 'Australia'],
       ['Netlify', 'Hosting for joinnorma.com and receiving the Book a demo form', 'United States'],
-      ['Notion', 'Storing demo requests so we can follow up', 'United States']]),
+      ['Notion', 'Storing demo requests so we can follow up', 'United States'],
+      ['Google', 'The booking calendar for demo calls booked from joinnorma.com', 'United States']]),
     P('Your speech is turned into text on your own device. No audio is sent to anyone to be transcribed.'),
     P('Some of these providers are outside Australia. Before we disclose your information overseas, we take the steps Australian privacy law requires to make sure it stays protected.')]],
   ['How long we keep it', [

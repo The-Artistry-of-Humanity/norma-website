@@ -403,7 +403,7 @@ class YourPeople extends React.Component {
               The check-in is an awareness tool that works both ways. Each person gets their own picture first, a starting point for the month. Only then does it become the group signal leaders see.
             </p>
           </div>
-          <ol style={s(`list-style:none;margin:clamp(48px,6vw,72px) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(48px,5vw,56px) clamp(28px,3.4vw,48px)`)}>
+          <ol data-m="ci-steps" style={s(`list-style:none;margin:clamp(48px,6vw,72px) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(48px,5vw,56px) clamp(28px,3.4vw,48px)`)}>
             <li style={s(`display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:20px;min-width:0`)}>
               <div style={s(`display:flex;align-items:baseline;gap:12px;padding:0 4px`)}>
                 <span style={s(`font:500 12px 'DM Mono',monospace;color:rgba(20,35,26,.55)`)}>01</span>

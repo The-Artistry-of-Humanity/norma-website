@@ -31,6 +31,30 @@ import HomePage from '../islands/v5/HomePage';
   [data-m=delta]{white-space:nowrap}
   div:has(> [data-m=delta]){flex-wrap:wrap!important;gap:6px 12px!important}
 }
+/* Moments: arrows centred; the three costs as an even row of icon-over-label. */
+@media (max-width:759px){
+  [data-m=car-ctrl]{flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:28px!important}
+  [data-m=car-legend]{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px!important;width:100%;max-width:400px}
+  [data-m=car-legend] > span{flex-direction:column;gap:9px!important;font-size:13.5px!important;text-align:center}
+  [data-m=car-legend] > span > span{width:40px!important;height:40px!important}
+  /* What it costs: each cost is a card led by its figure, with a strip in its
+     colour from the bar above; the name becomes a quiet label. */
+  [data-m=cost-bar]{margin-top:32px!important}
+  [data-m=cost-grid]{display:flex!important;flex-direction:column;gap:12px!important;margin-top:16px!important}
+  [data-m=cost-grid] > div{display:block!important;position:relative;overflow:hidden;padding:24px 22px 20px;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;background:linear-gradient(158deg,rgba(228,240,214,.085),rgba(228,240,214,.03));box-shadow:inset 0 0 0 1px rgba(228,240,214,.09)}
+  [data-m=cost-grid] > div::before{content:'';position:absolute;left:0;right:0;top:0;height:4px}
+  [data-m=cost-grid] > div:nth-child(1)::before{background:#D9EA6E}
+  [data-m=cost-grid] > div:nth-child(2)::before{background:repeating-linear-gradient(135deg,rgba(217,234,110,.8) 0 3px,rgba(217,234,110,.18) 3px 9px)}
+  [data-m=cost-grid] > div:nth-child(3)::before{background:rgba(217,234,110,.45)}
+  [data-m=cost-grid] > div > div:first-child{margin-top:0!important;gap:10px!important}
+  [data-m=cost-grid] > div > div:first-child > span:first-child{width:34px!important;height:34px!important}
+  [data-m=cost-grid] > div > div:first-child > span:last-child{font:600 15.5px 'DM Sans',sans-serif!important;letter-spacing:.1px!important;color:rgba(244,242,230,.9)!important}
+  [data-m=cost-grid] > div > div:nth-child(2){margin-top:16px!important;font-size:40px!important;letter-spacing:-.5px}
+  [data-m=cost-grid] > div > p:nth-of-type(1){margin-top:10px!important}
+  [data-m=cost-grid] > div > p:last-child{margin-top:16px!important;padding-top:13px;border-top:1px solid rgba(228,240,214,.08)}
+  /* Two sides: stacked, the dial sits behind the cards. */
+  [data-m=dial]{z-index:0!important}
+}
 /* Two columns fit: the score card takes the full row, Fulfilment and Culture sit side by side. */
 @media (min-width:600px) and (max-width:819px){
   [data-fit="1280x940"] > main > div:nth-child(2) > :first-child{grid-column:1/-1}
