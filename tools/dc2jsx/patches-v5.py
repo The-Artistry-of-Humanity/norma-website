@@ -35,6 +35,16 @@ PATCHES = [
     ("RoiPage.tsx",
      "<div style={s(`margin-top:clamp(44px,5.5vw,72px);display:grid;grid-template-columns:repeat(",
      "<div data-m=\"tiers\" style={s(`margin-top:clamp(44px,5.5vw,72px);display:grid;grid-template-columns:repeat("),
+    # Your people, team signal: when the column count changes (window crosses
+    # 700/1000px) cards are reused with new roles, so a faded neighbour could
+    # become Laura and stay faded. Re-apply whenever a card's role changes, and
+    # give each role a complete style.
+    ("YourPeople.tsx",
+     "if (onlyNew && el.__ppl) return; el.__ppl = true;",
+     "if (onlyNew && el.__ppl === el.dataset.role) return; el.__ppl = el.dataset.role;"),
+    ("YourPeople.tsx",
+     "if (L) { el.style.zIndex = '2'; el.style.translate = fin ? '0 0' : '0 -90px'; el.style.scale = fin ? '1' : '1.18'; }\n      else { el.style.opacity = fin ? '1' : '.16'; el.style.scale = fin ? '1' : '.95'; }",
+     "if (L) { el.style.zIndex = '2'; el.style.opacity = '1'; el.style.translate = fin ? '0 0' : '0 -90px'; el.style.scale = fin ? '1' : '1.18'; }\n      else { el.style.zIndex = ''; el.style.translate = '0 0'; el.style.opacity = fin ? '1' : '.16'; el.style.scale = fin ? '1' : '.95'; }"),
     # Home, leaders dashboard: the score deltas break onto two lines once stacked.
     ("HomePage.tsx",
      "<span style={s(`font:500 13px 'DM Mono',monospace;color:#10B981`)}>↑ 2 since Sep",

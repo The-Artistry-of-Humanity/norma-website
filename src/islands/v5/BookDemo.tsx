@@ -1,8 +1,9 @@
 // @ts-nocheck
 /* Generated from the design handoff (design_handoff_v5/reference) by dc2jsx.
    Markup and styles are verbatim from the reference; logic is the reference's
-   own renderVals/state code. Edit the reference and regenerate rather than
-   hand-tuning values here. */
+   own renderVals/state code. Since 17 Oct 2026 this file also carries design
+   changes made here after the handoff (git log shows each), so regenerating
+   from the reference would drop them: diff before rerunning build-v5.sh. */
 import React from 'react';
 import { s } from '../../lib/s';
 import './BookDemo.dc.css';
@@ -119,17 +120,17 @@ class BookDemo extends React.Component {
             <div style={s(`min-width:0;position:relative;max-width:820px;width:100%;margin:0 auto;box-sizing:border-box;display:flex;flex-direction:column;gap:18px`)}>
               <div aria-hidden="true" style={s(`position:absolute;left:-10%;top:30%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(205,226,80,.7),rgba(217,234,110,0) 72%);pointer-events:none`)}></div>
               <div aria-hidden="true" style={s(`position:absolute;right:-8%;bottom:-6%;width:56%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(74,107,58,.38),rgba(74,107,58,0) 72%);pointer-events:none`)}></div>
-              <div style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(26px,3vw,36px);border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;background:linear-gradient(150deg,rgba(15,32,21,.9),rgba(15,32,21,.78));backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);color:#F4F2E6;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.08),0 36px 70px -30px rgba(20,35,26,.5)`)}>
-                <div aria-hidden="true" style={s(`position:absolute;right:-18%;top:-40%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.22),rgba(217,234,110,0) 70%);pointer-events:none`)}></div>
+              <div style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(26px,3vw,36px);border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;background:linear-gradient(150deg,rgba(11,24,16,.97),rgba(15,32,21,.92));backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);color:#F4F2E6;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.08),0 36px 70px -30px rgba(20,35,26,.5)`)}>
+                <div aria-hidden="true" style={s(`position:absolute;right:-18%;top:-40%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.14),rgba(217,234,110,0) 70%);pointer-events:none`)}></div>
                 <img data-m="slot-norma" src="/assets/v5/norma-point.png" alt="" width="150" height="202" style={s(`position:absolute;right:clamp(-10px,1vw,18px);bottom:-26px;width:clamp(110px,16vw,150px);height:auto;filter:drop-shadow(0 0 1px rgba(246,244,233,.35)) drop-shadow(0 18px 24px rgba(0,0,0,.35));pointer-events:none;z-index:1`)} />
                 <div data-m="slot-text" style={s(`position:relative;padding-right:clamp(120px,18vw,180px)`)}>
                   <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#DCEC85`)}>The easiest way</span>
                   <h2 style={s(`margin:12px 0 0;font:400 clamp(28px,3vw,36px)/1.1 'DM Serif Display',serif;letter-spacing:-.4px;color:#F6F4E9;text-wrap:balance`)}>Pick a time that suits you.</h2>
                   <p style={s(`margin:12px 0 0;max-width:26em;font:400 16px/1.55 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>A thirty-minute demo call. Choose a slot in our calendar and it’s booked.</p>
                   <div style={s(`display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px`)}>
-                    <a data-m="slot-btn" href="https://calendar.app.google/P14aVTpPNqgrVAbHA" target="_blank" rel="noopener" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 26px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.28)`)} className="bd-hob247fb bd-ac3e8255">
+                    <a data-m="slot-btn" href="https://calendar.app.google/P14aVTpPNqgrVAbHA" target="_blank" rel="noopener" aria-label="Book a demo slot (opens in a new tab)" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 26px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.28)`)} className="bd-hob247fb bd-ac3e8255">
                       Book a demo slot
-                      <span aria-hidden="true">›</span>
+                      <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={s(`display:block;flex:none;margin-left:1px`)}><path d="M7 6.5h10.5V17"></path></svg>
                     </a>
                   </div>
                 </div>
@@ -221,9 +222,9 @@ class BookDemo extends React.Component {
                       <img src="/assets/v5/norma-happy.png" alt="" width="116" height="156" style={s(`position:relative;display:block;filter:drop-shadow(0 0 1px rgba(20,35,26,.7)) drop-shadow(0 18px 24px rgba(20,35,26,.18));transform:${V.popT ?? ''};opacity:${V.popO ?? ''};transition:transform 1.2s cubic-bezier(.22,.61,.36,1),opacity .7s ease`)} />
                       <h2 style={s(`position:relative;margin:24px 0 0;font:400 clamp(34px,3.6vw,44px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;transform:${V.txT ?? ''};opacity:${V.txO ?? ''};transition:transform 1s cubic-bezier(.22,.61,.36,1) .35s,opacity .8s ease .35s`)}>{"Thanks, "}{V.first}.</h2>
                       <p style={s(`position:relative;margin:14px 0 0;max-width:24em;font:400 17px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.72);text-wrap:pretty;transform:${V.txT ?? ''};opacity:${V.txO ?? ''};transition:transform 1s cubic-bezier(.22,.61,.36,1) .5s,opacity .8s ease .5s`)}>{"Your message is with us. We’ll write to "}{V.email}{" within one working day."}</p>
-                      <a href="https://calendar.app.google/P14aVTpPNqgrVAbHA" target="_blank" rel="noopener" style={s(`position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:28px;height:50px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15px 'DM Sans',sans-serif;opacity:${V.txO ?? ''};transition:opacity .8s ease .75s`)} className="bd-ho4ead8f bd-ac3e8255">
+                      <a href="https://calendar.app.google/P14aVTpPNqgrVAbHA" target="_blank" rel="noopener" aria-label="Pick a time now (opens in a new tab)" style={s(`position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:28px;height:50px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15px 'DM Sans',sans-serif;opacity:${V.txO ?? ''};transition:opacity .8s ease .75s`)} className="bd-ho4ead8f bd-ac3e8255">
                         Can’t wait? Pick a time now
-                        <span aria-hidden="true">›</span>
+                        <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={s(`display:block;flex:none;margin-left:1px`)}><path d="M7 6.5h10.5V17"></path></svg>
                       </a>
                     </div>
                   </>
@@ -264,7 +265,7 @@ class BookDemo extends React.Component {
             <div style={s(`display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:clamp(40px,5vw,64px)`)}>
               <button type="button" onClick={V.toTop} style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 26px;border:0;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.24)`)} className="bd-ac3e8255">
                 Book a demo slot
-                <span aria-hidden="true">›</span>
+                <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={s(`display:block;flex:none`)}><path d="M12 19V5"></path><path d="M6 11l6-6 6 6"></path></svg>
               </button>
               <span style={s(`font:400 15px 'DM Sans',sans-serif;color:rgba(201,212,194,.8)`)}>Something we haven’t answered? Ask it in the form.</span>
             </div>

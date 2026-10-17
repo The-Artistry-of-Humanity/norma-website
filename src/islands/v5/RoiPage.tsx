@@ -1,8 +1,9 @@
 // @ts-nocheck
 /* Generated from the design handoff (design_handoff_v5/reference) by dc2jsx.
    Markup and styles are verbatim from the reference; logic is the reference's
-   own renderVals/state code. Edit the reference and regenerate rather than
-   hand-tuning values here. */
+   own renderVals/state code. Since 17 Oct 2026 this file also carries design
+   changes made here after the handoff (git log shows each), so regenerating
+   from the reference would drop them: diff before rerunning build-v5.sh. */
 import React from 'react';
 import { s } from '../../lib/s';
 import './RoiPage.dc.css';
@@ -35,24 +36,34 @@ const K = {
 };
 const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'B' : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : v >= 1e4 ? '$' + Math.round(v / 1e3) + 'k' : '$' + Math.round(v).toLocaleString('en-AU');
 const num = v => Math.round(v).toLocaleString('en-AU');
+// Headcount slider: a log scale from 20 to 10,000, so a 60-person business and a
+// 6,000-person one both get room, snapping to round numbers. Typing allows 5 to 100,000.
+const HC_MIN = 20, HC_MAX = 10000;
+const hcStep = v => v < 100 ? 5 : v < 300 ? 10 : v < 1000 ? 25 : v < 3000 ? 50 : v < 6000 ? 100 : 250;
+const hcSnap = v => Math.min(HC_MAX, Math.max(HC_MIN, Math.round(v / hcStep(v)) * hcStep(v)));
+const hcPos = v => Math.round(1000 * Math.log(Math.min(HC_MAX, Math.max(HC_MIN, v)) / HC_MIN) / Math.log(HC_MAX / HC_MIN));
+const hcFromPos = p => hcSnap(HC_MIN * Math.pow(HC_MAX / HC_MIN, p / 1000));
 const pct = v => (v % 1 ? v.toFixed(1) : v) + '%';
 const mulberry = s => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 class RoiPage extends React.Component {
-  state = { narrow: false, menu: false, vw: 1200, industry: 'all', headcount: 500, rates: null, hl: null, detail: false, tip: null, chip: false, lit: false };
+  state = { narrow: false, menu: false, vw: 1200, industry: 'all', headcount: 500, rates: null, hl: null, detail: false, tip: null, chip: false, lit: false, hcText: null, hcOpen: false, touch: false };
   rootRef = React.createRef(); heroRef = React.createRef(); humanRef = React.createRef(); chipRef = React.createRef();
   componentDidMount() {
     this.onResize = () => { const w = window.innerWidth, n = w < 760; if (n !== this.state.narrow || w !== this.state.vw) this.setState({ narrow: n, vw: w, menu: n ? this.state.menu : false }); };
     window.addEventListener('resize', this.onResize); this.onResize(); requestAnimationFrame(this.onResize); setTimeout(this.onResize, 400);
     if (window.ResizeObserver) { this.ro = new ResizeObserver(this.onResize); this.ro.observe(document.documentElement); }
-    this.onScroll = () => { const h = this.heroRef.current; if (!h) return; const on = h.getBoundingClientRect().bottom < 0; if (on !== this.state.chip) this.setState({ chip: on }); };
+    this.onScroll = () => { const h = this.heroRef.current; if (!h) return; const on = h.getBoundingClientRect().bottom < 0; if (on !== this.state.chip) this.setState(on ? { chip: on } : { chip: on, hcOpen: false }); };
+    if (window.matchMedia && window.matchMedia('(hover: none)').matches) this.setState({ touch: true });
     window.addEventListener('scroll', this.onScroll, { passive: true });
     // The crowd looks fine from the outside; the colours come on once the section is in view.
     this.io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting) && !this.state.lit) { this.io.disconnect(); setTimeout(() => this.setState({ lit: true }), 900); } }, { threshold: .4 });
     if (this.humanRef.current) this.io.observe(this.humanRef.current);
-    this.onDoc = e => { if (this.state.tip && !(this.chipRef.current && this.chipRef.current.contains(e.target))) this.setState({ tip: null }); };
+    this.onDoc = e => { const inChip = this.chipRef.current && this.chipRef.current.contains(e.target); if (this.state.tip && !inChip) this.setState({ tip: null }); if (this.state.hcOpen && !inChip) this.setState({ hcOpen: false }); if (this.state.hl && !(e.target.closest && e.target.closest('[data-m=tiers]'))) this.setState({ hl: null }); };
+    this.onKey = e => { if (e.key === 'Escape' && this.state.hcOpen) this.setState({ hcOpen: false }); };
+    document.addEventListener('keydown', this.onKey);
     document.addEventListener('click', this.onDoc);
   }
-  componentWillUnmount() { if (this.ro) this.ro.disconnect(); window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); document.removeEventListener('click', this.onDoc); if (this.io) this.io.disconnect(); }
+  componentWillUnmount() { if (this.ro) this.ro.disconnect(); window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); document.removeEventListener('click', this.onDoc); document.removeEventListener('keydown', this.onKey); if (this.io) this.io.disconnect(); }
   ind() { return IND.find(i => i.id === this.state.industry) || IND[0]; }
   rates() { const i = this.ind(); return { turn: i.turn, abs: i.abs, sal: i.sal, ...(this.state.rates || {}) }; }
   setRate(k, v) { this.setState({ rates: { ...(this.state.rates || {}), [k]: v } }); }
@@ -86,19 +97,33 @@ class RoiPage extends React.Component {
     const leavers = N * R.turn / 100, days = N * R.abs, daily = R.sal * 1.2 / 230, replace = R.sal * .5;
     const turn = leavers * replace, abs = days * daily, presX = 2.3 * Math.pow(sf, .25), pres = abs * presX, total = turn + abs + pres, lift = liftFor(N) / 100;
     const card = (k, i) => ({ n: num(counts[k]), pct: pct(Math.round(shares[i] * 10) / 10), c: K[k].num, dot: K[k].c, bg: K[k].card, pill: K[k].pill, ring: hl === k ? 'inset 0 0 0 1px rgba(246,244,233,.22)' : 'inset 0 0 0 1px rgba(246,244,233,0)',
-      op: hl && hl !== k ? .5 : 1, tf: hl === k ? 'translateY(-3px)' : 'none', on: () => this.setState({ hl: k }), off: () => this.setState({ hl: null }) });
+      op: hl && hl !== k ? .5 : 1, tf: hl === k ? 'translateY(-3px)' : 'none', on: () => this.setState({ hl: k }), off: () => this.setState({ hl: null }), tap: () => this.setState({ hl: k }) });
     const inp = (k, min, max, step) => ({ value: R[k], min, max, step, set: e => { const v = +e.target.value; if (!isNaN(v)) this.setRate(k, v); } });
     return {
       rootRef: this.rootRef, heroRef: this.heroRef, wide: !narrow, narrow, menuOpen: narrow && menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
       cardCols: this.state.vw >= 860 ? 4 : this.state.vw >= 520 ? 2 : 1,
       industries: IND.map(i => ({ id: i.id, name: i.name })), industry: this.state.industry, industryName: I.name,
       setIndustry: e => this.setState({ industry: e.target.value, rates: null }),
-      headcount: this.state.headcount, setHeadcount: e => this.setState({ headcount: e.target.value }), headcountLabel: num(N),
+      headcountLabel: num(N),
+      hcPos: hcPos(N), hcT: (hcPos(N) / 1000).toFixed(3), hcValText: num(N) + ' people',
+      slide: e => { const p = +e.target.value, cur = hcPos(N); let v = hcFromPos(p); if (v === N && p !== cur) v = hcSnap(p > cur ? N + hcStep(N) : N - hcStep(N - 1)); this.setState({ headcount: v, hcText: null }); },
+      hcKeys: e => { const k = e.key, cur = hcPos(N); let v = null;
+        if (k === 'ArrowRight' || k === 'ArrowUp') v = hcSnap(N + hcStep(N)); else if (k === 'ArrowLeft' || k === 'ArrowDown') v = hcSnap(N - hcStep(N - 1));
+        else if (k === 'PageUp') v = hcFromPos(Math.min(1000, cur + 100)); else if (k === 'PageDown') v = hcFromPos(Math.max(0, cur - 100));
+        else if (k === 'Home') v = HC_MIN; else if (k === 'End') v = HC_MAX;
+        if (v != null) { e.preventDefault(); this.setState({ headcount: v, hcText: null }); } },
+      hcShown: this.state.hcText != null ? this.state.hcText : num(N), hcLen: String(this.state.hcText != null ? this.state.hcText : num(N)).length || 1,
+      typeHc: e => { const d = e.target.value.replace(/\D/g, '').slice(0, 6); this.setState(d ? { hcText: d, headcount: +d } : { hcText: d }); },
+      hcType: e => { const t = e.target; this.setState({ hcText: String(N) }); requestAnimationFrame(() => { try { t.select(); } catch (_) {} }); },
+      hcDone: () => this.setState({ hcText: null, headcount: N }), hcEnter: e => { if (e.key === 'Enter') e.target.blur(); },
+      exploreLine: (this.state.touch ? 'Tap' : 'Hover over') + ' a group below to find the people who aren’t.',
+      hcOpen: this.state.hcOpen, toggleHc: e => { if (e) e.stopPropagation(); this.setState(st => ({ hcOpen: !st.hcOpen })); }, closeHc: () => this.setState({ hcOpen: false }),
+      indMax: this.state.hcOpen ? '0px' : '60vw', indOp: this.state.hcOpen ? 0 : 1, sldMax: this.state.hcOpen ? '320px' : '0px', sldOp: this.state.hcOpen ? 1 : 0,
+      sldW: narrow ? 'calc(100vw - 236px)' : '240px', sldTab: this.state.hcOpen ? 0 : -1, sldHidden: !this.state.hcOpen,
       detailOpen: detail, toggleDetail: () => this.setState(s => ({ detail: !s.detail })), detailBg: detail ? 'rgba(217,234,110,.35)' : 'transparent', detailBorder: detail ? 'rgba(20,35,26,.3)' : 'rgba(20,35,26,.18)',
       sTurn: inp('turn', 1, 60, .5), sAbs: inp('abs', 0, 40, .5), sSal: inp('sal', 20000, 400000, 1000), resetRates: () => this.setState({ rates: null }),
-      chipOn: this.state.chip, chipRef: this.chipRef, hcWidth: (String(this.state.headcount).length + 1) + 'ch',
-      hcBg: this.state.hcEdit ? '#FFFDF5' : '#FAF8F0', hcRing: this.state.hcEdit ? '0 0 0 2px #C4D94A,0 0 0 6px rgba(217,234,110,.3)' : '0 1px 2px rgba(20,35,26,.12)',
-      hcFocus: e => { const t = e.target; this.setState({ hcEdit: true }); requestAnimationFrame(() => { try { t.select(); } catch (_) {} }); }, hcBlur: () => this.setState({ hcEdit: false }), backToTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      chipOn: this.state.chip, chipRef: this.chipRef,
+      backToTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
       humanRef: this.humanRef,
       dotMap: svg, wellLabel: num(well),
       srcTip: this.tip('src', (per === 1 ? 'Each dot is one person. ' : 'Each dot is about ' + num(per) + ' people. ') + 'Shares from Gallup State of the Global Workplace 2024, Deloitte Australia 2024 and Black Dog Institute, applied to your headcount. Strain spreads further in larger organisations, so the shares edge up with size.'),
@@ -201,10 +226,20 @@ class RoiPage extends React.Component {
                     </span>
                   </span>
                 </label>
-                <label style={s(`display:flex;flex-direction:column;gap:8px;min-width:0`)}>
-                  <span style={s(`font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.62)`)}>Headcount</span>
-                  <input type="number" inputMode="numeric" min="5" max="100000" value={V.headcount} onChange={V.setHeadcount} onInput={V.setHeadcount} style={s(`width:100%;height:52px;box-sizing:border-box;padding:0 18px;border:1px solid rgba(20,35,26,.14);border-radius:14px 18px 12px 18px / 18px 14px 18px 12px;background:rgba(255,255,255,.55);color:#14231A;font:500 16px 'DM Sans',sans-serif`)} className="ri-foa3fa77" />
-                </label>
+                <div style={s(`display:flex;flex-direction:column;gap:4px;min-width:0`)}>
+                  <div style={s(`display:flex;align-items:flex-end;justify-content:space-between;gap:12px`)}>
+                    <label htmlFor="roi-headcount" style={s(`padding-bottom:4px;font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.62)`)}>Headcount</label>
+                    <span style={s(`display:inline-flex;align-items:baseline;gap:7px`)}>
+                      <input id="roi-headcount" type="text" inputMode="numeric" autoComplete="off" value={V.hcShown} onChange={V.typeHc} onFocus={V.hcType} onBlur={V.hcDone} onKeyDown={V.hcEnter} style={s(`width:calc(${V.hcLen} * .56em + 6px);box-sizing:content-box;padding:0 2px 2px;border:0;border-bottom:1.5px dashed rgba(20,35,26,.25);border-radius:0;background:transparent;color:#14231A;font:400 30px/1.05 'DM Serif Display',serif;letter-spacing:-.3px;text-align:right;outline:none`)} className="ri-hcnum" />
+                      <span style={s(`font:500 14px 'DM Sans',sans-serif;color:rgba(20,35,26,.6)`)}>people</span>
+                    </span>
+                  </div>
+                  <input type="range" className="nrm-range" min="0" max="1000" step="1" value={V.hcPos} onChange={V.slide} onKeyDown={V.hcKeys} aria-label="Headcount" aria-valuetext={V.hcValText} style={s(`--t:${V.hcT}`)} />
+                  <div aria-hidden="true" style={s(`display:flex;justify-content:space-between;font:500 12px 'DM Sans',sans-serif;color:rgba(20,35,26,.45)`)}>
+                    <span>20</span>
+                    <span>10,000+</span>
+                  </div>
+                </div>
                 {(V.detailOpen) ? (
                   <>
                     <div style={s(`margin-top:6px;padding-top:18px;border-top:1px solid rgba(20,35,26,.1);display:flex;flex-direction:column;gap:14px`)}>
@@ -243,8 +278,8 @@ class RoiPage extends React.Component {
       {(V.chipOn) ? (
         <>
           <div ref={V.chipRef} style={s(`position:fixed;left:50%;bottom:22px;z-index:70;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px;border-radius:999px;background:linear-gradient(150deg,rgba(250,248,240,.8),rgba(236,240,214,.62));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);color:#14231A;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.4),0 0 0 1px rgba(217,234,110,.45),0 12px 44px rgba(217,234,110,.34),0 24px 60px rgba(10,20,13,.3);max-width:calc(100vw - 24px);box-sizing:border-box`)}>
-            <span style={s(`position:relative;display:inline-flex`)}>
-              <select aria-label="Industry" value={V.industry} onChange={V.setIndustry} style={s(`display:inline-flex;align-items:center;height:36px;box-sizing:border-box;border:0;border-radius:999px;background:#FAF8F0;box-shadow:0 1px 2px rgba(20,35,26,.12);color:#14231A;font:600 13.5px 'DM Sans',sans-serif;cursor:pointer;appearance:none;-webkit-appearance:none;padding:0 32px 0 14px;max-width:46vw;text-overflow:ellipsis`)} className="ri-foa3fa77">
+            <span style={s(`position:relative;display:inline-flex;flex:none;overflow:hidden;max-width:${V.indMax ?? ''};opacity:${V.indOp ?? ''};margin-right:${V.hcOpen ? '-8px' : '0px'};transition:max-width .45s cubic-bezier(.22,.61,.36,1),opacity .25s ease,margin .45s cubic-bezier(.22,.61,.36,1)`)} aria-hidden={V.hcOpen}>
+              <select aria-label="Industry" tabIndex={V.hcOpen ? -1 : 0} value={V.industry} onChange={V.setIndustry} style={s(`display:inline-flex;align-items:center;height:36px;box-sizing:border-box;border:0;border-radius:999px;background:#FAF8F0;box-shadow:0 1px 2px rgba(20,35,26,.12);color:#14231A;font:600 13.5px 'DM Sans',sans-serif;cursor:pointer;appearance:none;-webkit-appearance:none;padding:0 32px 0 14px;max-width:46vw;text-overflow:ellipsis`)} className="ri-foa3fa77">
                 {(V.industries || []).map((o, $index) => (
                   <React.Fragment key={$index}>
                     <option value={o.id}>{o.name}</option>
@@ -255,15 +290,24 @@ class RoiPage extends React.Component {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
               </span>
             </span>
-            <span style={s(`display:inline-flex;align-items:center;height:36px;box-sizing:border-box;border:0;border-radius:999px;background:${V.hcBg ?? ''};box-shadow:${V.hcRing ?? ''};transition:box-shadow .24s ease,background .24s ease;color:#14231A;font:600 13.5px 'DM Sans',sans-serif;cursor:pointer;padding:0 14px 0 12px;gap:6px;cursor:text`)}>
-              <input aria-label="Headcount" type="number" inputMode="numeric" min="5" max="100000" value={V.headcount} onChange={V.setHeadcount} onInput={V.setHeadcount} onFocus={V.hcFocus} onBlur={V.hcBlur} style={s(`width:${V.hcWidth ?? ''};border:0;background:transparent;color:#14231A;caret-color:#4A6B3A;font:600 13.5px 'DM Sans',sans-serif;padding:0;text-align:right;outline:none`)} />
-              <span style={s(`font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.6)`)}>people</span>
+            <span style={s(`display:inline-flex;align-items:center;flex:none;overflow:hidden;padding:6px 0;margin:-6px 0;max-width:${V.sldMax ?? ''};opacity:${V.sldOp ?? ''};transition:max-width .45s cubic-bezier(.22,.61,.36,1),opacity .3s ease .08s`)} aria-hidden={V.sldHidden}>
+              <input type="range" className="nrm-range nrm-range-sm" min="0" max="1000" step="1" value={V.hcPos} onChange={V.slide} onKeyDown={V.hcKeys} tabIndex={V.sldTab} aria-label="Headcount" aria-valuetext={V.hcValText} style={s(`width:${V.sldW ?? ''};margin:0 6px 0 8px;--t:${V.hcT}`)} />
             </span>
-            <button type="button" onClick={V.backToTop} aria-label="Back to the top" title="Back to the top" style={s(`flex:none;width:36px;height:36px;border-radius:999px;border:0;background:#14231A;color:#F4F2E6;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0`)} className="ri-ho3cfe08 ri-ac3e8255">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M12 19V5"></path>
-                <path d="M6 11l6-6 6 6"></path>
-              </svg>
+            <button type="button" onClick={V.toggleHc} aria-expanded={V.hcOpen} aria-label={V.hcValText + ', change headcount'} style={s(`display:inline-flex;align-items:center;flex:none;height:36px;box-sizing:border-box;border:0;border-radius:999px;background:${V.hcOpen ? '#FFFDF5' : '#FAF8F0'};box-shadow:${V.hcOpen ? '0 0 0 2px #C4D94A,0 0 0 6px rgba(217,234,110,.3)' : '0 1px 2px rgba(20,35,26,.12)'};transition:box-shadow .24s ease,background .24s ease;color:#14231A;font:600 13.5px 'DM Sans',sans-serif;cursor:pointer;padding:0 14px 0 12px;gap:6px;font-variant-numeric:tabular-nums`)} className="ri-ac3e8255">
+              {V.headcountLabel}
+              <span style={s(`font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.6)`)}>people</span>
+            </button>
+            <button type="button" onClick={V.hcOpen ? V.closeHc : V.backToTop} aria-label={V.hcOpen ? 'Done' : 'Back to the top'} title={V.hcOpen ? 'Done' : 'Back to the top'} style={s(`flex:none;width:36px;height:36px;border-radius:999px;border:0;background:#14231A;color:#F4F2E6;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0`)} className="ri-ho3cfe08 ri-ac3e8255">
+              {(V.hcOpen) ? (
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                </svg>
+              ) : (
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 19V5"></path>
+                  <path d="M6 11l6-6 6 6"></path>
+                </svg>
+              )}
             </button>
           </div>
         </>
@@ -279,10 +323,13 @@ class RoiPage extends React.Component {
                 <br />
                 <span style={s(`background:linear-gradient(105deg,#F6F4E9 8%,#EAF79B 48%,#C4D94A 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent`)}>{V.headcountLabel}{" people who all seem fine."}</span>
               </h2>
+              <p style={s(`margin:18px 0 0;max-width:30em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.82);text-wrap:pretty`)}>
+                From the outside, everyone looks fine. {V.exploreLine}
+              </p>
             </div>
           </div>
           <div data-m="tiers" style={s(`margin-top:clamp(44px,5.5vw,72px);display:grid;grid-template-columns:repeat(${V.cardCols ?? ''},minmax(0,1fr));gap:12px`)}>
-            <div onMouseEnter={V.h1.on} onMouseLeave={V.h1.off} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;background:${V.h1.bg ?? ''};box-shadow:${V.h1.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h1.op ?? ''};transform:${V.h1.tf ?? ''}`)}>
+            <div onMouseEnter={V.h1.on} onMouseLeave={V.h1.off} onClick={V.h1.tap} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;background:${V.h1.bg ?? ''};box-shadow:${V.h1.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h1.op ?? ''};transform:${V.h1.tf ?? ''}`)}>
               <span style={s(`display:flex;align-items:flex-start;gap:9px;min-height:calc(2 * 1.15 * clamp(19px,1.8vw,22px))`)}>
                 <span style={s(`flex:none;margin-top:.45em;width:8px;height:8px;border-radius:50%;background:${V.h1.dot ?? ''}`)}></span>
                 <span style={s(`font:400 clamp(19px,1.8vw,22px)/1.15 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>Quietly disengaging</span>
@@ -293,7 +340,7 @@ class RoiPage extends React.Component {
                 <span style={s(`font:500 12.5px 'DM Mono',monospace;letter-spacing:.5px;color:rgba(201,212,194,.7)`)}>{V.h1.pct}</span>
               </span>
             </div>
-            <div onMouseEnter={V.h2.on} onMouseLeave={V.h2.off} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;background:${V.h2.bg ?? ''};box-shadow:${V.h2.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h2.op ?? ''};transform:${V.h2.tf ?? ''}`)}>
+            <div onMouseEnter={V.h2.on} onMouseLeave={V.h2.off} onClick={V.h2.tap} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;background:${V.h2.bg ?? ''};box-shadow:${V.h2.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h2.op ?? ''};transform:${V.h2.tf ?? ''}`)}>
               <span style={s(`display:flex;align-items:flex-start;gap:9px;min-height:calc(2 * 1.15 * clamp(19px,1.8vw,22px))`)}>
                 <span style={s(`flex:none;margin-top:.45em;width:8px;height:8px;border-radius:50%;background:${V.h2.dot ?? ''}`)}></span>
                 <span style={s(`font:400 clamp(19px,1.8vw,22px)/1.15 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>Heading toward burnout</span>
@@ -304,7 +351,7 @@ class RoiPage extends React.Component {
                 <span style={s(`font:500 12.5px 'DM Mono',monospace;letter-spacing:.5px;color:rgba(201,212,194,.7)`)}>{V.h2.pct}</span>
               </span>
             </div>
-            <div onMouseEnter={V.h3.on} onMouseLeave={V.h3.off} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:32px 22px 30px 20px / 20px 30px 22px 32px;background:${V.h3.bg ?? ''};box-shadow:${V.h3.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h3.op ?? ''};transform:${V.h3.tf ?? ''}`)}>
+            <div onMouseEnter={V.h3.on} onMouseLeave={V.h3.off} onClick={V.h3.tap} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:32px 22px 30px 20px / 20px 30px 22px 32px;background:${V.h3.bg ?? ''};box-shadow:${V.h3.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h3.op ?? ''};transform:${V.h3.tf ?? ''}`)}>
               <span style={s(`display:flex;align-items:flex-start;gap:9px;min-height:calc(2 * 1.15 * clamp(19px,1.8vw,22px))`)}>
                 <span style={s(`flex:none;margin-top:.45em;width:8px;height:8px;border-radius:50%;background:${V.h3.dot ?? ''}`)}></span>
                 <span style={s(`font:400 clamp(19px,1.8vw,22px)/1.15 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>In burnout, hiding it</span>
@@ -315,7 +362,7 @@ class RoiPage extends React.Component {
                 <span style={s(`font:500 12.5px 'DM Mono',monospace;letter-spacing:.5px;color:rgba(201,212,194,.7)`)}>{V.h3.pct}</span>
               </span>
             </div>
-            <div onMouseEnter={V.h4.on} onMouseLeave={V.h4.off} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:22px 30px 20px 32px / 30px 20px 32px 22px;background:${V.h4.bg ?? ''};box-shadow:${V.h4.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h4.op ?? ''};transform:${V.h4.tf ?? ''}`)}>
+            <div onMouseEnter={V.h4.on} onMouseLeave={V.h4.off} onClick={V.h4.tap} style={s(`position:relative;min-width:0;box-sizing:border-box;padding:22px 22px 24px;border-radius:22px 30px 20px 32px / 30px 20px 32px 22px;background:${V.h4.bg ?? ''};box-shadow:${V.h4.ring ?? ''};transition:opacity .3s ease,transform .3s ease,box-shadow .3s ease;opacity:${V.h4.op ?? ''};transform:${V.h4.tf ?? ''}`)}>
               <span style={s(`display:flex;align-items:flex-start;gap:9px;min-height:calc(2 * 1.15 * clamp(19px,1.8vw,22px))`)}>
                 <span style={s(`flex:none;margin-top:.45em;width:8px;height:8px;border-radius:50%;background:${V.h4.dot ?? ''}`)}></span>
                 <span style={s(`font:400 clamp(19px,1.8vw,22px)/1.15 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>In genuine crisis</span>
@@ -514,19 +561,39 @@ class RoiPage extends React.Component {
       <section style={s(`position:relative;z-index:1;margin-top:calc(-1 * clamp(40px,5.5vw,80px));border-radius:clamp(28px,4vw,56px) clamp(52px,7.5vw,112px) 0 0 / clamp(24px,3.5vw,48px) clamp(40px,5.5vw,80px) 0 0;background:#F4F2E6;color:#14231A`)}>
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(88px,11vw,152px);padding-bottom:clamp(72px,9vw,120px)`)}>
           <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(24px,3vw,40px);margin-bottom:clamp(72px,9vw,120px)`)}>
-            <div style={s(`padding-top:18px;border-top:1px solid rgba(20,35,26,.12)`)}>
-              <span style={s(`font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Nothing new to collect</span>
+            <div style={s(`padding-top:22px;border-top:1px solid rgba(20,35,26,.12)`)}>
+              <span aria-hidden="true" style={s(`display:flex;align-items:center;justify-content:center;width:46px;height:46px;margin-bottom:16px;border-radius:16px 12px 15px 11px / 12px 16px 11px 15px;background:linear-gradient(160deg,#EEF1CD,#E2E8BA);box-shadow:inset 0 0 0 1px rgba(20,35,26,.06);color:#14231A`)}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"></ellipse>
+                  <path d="M4.5 5.5v6.2c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V5.5"></path>
+                  <path d="M4.5 11.7v6.2c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6.2"></path>
+                </svg>
+              </span>
+              <span style={s(`display:block;font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Nothing new to collect</span>
               <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>Leavers, sick days and claims already sit in your HR and WHS systems. That’s the baseline.</p>
             </div>
-            <div style={s(`padding-top:18px;border-top:1px solid rgba(20,35,26,.12)`)}>
-              <span style={s(`font:400 22px 'DM Serif Display',serif;color:#14231A`)}>One check-in a month</span>
+            <div style={s(`padding-top:22px;border-top:1px solid rgba(20,35,26,.12)`)}>
+              <span aria-hidden="true" style={s(`display:flex;align-items:center;justify-content:center;width:46px;height:46px;margin-bottom:16px;border-radius:12px 16px 11px 15px / 15px 11px 16px 12px;background:linear-gradient(160deg,#EEF1CD,#E2E8BA);box-shadow:inset 0 0 0 1px rgba(20,35,26,.06);color:#14231A`)}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3.5" y="4.5" width="17" height="16" rx="3"></rect>
+                  <path d="M8 2.8v3.4M16 2.8v3.4M3.5 9.5h17"></path>
+                  <path d="M9 15l2 2 4-4"></path>
+                </svg>
+              </span>
+              <span style={s(`display:block;font:400 22px 'DM Serif Display',serif;color:#14231A`)}>One check-in a month</span>
               <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
                 Your people get their own picture first. You get the group signal.{' '}
                 <a href="/your-people/" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="ri-hodb1b46">See the app ›</a>
               </p>
             </div>
-            <div style={s(`padding-top:18px;border-top:1px solid rgba(20,35,26,.12)`)}>
-              <span style={s(`font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Knowing, doing, proving</span>
+            <div style={s(`padding-top:22px;border-top:1px solid rgba(20,35,26,.12)`)}>
+              <span aria-hidden="true" style={s(`display:flex;align-items:center;justify-content:center;width:46px;height:46px;margin-bottom:16px;border-radius:15px 11px 16px 12px / 11px 15px 12px 16px;background:linear-gradient(160deg,#EEF1CD,#E2E8BA);box-shadow:inset 0 0 0 1px rgba(20,35,26,.06);color:#14231A`)}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 21.5s7.5-3.6 7.5-9.4V5.6L12 2.8 4.5 5.6v6.5c0 5.8 7.5 9.4 7.5 9.4z"></path>
+                  <path d="M9 12l2.2 2.2L15.5 10"></path>
+                </svg>
+              </span>
+              <span style={s(`display:block;font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Knowing, doing, proving</span>
               <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
                 Where to look, what to do, and a dated record of both.{' '}
                 <a href="/for-leaders/" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="ri-hodb1b46">See the dashboard ›</a>

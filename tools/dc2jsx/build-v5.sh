@@ -4,7 +4,9 @@
 # Copies reference assets to public/assets/v5/, writes one React component per
 # page to src/islands/v5/, shrinks oversized images (optimise-v5.py) and applies
 # the phone-layout hooks (patches-v5.py). Each component is the reference's own
-# markup and logic; edit the reference and rerun rather than hand-tuning output.
+# markup and logic. From 17 Oct 2026 RoiPage, ForLeaders and BookDemo also carry
+# design edits made in code after the handoff; rerunning overwrites them, so diff
+# against git and re-apply (or fold them into the next handoff) first.
 set -e
 cd "$(dirname "$0")/../.."
 REF=design_handoff_v5/reference
