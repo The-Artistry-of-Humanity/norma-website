@@ -7,8 +7,11 @@ interface Props {
   title: string;
   description: string;
   canonical: string;
+  /** Social preview image in public/og/ (made by tools/og/make-og.mjs). */
+  og?: string;
 }
-const { title, description, canonical } = Astro.props;
+const { title, description, canonical, og = '/og/home.jpg' } = Astro.props;
+const ogImage = 'https://joinnorma.com' + og;
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -27,8 +30,14 @@ const { title, description, canonical } = Astro.props;
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="nørma" />
-    <meta property="og:image" content="https://joinnorma.com/og-image.png" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <slot name="head" />
   </head>
   <body>
