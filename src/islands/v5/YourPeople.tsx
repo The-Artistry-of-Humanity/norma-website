@@ -77,12 +77,12 @@ class YourPeople extends React.Component {
     const grid = this.pplGrid || (this.rootRef.current && this.rootRef.current.querySelector('[data-ppl-grid]')); if (!grid) return;
     const fin = played || !this.motionOn(), ease = 'cubic-bezier(.22,.61,.36,1)';
     grid.querySelectorAll('[data-role]').forEach(el => {
-      if (onlyNew && el.__ppl) return; el.__ppl = true;
+      if (onlyNew && el.__ppl === el.dataset.role) return; el.__ppl = el.dataset.role;
       const L = el.dataset.role === 'laura', dl = (.3 + (+el.dataset.dist || 0) * .14).toFixed(2) + 's';
       el.style.willChange = L ? 'translate, scale' : 'opacity, scale';
       el.style.transition = !animate ? 'none' : L ? 'translate 1.6s ' + ease + ', scale 1.6s ' + ease : 'opacity 1.1s ease ' + dl + ', scale 1.1s ' + ease + ' ' + dl;
-      if (L) { el.style.zIndex = '2'; el.style.translate = fin ? '0 0' : '0 -90px'; el.style.scale = fin ? '1' : '1.18'; }
-      else { el.style.opacity = fin ? '1' : '.16'; el.style.scale = fin ? '1' : '.95'; }
+      if (L) { el.style.zIndex = '2'; el.style.opacity = '1'; el.style.translate = fin ? '0 0' : '0 -90px'; el.style.scale = fin ? '1' : '1.18'; }
+      else { el.style.zIndex = ''; el.style.translate = '0 0'; el.style.opacity = fin ? '1' : '.16'; el.style.scale = fin ? '1' : '.95'; }
     });
   }
   componentWillUnmount() {

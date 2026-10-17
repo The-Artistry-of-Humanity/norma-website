@@ -1,8 +1,9 @@
 // @ts-nocheck
 /* Generated from the design handoff (design_handoff_v5/reference) by dc2jsx.
    Markup and styles are verbatim from the reference; logic is the reference's
-   own renderVals/state code. Edit the reference and regenerate rather than
-   hand-tuning values here. */
+   own renderVals/state code. Since 17 Oct 2026 this file also carries design
+   changes made here after the handoff (git log shows each), so regenerating
+   from the reference would drop them: diff before rerunning build-v5.sh. */
 import React from 'react';
 import { s } from '../../lib/s';
 import './ForLeaders.dc.css';
@@ -1104,7 +1105,7 @@ class ForLeaders extends React.Component {
             </div>
             <div style={s(`min-width:0;order:1`)}>
               <div style={s(`padding:clamp(22px,2.6vw,32px);border-radius:22px 30px 20px 32px / 30px 20px 32px 22px;background:rgba(228,240,214,.05)`)}>
-                <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:2.2px;text-transform:uppercase;color:rgba(201,212,194,.78)`)}>The four questions · answered in nørma</span>
+                <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:2.2px;text-transform:uppercase;color:rgba(201,212,194,.78)`)}>The 4 psychosocial duty questions · answered with nørma</span>
                 <ol style={s(`list-style:none;margin:6px 0 0;padding:0`)}>
                   <li data-reveal="up" data-delay="0.00" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;border-bottom:1px solid rgba(228,240,214,.08)`)}>
                     <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}><span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.58)`)}>3 OCT</span></span>
@@ -1208,6 +1209,9 @@ class ForLeaders extends React.Component {
           <p style={s(`margin:20px 0 0;max-width:34em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.72);text-wrap:pretty;`)}>
             The check-in shows where things stand. Day to day shows what happens next: how many people used the app this month, and how often they kept a habit, reflected, reset or opened a growth journey.
           </p>
+          <p style={s(`margin:18px 0 0;font:500 16px/1.5 'DM Sans',sans-serif`)}>
+            <a href="/your-people/#features" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="fl-hodb1b46">Explore everything in the app ›</a>
+          </p>
           <div style={s(`margin-top:clamp(40px,5vw,64px)`)}>
             {(V.wide) ? (
               <>
@@ -1278,8 +1282,8 @@ class ForLeaders extends React.Component {
               <p style={s(`margin:20px auto 0;max-width:24em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>We’ll walk you through the dashboard and the app your people use alongside it.</p>
               <div style={s(`display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px`)}>
                 <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:54px;padding:0 24px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.24);padding:0 28px`)} className="fl-ac3e8255">Book a demo</a>
-                <a href="/your-people/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15.5px 'DM Sans',sans-serif`)} className="fl-ho3cfe08 fl-ac3e8255">
-                  See the app your people use
+                <a href="/roi/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15.5px 'DM Sans',sans-serif`)} className="fl-ho3cfe08 fl-ac3e8255">
+                  Work out your ROI
                   <span aria-hidden="true">›</span>
                 </a>
               </div>
