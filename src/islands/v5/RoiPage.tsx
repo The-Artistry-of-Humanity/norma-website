@@ -10,7 +10,9 @@ import './RoiPage.dc.css';
 
 
 // Benchmarks per industry: turnover %, unplanned days per person, average salary, then the four human-cost shares (%).
-const IND = [
+// Australian benchmarks (the handoff's table). US rows below share ids, names and the
+// human-case shares (h); only turnover, unplanned days and salary differ.
+const IND_AU = [
   { id: 'all', name: 'All industries', turn: 13.5, abs: 9, sal: 100000, h: [47, 17, 8.6, 0.6] },
   { id: 'health', name: 'Healthcare & aged care', turn: 15, abs: 12, sal: 95000, h: [44, 22, 11, 0.8] },
   { id: 'retail', name: 'Retail & hospitality', turn: 22, abs: 8, sal: 65000, h: [52, 18, 8, 0.6] },
@@ -22,6 +24,19 @@ const IND = [
   { id: 'edu', name: 'Education', turn: 11, abs: 10, sal: 90000, h: [42, 21, 10, 0.6] },
   { id: 'gov', name: 'Government & public sector', turn: 9, abs: 11, sal: 100000, h: [49, 16, 8, 0.5] }
 ];
+const IND_US = [
+  { id: 'all', turn: 13, abs: 4, sal: 68000 },
+  { id: 'health', turn: 13, abs: 5, sal: 62000 },
+  { id: 'retail', turn: 22, abs: 3.5, sal: 37000 },
+  { id: 'prof', turn: 15, abs: 3, sal: 88000 },
+  { id: 'finance', turn: 9, abs: 3.5, sal: 97000 },
+  { id: 'tech', turn: 9, abs: 3, sal: 107000 },
+  { id: 'construct', turn: 12, abs: 4, sal: 85000 },
+  { id: 'manu', turn: 11, abs: 4, sal: 73000 },
+  { id: 'edu', turn: 8, abs: 5, sal: 62000 },
+  { id: 'gov', turn: 5.5, abs: 5, sal: 68000 }
+].map(r => ({ ...IND_AU.find(a => a.id === r.id), ...r }));
+const COUNTRY = { au: { ind: IND_AU, loc: 'en-AU', cur: 'AUD', adj: 'Australian', flag: '🇦🇺', name: 'Australia', short: 'AU' }, us: { ind: IND_US, loc: 'en-US', cur: 'USD', adj: 'US', flag: '🇺🇸', name: 'United States', short: 'US' } };
 // Scale: in larger organisations strain spreads further (shares edge up), and so do improvements (the lift edges up).
 // Benchmarks describe a ~1,000-person organisation. Below that, strain compounds less (power curve); above it, it keeps climbing more slowly.
 const sizeF = N => N <= 1000 ? Math.pow(N / 1000, .218) : 1 + .25 * Math.log10(N / 1000);
@@ -34,8 +49,9 @@ const K = {
   h3: { c: '#F0A58C', hi: '#F8C8B6', num: '#F5A98E', card: 'linear-gradient(180deg,rgba(240,165,140,.36),rgba(240,165,140,.06))', pill: 'rgba(240,165,140,.24)' },
   h4: { c: '#C85C44', hi: '#E78E71', num: '#F08A6C', card: 'linear-gradient(180deg,rgba(200,92,68,.5),rgba(200,92,68,.1))', pill: 'rgba(200,92,68,.36)' }
 };
-const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'bn' : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'm' : v >= 1e4 ? '$' + Math.round(v / 1e3) + 'k' : '$' + Math.round(v).toLocaleString('en-AU');
-const num = v => Math.round(v).toLocaleString('en-AU');
+let LOC = 'en-AU'; // set per render from the chosen country
+const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'bn' : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'm' : v >= 1e4 ? '$' + Math.round(v / 1e3) + 'k' : '$' + Math.round(v).toLocaleString(LOC);
+const num = v => Math.round(v).toLocaleString(LOC);
 // Headcount slider: a log scale from 20 to 10,000, so a 60-person business and a
 // 6,000-person one both get room, snapping to round numbers. Typing allows 5 to 100,000.
 const HC_MIN = 20, HC_MAX = 10000;
@@ -46,9 +62,10 @@ const hcFromPos = p => hcSnap(HC_MIN * Math.pow(HC_MAX / HC_MIN, p / 1000));
 const pct = v => (v % 1 ? v.toFixed(1) : v) + '%';
 const mulberry = s => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 class RoiPage extends React.Component {
-  state = { narrow: false, menu: false, vw: 1200, industry: 'all', headcount: 500, rates: null, hl: null, detail: false, tip: null, chip: false, lit: false, hcText: null, hcOpen: false, touch: false };
+  state = { narrow: false, menu: false, vw: 1200, industry: 'all', headcount: 500, country: 'au', rates: null, hl: null, detail: false, tip: null, chip: false, lit: false, hcText: null, hcOpen: false, touch: false };
   rootRef = React.createRef(); heroRef = React.createRef(); humanRef = React.createRef(); chipRef = React.createRef();
   componentDidMount() {
+    try { const c = new URL(location.href).searchParams.get('country'); if (c && COUNTRY[c.toLowerCase()]) this.setState({ country: c.toLowerCase() }); } catch (_) {}
     this.onResize = () => { const w = window.innerWidth, n = w < 760; if (n !== this.state.narrow || w !== this.state.vw) this.setState({ narrow: n, vw: w, menu: n ? this.state.menu : false }); };
     window.addEventListener('resize', this.onResize); this.onResize(); requestAnimationFrame(this.onResize); setTimeout(this.onResize, 400);
     if (window.ResizeObserver) { this.ro = new ResizeObserver(this.onResize); this.ro.observe(document.documentElement); }
@@ -64,7 +81,10 @@ class RoiPage extends React.Component {
     document.addEventListener('click', this.onDoc);
   }
   componentWillUnmount() { if (this.ro) this.ro.disconnect(); window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); document.removeEventListener('click', this.onDoc); document.removeEventListener('keydown', this.onKey); if (this.io) this.io.disconnect(); }
-  ind() { return IND.find(i => i.id === this.state.industry) || IND[0]; }
+  co() { return COUNTRY[this.state.country] || COUNTRY.au; }
+  ind() { const T = this.co().ind; return T.find(i => i.id === this.state.industry) || T[0]; }
+  // Country: ?country=us|au in the URL (sales links), kept in sync with the switch.
+  setCountry(c) { if (!COUNTRY[c] || c === this.state.country) return; this.setState({ country: c, rates: null }); try { const u = new URL(location.href); u.searchParams.set('country', c); history.replaceState(null, '', u); } catch (_) {} }
   rates() { const i = this.ind(); return { turn: i.turn, abs: i.abs, sal: i.sal, ...(this.state.rates || {}) }; }
   setRate(k, v) { this.setState({ rates: { ...(this.state.rates || {}), [k]: v } }); }
   // One SVG dot per person (or per group when the headcount is large), scattered so the signal sits inside the crowd.
@@ -88,7 +108,7 @@ class RoiPage extends React.Component {
   }
   tip(key, text) { const open = this.state.tip === key; return { open, text, show: e => { if (e && e.stopPropagation) e.stopPropagation(); if (!open) this.setState({ tip: key }); }, hide: () => { if (this.state.tip === key) this.setState({ tip: null }); } }; }
   renderVals() {
-    const { narrow, menu, hl, detail } = this.state, R = this.rates(), I = this.ind();
+    const { narrow, menu, hl, detail } = this.state, CO = this.co(); LOC = CO.loc; const R = this.rates(), I = this.ind(), us = this.state.country === 'us';
     const N = Math.max(5, Math.min(100000, Math.round(+this.state.headcount) || 0));
     const sf = sizeF(N), shares = [I.h[0] * Math.pow(sf, .4), I.h[1] * sf, I.h[2] * sf, I.h[3] * sf];
     const counts = { h1: Math.round(N * shares[0] / 100), h2: Math.round(N * shares[1] / 100), h3: Math.round(N * shares[2] / 100), h4: Math.round(N * shares[3] / 100) };
@@ -102,7 +122,8 @@ class RoiPage extends React.Component {
     return {
       rootRef: this.rootRef, heroRef: this.heroRef, wide: !narrow, narrow, menuOpen: narrow && menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
       cardCols: this.state.vw >= 860 ? 4 : this.state.vw >= 520 ? 2 : 1,
-      industries: IND.map(i => ({ id: i.id, name: i.name })), industry: this.state.industry, industryName: I.name,
+      industries: IND_AU.map(i => ({ id: i.id, name: i.name })),
+      cur: CO.cur, coFlag: CO.flag, coShort: CO.short, isAU: !us, isUS: us, pickAU: () => this.setCountry('au'), pickUS: () => this.setCountry('us'), flipCountry: e => { if (e) e.stopPropagation(); this.setCountry(us ? 'au' : 'us'); }, industryAdj: CO.adj, industry: this.state.industry, industryName: I.name,
       setIndustry: e => this.setState({ industry: e.target.value, rates: null }),
       headcountLabel: num(N),
       hcPos: hcPos(N), hcT: (hcPos(N) / 1000).toFixed(3), hcValText: num(N) + ' people',
@@ -126,11 +147,11 @@ class RoiPage extends React.Component {
       backToTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
       humanRef: this.humanRef,
       dotMap: svg, wellLabel: num(well),
-      srcTip: this.tip('src', (per === 1 ? 'Each dot is one person. ' : 'Each dot is about ' + num(per) + ' people. ') + 'Shares from Gallup State of the Global Workplace 2024, Deloitte Australia 2024 and Black Dog Institute, applied to your headcount. Strain spreads further in larger organisations, so the shares edge up with size.'),
+      srcTip: this.tip('src', (per === 1 ? 'Each dot is one person. ' : 'Each dot is about ' + num(per) + ' people. ') + (us ? 'Shares from Gallup State of the Global Workplace 2024 and Gallup State of the American Workplace, applied to your headcount.' : 'Shares from Gallup State of the Global Workplace 2024, Deloitte Australia 2024 and Black Dog Institute, applied to your headcount.') + ' Strain spreads further in larger organisations, so the shares edge up with size.'),
       h1: card('h1', 0), h2: card('h2', 1), h3: card('h3', 2), h4: card('h4', 3),
       totalMoney: money(total),
-      turn: { money: money(turn), sub: num(leavers) + ' people leave', tip: this.tip('turn', num(leavers) + ' leavers at ' + pct(R.turn) + ' turnover, each costing about half a year’s salary to replace (' + money(replace) + ', Gallup lower bound).') },
-      abs: { money: money(abs), sub: num(days) + ' unplanned days off', tip: this.tip('abs', R.abs + ' days a person a year, at a loaded daily cost of ' + money(daily) + ' (' + money(R.sal) + ' salary plus 20% on-costs, over 230 working days).') },
+      turn: { money: money(turn), sub: num(leavers) + ' people leave', tip: this.tip('turn', num(leavers) + ' leavers at ' + pct(R.turn) + ' turnover, each costing about half a year’s salary to replace (' + money(replace) + ', Gallup lower bound)' + (us ? ' (Mercer 2025 US Turnover Survey, scaled by BLS JOLTS quits by industry).' : '.')) },
+      abs: { money: money(abs), sub: num(days) + ' unplanned days off', tip: this.tip('abs', R.abs + ' days a person a year, at a loaded daily cost of ' + money(daily) + ' (' + money(R.sal) + ' salary plus 20% on-costs, over 230 working days)' + (us ? ' (BLS Current Population Survey: hours lost to unplanned absence).' : '.')) },
       pres: { money: money(pres), sub: 'At work, not really there', tip: this.tip('pres', 'Benchmarked at ' + presX.toFixed(1) + ' times the cost of absence, a little higher in larger organisations where it hides more easily. The biggest cost, and the one you can’t see.') },
       recoverMoney: money(total * lift),
       stay: { n: num(Math.max(1, leavers * lift)), sub: 'who would otherwise have left this year' },
@@ -211,6 +232,13 @@ class RoiPage extends React.Component {
                 </button>
               </div>
               <div style={s(`margin-top:18px;display:flex;flex-direction:column;gap:14px`)}>
+                <div style={s(`display:flex;flex-direction:column;gap:8px;min-width:0`)}>
+                  <span id="roi-country" style={s(`font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.62)`)}>Where you’re based</span>
+                  <div role="radiogroup" aria-labelledby="roi-country" style={s(`display:flex;gap:4px;padding:4px;border:1px solid rgba(20,35,26,.14);border-radius:18px 14px 18px 12px / 14px 18px 12px 18px;background:rgba(255,255,255,.4)`)}>
+                    <button type="button" role="radio" aria-checked={V.isAU} onClick={V.pickAU} style={s(`display:flex;flex:1;align-items:center;justify-content:center;gap:8px;height:42px;border:0;border-radius:14px 11px 15px 10px / 11px 15px 10px 14px;cursor:pointer;font:500 14.5px 'DM Sans',sans-serif;color:#14231A;transition:background .2s ease,box-shadow .2s ease;background:${V.isAU ? 'rgba(217,234,110,.45)' : 'transparent'};box-shadow:${V.isAU ? 'inset 0 0 0 1px rgba(196,217,74,.7)' : 'none'}`)}><span aria-hidden="true">🇦🇺</span>Australia</button>
+                    <button type="button" role="radio" aria-checked={V.isUS} onClick={V.pickUS} style={s(`display:flex;flex:1;align-items:center;justify-content:center;gap:8px;height:42px;border:0;border-radius:14px 11px 15px 10px / 11px 15px 10px 14px;cursor:pointer;font:500 14.5px 'DM Sans',sans-serif;color:#14231A;transition:background .2s ease,box-shadow .2s ease;background:${V.isUS ? 'rgba(217,234,110,.45)' : 'transparent'};box-shadow:${V.isUS ? 'inset 0 0 0 1px rgba(196,217,74,.7)' : 'none'}`)}><span aria-hidden="true">🇺🇸</span>United States</button>
+                  </div>
+                </div>
                 <label style={s(`display:flex;flex-direction:column;gap:8px;min-width:0`)}>
                   <span style={s(`font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.62)`)}>Industry</span>
                   <span style={s(`position:relative;display:block`)}>
@@ -243,7 +271,7 @@ class RoiPage extends React.Component {
                 {(V.detailOpen) ? (
                   <>
                     <div style={s(`margin-top:6px;padding-top:18px;border-top:1px solid rgba(20,35,26,.1);display:flex;flex-direction:column;gap:14px`)}>
-                      <span style={s(`font:400 13.5px/1.5 'DM Sans',sans-serif;color:rgba(20,35,26,.62);text-wrap:pretty`)}>{"If you know your own numbers, use them. Otherwise these are the "}{V.industryName}{" benchmarks."}</span>
+                      <span style={s(`font:400 13.5px/1.5 'DM Sans',sans-serif;color:rgba(20,35,26,.62);text-wrap:pretty`)}>{"If you know your own numbers, use them. Otherwise these are the "}{V.industryAdj}{" "}{V.industryName}{" benchmarks."}</span>
                       <label style={s(`display:flex;flex-direction:column;gap:8px;min-width:0`)}>
                         <span style={s(`font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.62)`)}>Turnover a year</span>
                         <span style={s(`position:relative;display:block`)}>
@@ -279,6 +307,7 @@ class RoiPage extends React.Component {
         <>
           <div ref={V.chipRef} style={s(`position:fixed;left:50%;bottom:22px;z-index:70;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px;border-radius:999px;background:linear-gradient(150deg,rgba(250,248,240,.8),rgba(236,240,214,.62));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);color:#14231A;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.4),0 0 0 1px rgba(217,234,110,.45),0 12px 44px rgba(217,234,110,.34),0 24px 60px rgba(10,20,13,.3);max-width:calc(100vw - 24px);box-sizing:border-box`)}>
             <span style={s(`position:relative;display:inline-flex;flex:none;overflow:hidden;max-width:${V.indMax ?? ''};opacity:${V.indOp ?? ''};margin-right:${V.hcOpen ? '-8px' : '0px'};transition:max-width .45s cubic-bezier(.22,.61,.36,1),opacity .25s ease,margin .45s cubic-bezier(.22,.61,.36,1)`)} aria-hidden={V.hcOpen}>
+              <button type="button" onClick={V.flipCountry} tabIndex={V.hcOpen ? -1 : 0} aria-label={'Country: ' + (V.isUS ? 'United States' : 'Australia') + ', switch'} style={s(`flex:none;display:inline-flex;align-items:center;gap:5px;height:36px;margin-right:6px;padding:0 11px;border:0;border-radius:999px;background:#FAF8F0;box-shadow:0 1px 2px rgba(20,35,26,.12);color:#14231A;font:600 13px 'DM Sans',sans-serif;cursor:pointer`)} className="ri-ac3e8255"><span aria-hidden="true">{V.coFlag}</span>{V.coShort}</button>
               <select aria-label="Industry" tabIndex={V.hcOpen ? -1 : 0} value={V.industry} onChange={V.setIndustry} style={s(`display:inline-flex;align-items:center;height:36px;box-sizing:border-box;border:0;border-radius:999px;background:#FAF8F0;box-shadow:0 1px 2px rgba(20,35,26,.12);color:#14231A;font:600 13.5px 'DM Sans',sans-serif;cursor:pointer;appearance:none;-webkit-appearance:none;padding:0 32px 0 14px;max-width:46vw;text-overflow:ellipsis`)} className="ri-foa3fa77">
                 {(V.industries || []).map((o, $index) => (
                   <React.Fragment key={$index}>
@@ -407,7 +436,7 @@ class RoiPage extends React.Component {
               </div>
               <p style={s(`margin:14px 0 0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap`)}>
                 <span style={s(`font:400 clamp(52px,6vw,80px)/1 'DM Serif Display',serif;letter-spacing:-1px;color:#F0A58C`)}>{V.totalMoney}</span>
-                <span style={s(`font:400 18px 'DM Sans',sans-serif;color:rgba(201,212,194,.9)`)}>a year</span>
+                <span style={s(`font:400 18px 'DM Sans',sans-serif;color:rgba(201,212,194,.9)`)}>a year <span style={s(`margin-left:4px;padding:2px 7px;border-radius:999px;background:rgba(228,240,214,.08);font:600 11px 'DM Sans',sans-serif;letter-spacing:1px;vertical-align:3px`)}>{V.cur}</span></span>
               </p>
               <div style={s(`margin-top:auto;padding-top:28px`)}>
                 <div style={s(`position:relative;display:flex;align-items:center;gap:14px;padding:20px 0;border-top:1px solid rgba(228,240,214,.1)`)}>
@@ -504,7 +533,7 @@ class RoiPage extends React.Component {
               <p style={s(`position:relative;margin:14px 0 0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap`)}>
                 <span style={s(`font:400 clamp(52px,6vw,80px)/1 'DM Serif Display',serif;letter-spacing:-1px;color:#EAF79B`)}>{V.recoverMoney}</span>
                 <span style={s(`display:inline-flex;align-items:center;gap:4px;font:400 18px 'DM Sans',sans-serif;color:rgba(201,212,194,.9)`)}>
-                  a year
+                  a year <span style={s(`padding:2px 7px;border-radius:999px;background:rgba(228,240,214,.08);font:600 11px 'DM Sans',sans-serif;letter-spacing:1px`)}>{V.cur}</span>
                   <button type="button" aria-label="How this is calculated" onMouseEnter={V.caseTip.show} onMouseLeave={V.caseTip.hide} onFocus={V.caseTip.show} onBlur={V.caseTip.hide} onClick={V.caseTip.show} style={s(`display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;padding:0;border:0;border-radius:999px;background:transparent;color:rgba(201,212,194,.55);cursor:pointer`)} className="ri-ho18295a">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <circle cx="12" cy="12" r="8.5"></circle>
