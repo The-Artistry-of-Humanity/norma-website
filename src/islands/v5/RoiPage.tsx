@@ -25,17 +25,23 @@ const IND_AU = [
   { id: 'gov', name: 'Government & public sector', turn: 9, abs: 11, sal: 100000, h: [49, 16, 8, 0.5] }
 ];
 const IND_US = [
-  { id: 'all', turn: 13, abs: 4, sal: 68000 },
-  { id: 'health', turn: 13, abs: 5, sal: 62000 },
-  { id: 'retail', turn: 22, abs: 3.5, sal: 37000 },
-  { id: 'prof', turn: 15, abs: 3, sal: 88000 },
-  { id: 'finance', turn: 9, abs: 3.5, sal: 97000 },
-  { id: 'tech', turn: 9, abs: 3, sal: 107000 },
-  { id: 'construct', turn: 12, abs: 4, sal: 85000 },
-  { id: 'manu', turn: 11, abs: 4, sal: 73000 },
-  { id: 'edu', turn: 8, abs: 5, sal: 62000 },
-  { id: 'gov', turn: 5.5, abs: 5, sal: 68000 }
+  { id: 'all', turn: 13, abs: 4, sal: 77000 },
+  { id: 'health', turn: 13, abs: 5, sal: 70000 },
+  { id: 'retail', turn: 22, abs: 3.5, sal: 42000 },
+  { id: 'prof', turn: 15, abs: 3, sal: 100000 },
+  { id: 'finance', turn: 9, abs: 3.5, sal: 110000 },
+  { id: 'tech', turn: 9, abs: 3, sal: 121000 },
+  { id: 'construct', turn: 12, abs: 4, sal: 96000 },
+  { id: 'manu', turn: 11, abs: 4, sal: 83000 },
+  { id: 'edu', turn: 8, abs: 5, sal: 70000 },
+  { id: 'gov', turn: 5.5, abs: 5, sal: 77000 }
 ].map(r => ({ ...IND_AU.find(a => a.id === r.id), ...r }));
+// On-costs over salary. US: BLS ECEC June 2026, full-time private ($54.00 total / $36.97 wages).
+const LOAD = { au: 1.2, us: 1.46 };
+// Employer share of health premiums a person a year, US only: KFF 2025, $7,885 single
+// and $20,143 family, assuming half the workforce on family cover. Shown beside the
+// total, never inside it.
+const HEALTH_US = 14014;
 const COUNTRY = { au: { ind: IND_AU, loc: 'en-AU', cur: 'AUD', adj: 'Australian', flag: '🇦🇺', name: 'Australia', short: 'AU' }, us: { ind: IND_US, loc: 'en-US', cur: 'USD', adj: 'US', flag: '🇺🇸', name: 'United States', short: 'US' } };
 // Scale: in larger organisations strain spreads further (shares edge up), and so do improvements (the lift edges up).
 // Benchmarks describe a ~1,000-person organisation. Below that, strain compounds less (power curve); above it, it keeps climbing more slowly.
@@ -114,7 +120,8 @@ class RoiPage extends React.Component {
     const counts = { h1: Math.round(N * shares[0] / 100), h2: Math.round(N * shares[1] / 100), h3: Math.round(N * shares[2] / 100), h4: Math.round(N * shares[3] / 100) };
     const well = Math.max(0, N - counts.h1 - counts.h2 - counts.h3 - counts.h4);
     const { svg, per } = this.dots(N, counts, hl);
-    const leavers = N * R.turn / 100, days = N * R.abs, daily = R.sal * 1.2 / 230, replace = R.sal * .5;
+    const load = LOAD[this.state.country] || LOAD.au;
+    const leavers = N * R.turn / 100, days = N * R.abs, daily = R.sal * load / 230, replace = R.sal * .5;
     const turn = leavers * replace, abs = days * daily, presX = 2.3 * Math.pow(sf, .25), pres = abs * presX, total = turn + abs + pres, lift = liftFor(N) / 100;
     const card = (k, i) => ({ n: num(counts[k]), pct: pct(Math.round(shares[i] * 10) / 10), c: K[k].num, dot: K[k].c, bg: K[k].card, pill: K[k].pill, ring: hl === k ? 'inset 0 0 0 1px rgba(246,244,233,.22)' : 'inset 0 0 0 1px rgba(246,244,233,0)',
       op: hl && hl !== k ? .5 : 1, tf: hl === k ? 'translateY(-3px)' : 'none', on: () => this.setState({ hl: k }), off: () => this.setState({ hl: null }), tap: () => this.setState({ hl: k }) });
@@ -151,8 +158,9 @@ class RoiPage extends React.Component {
       h1: card('h1', 0), h2: card('h2', 1), h3: card('h3', 2), h4: card('h4', 3),
       totalMoney: money(total),
       turn: { money: money(turn), sub: num(leavers) + ' people leave', tip: this.tip('turn', num(leavers) + ' leavers at ' + pct(R.turn) + ' turnover, each costing about half a year’s salary to replace (' + money(replace) + ', Gallup lower bound)' + (us ? ' (Mercer 2025 US Turnover Survey, scaled by BLS JOLTS quits by industry).' : '.')) },
-      abs: { money: money(abs), sub: num(days) + ' unplanned days off', tip: this.tip('abs', R.abs + ' days a person a year, at a loaded daily cost of ' + money(daily) + ' (' + money(R.sal) + ' salary plus 20% on-costs, over 230 working days)' + (us ? ' (BLS Current Population Survey: hours lost to unplanned absence).' : '.')) },
+      abs: { money: money(abs), sub: num(days) + ' unplanned days off', tip: this.tip('abs', R.abs + ' days a person a year, at a loaded daily cost of ' + money(daily) + ' (' + money(R.sal) + ' salary plus ' + Math.round((load - 1) * 100) + '% on-costs, over 230 working days)' + (us ? ' (BLS Current Population Survey: hours lost to unplanned absence; BLS Employer Costs for Employee Compensation).' : '.')) },
       pres: { money: money(pres), sub: 'At work, not really there', tip: this.tip('pres', 'Benchmarked at ' + presX.toFixed(1) + ' times the cost of absence, a little higher in larger organisations where it hides more easily. The biggest cost, and the one you can’t see.') },
+      health: us ? { money: money(N * HEALTH_US), tip: this.tip('health', 'Employer share of premiums, KFF Employer Health Benefits Survey 2025 ($7,885 single, $20,143 family, half on family cover). Not included in the total.') } : null,
       recoverMoney: money(total * lift),
       stay: { n: num(Math.max(1, leavers * lift)), sub: 'who would otherwise have left this year' },
       days: { n: num(days * lift), sub: 'unplanned days that don’t happen' },
@@ -523,6 +531,29 @@ class RoiPage extends React.Component {
                     ) : null}
                   </span>
                 </div>
+                {(V.health) ? (
+                  <>
+                    <div style={s(`position:relative;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid rgba(246,244,233,.12)`)}>
+                      <span style={s(`flex:1;min-width:0;font:400 14.5px/1.45 'DM Sans',sans-serif;color:rgba(201,212,194,.8)`)}>What’s at stake in your health plan</span>
+                      <span style={s(`display:flex;align-items:center;gap:6px`)}>
+                        <span style={s(`font:400 clamp(20px,2vw,24px)/1 'DM Serif Display',serif;color:rgba(246,244,233,.9)`)}>{V.health.money}</span>
+                        <span style={s(`font:400 14px 'DM Sans',sans-serif;color:rgba(201,212,194,.7)`)}>a year</span>
+                        <button type="button" aria-label="How this is calculated" onMouseEnter={V.health.tip.show} onMouseLeave={V.health.tip.hide} onFocus={V.health.tip.show} onBlur={V.health.tip.hide} onClick={V.health.tip.show} style={s(`display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:0;border-radius:999px;background:transparent;color:rgba(201,212,194,.6);cursor:pointer;padding:0`)} className="ri-ho18295a">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="8.5"></circle>
+                            <path d="M12 11v5"></path>
+                            <path d="M12 7.8v.1"></path>
+                          </svg>
+                        </button>
+                        {(V.health.tip.open) ? (
+                          <>
+                            <span role="tooltip" style={s(`position:absolute;right:0;top:calc(100% + 8px);z-index:5;width:min(300px,78vw);box-sizing:border-box;padding:12px 14px;border-radius:16px 12px 16px 10px / 12px 16px 10px 16px;background:#F4F2E6;color:#14231A;font:400 13px/1.5 'DM Sans',sans-serif;box-shadow:0 20px 40px -18px rgba(0,0,0,.5)`)}>{V.health.tip.text}</span>
+                          </>
+                        ) : null}
+                      </span>
+                    </div>
+                  </>
+                ) : null}
               </div>
             </div>
             <div style={s(`min-width:0;box-sizing:border-box;padding:clamp(26px,3vw,40px);border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;background:linear-gradient(165deg,rgba(217,234,110,.16),rgba(217,234,110,.04) 70%);display:flex;flex-direction:column`)}>
