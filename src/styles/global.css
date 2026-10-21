@@ -1,3 +1,6 @@
+/* The help centre, legal pages and 404 are dark by design: say so, so Chrome
+   for Android's auto dark theme leaves them alone. */
+:root{color-scheme:dark}
 html{scroll-behavior:smooth}
 html,body{margin:0;padding:0;background:#0F2015}
 a{color:#D9EA6E;text-decoration:none}a:hover{color:#EAF79B}
