@@ -1,7 +1,9 @@
 /* Page base for the round 5 pages (Home, Your people, For leaders, ROI, Book a
    demo), from each reference's own <helmet> style. Help and legal keep
    global.css. Per-page extras (range accent, placeholders) live in each page. */
-:root{color-scheme:light;--bg-base:#0A130D}
+/* "only" is what opts out of Chrome for Android's auto dark theme, which
+   repaints light pages and made the hero unreadable on a reviewer's phone. */
+:root{color-scheme:only light;--bg-base:#0A130D}
 html{scroll-behavior:smooth}
 html,body{margin:0;padding:0;background:#F4F2E6;overflow-x:clip}
 a{color:#14231A;text-decoration:none}
