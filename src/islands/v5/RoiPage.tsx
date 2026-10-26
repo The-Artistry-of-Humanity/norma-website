@@ -98,10 +98,15 @@ class RoiPage extends React.Component {
     // One dot per person up to 2,000; beyond that the crowd keeps growing (denser), never resetting.
     const n = N <= 2000 ? Math.max(1, N) : Math.min(7000, Math.round(2000 + 880 * Math.log2(N / 2000))), per = N / n, aspect = this.state.narrow ? 1.1 : 3.4;
     const cols = Math.max(8, Math.ceil(Math.sqrt(n * aspect))), rows = Math.ceil(n / cols), g = 10, r = 3.4;
+    // Desktop scatters each group through the crowd and hovering a card picks it out.
+    // Touch screens have no hover, so there the groups sit in blocks, in card order.
+    const sorted = this.state.touch;
     const order = Array.from({ length: n }, (_, i) => i), rnd = mulberry(7);
-    for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
-    const kinds = []; let left = n;
-    ['h4', 'h3', 'h2', 'h1'].forEach(k => { const c = Math.min(left, Math.round(counts[k] / per)); for (let i = 0; i < c; i++) kinds.push(k); left -= c; });
+    if (!sorted) for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    const cnt = {}; let left = n;
+    ['h4', 'h3', 'h2', 'h1'].forEach(k => { cnt[k] = Math.min(left, Math.round(counts[k] / per)); left -= cnt[k]; });
+    const kinds = [];
+    (sorted ? ['h1', 'h2', 'h3', 'h4'] : ['h4', 'h3', 'h2', 'h1']).forEach(k => { for (let i = 0; i < cnt[k]; i++) kinds.push(k); });
     while (kinds.length < n) kinds.push('well');
     const defs = React.createElement('defs', null, Object.keys(K).map(k => React.createElement('radialGradient', { key: k, id: 'dot-' + k, cx: '35%', cy: '32%', r: '70%' },
       React.createElement('stop', { offset: '0', stopColor: K[k].hi }), React.createElement('stop', { offset: '1', stopColor: K[k].c }))));
