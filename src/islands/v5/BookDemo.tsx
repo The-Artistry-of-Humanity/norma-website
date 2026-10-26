@@ -304,3 +304,5 @@ class BookDemo extends React.Component {
 }
 
 export default BookDemo;
+// The FAQ list doubles as structured data on the page (book-a-demo.astro).
+export { FAQ };

@@ -3,8 +3,17 @@
    component generated from the reference: markup, styles and behaviour. */
 import LayoutV5 from '../layouts/LayoutV5.astro';
 import HomePage from '../islands/v5/HomePage';
+// Tells search engines who nørma is. alternateName covers people typing it without the ø.
+const org = {
+  '@context': 'https://schema.org', '@type': 'Organization', '@id': 'https://joinnorma.com/#org',
+  name: 'nørma', alternateName: ['Norma', 'joinnorma'], url: 'https://joinnorma.com/',
+  logo: 'https://joinnorma.com/assets/v5/norma-icon.png',
+  description: 'An employee wellbeing app for your people and a culture dashboard for leaders.',
+  parentOrganization: { '@type': 'Organization', name: 'The Artistry of Humanity Pty Ltd', url: 'https://artistry-of-humanity.com/' },
+};
+const site = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'nørma', alternateName: ['Norma', 'joinnorma'], url: 'https://joinnorma.com/', publisher: { '@id': 'https://joinnorma.com/#org' } };
 ---
-<LayoutV5 title={'nørma · The well-being operating system'} description={'nørma is an app for your people and a dashboard for you. They see where their life is at. You see where your culture is at, and what to do about it.'} canonical="https://joinnorma.com/">
+<LayoutV5 title={'nørma · Employee wellbeing app and leadership dashboard'} description={'nørma is an employee wellbeing app for your people and a culture dashboard for you. They see where their life is at, you see where your culture is at.'} canonical="https://joinnorma.com/" jsonld={[org, site]}>
   <HomePage client:load />
 </LayoutV5>
 <style is:global>

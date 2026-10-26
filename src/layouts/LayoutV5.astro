@@ -9,8 +9,10 @@ interface Props {
   canonical: string;
   /** Social preview image in public/og/ (made by tools/og/make-og.mjs). */
   og?: string;
+  /** Structured data (schema.org objects) for search engines. */
+  jsonld?: object[];
 }
-const { title, description, canonical, og = '/og/home.jpg' } = Astro.props;
+const { title, description, canonical, og = '/og/home.jpg', jsonld = [] } = Astro.props;
 const ogImage = 'https://joinnorma.com' + og;
 ---
 <!doctype html>
@@ -39,6 +41,7 @@ const ogImage = 'https://joinnorma.com' + og;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    {jsonld.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
     <slot name="head" />
   </head>
   <body>
