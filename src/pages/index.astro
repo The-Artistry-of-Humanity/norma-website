@@ -17,28 +17,16 @@ const site = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'nør
   <HomePage client:load />
 </LayoutV5>
 <style is:global>
-/* Phone pass (not in the handoff). "The culture they walk into": the reference
-   shows the 1280px dashboard frame at 60% and lets you swipe it, which leaves
-   8px text. Under 820px the same cards (score, Fulfilment, Culture, focus
-   area, running) stack at full size instead; same markup, same numbers. */
+/* "The culture they walk into": on wide screens a 1280x940 window on the real
+   dashboard, scaled to fit. Under 820px that would leave unreadable text, so the
+   three phone-width cards from the dashboard (score, Fulfilment, Culture) stack
+   instead. */
+[data-m=lead-cards]{display:none}
 @media (max-width:819px){
   div:has(> [data-fit="1280x940"]){height:auto!important;overflow:visible!important}
-  [data-fit="1280x940"]{position:relative!important;left:0!important;width:auto!important;height:auto!important;transform:none!important;display:block!important}
-  [data-fit="1280x940"] > aside{display:none!important}
-  [data-fit="1280x940"] > main{padding:22px clamp(16px,4vw,26px) 24px!important;gap:14px!important}
-  [data-fit="1280x940"] > main > div:nth-child(1){flex-wrap:wrap!important;gap:8px 16px!important}
-  [data-fit="1280x940"] > main > div:nth-child(1) > div:nth-child(2){display:none!important}
-  [data-fit="1280x940"] > main > div:nth-child(2),
-  [data-fit="1280x940"] > main > div:nth-child(3){grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important;gap:12px!important}
-  [data-fit="1280x940"] > main > div:nth-child(n+4){display:none!important}
-  /* The frame fades its bottom fifth to soften the desktop table; stacked, that would dim the last card. */
-  [data-fit="1280x940"]{-webkit-mask-image:none!important;mask-image:none!important}
-  /* Focus area and Running: text takes the full width, the button wraps underneath. */
-  [data-fit="1280x940"] > main > div:nth-child(3) > div > div:first-child{flex-wrap:wrap!important;gap:12px!important}
-  [data-fit="1280x940"] > main > div:nth-child(3) > div > div:first-child > :first-child{flex:1 1 100%!important}
-  /* Score rows: the delta stays on one line; on the narrowest cards the Steady pill drops below. */
-  [data-m=delta]{white-space:nowrap}
-  div:has(> [data-m=delta]){flex-wrap:wrap!important;gap:6px 12px!important}
+  [data-fit="1280x940"]{display:none!important}
+  [data-m=lead-cards]{display:flex;flex-direction:column;gap:12px;max-width:440px;margin:0 auto}
+  [data-m=lead-cards] img{display:block;width:100%;height:auto}
 }
 /* Moments: arrows centred; the three costs as an even row of icon-over-label. */
 @media (max-width:759px){
@@ -59,13 +47,5 @@ const site = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'nør
   [data-m=cost-grid] > div > p:last-child{margin-top:12px!important;color:rgba(201,212,194,.5)!important}
   /* Two sides: stacked, the dial sits behind the cards. */
   [data-m=dial]{z-index:0!important}
-}
-/* Two columns fit: the score card takes the full row, Fulfilment and Culture sit side by side. */
-@media (min-width:600px) and (max-width:819px){
-  [data-fit="1280x940"] > main > div:nth-child(2) > :first-child{grid-column:1/-1}
-}
-@media (max-width:819px){
-  /* The score card is square beside its neighbours; stacked, it sizes to the dial. */
-  [data-fit="1280x940"] > main > div:nth-child(2) > :first-child{aspect-ratio:auto!important;min-height:236px}
 }
 </style>

@@ -74,13 +74,8 @@ PATCHES = [
     ("BookDemo.tsx",
      "<div ref={V.cardRef} style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(26px,3vw,36px);",
      "<div data-m=\"form-card\" ref={V.cardRef} style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(26px,3vw,36px);"),
-    # Home, leaders dashboard: the score deltas break onto two lines once stacked.
-    ("HomePage.tsx",
-     "<span style={s(`font:500 13px 'DM Mono',monospace;color:#10B981`)}>↑ 2 since Sep",
-     "<span data-m=\"delta\" style={s(`font:500 13px 'DM Mono',monospace;color:#10B981`)}>↑ 2 since Sep"),
-    ("HomePage.tsx",
-     "<span style={s(`font:500 13px 'DM Mono',monospace;color:#EF4444`)}>↓ 3 since Sep",
-     "<span data-m=\"delta\" style={s(`font:500 13px 'DM Mono',monospace;color:#EF4444`)}>↓ 3 since Sep"),
+    # (The Home leaders dashboard is a real screenshot since the light-theme round,
+    # 27 Oct 2026, so its coded score rows and their delta hooks are gone.)
 ]
 
 for name, old, new in PATCHES:

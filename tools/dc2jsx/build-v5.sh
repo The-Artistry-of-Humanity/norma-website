@@ -13,7 +13,8 @@ REF=design_handoff_v5/reference
 OUT=src/islands/v5
 GEN=$(mktemp -d)
 mkdir -p "$OUT" public/assets/v5
-rsync -a --delete "$REF/assets/" public/assets/v5/
+# light/ holds the light-theme product screenshots (tools/light/make-light.py); keep it.
+rsync -a --delete --exclude light/ "$REF/assets/" public/assets/v5/
 
 gen() { # <reference file> <root label> <class prefix> <ComponentName> [imports...]
   ref="$REF/$1.dc.html"; label=$2; prefix=$3; name=$4; shift 4
@@ -33,3 +34,5 @@ rm -rf "$GEN"
 python3 tools/dc2jsx/optimise-v5.py .
 # Hooks and small fixes for the phone layouts (styles live in src/pages/*.astro).
 python3 tools/dc2jsx/patches-v5.py .
+# Light-theme product screenshots (Oct 2026), from design_handoff_shots/.
+[ -d design_handoff_shots ] && python3 tools/light/make-light.py

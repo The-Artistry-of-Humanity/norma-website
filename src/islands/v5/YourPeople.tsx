@@ -19,7 +19,7 @@ class YourPeople extends React.Component {
     { name: 'Social Connection', line: 'Friends, family, community and belonging: the pillar nobody schedules and the one that thins out first.', themes: ['Friends', 'Family', 'Community', 'Belonging'], score: 38, q: 'Do you spend quality time with a like-minded friend weekly?', laura: '“I can’t remember the last time I saw my friends when it wasn’t someone’s birthday. Work has crept into the evenings I used to keep for them.”' },
     { name: 'Work & Life Flow', line: 'Purpose, enough time to do the job well, the relationship with a manager and control over the next step.', themes: ['Purpose', 'Time', 'Manager', 'Next step'], score: 63, q: 'Do you feel in control of your next step?', laura: '“I know what I’m doing and I’m good at it. What I can’t see is where it goes from here, and nobody’s asked me.”' },
   ];
-  COL = ['#A9DDB4', '#C4BEEE', '#F0BDB5', '#F2DAAC', '#AAD7E3'];
+  COL = ['#4E9A63', '#7A70C4', '#C9705F', '#C99A3F', '#4C9CB3'];
   LAURA = [71, 58, 66, 38, 63];
   // Laura is placed in the centre column; the rest fill around her in this order.
   PEOPLE = [
@@ -31,10 +31,10 @@ class YourPeople extends React.Component {
   SHAPES = ['30px 20px 32px 22px / 22px 32px 20px 30px', '22px 32px 20px 30px / 30px 20px 32px 22px', '32px 22px 30px 20px / 20px 30px 22px 32px', '20px 30px 22px 32px / 32px 22px 30px 20px'];
   WEAK = 3; FILM_LEN = 36;
   band(s) {
-    if (s >= 70) return { band: 'Thriving', col: '#DCEC85', chipBg: 'rgba(217,234,110,.16)' };
-    if (s >= 55) return { band: 'Steady', col: '#F4F2E6', chipBg: 'rgba(228,240,214,.1)' };
-    if (s >= 46) return { band: 'Needs care', col: '#E6C77E', chipBg: 'rgba(230,199,126,.16)' };
-    return { band: 'Needs attention', col: '#F2A58C', chipBg: 'rgba(231,142,113,.18)' };
+    if (s >= 70) return { band: 'Thriving', col: '#2F8F5B', chipBg: 'rgba(78,154,99,.14)' };
+    if (s >= 55) return { band: 'Steady', col: '#14231A', chipBg: 'rgba(20,35,26,.07)' };
+    if (s >= 46) return { band: 'Needs care', col: '#9A6E1E', chipBg: 'rgba(201,154,63,.16)' };
+    return { band: 'Needs attention', col: '#B14A33', chipBg: 'rgba(201,112,95,.16)' };
   }
   motionOn() { return (this.props.ambientMotion ?? true) && !this.reduced; }
   // Smooth pentagon through the five score points, so the dots sit on the line as in the app.
@@ -161,7 +161,7 @@ class YourPeople extends React.Component {
       const on = i === sel;
       v['pk' + i] = () => this.setState({ pillar: i });
       v['on' + i] = on;
-      v['rg' + i] = on ? '0 0 0 1.5px ' + this.COL[i] : i === this.WEAK ? '0 0 0 1.5px rgba(231,142,113,.75)' : 'none';
+      v['rg' + i] = on ? '0 0 0 2px ' + this.COL[i] : i === this.WEAK ? '0 0 0 2px rgba(201,112,95,.7)' : 'none';
     });
     for (let i = 0; i < 6; i++) {
       const on = i === feat;
@@ -244,17 +244,17 @@ class YourPeople extends React.Component {
               <div aria-hidden="true" style={s(`position:absolute;left:110px;top:0;width:420px;height:610px;border-radius:210px 210px 30px 24px / 210px 210px 30px 24px;background:radial-gradient(62% 40% at 50% 16%,rgba(217,234,110,.5) 0%,rgba(217,234,110,.14) 55%,rgba(217,234,110,0) 82%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 60%)`)}></div>
               <div style={s(`position:absolute;left:34px;top:118px;transform:rotate(-7deg);width:214px;aspect-ratio:390/844;box-sizing:border-box;padding:6px;border-radius:35px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
                 <div style={s(`width:100%;height:100%;border-radius:30px;overflow:hidden;background:#0F2015`)}>
-                  <img src="/assets/v5/web/reflect.jpg" alt="Reflect: What’s on your mind? nørma listening" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                  <img src="/assets/v5/light/app-reflect.webp" alt="Reflect: What’s on your mind? nørma listening" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                 </div>
               </div>
               <div style={s(`position:absolute;left:392px;top:118px;transform:rotate(7deg);width:214px;aspect-ratio:390/844;box-sizing:border-box;padding:6px;border-radius:35px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
                 <div style={s(`width:100%;height:100%;border-radius:30px;overflow:hidden;background:#0F2015`)}>
-                  <img src="/assets/v5/web/film.jpg" alt="A growth journey film: Five pillars. One life." style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                  <img src="/assets/v5/light/app-film.webp" alt="A growth journey chapter: Five pillars, one life" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                 </div>
               </div>
               <div style={s(`position:absolute;left:189px;top:36px;width:262px;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:43px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
                 <div style={s(`width:100%;height:100%;border-radius:37px;overflow:hidden;background:#0F2015`)}>
-                  <img src="/assets/v5/web/home.jpg" alt="nørma Home: Good evening, Fulfilment 67 with the five pillars" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                  <img src="/assets/v5/light/app-home.webp" alt="nørma Home: Good evening, Fulfilment 67 with the five pillars" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                 </div>
               </div>
             </div>
@@ -270,53 +270,54 @@ class YourPeople extends React.Component {
             nørma is built on our own framework: five pillars that together shape a person’s life. Work is only one of them. Health, inner life, close relationships and friendships all carry into the working day, and when one slips, the others feel it.
           </p>
           <div style={s(`margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(40px,5vw,72px);align-items:center`)}>
-            <div style={s(`position:relative;width:100%;max-width:500px;aspect-ratio:100/94;margin:0 auto`)}>
-              <div aria-hidden="true" style={s(`position:absolute;left:20%;top:24%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.14),rgba(217,234,110,0) 72%);pointer-events:none`)}></div>
+            <div style={s(`box-sizing:border-box;width:100%;max-width:540px;margin:0 auto;padding:clamp(18px,2.6vw,28px);border-radius:32px 22px 30px 20px / 22px 32px 20px 30px;background:linear-gradient(170deg,#FBFAF4,#F2F1E6 80%);box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(20,35,26,.06)`)}>
+            <div style={s(`position:relative;width:100%;aspect-ratio:100/94;margin:0 auto`)}>
+              <div aria-hidden="true" style={s(`position:absolute;left:20%;top:24%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.4),rgba(217,234,110,0) 72%);pointer-events:none`)}></div>
               <div style={s(`position:absolute;left:0;top:0;z-index:1;display:flex;align-items:center;gap:12px`)}>
                 <span style={s(`position:relative;flex:none;width:52px;height:52px`)}>
                   <svg viewBox="0 0 52 52" aria-hidden="true" style={s(`position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)`)}>
-                    <circle cx="26" cy="26" r="24.5" fill="none" stroke="rgba(228,240,214,.14)" strokeWidth="2"></circle>
-                    <circle cx="26" cy="26" r="24.5" fill="none" stroke="#D9EA6E" strokeWidth="2" strokeLinecap="round" pathlength="100" strokeDasharray="59 100"></circle>
+                    <circle cx="26" cy="26" r="24.5" fill="none" stroke="rgba(20,35,26,.1)" strokeWidth="2"></circle>
+                    <circle cx="26" cy="26" r="24.5" fill="none" stroke="#8FB03E" strokeWidth="2" strokeLinecap="round" pathlength="100" strokeDasharray="59 100"></circle>
                   </svg>
                   {' '}
                   <img src="/assets/v5/people/laura-avatar.jpg" alt="Laura" width="42" height="42" style={s(`position:absolute;left:5px;top:5px;display:block;width:42px;height:42px;border-radius:50%;object-fit:cover`)} />
                 </span>
                 <span style={s(`display:flex;flex-direction:column;gap:5px`)}>
-                  <span style={s(`font:400 21px/1 'DM Serif Display',serif;color:#F6F4E9`)}>Laura</span>
-                  <span style={s(`font:500 10.5px 'DM Mono',monospace;letter-spacing:1.4px;color:rgba(201,212,194,.78)`)}>OCTOBER</span>
+                  <span style={s(`font:400 21px/1 'DM Serif Display',serif;color:#14231A`)}>Laura</span>
+                  <span style={s(`font:500 10.5px 'DM Mono',monospace;letter-spacing:1.4px;color:rgba(20,35,26,.5)`)}>OCTOBER</span>
                 </span>
               </div>
               <svg viewBox="0 0 100 94" aria-hidden="true" style={s(`position:absolute;inset:0;width:100%;height:100%;overflow:visible`)}>
                 <defs>
                   <radialGradient id="lauraFill" cx="50%" cy="50%" r="62%">
-                    <stop offset="0" stopColor="#D9EA6E" stopOpacity=".36"></stop>
-                    <stop offset="1" stopColor="#D9EA6E" stopOpacity=".14"></stop>
+                    <stop offset="0" stopColor="#D9EA6E" stopOpacity=".7"></stop>
+                    <stop offset="1" stopColor="#D9EA6E" stopOpacity=".32"></stop>
                   </radialGradient>
                 </defs>
-                <path d="M50.00 16.00 C56.85 16.00 82.12 34.36 84.24 40.88 C86.35 47.39 76.70 77.10 71.16 81.12 C65.62 85.15 34.38 85.15 28.84 81.12 C23.30 77.10 13.65 47.39 15.76 40.88 C17.88 34.36 43.15 16.00 50.00 16.00Z" fill="none" stroke="rgba(217,234,110,.16)" strokeWidth="1.5" vectorEffect="non-scaling-stroke"></path>
+                <path d="M50.00 16.00 C56.85 16.00 82.12 34.36 84.24 40.88 C86.35 47.39 76.70 77.10 71.16 81.12 C65.62 85.15 34.38 85.15 28.84 81.12 C23.30 77.10 13.65 47.39 15.76 40.88 C17.88 34.36 43.15 16.00 50.00 16.00Z" fill="none" stroke="rgba(143,176,62,.3)" strokeWidth="1.5" vectorEffect="non-scaling-stroke"></path>
                 <g ref={V.polyRef} style={s(`transform-origin:50px 52px;transition:transform 1.6s cubic-bezier(.22,.61,.36,1),opacity 1s ease`)}>
-                  <path d="M50.00 24.87 C55.46 24.93 70.21 39.11 72.02 44.85 C73.82 50.59 68.89 70.20 65.04 72.71 C61.20 75.22 44.61 69.18 39.99 65.78 C35.37 62.38 25.33 49.28 26.53 44.37 C27.73 39.47 44.54 24.82 50.00 24.87Z" fill="url(#lauraFill)" stroke="#D9EA6E" strokeWidth="3" strokeLinejoin="round" vectorEffect="non-scaling-stroke"></path>
-                  <circle cx="50.00" cy="24.87" r="1.1" fill="#A9DDB4"></circle>
-                  <circle cx="72.02" cy="44.85" r="1.1" fill="#C4BEEE"></circle>
-                  <circle cx="65.04" cy="72.71" r="1.1" fill="#F0BDB5"></circle>
-                  <circle cx="39.99" cy="65.78" r="1.1" fill="#F2DAAC"></circle>
-                  <circle cx="26.53" cy="44.37" r="1.1" fill="#AAD7E3"></circle>
+                  <path d="M50.00 24.87 C55.46 24.93 70.21 39.11 72.02 44.85 C73.82 50.59 68.89 70.20 65.04 72.71 C61.20 75.22 44.61 69.18 39.99 65.78 C35.37 62.38 25.33 49.28 26.53 44.37 C27.73 39.47 44.54 24.82 50.00 24.87Z" fill="url(#lauraFill)" stroke="#8FB03E" strokeWidth="3" strokeLinejoin="round" vectorEffect="non-scaling-stroke"></path>
+                  <circle cx="50.00" cy="24.87" r="1.4" fill="#4E9A63"></circle>
+                  <circle cx="72.02" cy="44.85" r="1.4" fill="#7A70C4"></circle>
+                  <circle cx="65.04" cy="72.71" r="1.4" fill="#C9705F"></circle>
+                  <circle cx="39.99" cy="65.78" r="1.4" fill="#C99A3F"></circle>
+                  <circle cx="26.53" cy="44.37" r="1.4" fill="#4C9CB3"></circle>
                 </g>
               </svg>
               <div style={s(`position:absolute;left:50%;top:55.3%;transform:translate(-50%,-50%);pointer-events:none`)}>
-                <span style={s(`display:block;font:400 clamp(56px,9vw,100px)/.9 'DM Serif Display',serif;color:#F6F4E9;text-shadow:0 0 40px rgba(217,234,110,.3)`)}>59</span>
+                <span style={s(`display:block;font:400 clamp(56px,9vw,100px)/.9 'DM Serif Display',serif;color:#14231A`)}>59</span>
               </div>
               {(V.motion) ? (
                 <>
                   <svg viewBox="0 0 100 94" aria-hidden="true" style={s(`position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none`)}>
-                    <circle cx="28.84" cy="81.12" r="6.2" fill="none" stroke="#E78E71" strokeWidth="1.5" vectorEffect="non-scaling-stroke">
+                    <circle cx="28.84" cy="81.12" r="6.2" fill="none" stroke="#C9705F" strokeWidth="1.5" vectorEffect="non-scaling-stroke">
                       <animate attributename="r" values="6.2;10.5" dur="3s" repeatcount="indefinite"></animate>
                       <animate attributename="opacity" values=".75;0" dur="3s" repeatcount="indefinite"></animate>
                     </circle>
                   </svg>
                 </>
               ) : null}
-              <button type="button" onClick={V.pk0} aria-pressed={V.on0} aria-label="Health & Fitness, 71" style={s(`position:absolute;left:50%;top:17.02%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(169,221,180,.16);color:#A9DDB4;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg0 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hob310ea yp-ac44a72b">
+              <button type="button" onClick={V.pk0} aria-pressed={V.on0} aria-label="Health & Fitness, 71" style={s(`position:absolute;left:50%;top:17.02%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(78,154,99,.14);color:#4E9A63;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg0 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hob310ea yp-ac44a72b">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                   <circle cx="14.5" cy="4.6" r="1.8"></circle>
                   <path d="M7.5 11.2l3.6-2.9 3.2 1.4 1.6 2.9 2.9.6"></path>
@@ -325,20 +326,20 @@ class YourPeople extends React.Component {
                 </svg>
               </button>
               {' '}
-              <button type="button" onClick={V.pk1} aria-pressed={V.on1} aria-label="Internal Work, 58" style={s(`position:absolute;left:84.24%;top:43.49%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:48% 52% 50% 50% / 54% 50% 50% 46%;background:rgba(196,190,238,.16);color:#C4BEEE;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg1 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-ho5a130b yp-ac44a72b">
+              <button type="button" onClick={V.pk1} aria-pressed={V.on1} aria-label="Internal Work, 58" style={s(`position:absolute;left:84.24%;top:43.49%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:48% 52% 50% 50% / 54% 50% 50% 46%;background:rgba(122,112,196,.14);color:#7A70C4;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg1 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-ho5a130b yp-ac44a72b">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                   <path d="M12 6.6C10.2 5.3 7.6 4.8 3.8 5v13.2c3.8-.2 6.4.3 8.2 1.6 1.8-1.3 4.4-1.8 8.2-1.6V5c-3.8-.2-6.4.3-8.2 1.6z"></path>
                   <path d="M12 6.6v13.2"></path>
                 </svg>
               </button>
               {' '}
-              <button type="button" onClick={V.pk2} aria-pressed={V.on2} aria-label="Love & Relationships, 66" style={s(`position:absolute;left:71.16%;top:86.3%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:50% 50% 48% 52% / 46% 50% 54% 50%;background:rgba(240,189,181,.16);color:#F0BDB5;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg2 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hoec5a95 yp-ac44a72b">
+              <button type="button" onClick={V.pk2} aria-pressed={V.on2} aria-label="Love & Relationships, 66" style={s(`position:absolute;left:71.16%;top:86.3%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:50% 50% 48% 52% / 46% 50% 54% 50%;background:rgba(201,112,95,.14);color:#C9705F;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg2 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hoec5a95 yp-ac44a72b">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                   <path d="M12 19 C7 15 4.5 12.4 4.5 9.4 C4.5 7 6.3 5.2 8.6 5.2 C10 5.2 11.3 6 12 7.2 C12.7 6 14 5.2 15.4 5.2 C17.7 5.2 19.5 7 19.5 9.4 C19.5 12.4 17 15 12 19 Z"></path>
                 </svg>
               </button>
               {' '}
-              <button type="button" onClick={V.pk3} aria-pressed={V.on3} aria-label="Social Connection, 38, her weakest pillar" style={s(`position:absolute;left:28.84%;top:86.3%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:50% 46% 54% 50% / 52% 50% 48% 50%;background:rgba(242,218,172,.16);color:#F2DAAC;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg3 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hoc3879c yp-ac44a72b">
+              <button type="button" onClick={V.pk3} aria-pressed={V.on3} aria-label="Social Connection, 38, her weakest pillar" style={s(`position:absolute;left:28.84%;top:86.3%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:50% 46% 54% 50% / 52% 50% 48% 50%;background:rgba(201,154,63,.16);color:#C99A3F;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg3 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hoc3879c yp-ac44a72b">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                   <path d="M3.4 19.4 C3.4 15.8 5.9 14.1 9 14.1 C12.1 14.1 14.6 15.8 14.6 19.4"></path>
                   <path d="M16.4 15.4 C18.9 15.7 20.6 17.2 20.6 19.4"></path>
@@ -347,7 +348,7 @@ class YourPeople extends React.Component {
                 </svg>
               </button>
               {' '}
-              <button type="button" onClick={V.pk4} aria-pressed={V.on4} aria-label="Work & Life Flow, 63" style={s(`position:absolute;left:15.76%;top:43.49%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:54% 50% 46% 50% / 50% 48% 52% 50%;background:rgba(170,215,227,.16);color:#AAD7E3;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg4 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hoc7f31f yp-ac44a72b">
+              <button type="button" onClick={V.pk4} aria-pressed={V.on4} aria-label="Work & Life Flow, 63" style={s(`position:absolute;left:15.76%;top:43.49%;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;cursor:pointer;border-radius:54% 50% 46% 50% / 50% 48% 52% 50%;background:rgba(76,156,179,.14);color:#4C9CB3;display:flex;align-items:center;justify-content:center;box-shadow:${V.rg4 ?? ''};transition:box-shadow .3s ease,background .3s ease`)} className="yp-hoc7f31f yp-ac44a72b">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                   <path d="M3 7.5c3-2.4 6-2.4 9 0s6 2.4 9 0"></path>
                   <path d="M3 12c3-2.4 6-2.4 9 0s6 2.4 9 0"></path>
@@ -355,35 +356,36 @@ class YourPeople extends React.Component {
                 </svg>
               </button>
             </div>
-            <div style={s(`box-sizing:border-box;padding:clamp(28px,3.4vw,40px);border-radius:30px 22px 32px 20px / 22px 32px 20px 30px;background:linear-gradient(165deg,#17301F,#11251A 70%);box-shadow:0 30px 70px -30px rgba(0,0,0,.6)`)}>
-              <span style={s(`font:500 11px 'DM Mono',monospace;letter-spacing:1.6px;color:#DCEC85`)}>{"PILLAR "}{V.cur.n}{" OF 05"}</span>
-              <h3 style={s(`margin:12px 0 0;font:400 clamp(28px,3vw,36px)/1.1 'DM Serif Display',serif;letter-spacing:-.4px;color:#F6F4E9`)}>{V.cur.name}</h3>
-              <p style={s(`margin:12px 0 0;font:400 16.5px/1.55 'DM Sans',sans-serif;color:rgba(244,242,230,.86);text-wrap:pretty`)}>{V.cur.line}</p>
+            </div>
+            <div style={s(`box-sizing:border-box;padding:clamp(28px,3.4vw,40px);border-radius:30px 22px 32px 20px / 22px 32px 20px 30px;background:linear-gradient(165deg,#FBFAF4,#F2F1E6 70%);box-shadow:0 30px 70px -30px rgba(0,0,0,.6),0 0 0 1px rgba(20,35,26,.06);color:#14231A`)}>
+              <span style={s(`font:500 11px 'DM Mono',monospace;letter-spacing:1.6px;color:#4E7A2E`)}>{"PILLAR "}{V.cur.n}{" OF 05"}</span>
+              <h3 style={s(`margin:12px 0 0;font:400 clamp(28px,3vw,36px)/1.1 'DM Serif Display',serif;letter-spacing:-.4px;color:#14231A`)}>{V.cur.name}</h3>
+              <p style={s(`margin:12px 0 0;font:400 16.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>{V.cur.line}</p>
               <div style={s(`display:flex;flex-wrap:wrap;gap:8px;margin-top:18px`)}>
                 {(V.cur.themes || []).map((th, $index) => (
                   <React.Fragment key={$index}>
-                    <span style={s(`padding:7px 13px;border-radius:14px 10px 13px 9px / 10px 13px 9px 14px;background:rgba(228,240,214,.08);font:500 12.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.88)`)}>{th}</span>
+                    <span style={s(`padding:7px 13px;border-radius:14px 10px 13px 9px / 10px 13px 9px 14px;background:rgba(20,35,26,.06);font:500 12.5px 'DM Sans',sans-serif;color:rgba(20,35,26,.78)`)}>{th}</span>
                   </React.Fragment>
                 ))}
               </div>
-              <div style={s(`margin-top:26px;padding:22px 22px 24px;border-radius:24px 16px 26px 14px / 16px 26px 14px 24px;background:rgba(228,240,214,.07)`)}>
-                <span style={s(`font:600 10px 'DM Sans',sans-serif;letter-spacing:2.2px;color:rgba(201,212,194,.72)`)}>LAURA · THIS MONTH</span>
+              <div style={s(`margin-top:26px;padding:22px 22px 24px;border-radius:24px 16px 26px 14px / 16px 26px 14px 24px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(20,35,26,.06)`)}>
+                <span style={s(`font:600 10px 'DM Sans',sans-serif;letter-spacing:2.2px;color:rgba(20,35,26,.5)`)}>LAURA · THIS MONTH</span>
                 <div style={s(`display:flex;align-items:center;gap:14px;margin-top:12px`)}>
                   <img src="/assets/v5/people/laura-avatar.jpg" alt="Laura" width="48" height="48" style={s(`display:block;flex:none;width:48px;height:48px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;object-fit:cover`)} />
                   <span style={s(`font:400 48px/1 'DM Serif Display',serif;color:${V.cur.col ?? ''}`)}>{V.cur.score}</span>
                   <span style={s(`padding:5px 11px;border-radius:999px;background:${V.cur.chipBg ?? ''};font:600 12px 'DM Sans',sans-serif;color:${V.cur.col ?? ''}`)}>{V.cur.band}</span>
                 </div>
-                <span style={s(`display:block;margin-top:16px;font:500 13px/1.45 'DM Sans',sans-serif;color:rgba(201,212,194,.78);text-wrap:pretty`)}>{"From the check-in: "}{V.cur.q}</span>
-                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(244,242,230,.88);text-wrap:pretty`)}>{V.cur.laura}</p>
+                <span style={s(`display:block;margin-top:16px;font:500 13px/1.45 'DM Sans',sans-serif;color:rgba(20,35,26,.55);text-wrap:pretty`)}>{"From the check-in: "}{V.cur.q}</span>
+                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.78);text-wrap:pretty`)}>{V.cur.laura}</p>
                 {(V.cur.weak) ? (
                   <>
                     <div style={s(`margin-top:20px;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:20px 14px 22px 12px / 14px 22px 12px 20px;background:rgba(231,142,113,.12);border:1px solid rgba(231,142,113,.45)`)}>
-                      <span style={s(`flex:none;width:34px;height:34px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(231,142,113,.22);display:flex;align-items:center;justify-content:center;color:#F5B9A4`)}>
+                      <span style={s(`flex:none;width:34px;height:34px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(201,112,95,.16);display:flex;align-items:center;justify-content:center;color:#B14A33`)}>
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 4l7.6 5.5-2.9 9H7.3l-2.9-9z"></path></svg>
                       </span>
                       <span style={s(`display:flex;flex-direction:column;gap:4px`)}>
-                        <span style={s(`font:600 15.5px/1.35 'DM Sans',sans-serif;color:#F8D3C6`)}>Her weakest pillar, so this is where she starts.</span>
-                        <span style={s(`font:400 14.5px/1.5 'DM Sans',sans-serif;color:rgba(244,242,230,.82)`)}>nørma makes Social Connection her focus this month, with one habit to add and a short journey to begin.</span>
+                        <span style={s(`font:600 15.5px/1.35 'DM Sans',sans-serif;color:#B14A33`)}>Her weakest pillar, so this is where she starts.</span>
+                        <span style={s(`font:400 14.5px/1.5 'DM Sans',sans-serif;color:rgba(20,35,26,.72)`)}>nørma makes Social Connection her focus this month, with one habit to add and a short journey to begin.</span>
                       </span>
                     </div>
                   </>
@@ -412,7 +414,7 @@ class YourPeople extends React.Component {
               <div style={s(`height:clamp(440px,40vw,520px);display:flex;align-items:center;justify-content:center`)}>
                 <div style={s(`height:100%;max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:40px;background:#0B140E;box-shadow:0 40px 70px -34px rgba(20,35,26,.55),0 0 0 1px rgba(20,35,26,.12)`)}>
                   <div style={s(`width:100%;height:100%;border-radius:34px;overflow:hidden;background:#0F2015`)}>
-                    <img src="/assets/v5/web/question.jpg" alt="A check-in question: Do you practice gratitude? No, Not really, Mostly, Yes" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                    <img src="/assets/v5/light/app-question.webp" alt="A check-in question: Do you exercise regularly each week? No, Not really, Mostly, Yes" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                   </div>
                 </div>
               </div>
@@ -428,7 +430,7 @@ class YourPeople extends React.Component {
               <div style={s(`height:clamp(440px,40vw,520px);display:flex;align-items:center;justify-content:center`)}>
                 <div style={s(`height:100%;max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:40px;background:#0B140E;box-shadow:0 40px 70px -34px rgba(20,35,26,.55),0 0 0 1px rgba(20,35,26,.12)`)}>
                   <div style={s(`width:100%;height:100%;border-radius:34px;overflow:hidden;background:#0F2015`)}>
-                    <img src="/assets/v5/web/complete.jpg" alt="Check-in complete: Here’s where you are. Fulfilment 62 and a focus for the month, Social Connection" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                    <img src="/assets/v5/light/app-where-you-stand.webp" alt="Check-in complete: Where you stand. Fulfilment 64, up 3 since the last check-in, and Social Connection has the most room to grow" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                   </div>
                 </div>
               </div>
@@ -444,7 +446,7 @@ class YourPeople extends React.Component {
               <div style={s(`height:clamp(440px,40vw,520px);display:flex;align-items:center;justify-content:center`)}>
                 <div style={s(`height:100%;max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:40px;background:#0B140E;box-shadow:0 40px 70px -34px rgba(20,35,26,.55),0 0 0 1px rgba(20,35,26,.12)`)}>
                   <div style={s(`width:100%;height:100%;border-radius:34px;overflow:hidden;background:#0F2015`)}>
-                    <img src="/assets/v5/web/home.jpg" alt="nørma Home: Good evening, Fulfilment 67 with the five pillars" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                    <img src="/assets/v5/light/app-home.webp" alt="nørma Home: Good evening, Fulfilment 67 with the five pillars" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                   </div>
                 </div>
               </div>
@@ -545,26 +547,26 @@ class YourPeople extends React.Component {
               </defs>
               <path d={V.flowD} fill="none" stroke="url(#flowGrad)" strokeWidth="1.5" strokeLinecap="round" vectorEffect="non-scaling-stroke"></path>
             </svg>
-            <div style={s(`position:relative;max-width:880px;margin:0 auto;box-sizing:border-box;padding:clamp(28px,4vw,48px);border-radius:36px 24px 34px 22px / 24px 36px 22px 34px;background:radial-gradient(60% 70% at 30% 0%,rgba(217,234,110,.14),rgba(217,234,110,0) 70%),linear-gradient(165deg,#17301F,#0F2015 72%);box-shadow:0 40px 80px -36px rgba(20,35,26,.6);color:#F4F2E6;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(28px,4vw,56px);align-items:center`)}>
+            <div style={s(`position:relative;max-width:880px;margin:0 auto;box-sizing:border-box;padding:clamp(28px,4vw,48px);border-radius:36px 24px 34px 22px / 24px 36px 22px 34px;background:radial-gradient(60% 70% at 30% 0%,rgba(217,234,110,.3),rgba(217,234,110,0) 70%),linear-gradient(170deg,#FBFAF4,#F2F1E6 80%);box-shadow:0 50px 100px -50px rgba(20,35,26,.45),0 0 0 1px rgba(20,35,26,.07);color:#14231A;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(28px,4vw,56px);align-items:center`)}>
               <div style={s(`position:relative;width:100%;max-width:300px;aspect-ratio:100/94;margin:0 auto`)}>
                 <div aria-hidden="true" style={s(`position:absolute;left:18%;top:22%;width:64%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.16),rgba(217,234,110,0) 72%)`)}></div>
                 <svg viewBox="0 0 100 94" aria-hidden="true" style={s(`position:absolute;inset:0;width:100%;height:100%;overflow:visible`)}>
                   <defs>
                     <radialGradient id="teamFill" cx="50%" cy="50%" r="62%">
-                      <stop offset="0" stopColor="#D9EA6E" stopOpacity=".36"></stop>
-                      <stop offset="1" stopColor="#D9EA6E" stopOpacity=".14"></stop>
+                      <stop offset="0" stopColor="#D9EA6E" stopOpacity=".7"></stop>
+                      <stop offset="1" stopColor="#D9EA6E" stopOpacity=".32"></stop>
                     </radialGradient>
                   </defs>
-                  <path d="M50.00 16.00 C56.85 16.00 82.12 34.36 84.24 40.88 C86.35 47.39 76.70 77.10 71.16 81.12 C65.62 85.15 34.38 85.15 28.84 81.12 C23.30 77.10 13.65 47.39 15.76 40.88 C17.88 34.36 43.15 16.00 50.00 16.00Z" fill="none" stroke="rgba(217,234,110,.16)" strokeWidth="1.5" vectorEffect="non-scaling-stroke"></path>
-                  <path d="M50.00 26.10 C55.53 26.09 71.40 38.91 73.18 44.47 C74.96 50.03 69.28 69.31 64.87 72.46 C60.45 75.61 40.92 74.07 36.39 70.73 C31.86 67.38 25.48 49.92 27.11 44.56 C28.74 39.21 44.47 26.11 50.00 26.10Z" fill="url(#teamFill)" stroke="#D9EA6E" strokeWidth="2.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke"></path>
-                  <circle cx="50.00" cy="26.10" r="1.2" fill="#A9DDB4"></circle>
-                  <circle cx="73.18" cy="44.47" r="1.2" fill="#C4BEEE"></circle>
-                  <circle cx="64.87" cy="72.46" r="1.2" fill="#F0BDB5"></circle>
-                  <circle cx="36.39" cy="70.73" r="1.2" fill="#F2DAAC"></circle>
-                  <circle cx="27.11" cy="44.56" r="1.2" fill="#AAD7E3"></circle>
+                  <path d="M50.00 16.00 C56.85 16.00 82.12 34.36 84.24 40.88 C86.35 47.39 76.70 77.10 71.16 81.12 C65.62 85.15 34.38 85.15 28.84 81.12 C23.30 77.10 13.65 47.39 15.76 40.88 C17.88 34.36 43.15 16.00 50.00 16.00Z" fill="none" stroke="rgba(143,176,62,.3)" strokeWidth="1.5" vectorEffect="non-scaling-stroke"></path>
+                  <path d="M50.00 26.10 C55.53 26.09 71.40 38.91 73.18 44.47 C74.96 50.03 69.28 69.31 64.87 72.46 C60.45 75.61 40.92 74.07 36.39 70.73 C31.86 67.38 25.48 49.92 27.11 44.56 C28.74 39.21 44.47 26.11 50.00 26.10Z" fill="url(#teamFill)" stroke="#8FB03E" strokeWidth="2.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke"></path>
+                  <circle cx="50.00" cy="26.10" r="1.5" fill="#4E9A63"></circle>
+                  <circle cx="73.18" cy="44.47" r="1.5" fill="#7A70C4"></circle>
+                  <circle cx="64.87" cy="72.46" r="1.5" fill="#C9705F"></circle>
+                  <circle cx="36.39" cy="70.73" r="1.5" fill="#C99A3F"></circle>
+                  <circle cx="27.11" cy="44.56" r="1.5" fill="#4C9CB3"></circle>
                 </svg>
                 {' '}
-                <span aria-hidden="true" style={s(`position:absolute;left:50%;top:17.02%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(169,221,180,.16);color:#A9DDB4;display:flex;align-items:center;justify-content:center`)}>
+                <span aria-hidden="true" style={s(`position:absolute;left:50%;top:17.02%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(78,154,99,.14);color:#4E9A63;display:flex;align-items:center;justify-content:center`)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                     <circle cx="14.5" cy="4.6" r="1.8"></circle>
                     <path d="M7.5 11.2l3.6-2.9 3.2 1.4 1.6 2.9 2.9.6"></path>
@@ -572,18 +574,18 @@ class YourPeople extends React.Component {
                     <path d="M9.7 13.9l-2.6 5.4"></path>
                   </svg>
                 </span>
-                <span aria-hidden="true" style={s(`position:absolute;left:84.24%;top:43.49%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:48% 52% 50% 50% / 54% 50% 50% 46%;background:rgba(196,190,238,.16);color:#C4BEEE;display:flex;align-items:center;justify-content:center`)}>
+                <span aria-hidden="true" style={s(`position:absolute;left:84.24%;top:43.49%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:48% 52% 50% 50% / 54% 50% 50% 46%;background:rgba(122,112,196,.14);color:#7A70C4;display:flex;align-items:center;justify-content:center`)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                     <path d="M12 6.6C10.2 5.3 7.6 4.8 3.8 5v13.2c3.8-.2 6.4.3 8.2 1.6 1.8-1.3 4.4-1.8 8.2-1.6V5c-3.8-.2-6.4.3-8.2 1.6z"></path>
                     <path d="M12 6.6v13.2"></path>
                   </svg>
                 </span>
-                <span aria-hidden="true" style={s(`position:absolute;left:71.16%;top:86.3%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50% 50% 48% 52% / 46% 50% 54% 50%;background:rgba(240,189,181,.16);color:#F0BDB5;display:flex;align-items:center;justify-content:center`)}>
+                <span aria-hidden="true" style={s(`position:absolute;left:71.16%;top:86.3%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50% 50% 48% 52% / 46% 50% 54% 50%;background:rgba(201,112,95,.14);color:#C9705F;display:flex;align-items:center;justify-content:center`)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                     <path d="M12 19 C7 15 4.5 12.4 4.5 9.4 C4.5 7 6.3 5.2 8.6 5.2 C10 5.2 11.3 6 12 7.2 C12.7 6 14 5.2 15.4 5.2 C17.7 5.2 19.5 7 19.5 9.4 C19.5 12.4 17 15 12 19 Z"></path>
                   </svg>
                 </span>
-                <span aria-hidden="true" style={s(`position:absolute;left:28.84%;top:86.3%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50% 46% 54% 50% / 52% 50% 48% 50%;background:rgba(242,218,172,.16);color:#F2DAAC;display:flex;align-items:center;justify-content:center`)}>
+                <span aria-hidden="true" style={s(`position:absolute;left:28.84%;top:86.3%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50% 46% 54% 50% / 52% 50% 48% 50%;background:rgba(201,154,63,.16);color:#C99A3F;display:flex;align-items:center;justify-content:center`)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                     <path d="M3.4 19.4 C3.4 15.8 5.9 14.1 9 14.1 C12.1 14.1 14.6 15.8 14.6 19.4"></path>
                     <path d="M16.4 15.4 C18.9 15.7 20.6 17.2 20.6 19.4"></path>
@@ -591,7 +593,7 @@ class YourPeople extends React.Component {
                     <circle cx="16.8" cy="10.3" r="2.6"></circle>
                   </svg>
                 </span>
-                <span aria-hidden="true" style={s(`position:absolute;left:15.76%;top:43.49%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:54% 50% 46% 50% / 50% 48% 52% 50%;background:rgba(170,215,227,.16);color:#AAD7E3;display:flex;align-items:center;justify-content:center`)}>
+                <span aria-hidden="true" style={s(`position:absolute;left:15.76%;top:43.49%;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:54% 50% 46% 50% / 50% 48% 52% 50%;background:rgba(76,156,179,.14);color:#4C9CB3;display:flex;align-items:center;justify-content:center`)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:46%;height:46%`)}>
                     <path d="M3 7.5c3-2.4 6-2.4 9 0s6 2.4 9 0"></path>
                     <path d="M3 12c3-2.4 6-2.4 9 0s6 2.4 9 0"></path>
@@ -599,20 +601,20 @@ class YourPeople extends React.Component {
                   </svg>
                 </span>
                 {' '}
-                <span style={s(`position:absolute;left:50%;top:55.3%;transform:translate(-50%,-50%);font:400 clamp(44px,5.4vw,64px)/.9 'DM Serif Display',serif;color:#F6F4E9;text-shadow:0 0 34px rgba(217,234,110,.3)`)}>63</span>
+                <span style={s(`position:absolute;left:50%;top:55.3%;transform:translate(-50%,-50%);font:400 clamp(44px,5.4vw,64px)/.9 'DM Serif Display',serif;color:#14231A`)}>63</span>
               </div>
               <div style={s(`min-width:0`)}>
-                <span style={s(`font:600 10px 'DM Sans',sans-serif;letter-spacing:2.2px;color:#DCEC85`)}>TEAM SIGNAL</span>
-                <h3 style={s(`margin:12px 0 0;font:400 clamp(28px,3vw,36px)/1.1 'DM Serif Display',serif;letter-spacing:-.4px;color:#F6F4E9;text-wrap:balance`)}>One score for the whole team.</h3>
-                <p style={s(`margin:14px 0 0;font:400 16.5px/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>
+                <span style={s(`font:600 10px 'DM Sans',sans-serif;letter-spacing:2.2px;color:#4E7A2E`)}>TEAM SIGNAL</span>
+                <h3 style={s(`margin:12px 0 0;font:400 clamp(28px,3vw,36px)/1.1 'DM Serif Display',serif;letter-spacing:-.4px;color:#14231A;text-wrap:balance`)}>One score for the whole team.</h3>
+                <p style={s(`margin:14px 0 0;font:400 16.5px/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
                   Each person’s answers are added into one figure for their team. Teams below five never appear, and no individual score reaches a dashboard. That’s all a leader sees, and it’s where their side begins.
                 </p>
                 <div style={s(`display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:24px`)}>
-                  <a href="/for-leaders/#dashboard" style={s(`display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(228,240,214,.26);color:#F6F4E9;font:600 14.5px 'DM Sans',sans-serif`)} className="yp-ho95696c">
+                  <a href="/for-leaders/#dashboard" style={s(`display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(20,35,26,.2);color:#14231A;font:600 14.5px 'DM Sans',sans-serif`)} className="yp-ho95696c">
                     Explore the leadership dashboard
                     <span aria-hidden="true">›</span>
                   </a>
-                  <span style={s(`display:flex;align-items:center;gap:8px;font:400 13.5px/1.45 'DM Sans',sans-serif;color:rgba(244,242,230,.78)`)}>
+                  <span style={s(`display:flex;align-items:center;gap:8px;font:400 13.5px/1.45 'DM Sans',sans-serif;color:rgba(20,35,26,.6)`)}>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <rect x="5.5" y="10.5" width="13" height="9" rx="2.5"></rect>
                       <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path>
@@ -662,7 +664,7 @@ class YourPeople extends React.Component {
                     <div style={s(`display:flex;justify-content:center`)}>
                       <div style={s(`height:min(560px,128vw);max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:42px;background:#060B07;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(228,240,214,.14)`)}>
                         <div style={s(`position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0F2015`)}>
-                          <img src="/assets/v5/web/reflect.jpg" alt="Reflect: What’s on your mind? nørma listening, the words appearing as they’re spoken" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                          <img src="/assets/v5/light/app-reflect.webp" alt="Reflect: What’s on your mind? nørma listening, the words appearing as they’re spoken" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                         </div>
                       </div>
                     </div>
@@ -696,7 +698,7 @@ class YourPeople extends React.Component {
                     <div style={s(`display:flex;justify-content:center`)}>
                       <div style={s(`height:min(560px,128vw);max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:42px;background:#060B07;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(228,240,214,.14)`)}>
                         <div style={s(`position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0F2015`)}>
-                          <img src="/assets/v5/web/entry.jpg" alt="A reflection entry: Missing someone specific is sitting under the unsure, scattered feeling. Growth work: Reach out to a friend" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                          <img src="/assets/v5/light/app-entry.webp" alt="A reflection entry: Missing someone specific is sitting under the unsure, scattered feeling. Growth work: Reach out to a friend" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                         </div>
                       </div>
                     </div>
@@ -730,7 +732,7 @@ class YourPeople extends React.Component {
                     <div style={s(`display:flex;justify-content:center`)}>
                       <div style={s(`height:min(560px,128vw);max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:42px;background:#060B07;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(228,240,214,.14)`)}>
                         <div style={s(`position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0F2015`)}>
-                          <img src="/assets/v5/web/emotion.jpg" alt="Name the emotion: seven core emotions as soft colour bubbles" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                          <img src="/assets/v5/light/app-emotion.webp" alt="Name the emotion: How are you feeling? Seven core emotions as soft colour bubbles" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                         </div>
                       </div>
                     </div>
@@ -764,7 +766,7 @@ class YourPeople extends React.Component {
                     <div style={s(`display:flex;justify-content:center`)}>
                       <div style={s(`height:min(560px,128vw);max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:42px;background:#060B07;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(228,240,214,.14)`)}>
                         <div style={s(`position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0F2015`)}>
-                          <img src="/assets/v5/web/breathing.jpg" alt="Reset: a breathing exercise, nørma breathing along" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                          <img src="/assets/v5/light/app-breathing.webp" alt="Reset: a breathing exercise, nørma breathing along" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                         </div>
                       </div>
                     </div>
@@ -798,7 +800,7 @@ class YourPeople extends React.Component {
                     <div style={s(`display:flex;justify-content:center`)}>
                       <div style={s(`height:min(560px,128vw);max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:42px;background:#060B07;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(228,240,214,.14)`)}>
                         <div style={s(`position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0F2015`)}>
-                          <img src="/assets/v5/web/habits.jpg" alt="Habits grouped by pillar" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                          <img src="/assets/v5/light/app-habits.webp" alt="Habits grouped by pillar" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                         </div>
                       </div>
                     </div>
@@ -832,7 +834,7 @@ class YourPeople extends React.Component {
                     <div style={s(`display:flex;justify-content:center`)}>
                       <div style={s(`height:min(560px,128vw);max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:42px;background:#060B07;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(228,240,214,.14)`)}>
                         <div style={s(`position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0F2015`)}>
-                          <img src="/assets/v5/web/gratitude.jpg" alt="Gratitude: three things written for today" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                          <img src="/assets/v5/light/app-gratitude-entry.webp" alt="Gratitude: three things written for today" loading="lazy" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                         </div>
                       </div>
                     </div>
@@ -845,12 +847,12 @@ class YourPeople extends React.Component {
                 <div style={s(`flex:none;width:clamp(300px,32vw,380px);position:sticky;top:calc(50vh - min(310px,calc(50vh - 60px)) + 34px);display:flex;align-items:center;justify-content:center;gap:22px;height:min(620px,calc(100vh - 120px))`)}>
                   <div style={s(`height:100%;max-width:100%;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:42px;background:#060B07;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(228,240,214,.14)`)}>
                     <div style={s(`position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0F2015`)}>
-                      <img src="/assets/v5/web/reflect.jpg" alt="Reflect: What’s on your mind? nørma listening, the words appearing as they’re spoken" aria-hidden={V.fh0} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo0 ?? ''};transform:scale(${V.fs0 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
-                      <img src="/assets/v5/web/entry.jpg" alt="A reflection entry: Missing someone specific is sitting under the unsure, scattered feeling. Growth work: Reach out to a friend" aria-hidden={V.fh1} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo1 ?? ''};transform:scale(${V.fs1 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
-                      <img src="/assets/v5/web/emotion.jpg" alt="Name the emotion: seven core emotions as soft colour bubbles" aria-hidden={V.fh2} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo2 ?? ''};transform:scale(${V.fs2 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
-                      <img src="/assets/v5/web/breathing.jpg" alt="Reset: a breathing exercise, nørma breathing along" aria-hidden={V.fh3} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo3 ?? ''};transform:scale(${V.fs3 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
-                      <img src="/assets/v5/web/habits.jpg" alt="Habits grouped by pillar" aria-hidden={V.fh4} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo4 ?? ''};transform:scale(${V.fs4 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
-                      <img src="/assets/v5/web/gratitude.jpg" alt="Gratitude: three things written for today" aria-hidden={V.fh5} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo5 ?? ''};transform:scale(${V.fs5 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
+                      <img src="/assets/v5/light/app-reflect.webp" alt="Reflect: What’s on your mind? nørma listening, the words appearing as they’re spoken" aria-hidden={V.fh0} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo0 ?? ''};transform:scale(${V.fs0 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
+                      <img src="/assets/v5/light/app-entry.webp" alt="A reflection entry: Missing someone specific is sitting under the unsure, scattered feeling. Growth work: Reach out to a friend" aria-hidden={V.fh1} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo1 ?? ''};transform:scale(${V.fs1 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
+                      <img src="/assets/v5/light/app-emotion.webp" alt="Name the emotion: How are you feeling? Seven core emotions as soft colour bubbles" aria-hidden={V.fh2} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo2 ?? ''};transform:scale(${V.fs2 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
+                      <img src="/assets/v5/light/app-breathing.webp" alt="Reset: a breathing exercise, nørma breathing along" aria-hidden={V.fh3} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo3 ?? ''};transform:scale(${V.fs3 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
+                      <img src="/assets/v5/light/app-habits.webp" alt="Habits grouped by pillar" aria-hidden={V.fh4} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo4 ?? ''};transform:scale(${V.fs4 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
+                      <img src="/assets/v5/light/app-gratitude-entry.webp" alt="Gratitude: three things written for today" aria-hidden={V.fh5} style={s(`position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:${V.fo5 ?? ''};transform:scale(${V.fs5 ?? ''});transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform 1.2s cubic-bezier(.22,.61,.36,1)`)} />
                     </div>
                   </div>
                   <div aria-hidden="true" style={s(`display:flex;flex-direction:column;gap:8px`)}>
@@ -968,20 +970,20 @@ class YourPeople extends React.Component {
             <div style={s(`display:flex;justify-content:center`)}>
               <div style={s(`position:relative;width:min(400px,100%);padding:clamp(8px,2vw,24px) 0`)}>
                 <div aria-hidden="true" style={s(`position:absolute;left:4%;right:4%;top:4%;bottom:4%;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.14),rgba(217,234,110,0));pointer-events:none`)}></div>
-                <div style={s(`position:relative;padding:24px 24px 30px;border-radius:30px 22px 32px 20px / 22px 32px 20px 30px;background:rgba(15,32,21,.5);border:1px solid rgba(228,240,214,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)`)}>
+                <div style={s(`position:relative;padding:24px 24px 30px;border-radius:30px 22px 32px 20px / 22px 32px 20px 30px;background:linear-gradient(170deg,#FBFAF4,#F2F1E6 85%);border:1px solid rgba(20,35,26,.06);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)`)}>
                   <div style={s(`display:flex;align-items:center;gap:12px`)}>
                     <img src="/assets/v5/people/laura-avatar.jpg" alt="" width="38" height="38" style={s(`display:block;flex:none;width:38px;height:38px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;object-fit:cover`)} />
                     <span style={s(`display:flex;flex-direction:column;gap:4px;min-width:0`)}>
-                      <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#F6F4E9`)}>Laura’s reflection</span>
-                      <span style={s(`font:600 9.5px 'DM Sans',sans-serif;letter-spacing:2.2px;color:rgba(201,212,194,.75)`)}>TUE · 14 OCT</span>
+                      <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#14231A`)}>Laura’s reflection</span>
+                      <span style={s(`font:600 9.5px 'DM Sans',sans-serif;letter-spacing:2.2px;color:rgba(20,35,26,.5)`)}>TUE · 14 OCT</span>
                     </span>
                   </div>
                   <div style={s(`position:relative;margin-top:22px`)}>
-                    <p aria-hidden="true" style={s(`margin:0;font:400 22px/1.34 'DM Serif Display',serif;letter-spacing:-.2px;color:rgba(244,242,230,.8);filter:blur(6px);user-select:none`)}>
+                    <p aria-hidden="true" style={s(`margin:0;font:400 22px/1.34 'DM Serif Display',serif;letter-spacing:-.2px;color:rgba(20,35,26,.72);filter:blur(6px);user-select:none`)}>
                       I keep saying yes to the late calls, and by the weekend I’m too tired to see anyone. I miss the Thursday dinners more than I let on.
                     </p>
                     <div style={s(`position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px`)}>
-                      <span style={s(`width:56px;height:56px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(217,234,110,.2);box-shadow:0 0 32px rgba(217,234,110,.35);display:flex;align-items:center;justify-content:center;color:#EAF79B`)}>
+                      <span style={s(`width:56px;height:56px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:rgba(217,234,110,.55);box-shadow:0 0 32px rgba(217,234,110,.5);display:flex;align-items:center;justify-content:center;color:#2E4A1C`)}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                           <rect x="5.5" y="10.5" width="13" height="9" rx="2.5"></rect>
                           <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path>

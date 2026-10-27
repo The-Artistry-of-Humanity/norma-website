@@ -17,6 +17,9 @@ const LV = [
 const PILLARS = ['Health & Fitness', 'Internal Work', 'Love & Relationships', 'Social Connection', 'Work & Life Flow'];
 const PC = ['#9FD6AB', '#B9B2E8', '#EBAFA6', '#EFD19A', '#9CCFDD'];
 const band = v => v >= 70 ? '#D9EA6E' : v >= 55 ? '#F4F2E6' : v >= 46 ? '#E6C77E' : '#F0A58C';
+// The same bands on the light product cards, as the light dashboard draws them.
+const bandL = v => v >= 70 ? '#2F8F5B' : v >= 55 ? '#14231A' : v >= 46 ? '#9A6E1E' : '#B14A33';
+const PCL = ['#4E9A63', '#7A70C4', '#C9705F', '#C99A3F', '#4C9CB3'];
 const pts = v => v.map((x, i) => { const a = (-90 + 72 * i) * Math.PI / 180, r = 80 * x / 100; return [100 + r * Math.cos(a), 100 + r * Math.sin(a)]; });
 const soft = (p, t = .16) => { const n = p.length, L = (a, b) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t], f = q => q[0].toFixed(1) + ' ' + q[1].toFixed(1); let d = ''; for (let i = 0; i < n; i++) { const P = p[i], A = L(P, p[(i + n - 1) % n]), B = L(P, p[(i + 1) % n]); d += (i ? ' L' : 'M') + f(A) + ' Q' + f(P) + ' ' + f(B); } return d + ' Z'; };
 class ForLeaders extends React.Component {
@@ -88,9 +91,9 @@ class ForLeaders extends React.Component {
     const levels = LV.map((l, i) => { const sel = i === lv, sc = Math.round(mean(l.vals)); return { kind: l.kind, name: l.name, score: sc, col: band(sc), sel, pick: () => this.pick(i), indent: i * 28 + 'px', shape: SHP[i], bg: sel ? 'rgba(217,234,110,.12)' : 'rgba(228,240,214,.05)', ring: sel ? 'inset 0 0 0 1px rgba(217,234,110,.5)' : 'inset 0 0 0 1px rgba(228,240,214,0)', eyeCol: sel ? '#DCEC85' : 'rgba(201,212,194,.72)' }; });
     const score = Math.round(mean(pv));
     const extra = { levelsRef: this.levelsRef, levels, penD: soft(pts(pv)), cmpD: soft(pts(pc)), cmpOp: L.cmp == null ? 0 : 1, deptD: soft(pts(pd)), deptOp: lv === 2 ? 1 : 0,
-      dots: pts(pv).map((p, i) => ({ left: (p[0] / 2).toFixed(2) + '%', top: (p[1] / 2).toFixed(2) + '%', c: PC[i] })),
-      lvlScore: score, lvlCol: band(score), lvlName: L.name, cmpLabel: L.cmp == null ? '' : LV[L.cmp].name,
-      rows: PILLARS.map((n, i) => ({ name: n, c: PC[i], v: Math.round(pv[i]), col: band(pv[i]), cmp: L.cmp == null ? '' : Math.round(pc[i]) })) };
+      dots: pts(pv).map((p, i) => ({ left: (p[0] / 2).toFixed(2) + '%', top: (p[1] / 2).toFixed(2) + '%', c: PCL[i] })),
+      lvlScore: score, lvlCol: bandL(score), lvlName: L.name, cmpLabel: L.cmp == null ? '' : LV[L.cmp].name,
+      rows: PILLARS.map((n, i) => ({ name: n, c: PCL[i], v: Math.round(pv[i]), col: bandL(pv[i]), cmp: L.cmp == null ? '' : Math.round(pc[i]) })) };
     return { ...extra, swarmRef: this.swarmRef, rootRef: this.rootRef, tourRef: this.tourRef, tourImg: this.tourImg, wide: !narrow, narrow, menuOpen: narrow && menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })) };
   }
 
@@ -160,43 +163,16 @@ class ForLeaders extends React.Component {
             {(V.wide) ? (
               <>
                 <div style={s(`position:relative;padding-bottom:12%`)}>
-                  <div style={s(`position:relative;aspect-ratio:16/10;border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;overflow:hidden;background:#0A140D;box-shadow:0 46px 90px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.12)`)}>
-                    <div style={s(`height:26px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#111D15;border-bottom:1px solid rgba(228,240,214,.06)`)}>
-                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(228,240,214,.18)`)}></span>
-                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(228,240,214,.18)`)}></span>
-                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(228,240,214,.18)`)}></span>
+                  <div style={s(`position:relative;aspect-ratio:16/10;border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;overflow:hidden;background:#F6F5EE;box-shadow:0 46px 90px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.12)`)}>
+                    <div style={s(`height:26px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#ECEBE1;border-bottom:1px solid rgba(20,35,26,.08)`)}>
+                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
+                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
+                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
                     </div>
-                    <img src="/assets/v5/web/dash/01-home.jpg" alt="The nørma leader dashboard for Northwind: nørma Score, Fulfilment 61, Culture 61 with Needs attention, a focus area and the start of every department" style={s(`display:block;width:100%;height:auto`)} />
+                    <img src="/assets/v5/light/dash-home-full.webp" alt="The nørma leader dashboard for Northwind: nørma Score 6.5, Fulfilment 61, Culture 68, a focus area and every department" style={s(`display:block;width:100%;height:auto`)} />
                   </div>
-                  <div data-reveal="up" data-delay=".5" style={s(`position:absolute;right:-5%;bottom:0;width:36%;box-sizing:border-box;padding:16px 16px 18px;border-radius:26px 18px 28px 16px / 18px 28px 16px 26px;background:linear-gradient(170deg,#18291D,#0F1C13 80%);box-shadow:0 40px 70px -24px rgba(20,35,26,.75),0 0 0 1px rgba(228,240,214,.12)`)}>
-                    <span style={s(`display:block;font:400 17px 'DM Serif Display',serif;color:#F6F4E9`)}>Fulfilment</span>
-                    {' '}
-                    <span style={s(`display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font:500 10.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.8)`)}>
-                      <span style={s(`display:inline-flex;align-items:center;gap:6px`)}>
-                        <span style={s(`width:12px;height:2px;border-radius:2px;background:#D9EA6E`)}></span>
-                        Field Services
-                      </span>
-                      <span style={s(`display:inline-flex;align-items:center;gap:6px`)}>
-                        <span style={s(`width:12px;height:0;border-top:2px dashed rgba(244,242,230,.55)`)}></span>
-                        Northwind
-                      </span>
-                    </span>
-                    <div style={s(`position:relative;width:100%;aspect-ratio:1;margin-top:6px`)}>
-                      <svg viewBox="0 0 200 200" aria-hidden="true" style={s(`position:absolute;inset:0;width:100%;height:100%;overflow:visible`)}>
-                        <path d="M84.8 31.1 Q100.0 20.0 115.2 31.1 L160.9 64.2 Q176.1 75.3 170.3 93.2 L152.8 146.8 Q147.0 164.7 128.2 164.7 L71.8 164.7 Q53.0 164.7 47.2 146.8 L29.7 93.2 Q23.9 75.3 39.1 64.2 Z" fill="none" stroke="rgba(217,234,110,.2)" strokeWidth="1.2"></path>
-                        <path d="M92.4 65.5 Q100.0 60.0 107.6 65.5 L130.4 82.1 Q138.0 87.6 135.1 96.6 L126.4 123.4 Q123.5 132.4 114.1 132.4 L85.9 132.4 Q76.5 132.4 73.6 123.4 L64.9 96.6 Q62.0 87.6 69.6 82.1 Z" fill="none" stroke="rgba(228,240,214,.07)" strokeWidth="1"></path>
-                        <path d="M92.9 56.0 Q100.0 50.4 107.2 56.0 L137.7 79.8 Q144.9 85.4 142.5 94.4 L132.5 132.5 Q130.1 141.4 120.8 141.0 L81.1 139.2 Q71.8 138.8 69.2 130.3 L58.4 94.2 Q55.9 85.7 62.9 80.0 Z" fill="none" stroke="rgba(244,242,230,.5)" strokeWidth="1.4" strokeDasharray="4 4"></path>
-                        <path d="M95.4 66.9 Q100.0 62.4 105.1 66.8 L126.8 85.3 Q132.0 89.6 130.5 96.2 L124.1 124.4 Q122.6 131.1 115.6 130.8 L85.8 129.4 Q78.8 129.1 77.6 123.0 L72.3 96.8 Q71.1 90.6 75.7 86.1 Z" fill="rgba(217,234,110,.14)" stroke="#D9EA6E" strokeWidth="2.2" strokeLinejoin="round"></path>
-                      </svg>
-                      {' '}
-                      <span style={s(`position:absolute;left:50.00%;top:31.20%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#9FD6AB`)}></span>
-                      <span style={s(`position:absolute;left:65.98%;top:44.81%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#B9B2E8`)}></span>
-                      <span style={s(`position:absolute;left:61.29%;top:65.53%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#EBAFA6`)}></span>
-                      <span style={s(`position:absolute;left:39.42%;top:64.56%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#EFD19A`)}></span>
-                      <span style={s(`position:absolute;left:35.54%;top:45.30%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#9CCFDD`)}></span>
-                      {' '}
-                      <span style={s(`position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);font:400 clamp(22px,2.4vw,32px)/1 'DM Serif Display',serif;color:#F0A58C`)}>44</span>
-                    </div>
+                  <div data-reveal="up" data-delay=".5" style={s(`position:absolute;right:-5%;bottom:0;width:30%;border-radius:26px 18px 28px 16px / 18px 28px 16px 26px;overflow:hidden;background:#FBFAF4;box-shadow:0 30px 60px -24px rgba(20,35,26,.45),0 0 0 1px rgba(20,35,26,.06)`)}>
+                    <img src="/assets/v5/light/department-pentagon.webp" alt="Fulfilment for Field Services, 44, drawn over Northwind’s 61" width="260" height="362" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                   </div>
                 </div>
               </>
@@ -204,7 +180,7 @@ class ForLeaders extends React.Component {
             {(V.narrow) ? (
               <>
                 <div style={s(`position:relative;max-width:360px;margin:0 auto;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;overflow:hidden;background:#0F2015;box-shadow:0 46px 90px -34px rgba(20,35,26,.6)`)}>
-                  <img src="/assets/v5/web/dash/m-score-dial.jpg" alt="The nørma Score dial" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/m-score-card.webp" alt="The nørma Score dial: 6.5, steady" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
@@ -756,14 +732,14 @@ class ForLeaders extends React.Component {
             {(V.wide) ? (
               <>
                 <div data-reveal="up" style={s(`position:relative;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                  <img src="/assets/v5/web/dash/e-score-cards.jpg" alt="nørma Score 6.1, Fulfilment 61 steady, Culture 61 down 10 with Needs attention" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/score-cards.webp" alt="nørma Score 6.5, Fulfilment 61 up 2, Culture 68 down 3" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
             {(V.narrow) ? (
               <>
                 <div style={s(`position:relative;max-width:400px;margin:0 auto;border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                  <img src="/assets/v5/web/dash/m-culture-card.jpg" alt="Culture 61, down 10 since September" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/m-culture-card.webp" alt="Culture 68, down 3 since September" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
@@ -810,15 +786,15 @@ class ForLeaders extends React.Component {
           <>
             <div ref={V.tourRef} style={s(`position:relative;height:210vh;margin-top:clamp(40px,5vw,64px)`)}>
               <div style={s(`position:sticky;top:88px;height:calc(100vh - 120px);max-height:820px;box-sizing:border-box;padding:0 clamp(20px,5vw,48px)`)}>
-                <div style={s(`max-width:1160px;height:100%;margin:0 auto;display:flex;flex-direction:column;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;overflow:hidden;background:#0A140D;box-shadow:0 60px 120px -40px rgba(0,0,0,.9),0 0 0 1px rgba(228,240,214,.1)`)}>
-                  <div style={s(`flex:none;height:30px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#111D15;border-bottom:1px solid rgba(228,240,214,.06)`)}>
-                    <span style={s(`width:9px;height:9px;border-radius:50%;background:rgba(228,240,214,.18)`)}></span>
-                    <span style={s(`width:9px;height:9px;border-radius:50%;background:rgba(228,240,214,.18)`)}></span>
-                    <span style={s(`width:9px;height:9px;border-radius:50%;background:rgba(228,240,214,.18)`)}></span>
-                    <span style={s(`margin-left:14px;font:500 11px 'DM Mono',monospace;color:rgba(201,212,194,.55)`)}>app.joinnorma.com · Northwind</span>
+                <div style={s(`max-width:1160px;height:100%;margin:0 auto;display:flex;flex-direction:column;border-radius:24px 18px 26px 16px / 18px 26px 16px 24px;overflow:hidden;background:#F6F5EE;box-shadow:0 60px 120px -40px rgba(0,0,0,.9),0 0 0 1px rgba(228,240,214,.1)`)}>
+                  <div style={s(`flex:none;height:30px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#ECEBE1;border-bottom:1px solid rgba(20,35,26,.08)`)}>
+                    <span style={s(`width:9px;height:9px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
+                    <span style={s(`width:9px;height:9px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
+                    <span style={s(`width:9px;height:9px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
+                    <span style={s(`margin-left:14px;font:500 11px 'DM Mono',monospace;color:rgba(20,35,26,.5)`)}>app.joinnorma.com · Northwind</span>
                   </div>
                   <div style={s(`position:relative;flex:1;min-height:0;overflow:hidden`)}>
-                    <img ref={V.tourImg} src="/assets/v5/web/dash/01-home.jpg" alt="The full nørma dashboard home for Northwind" style={s(`display:block;width:100%;height:auto;will-change:transform`)} />
+                    <img ref={V.tourImg} src="/assets/v5/light/dash-home-full.webp" alt="The nørma leader dashboard for Northwind: nørma Score 6.5, Fulfilment 61, Culture 68, a focus area and every department" style={s(`display:block;width:100%;height:auto;will-change:transform`)} />
                   </div>
                 </div>
               </div>
@@ -830,10 +806,10 @@ class ForLeaders extends React.Component {
           <>
             <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:40px;padding-bottom:clamp(112px,13vw,176px);display:flex;flex-direction:column;gap:20px`)}>
               <div style={s(`position:relative;max-width:400px;margin:0 auto;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                <img src="/assets/v5/web/dash/m-culture-card.jpg" alt="Culture 61, down 10 since September" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                <img src="/assets/v5/light/m-culture-card.webp" alt="Culture 68, down 3 since September" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
               </div>
               <div style={s(`position:relative;max-width:400px;margin:0 auto;border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                <img src="/assets/v5/web/dash/m-culture-by-month.jpg" alt="Culture by month, with the October dip" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                <img src="/assets/v5/light/m-fulfilment-card.webp" alt="Fulfilment 61, up 2 since September" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
               </div>
             </div>
           </>
@@ -854,21 +830,21 @@ class ForLeaders extends React.Component {
             {(V.wide) ? (
               <>
                 <div data-reveal="up" style={s(`position:relative;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                  <img src="/assets/v5/web/dash/e-department-cards.jpg" alt="Three department cards: Field Services in red, one amber, one green, each with a score, a Fulfilment shape and Culture" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/department-cards.webp" alt="Department cards: Field Services and Logistics shaded red, Sales amber, each with a score, a Fulfilment shape and Culture" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
             {(V.narrow) ? (
               <>
                 <div style={s(`position:relative;max-width:400px;margin:0 auto;border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                  <img src="/assets/v5/web/dash/m-department-card.jpg" alt="Field Services card" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/m-department-card.webp" alt="Field Services: score 4.4, Fulfilment 44 and Culture 43, all down" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
             {(V.wide) ? (
               <>
                 <div data-reveal="up" data-delay=".35" style={s(`position:relative;width:min(560px,58%);margin:-6% 0 0 auto;margin-right:-2%;border-radius:32px 22px 30px 20px / 20px 30px 22px 32px;overflow:hidden;background:#0F2015;box-shadow:0 40px 70px -24px rgba(20,35,26,.7),0 0 0 1px rgba(228,240,214,.12)`)}>
-                  <img src="/assets/v5/web/dash/e-focus-area.jpg" alt="Focus area: Field Services, Fulfilment 44 and culture 43, both down again. Feeling safe is the lowest answer in the company." loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/focus-area.webp" alt="Focus area: Field Services, Fulfilment 44 and culture 43, both down again. Feeling safe is the lowest answer in the company." loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
@@ -899,31 +875,31 @@ class ForLeaders extends React.Component {
                 ))}
               </div>
             </div>
-            <div style={s(`min-width:0;box-sizing:border-box;padding:clamp(22px,2.6vw,32px);border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;background:linear-gradient(170deg,#18291D,#0F1C13 80%);box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
+            <div style={s(`min-width:0;box-sizing:border-box;padding:clamp(22px,2.6vw,32px);border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;background:linear-gradient(170deg,#FBFAF4,#F2F1E6 80%);box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(20,35,26,.06)`)}>
               <div style={s(`display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap`)}>
-                <span style={s(`font:400 24px 'DM Serif Display',serif;color:#F6F4E9`)}>Fulfilment</span>
-                <span style={s(`display:flex;flex-wrap:wrap;gap:4px 16px;font:500 12px 'DM Sans',sans-serif;color:rgba(201,212,194,.82)`)}>
+                <span style={s(`font:400 24px 'DM Serif Display',serif;color:#14231A`)}>Fulfilment</span>
+                <span style={s(`display:flex;flex-wrap:wrap;gap:4px 16px;font:500 12px 'DM Sans',sans-serif;color:rgba(20,35,26,.6)`)}>
                   <span style={s(`display:inline-flex;align-items:center;gap:7px`)}>
-                    <span style={s(`width:14px;height:2px;border-radius:2px;background:#D9EA6E`)}></span>
+                    <span style={s(`width:14px;height:2px;border-radius:2px;background:#4E9A63`)}></span>
                     {V.lvlName}
                   </span>
                   <span style={s(`display:inline-flex;align-items:center;gap:7px;opacity:${V.cmpOp ?? ''};transition:opacity .4s ease`)}>
-                    <span style={s(`width:14px;height:0;border-top:2px dashed rgba(244,242,230,.55)`)}></span>
+                    <span style={s(`width:14px;height:0;border-top:2px dashed rgba(20,35,26,.4)`)}></span>
                     {V.cmpLabel}
                   </span>
                   <span style={s(`display:inline-flex;align-items:center;gap:7px;opacity:${V.deptOp ?? ''};transition:opacity .4s ease`)}>
-                    <span style={s(`width:14px;height:0;border-top:2px dotted #B8C9A4`)}></span>
+                    <span style={s(`width:14px;height:0;border-top:2px dotted #9AAE84`)}></span>
                     Field Services
                   </span>
                 </span>
               </div>
               <div style={s(`position:relative;width:min(100%,320px);aspect-ratio:1;margin:18px auto 0`)}>
                 <svg viewBox="0 0 200 200" aria-hidden="true" style={s(`position:absolute;inset:0;width:100%;height:100%;overflow:visible`)}>
-                  <path d="M84.8 31.1 Q100.0 20.0 115.2 31.1 L160.9 64.2 Q176.1 75.3 170.3 93.2 L152.8 146.8 Q147.0 164.7 128.2 164.7 L71.8 164.7 Q53.0 164.7 47.2 146.8 L29.7 93.2 Q23.9 75.3 39.1 64.2 Z" fill="none" stroke="rgba(217,234,110,.2)" strokeWidth="1.2"></path>
-                  <path d="M92.4 65.5 Q100.0 60.0 107.6 65.5 L130.4 82.1 Q138.0 87.6 135.1 96.6 L126.4 123.4 Q123.5 132.4 114.1 132.4 L85.9 132.4 Q76.5 132.4 73.6 123.4 L64.9 96.6 Q62.0 87.6 69.6 82.1 Z" fill="none" stroke="rgba(228,240,214,.07)" strokeWidth="1"></path>
-                  <path d={V.deptD} fill="none" stroke="#B8C9A4" strokeWidth="1.3" strokeDasharray="1.5 3.5" strokeLinecap="round" style={s(`opacity:${V.deptOp ?? ''};transition:opacity .4s ease`)}></path>
-                  <path d={V.cmpD} fill="none" stroke="rgba(244,242,230,.5)" strokeWidth="1.3" strokeDasharray="4 4" style={s(`opacity:${V.cmpOp ?? ''};transition:opacity .4s ease`)}></path>
-                  <path d={V.penD} fill="rgba(217,234,110,.14)" stroke="#D9EA6E" strokeWidth="2" strokeLinejoin="round"></path>
+                  <path d="M84.8 31.1 Q100.0 20.0 115.2 31.1 L160.9 64.2 Q176.1 75.3 170.3 93.2 L152.8 146.8 Q147.0 164.7 128.2 164.7 L71.8 164.7 Q53.0 164.7 47.2 146.8 L29.7 93.2 Q23.9 75.3 39.1 64.2 Z" fill="none" stroke="rgba(78,154,99,.28)" strokeWidth="1.2"></path>
+                  <path d="M92.4 65.5 Q100.0 60.0 107.6 65.5 L130.4 82.1 Q138.0 87.6 135.1 96.6 L126.4 123.4 Q123.5 132.4 114.1 132.4 L85.9 132.4 Q76.5 132.4 73.6 123.4 L64.9 96.6 Q62.0 87.6 69.6 82.1 Z" fill="none" stroke="rgba(20,35,26,.08)" strokeWidth="1"></path>
+                  <path d={V.deptD} fill="none" stroke="#9AAE84" strokeWidth="1.3" strokeDasharray="1.5 3.5" strokeLinecap="round" style={s(`opacity:${V.deptOp ?? ''};transition:opacity .4s ease`)}></path>
+                  <path d={V.cmpD} fill="none" stroke="rgba(20,35,26,.38)" strokeWidth="1.3" strokeDasharray="4 4" style={s(`opacity:${V.cmpOp ?? ''};transition:opacity .4s ease`)}></path>
+                  <path d={V.penD} fill="rgba(78,154,99,.14)" stroke="#4E9A63" strokeWidth="2" strokeLinejoin="round"></path>
                 </svg>
                 {(V.dots || []).map((d, $index) => (
                   <React.Fragment key={$index}>
@@ -935,13 +911,13 @@ class ForLeaders extends React.Component {
               <div style={s(`margin-top:18px;display:flex;flex-direction:column`)}>
                 {(V.rows || []).map((r, $index) => (
                   <React.Fragment key={$index}>
-                    <div style={s(`display:grid;grid-template-columns:minmax(0,1fr) 48px 48px;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(228,240,214,.08)`)}>
-                      <span style={s(`display:flex;align-items:center;gap:10px;min-width:0;font:500 14.5px 'DM Sans',sans-serif;color:rgba(244,242,230,.92)`)}>
+                    <div style={s(`display:grid;grid-template-columns:minmax(0,1fr) 48px 48px;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(20,35,26,.08)`)}>
+                      <span style={s(`display:flex;align-items:center;gap:10px;min-width:0;font:500 14.5px 'DM Sans',sans-serif;color:#14231A`)}>
                         <span style={s(`flex:none;width:8px;height:8px;border-radius:50%;background:${r.c ?? ''}`)}></span>
                         {r.name}
                       </span>
                       <span style={s(`text-align:right;font:400 20px/1 'DM Serif Display',serif;color:${r.col ?? ''}`)}>{r.v}</span>
-                      <span style={s(`text-align:right;font:500 13px 'DM Sans',sans-serif;color:rgba(201,212,194,.7)`)}>{r.cmp}</span>
+                      <span style={s(`text-align:right;font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.5)`)}>{r.cmp}</span>
                     </div>
                   </React.Fragment>
                 ))}
@@ -961,15 +937,37 @@ class ForLeaders extends React.Component {
             <div style={s(`min-width:0;margin-top:clamp(32px,4vw,48px)`)}>
               {(V.wide) ? (
                 <>
-                  <div data-reveal="up" style={s(`position:relative;border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                    <img src="/assets/v5/web/dash/e-questions-answered.jpg" alt="Work and Life Flow: four questions with how people answered each, the score and the change since September" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <div data-reveal="up" style={s(`position:relative;border-radius:20px 32px 22px 30px / 32px 22px 30px 20px;overflow:hidden;background:#FBFAF4;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
+                    <img src="/assets/v5/light/questions-answered.webp" alt="Work & Life Flow: four questions with how people answered each, the score and the change since September" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                   </div>
                 </>
               ) : null}
               {(V.narrow) ? (
                 <>
-                  <div style={s(`position:relative;max-width:400px;margin:0 auto;border-radius:32px 22px 30px 20px / 20px 30px 22px 32px;overflow:hidden;background:#0F2015;box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.1)`)}>
-                    <img src="/assets/v5/web/dash/m-question.jpg" alt="One check-in question with its answer bar, score and change" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <div role="img" aria-label="Read by nørma: Work and Life Flow fell most, not enough time for the work. Feeling safe to speak fell too, with changes made without asking." style={s(`position:relative;max-width:400px;margin:0 auto;box-sizing:border-box;padding:22px 20px 20px;border-radius:32px 22px 30px 20px / 20px 30px 22px 32px;background:linear-gradient(165deg,#1A3524,#10231A 75%);box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(228,240,214,.12);color:#F4F2E6`)}>
+                    <div style={s(`display:flex;align-items:center;gap:10px`)}>
+                      <img src="/assets/v5/norma-happy.png" alt="" width="34" height="46" style={s(`flex:none;width:34px;height:auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))`)} />
+                      <span style={s(`font:600 14px 'DM Sans',sans-serif;color:#F6F4E9`)}>Read by nørma</span>
+                      <span style={s(`padding:2px 7px;border-radius:999px;background:rgba(217,234,110,.18);font:600 10px 'DM Sans',sans-serif;letter-spacing:1px;color:#DCEC85`)}>AI</span>
+                    </div>
+                    <ul style={s(`margin:16px 0 0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:6px;font:400 14.5px/1.45 'DM Sans',sans-serif;color:rgba(244,242,230,.9)`)}>
+                      <li>Work &amp; Life Flow fell most: not enough time for the work.</li>
+                      <li>Feeling safe to speak fell too, with changes made without asking.</li>
+                    </ul>
+                    <div style={s(`margin-top:16px;display:flex;flex-direction:column;gap:8px`)}>
+                    <div style={s(`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(228,240,214,.1)`)}>
+                      <span style={s(`font:500 14px/1.35 'DM Sans',sans-serif;color:#F4F2E6`)}>Enough time for the work</span>
+                      <span style={s(`flex:none;padding:4px 10px;border-radius:999px;background:rgba(240,165,140,.18);font:400 17px/1 'DM Serif Display',serif;color:#F5B9A4`)}>31 ↓</span>
+                    </div>
+                    <div style={s(`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(228,240,214,.1)`)}>
+                      <span style={s(`font:500 14px/1.35 'DM Sans',sans-serif;color:#F4F2E6`)}>Safe to speak</span>
+                      <span style={s(`flex:none;padding:4px 10px;border-radius:999px;background:rgba(240,165,140,.18);font:400 17px/1 'DM Serif Display',serif;color:#F5B9A4`)}>38 ↓</span>
+                    </div>
+                    <div style={s(`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(228,240,214,.1)`)}>
+                      <span style={s(`font:500 14px/1.35 'DM Sans',sans-serif;color:#F4F2E6`)}>Open answers naming changes made without asking</span>
+                      <span style={s(`flex:none;padding:4px 10px;border-radius:999px;background:rgba(244,242,230,.12);font:400 17px/1 'DM Serif Display',serif;color:#F6F4E9`)}>43%</span>
+                    </div>
+                    </div>
                   </div>
                 </>
               ) : null}
@@ -988,55 +986,55 @@ class ForLeaders extends React.Component {
               nørma suggests what to do next. Start a playbook from the growth library and it’s stamped on the timeline, so every check-in after shows whether it’s working.
             </p>
           </div>
-          <div style={s(`margin-top:clamp(40px,5vw,64px);box-sizing:border-box;padding:clamp(24px,3vw,40px);border-radius:24px 34px 26px 32px / 34px 26px 32px 24px;background:linear-gradient(170deg,#17301F,#0F2015 75%);box-shadow:0 50px 100px -50px rgba(20,35,26,.6);color:#F4F2E6`)}>
+          <div style={s(`margin-top:clamp(40px,5vw,64px);box-sizing:border-box;padding:clamp(24px,3vw,40px);border-radius:24px 34px 26px 32px / 34px 26px 32px 24px;background:linear-gradient(170deg,#FBFAF4,#F2F1E6 75%);box-shadow:0 50px 100px -50px rgba(20,35,26,.45),0 0 0 1px rgba(20,35,26,.07);color:#14231A`)}>
             <div style={s(`display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap`)}>
-              <span style={s(`font:400 24px 'DM Serif Display',serif;color:#F6F4E9`)}>Culture · Customer Success</span>
-              <span style={s(`font:500 10.5px 'DM Mono',monospace;letter-spacing:1.2px;color:rgba(201,212,194,.7)`)}>SAMPLE</span>
+              <span style={s(`font:400 24px 'DM Serif Display',serif;color:#14231A`)}>Culture · Customer Success</span>
+              <span style={s(`font:500 10.5px 'DM Mono',monospace;letter-spacing:1.2px;color:rgba(20,35,26,.5)`)}>SAMPLE</span>
             </div>
             <div style={s(`position:relative;margin-top:24px`)}>
               <svg data-m="act-chart" viewBox="0 0 1000 320" aria-hidden="true" style={s(`display:block;width:100%;height:auto;overflow:visible`)}>
                 <defs>
                   <linearGradient id="actFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stopColor="#D9EA6E" stopOpacity=".2"></stop>
-                    <stop offset="1" stopColor="#D9EA6E" stopOpacity="0"></stop>
+                    <stop offset="0" stopColor="#8FB03E" stopOpacity=".22"></stop>
+                    <stop offset="1" stopColor="#8FB03E" stopOpacity="0"></stop>
                   </linearGradient>
                   <clipPath id="actAfter"><rect x="625.7" y="0" width="374.3" height="320"></rect></clipPath>
                 </defs>
-                <rect x="625.7" y="16" width="344.3" height="246" rx="14" fill="rgba(217,234,110,.05)"></rect>
-                <line x1="40" x2="960" y1="214.9" y2="214.9" stroke="rgba(228,240,214,.07)" strokeWidth="1"></line>
-                <line x1="40" x2="960" y1="144.2" y2="144.2" stroke="rgba(228,240,214,.07)" strokeWidth="1"></line>
-                <line x1="40" x2="960" y1="73.6" y2="73.6" stroke="rgba(228,240,214,.07)" strokeWidth="1"></line>
+                <rect x="625.7" y="16" width="344.3" height="246" rx="14" fill="rgba(217,234,110,.2)"></rect>
+                <line x1="40" x2="960" y1="214.9" y2="214.9" stroke="rgba(20,35,26,.08)" strokeWidth="1"></line>
+                <line x1="40" x2="960" y1="144.2" y2="144.2" stroke="rgba(20,35,26,.08)" strokeWidth="1"></line>
+                <line x1="40" x2="960" y1="73.6" y2="73.6" stroke="rgba(20,35,26,.08)" strokeWidth="1"></line>
                 <path d="M60.0 108.9 C122.9 108.9 122.9 120.7 185.7 120.7 C248.6 120.7 248.6 132.4 311.4 132.4 C374.3 132.4 374.3 156.0 437.1 156.0 C500.0 156.0 500.0 191.3 562.9 191.3 C625.7 191.3 625.7 167.8 688.6 167.8 C751.4 167.8 751.4 132.4 814.3 132.4 C877.1 132.4 877.1 97.1 940.0 97.1 L940.0 262 L60.0 262 Z" fill="url(#actFill)" clipPath="url(#actAfter)"></path>
-                <path d="M60.0 108.9 C122.9 108.9 122.9 120.7 185.7 120.7 C248.6 120.7 248.6 132.4 311.4 132.4 C374.3 132.4 374.3 156.0 437.1 156.0 C500.0 156.0 500.0 191.3 562.9 191.3 C625.7 191.3 625.7 167.8 688.6 167.8 C751.4 167.8 751.4 132.4 814.3 132.4 C877.1 132.4 877.1 97.1 940.0 97.1" fill="none" stroke="rgba(244,242,230,.38)" strokeWidth="2.5" strokeLinecap="round"></path>
-                <line x1="625.7" x2="625.7" y1="16" y2="262" stroke="#D9EA6E" strokeWidth="1.5" strokeDasharray="4 5" opacity=".75"></line>
+                <path d="M60.0 108.9 C122.9 108.9 122.9 120.7 185.7 120.7 C248.6 120.7 248.6 132.4 311.4 132.4 C374.3 132.4 374.3 156.0 437.1 156.0 C500.0 156.0 500.0 191.3 562.9 191.3 C625.7 191.3 625.7 167.8 688.6 167.8 C751.4 167.8 751.4 132.4 814.3 132.4 C877.1 132.4 877.1 97.1 940.0 97.1" fill="none" stroke="rgba(20,35,26,.35)" strokeWidth="2.5" strokeLinecap="round"></path>
+                <line x1="625.7" x2="625.7" y1="16" y2="262" stroke="#8FB03E" strokeWidth="1.5" strokeDasharray="4 5" opacity=".75"></line>
                 <g clipPath="url(#actAfter)">
-                  <path data-reveal="draw" data-delay=".5" d="M60.0 108.9 C122.9 108.9 122.9 120.7 185.7 120.7 C248.6 120.7 248.6 132.4 311.4 132.4 C374.3 132.4 374.3 156.0 437.1 156.0 C500.0 156.0 500.0 191.3 562.9 191.3 C625.7 191.3 625.7 167.8 688.6 167.8 C751.4 167.8 751.4 132.4 814.3 132.4 C877.1 132.4 877.1 97.1 940.0 97.1" fill="none" stroke="#D9EA6E" strokeWidth="3.5" strokeLinecap="round" pathlength="1" strokeDasharray="1" strokeDashoffset="0"></path>
+                  <path data-reveal="draw" data-delay=".5" d="M60.0 108.9 C122.9 108.9 122.9 120.7 185.7 120.7 C248.6 120.7 248.6 132.4 311.4 132.4 C374.3 132.4 374.3 156.0 437.1 156.0 C500.0 156.0 500.0 191.3 562.9 191.3 C625.7 191.3 625.7 167.8 688.6 167.8 C751.4 167.8 751.4 132.4 814.3 132.4 C877.1 132.4 877.1 97.1 940.0 97.1" fill="none" stroke="#4E9A63" strokeWidth="3.5" strokeLinecap="round" pathlength="1" strokeDasharray="1" strokeDashoffset="0"></path>
                 </g>
-                <circle cx="60.0" cy="108.9" r="3.5" fill="rgba(244,242,230,.55)"></circle>
-                <circle cx="185.7" cy="120.7" r="3.5" fill="rgba(244,242,230,.55)"></circle>
-                <circle cx="311.4" cy="132.4" r="3.5" fill="rgba(244,242,230,.55)"></circle>
-                <circle cx="437.1" cy="156.0" r="3.5" fill="rgba(244,242,230,.55)"></circle>
-                <circle cx="688.6" cy="167.8" r="3.5" fill="#D9EA6E"></circle>
-                <circle cx="814.3" cy="132.4" r="3.5" fill="#D9EA6E"></circle>
-                <text x="60.0" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">JUN</text>
-                <text x="185.7" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">JUL</text>
-                <text x="311.4" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">AUG</text>
-                <text x="437.1" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">SEP</text>
-                <text x="562.9" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">OCT</text>
-                <text x="688.6" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">NOV</text>
-                <text x="814.3" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">DEC</text>
-                <text x="940.0" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(201,212,194,.7)">JAN</text>
-                <text x="60.0" y="92.9" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(201,212,194,.75)">71</text>
-                <text x="185.7" y="104.7" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(201,212,194,.75)">70</text>
-                <text x="311.4" y="116.4" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(201,212,194,.75)">69</text>
-                <text x="437.1" y="140.0" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(201,212,194,.75)">67</text>
-                <text x="562.9" y="175.3" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(201,212,194,.75)"></text>
-                <text x="688.6" y="151.8" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="#DCEC85">66</text>
-                <text x="814.3" y="116.4" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="#DCEC85">69</text>
-                <text x="940.0" y="81.1" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="#DCEC85"></text>
+                <circle cx="60.0" cy="108.9" r="3.5" fill="rgba(20,35,26,.4)"></circle>
+                <circle cx="185.7" cy="120.7" r="3.5" fill="rgba(20,35,26,.4)"></circle>
+                <circle cx="311.4" cy="132.4" r="3.5" fill="rgba(20,35,26,.4)"></circle>
+                <circle cx="437.1" cy="156.0" r="3.5" fill="rgba(20,35,26,.4)"></circle>
+                <circle cx="688.6" cy="167.8" r="3.5" fill="#4E9A63"></circle>
+                <circle cx="814.3" cy="132.4" r="3.5" fill="#4E9A63"></circle>
+                <text x="60.0" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">JUN</text>
+                <text x="185.7" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">JUL</text>
+                <text x="311.4" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">AUG</text>
+                <text x="437.1" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">SEP</text>
+                <text x="562.9" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">OCT</text>
+                <text x="688.6" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">NOV</text>
+                <text x="814.3" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">DEC</text>
+                <text x="940.0" y="300" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="13" fill="rgba(20,35,26,.5)">JAN</text>
+                <text x="60.0" y="92.9" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(20,35,26,.6)">71</text>
+                <text x="185.7" y="104.7" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(20,35,26,.6)">70</text>
+                <text x="311.4" y="116.4" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(20,35,26,.6)">69</text>
+                <text x="437.1" y="140.0" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(20,35,26,.6)">67</text>
+                <text x="562.9" y="175.3" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="rgba(20,35,26,.6)"></text>
+                <text x="688.6" y="151.8" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="#2F8F5B">66</text>
+                <text x="814.3" y="116.4" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="#2F8F5B">69</text>
+                <text x="940.0" y="81.1" textAnchor="middle" fontFamily="DM Sans, sans-serif" fontSize="13" fontWeight="500" fill="#2F8F5B"></text>
               </svg>
               {' '}
-              <span data-m="act-label" style={s(`position:absolute;left:64.17%;top:10.63%;font:600 11px 'DM Sans',sans-serif;letter-spacing:1.6px;text-transform:uppercase;color:#DCEC85`)}>Stop for Wellness running</span>
+              <span data-m="act-label" style={s(`position:absolute;left:64.17%;top:10.63%;font:600 11px 'DM Sans',sans-serif;letter-spacing:1.6px;text-transform:uppercase;color:#4E7A2E`)}>Stop for Wellness running</span>
               {' '}
               <span data-reveal="pop" data-delay=".2" style={s(`position:absolute;left:56.29%;top:59.79%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#E6C77E;color:#2A2410;display:flex;align-items:center;justify-content:center;font:600 12px 'DM Sans',sans-serif;box-shadow:0 0 0 5px #10201A`)}>1</span>
               {' '}
@@ -1045,26 +1043,26 @@ class ForLeaders extends React.Component {
               <span data-reveal="pop" data-delay="1.6" style={s(`position:absolute;left:94.00%;top:30.35%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#D9EA6E;color:#152213;display:flex;align-items:center;justify-content:center;font:600 12px 'DM Sans',sans-serif;box-shadow:0 0 0 5px #10201A`)}>3</span>
             </div>
             <div style={s(`margin-top:clamp(28px,3.5vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(20px,3vw,40px)`)}>
-              <div style={s(`min-width:0;padding-top:18px;border-top:1px solid rgba(228,240,214,.12)`)}>
+              <div style={s(`min-width:0;padding-top:18px;border-top:1px solid rgba(20,35,26,.12)`)}>
                 <span style={s(`display:flex;align-items:center;gap:10px`)}>
-                  <span style={s(`font:600 11px 'DM Mono',monospace;color:#EBD08F`)}>01</span>
-                  <span style={s(`font:400 22px 'DM Serif Display',serif;color:#F6F4E9`)}>Spotted</span>
+                  <span style={s(`font:600 11px 'DM Mono',monospace;color:#9A6E1E`)}>01</span>
+                  <span style={s(`font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Spotted</span>
                 </span>
-                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(201,212,194,.88);text-wrap:pretty`)}>The October check-in shows Culture in Customer Success at 64, its fourth drop in a row.</p>
+                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>The October check-in shows Culture in Customer Success at 64, its fourth drop in a row.</p>
               </div>
-              <div style={s(`min-width:0;padding-top:18px;border-top:1px solid rgba(228,240,214,.12)`)}>
+              <div style={s(`min-width:0;padding-top:18px;border-top:1px solid rgba(20,35,26,.12)`)}>
                 <span style={s(`display:flex;align-items:center;gap:10px`)}>
-                  <span style={s(`font:600 11px 'DM Mono',monospace;color:#DCEC85`)}>02</span>
-                  <span style={s(`font:400 22px 'DM Serif Display',serif;color:#F6F4E9`)}>Acted</span>
+                  <span style={s(`font:600 11px 'DM Mono',monospace;color:#4E7A2E`)}>02</span>
+                  <span style={s(`font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Acted</span>
                 </span>
-                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(201,212,194,.88);text-wrap:pretty`)}>On 16 October the team starts Stop for Wellness, a playbook from the growth library.</p>
+                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>On 16 October the team starts Stop for Wellness, a playbook from the growth library.</p>
               </div>
-              <div style={s(`min-width:0;padding-top:18px;border-top:1px solid rgba(228,240,214,.12)`)}>
+              <div style={s(`min-width:0;padding-top:18px;border-top:1px solid rgba(20,35,26,.12)`)}>
                 <span style={s(`display:flex;align-items:center;gap:10px`)}>
-                  <span style={s(`font:600 11px 'DM Mono',monospace;color:#DCEC85`)}>03</span>
-                  <span style={s(`font:400 22px 'DM Serif Display',serif;color:#F6F4E9`)}>Moving</span>
+                  <span style={s(`font:600 11px 'DM Mono',monospace;color:#4E7A2E`)}>03</span>
+                  <span style={s(`font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Moving</span>
                 </span>
-                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(201,212,194,.88);text-wrap:pretty`)}>Culture rises at every check-in after, back to 72 by January.</p>
+                <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>Culture rises at every check-in after, back to 72 by January.</p>
               </div>
             </div>
           </div>
@@ -1104,27 +1102,27 @@ class ForLeaders extends React.Component {
               </p>
             </div>
             <div style={s(`min-width:0;order:1`)}>
-              <div style={s(`padding:clamp(22px,2.6vw,32px);border-radius:22px 30px 20px 32px / 30px 20px 32px 22px;background:rgba(228,240,214,.05)`)}>
-                <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:2.2px;text-transform:uppercase;color:rgba(201,212,194,.78)`)}>The 4 psychosocial duty questions · answered with nørma</span>
+              <div style={s(`padding:clamp(22px,2.6vw,32px);border-radius:22px 30px 20px 32px / 30px 20px 32px 22px;background:linear-gradient(170deg,#FBFAF4,#F2F1E6 80%);box-shadow:0 40px 80px -40px rgba(0,0,0,.6),0 0 0 1px rgba(20,35,26,.06);color:#14231A`)}>
+                <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:2.2px;text-transform:uppercase;color:rgba(20,35,26,.55)`)}>The 4 psychosocial duty questions · answered with nørma</span>
                 <ol style={s(`list-style:none;margin:6px 0 0;padding:0`)}>
-                  <li data-reveal="up" data-delay="0.00" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;border-bottom:1px solid rgba(228,240,214,.08)`)}>
-                    <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}><span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.58)`)}>3 OCT</span></span>
-                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>1. What did you identify?</span>
-                    <span style={s(`display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px 12px 18px 12px / 12px 18px 12px 16px;background:rgba(231,142,113,.12)`)}>
+                  <li data-reveal="up" data-delay="0.00" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;border-bottom:1px solid rgba(20,35,26,.08)`)}>
+                    <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}><span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(20,35,26,.45)`)}>3 OCT</span></span>
+                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#14231A`)}>1. What did you identify?</span>
+                    <span style={s(`display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px 12px 18px 12px / 12px 18px 12px 16px;background:rgba(231,142,113,.16)`)}>
                       <span style={s(`flex:1;min-width:0;display:flex;flex-direction:column;gap:5px`)}>
-                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#F5B9A4`)}>Monthly check-in</span>
-                        <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#F6F4E9`)}>Feeling safe to speak</span>
+                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#B14A33`)}>Monthly check-in</span>
+                        <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#14231A`)}>Feeling safe to speak</span>
                       </span>
                       <span style={s(`display:flex;flex-direction:column;align-items:flex-end;gap:4px`)}>
-                        <span style={s(`font:400 34px/1 'DM Serif Display',serif;color:#F0A58C`)}>38</span>
-                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;color:#F5B9A4`)}>Needs attention</span>
+                        <span style={s(`font:400 34px/1 'DM Serif Display',serif;color:#B14A33`)}>38</span>
+                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;color:#B14A33`)}>Needs attention</span>
                       </span>
                     </span>
                   </li>
-                  <li data-reveal="up" data-delay="0.12" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;border-bottom:1px solid rgba(228,240,214,.08)`)}>
-                    <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}><span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.58)`)}>16 OCT</span></span>
-                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>2. What did you do?</span>
-                    <span style={s(`display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px 18px 12px 16px / 18px 12px 16px 12px;background:rgba(217,234,110,.08)`)}>
+                  <li data-reveal="up" data-delay="0.12" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;border-bottom:1px solid rgba(20,35,26,.08)`)}>
+                    <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}><span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(20,35,26,.45)`)}>16 OCT</span></span>
+                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#14231A`)}>2. What did you do?</span>
+                    <span style={s(`display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px 18px 12px 16px / 18px 12px 16px 12px;background:rgba(217,234,110,.24)`)}>
                       <span style={s(`flex:none;width:36px;height:36px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:#D9EA6E;display:flex;align-items:center;justify-content:center;color:#152213`)}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                           <path d="M6 21V4"></path>
@@ -1132,25 +1130,25 @@ class ForLeaders extends React.Component {
                         </svg>
                       </span>
                       <span style={s(`flex:1;min-width:0;display:flex;flex-direction:column;gap:5px`)}>
-                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#DCEC85`)}>Initiative started</span>
-                        <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#F6F4E9`)}>Stop for Wellness</span>
-                        <span style={s(`font:400 13.5px 'DM Sans',sans-serif;color:rgba(201,212,194,.85)`)}>A playbook from the growth library</span>
+                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#4E7A2E`)}>Initiative started</span>
+                        <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#14231A`)}>Stop for Wellness</span>
+                        <span style={s(`font:400 13.5px 'DM Sans',sans-serif;color:rgba(20,35,26,.62)`)}>A playbook from the growth library</span>
                       </span>
                     </span>
                   </li>
-                  <li data-reveal="up" data-delay="0.24" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;border-bottom:1px solid rgba(228,240,214,.08)`)}>
-                    <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}><span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.58)`)}>1 NOV</span></span>
-                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>3. Did it work?</span>
-                    <span style={s(`display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding:14px 16px;border-radius:18px 12px 16px 12px / 12px 16px 12px 18px;background:rgba(217,234,110,.08)`)}>
+                  <li data-reveal="up" data-delay="0.24" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;border-bottom:1px solid rgba(20,35,26,.08)`)}>
+                    <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}><span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(20,35,26,.45)`)}>1 NOV</span></span>
+                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#14231A`)}>3. Did it work?</span>
+                    <span style={s(`display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding:14px 16px;border-radius:18px 12px 16px 12px / 12px 16px 12px 18px;background:rgba(217,234,110,.24)`)}>
                       <span style={s(`flex:1 1 180px;min-width:0;display:flex;flex-direction:column;gap:5px`)}>
-                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#DCEC85`)}>Next check-in</span>
-                        <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#F6F4E9`)}>Feeling safe to speak already improved</span>
+                        <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#4E7A2E`)}>Next check-in</span>
+                        <span style={s(`font:500 15px 'DM Sans',sans-serif;color:#14231A`)}>Feeling safe to speak already improved</span>
                       </span>
                       <span style={s(`display:flex;align-items:center;gap:10px`)}>
-                        <span style={s(`font:400 20px/1 'DM Serif Display',serif;color:rgba(240,165,140,.7);text-decoration:line-through;text-decoration-thickness:1px`)}>38</span>
-                        <span aria-hidden="true" style={s(`color:rgba(201,212,194,.6)`)}>→</span>
-                        <span style={s(`font:400 34px/1 'DM Serif Display',serif;color:#E6C77E`)}>46</span>
-                        <span style={s(`display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:999px;background:rgba(217,234,110,.16);font:600 12px 'DM Sans',sans-serif;color:#EAF79B`)}>
+                        <span style={s(`font:400 20px/1 'DM Serif Display',serif;color:rgba(177,74,51,.6);text-decoration:line-through;text-decoration-thickness:1px`)}>38</span>
+                        <span aria-hidden="true" style={s(`color:rgba(20,35,26,.4)`)}>→</span>
+                        <span style={s(`font:400 34px/1 'DM Serif Display',serif;color:#9A6E1E`)}>46</span>
+                        <span style={s(`display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:999px;background:rgba(78,154,99,.14);font:600 12px 'DM Sans',sans-serif;color:#2F8F5B`)}>
                           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                             <path d="M12 19V5"></path>
                             <path d="M6 11l6-6 6 6"></path>
@@ -1162,8 +1160,8 @@ class ForLeaders extends React.Component {
                   </li>
                   <li data-reveal="up" data-delay="0.36" style={s(`display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:12px;padding:20px 0;`)}>
                     <span style={s(`grid-row:span 2;display:flex;flex-direction:column;gap:4px;padding-top:6px`)}></span>
-                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#F6F4E9`)}>4. Can you prove it?</span>
-                    <span style={s(`display:flex;flex-direction:column;gap:16px;padding:16px 18px 18px;border-radius:12px 16px 12px 18px / 16px 12px 18px 12px;background:linear-gradient(160deg,rgba(217,234,110,.16),rgba(217,234,110,.06))`)}>
+                    <span style={s(`font:400 clamp(22px,2.1vw,25px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#14231A`)}>4. Can you prove it?</span>
+                    <span style={s(`display:flex;flex-direction:column;gap:16px;padding:16px 18px 18px;border-radius:12px 16px 12px 18px / 16px 12px 18px 12px;background:linear-gradient(160deg,rgba(217,234,110,.34),rgba(217,234,110,.14))`)}>
                       <span style={s(`display:flex;align-items:center;gap:14px`)}>
                         <span style={s(`flex:none;width:40px;height:40px;border-radius:52% 48% 50% 50% / 50% 54% 46% 50%;background:#D9EA6E;display:flex;align-items:center;justify-content:center;color:#152213`)}>
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -1172,26 +1170,26 @@ class ForLeaders extends React.Component {
                           </svg>
                         </span>
                         <span style={s(`flex:1;min-width:0;display:flex;flex-direction:column;gap:4px`)}>
-                          <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#DCEC85`)}>Dated record</span>
-                          <span style={s(`font:400 clamp(19px,1.8vw,21px)/1.2 'DM Serif Display',serif;color:#F6F4E9`)}>Proof you took accountability.</span>
+                          <span style={s(`font:600 10.5px 'DM Sans',sans-serif;letter-spacing:1.8px;text-transform:uppercase;white-space:nowrap;color:#4E7A2E`)}>Dated record</span>
+                          <span style={s(`font:400 clamp(19px,1.8vw,21px)/1.2 'DM Serif Display',serif;color:#14231A`)}>Proof you took accountability.</span>
                         </span>
                       </span>
                       <span style={s(`position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px`)}>
                         <span aria-hidden="true" style={s(`position:absolute;left:16.6%;right:16.6%;top:5px;height:2px;border-radius:2px;background:linear-gradient(90deg,#E78E71,#D9EA6E 50%,#E6C77E)`)}></span>
                         <span style={s(`display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0`)}>
-                          <span style={s(`width:12px;height:12px;border-radius:50%;background:#E78E71;box-shadow:0 0 0 4px #1A2E20`)}></span>
-                          <span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.75)`)}>3 OCT</span>
-                          <span style={s(`font:500 12px 'DM Sans',sans-serif;color:rgba(244,242,230,.9);text-align:center`)}>Identified</span>
+                          <span style={s(`width:12px;height:12px;border-radius:50%;background:#E78E71;box-shadow:0 0 0 4px #F3F3E3`)}></span>
+                          <span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(20,35,26,.5)`)}>3 OCT</span>
+                          <span style={s(`font:500 12px 'DM Sans',sans-serif;color:#14231A;text-align:center`)}>Identified</span>
                         </span>
                         <span style={s(`display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0`)}>
-                          <span style={s(`width:12px;height:12px;border-radius:50%;background:#D9EA6E;box-shadow:0 0 0 4px #1A2E20`)}></span>
-                          <span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.75)`)}>16 OCT</span>
-                          <span style={s(`font:500 12px 'DM Sans',sans-serif;color:rgba(244,242,230,.9);text-align:center`)}>Acted</span>
+                          <span style={s(`width:12px;height:12px;border-radius:50%;background:#D9EA6E;box-shadow:0 0 0 4px #F3F3E3`)}></span>
+                          <span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(20,35,26,.5)`)}>16 OCT</span>
+                          <span style={s(`font:500 12px 'DM Sans',sans-serif;color:#14231A;text-align:center`)}>Acted</span>
                         </span>
                         <span style={s(`display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0`)}>
-                          <span style={s(`width:12px;height:12px;border-radius:50%;background:#E6C77E;box-shadow:0 0 0 4px #1A2E20`)}></span>
-                          <span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(201,212,194,.75)`)}>1 NOV</span>
-                          <span style={s(`font:500 12px 'DM Sans',sans-serif;color:rgba(244,242,230,.9);text-align:center`)}>Improved</span>
+                          <span style={s(`width:12px;height:12px;border-radius:50%;background:#E6C77E;box-shadow:0 0 0 4px #F3F3E3`)}></span>
+                          <span style={s(`font:500 10px 'DM Mono',monospace;letter-spacing:1px;color:rgba(20,35,26,.5)`)}>1 NOV</span>
+                          <span style={s(`font:500 12px 'DM Sans',sans-serif;color:#14231A;text-align:center`)}>Improved</span>
                         </span>
                       </span>
                     </span>
@@ -1216,14 +1214,14 @@ class ForLeaders extends React.Component {
             {(V.wide) ? (
               <>
                 <div data-reveal="up" style={s(`position:relative;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))`)}>
-                  <img src="/assets/v5/web/dash/e-putting-in-the-work-card.webp" alt="Putting in the work: 86% used the app, with habits, reflections, emotions, gratitude, growth work, resets and chapters" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/putting-in-the-work.webp" alt="Putting in the work: 86% used the app, with habits, reflections, emotions, gratitude, growth work, resets and chapters" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
             {(V.narrow) ? (
               <>
                 <div style={s(`position:relative;max-width:400px;margin:0 auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))`)}>
-                  <img src="/assets/v5/web/dash/m-putting-in-the-work-card.webp" alt="Putting in the work: four tiles of app use" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <img src="/assets/v5/light/m-putting-in-the-work.webp" alt="Putting in the work: used the app, habits logged, gratitude and growth work" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                 </div>
               </>
             ) : null}
@@ -1239,14 +1237,14 @@ class ForLeaders extends React.Component {
               {(V.wide) ? (
                 <>
                   <div data-reveal="up" style={s(`position:relative;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))`)}>
-                    <img src="/assets/v5/web/dash/e-how-people-feel-card.webp" alt="The emotion compass: 612 emotions named by 121 people across seven core emotions, September dashed" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                    <img src="/assets/v5/light/how-people-feel.webp" alt="How people feel: 612 emotions named by 121 people across seven core emotions" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                   </div>
                 </>
               ) : null}
               {(V.narrow) ? (
                 <>
                   <div style={s(`position:relative;max-width:400px;margin:0 auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))`)}>
-                    <img src="/assets/v5/web/dash/m-emotion-compass-card.webp" alt="The emotion compass" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                    <img src="/assets/v5/light/m-how-people-feel.webp" alt="How people feel: seven core emotions" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
                   </div>
                 </>
               ) : null}
@@ -1266,7 +1264,7 @@ class ForLeaders extends React.Component {
             </div>
             <div style={s(`min-width:0`)}>
               <div data-reveal="up" style={s(`position:relative;max-width:520px;margin:0 auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))`)}>
-                <img src="/assets/v5/web/dash/m-fewer-than-five-card.webp" alt="Two departments with their culture figures, and People and Finance hatched: fewer than five people, so nothing is shown" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                <img src="/assets/v5/light/m-fewer-than-five.webp" alt="Leadership with its figures, and People and Finance hatched: fewer than five people, so nothing shows" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
               </div>
             </div>
           </div>
