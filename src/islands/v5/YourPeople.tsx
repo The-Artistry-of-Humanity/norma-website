@@ -249,7 +249,7 @@ class YourPeople extends React.Component {
               </div>
               <div style={s(`position:absolute;left:392px;top:118px;transform:rotate(7deg);width:214px;aspect-ratio:390/844;box-sizing:border-box;padding:6px;border-radius:35px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
                 <div style={s(`width:100%;height:100%;border-radius:30px;overflow:hidden;background:#0F2015`)}>
-                  <img src="/assets/v5/light/app-film.webp" alt="A growth journey chapter: Five pillars, one life" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                  <img src="/assets/v5/light/app-film.webp" alt="Foundations, a growth journey: pick up the chapter where you left off" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                 </div>
               </div>
               <div style={s(`position:absolute;left:189px;top:36px;width:262px;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:43px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>

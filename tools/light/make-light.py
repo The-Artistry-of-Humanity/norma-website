@@ -58,7 +58,7 @@ def stack(parts, gap=0):
 # Phones: Home carousel phone, Your people hero and feature phones (390x844 frames).
 PHONES = {
     'app-home': 'app/01-the-app/01-home',
-    'app-film': 'app/06-journeys/03-start-chapter',
+    'app-film': 'app/06-journeys/02-foundations',
     'app-reflect': 'app/07-reflect/02-speaking',
     'app-reset': 'app/09-reset/01-hub',
     'app-gratitude': 'app/10-gratitude/04-page',
