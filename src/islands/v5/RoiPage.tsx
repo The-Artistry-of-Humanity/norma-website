@@ -192,7 +192,6 @@ class RoiPage extends React.Component {
                   <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">Your people</a>
                   <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">For leaders</a>
                   <a href="/roi/" style={s(`color:#14231A;padding:4px 0 2px;border-bottom:2px solid #D3E45F`)} className="ri-ho789e87">ROI</a>
-                  <a href="/help/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">Help</a>
                 </nav>
               </>
             ) : null}
@@ -216,8 +215,7 @@ class RoiPage extends React.Component {
             <nav style={s(`padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column;border-top:1px solid rgba(20,35,26,.07);font:400 22px 'DM Serif Display',serif`)}>
               <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>Your people</a>
               <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>For leaders</a>
-              <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>ROI</a>
-              <a href="/help/" style={s(`padding:12px 0;color:#14231A`)}>Help</a>
+              <a href="/roi/" style={s(`padding:12px 0;color:#14231A`)}>ROI</a>
             </nav>
           </>
         ) : null}
