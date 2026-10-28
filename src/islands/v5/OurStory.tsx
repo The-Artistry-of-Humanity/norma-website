@@ -61,7 +61,13 @@ const Gather = ({ on }) => (
 );
 
 // The shared words, in each pillar's colour from the app (dark-background set).
-const WORDS = [['Health', '#A9DDB4'], ['Relationships', '#F0BDB5'], ['Friendships', '#F2DAAC'], ['Inner life', '#C4BEEE'], ['Work', '#AAD7E3'], ['Culture', '#D9EA6E']];
+const WORDS = [['Health', '#A9DDB4'], ['Internal', '#C4BEEE'], ['Love', '#F0BDB5'], ['Social', '#F2DAAC'], ['Work', '#AAD7E3'], ['Culture', '#D9EA6E']];
+
+const SHARED = [
+  ['Shared awareness.', 'Your people check in on the five pillars: Health, Internal, Love, Social and Work. You see the same five on your dashboard, plus whether people feel heard, valued and safe to speak. Both sides are looking at the same picture.'],
+  ['Shared accountability.', 'Each side owns its part. Your people own their wellbeing, and the app helps them work on it. You own the culture they work in, and the dashboard shows where it needs attention and whether what you tried has worked.'],
+  ['Shared language.', 'The pillars don’t stay in the app. People start using them in one-to-ones, in team meetings, over coffee. Over time it’s simply how your organisation talks about how people are going, and it becomes part of your culture.'],
+];
 
 const Icon = ({ children }) => (
   <span aria-hidden="true" style={s(`display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:20px 16px 20px 14px / 16px 20px 14px 20px;background:rgba(217,234,110,.12);color:#D9EA6E`)}>
@@ -269,12 +275,12 @@ class OurStory extends React.Component {
           </div>
         </section>
 
-        {/* Shared language, shared accountability: both sides meet in the same words. */}
+        {/* Shared awareness, accountability and language: both sides meet in the same words. */}
         <section id="shared" style={s(`${TOP_B};background:#0F2015;color:#F4F2E6;overflow:hidden`)}>
           <div aria-hidden="true" style={s(`position:absolute;right:-16%;top:-10%;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.09),rgba(217,234,110,0) 70%);pointer-events:none`)}></div>
           <div style={s(`position:relative;${W};padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(110px,13vw,180px)`)}>
             <div style={s(`max-width:760px;margin:0 auto;text-align:center`)}>
-              <span style={s(`${EYEBROW};color:#DCEC85`)}>Shared language, shared accountability</span>
+              <span style={s(`${EYEBROW};color:#DCEC85`)}>Shared awareness, accountability and language</span>
               <h2 style={s(`${H2};color:#F6F4E9`)}>Both sides, on the same page.</h2>
               <p style={s(`${BODY};margin-left:auto;margin-right:auto;max-width:32em;color:rgba(201,212,194,.9)`)}>Awareness only moves things when both sides can talk about it, and both sides own their part.</p>
             </div>
@@ -291,15 +297,13 @@ class OurStory extends React.Component {
               <span className="os-wire os-wire-up" aria-hidden="true"></span>
               <span style={s(`display:inline-flex;align-items:center;height:46px;padding:0 22px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);font:600 15px 'DM Sans',sans-serif;color:#152213`)}>You</span>
             </div>
-            <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:36px clamp(36px,5vw,72px);max-width:1000px;margin:clamp(56px,7vw,88px) auto 0`)}>
-              <div>
-                <h3 style={s(`margin:0;font:400 clamp(24px,2.4vw,28px)/1.15 'DM Serif Display',serif;letter-spacing:-.3px;color:#F6F4E9`)}>Shared language.</h3>
-                <p style={s(`margin:12px 0 0;font:400 16.5px/1.65 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>Your people check in on five pillars of life: health, relationships, friendships, inner life and work. You see the same five on the dashboard, plus whether people feel heard, valued and safe to speak. Every conversation starts from the same place.</p>
-              </div>
-              <div>
-                <h3 style={s(`margin:0;font:400 clamp(24px,2.4vw,28px)/1.15 'DM Serif Display',serif;letter-spacing:-.3px;color:#F6F4E9`)}>Shared accountability.</h3>
-                <p style={s(`margin:12px 0 0;font:400 16.5px/1.65 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>Each side owns its part. Your people own their wellbeing, and the app helps them work on it. You own the culture they work in, and the dashboard shows where it needs attention and whether what you tried has worked.</p>
-              </div>
+            <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:36px clamp(32px,4vw,56px);max-width:1080px;margin:clamp(56px,7vw,88px) auto 0`)}>
+              {SHARED.map(([t, p]) => (
+                <div key={t}>
+                  <h3 style={s(`margin:0;font:400 clamp(24px,2.4vw,28px)/1.15 'DM Serif Display',serif;letter-spacing:-.3px;color:#F6F4E9`)}>{t}</h3>
+                  <p style={s(`margin:12px 0 0;font:400 16.5px/1.65 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>{p}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
