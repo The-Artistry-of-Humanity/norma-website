@@ -20,8 +20,11 @@ select,input,textarea{font-family:'DM Sans',sans-serif}
   section button:is([style*="height:54px"],[style*="height: 54px"]){width:100%;box-sizing:border-box;justify-content:center}
 }
 /* The product's lime highlighter (as in the dashboard's guidance pages), on one
-   phrase in each hero headline. It draws in once on load. The text inside is
-   solid so it reads over headlines that use gradient text. */
-.nrm-mark{color:#14231A;-webkit-text-fill-color:#14231A;background-image:linear-gradient(#DDEA84,#DDEA84);background-repeat:no-repeat;background-position:0 78%;background-size:100% .34em;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .05em;margin:0 -.05em;animation:nrmMark .9s cubic-bezier(.22,.61,.36,1) .4s both}
-@keyframes nrmMark{from{background-size:0 .34em}}
-@media (prefers-reduced-motion:reduce){.nrm-mark{animation:none}}
+   phrase in the big headlines. It draws in when it scrolls into view: LayoutV5
+   adds .nrm-js before first paint and .is-on per mark ([data-manual] marks are
+   switched by their own section). Dark sections use a softer lime so the light
+   text stays readable. The text is solid so it reads over gradient headlines. */
+.nrm-mark{--mk:#DDEA84;-webkit-text-fill-color:currentColor;background-image:linear-gradient(var(--mk),var(--mk));background-repeat:no-repeat;background-position:0 78%;background-size:100% .34em;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .05em;margin:0 -.05em;transition:background-size 1s cubic-bezier(.22,.61,.36,1) .15s}
+.nrm-mark-dark{--mk:rgba(217,234,110,.36)}
+.nrm-js .nrm-mark:not(.is-on){background-size:0 .34em}
+@media (prefers-reduced-motion:reduce){.nrm-mark{transition:none}}

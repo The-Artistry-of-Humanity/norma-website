@@ -265,7 +265,7 @@ class YourPeople extends React.Component {
         <div aria-hidden="true" style={s(`position:absolute;left:-12%;top:8%;width:72%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.08),rgba(217,234,110,0) 70%);pointer-events:none`)}></div>
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(80px,10vw,136px);padding-bottom:clamp(112px,13vw,176px)`)}>
           <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#DCEC85`)}>The five pillars</span>
-          <h2 style={s(`margin:14px 0 0;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Five pillars. One life.</h2>
+          <h2 style={s(`margin:14px 0 0;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Five pillars. <span className="nrm-mark nrm-mark-dark">One life</span>.</h2>
           <p style={s(`margin:22px 0 0;max-width:36em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.88);text-wrap:pretty`)}>
             nørma is built on our own framework: five pillars that together shape a person’s life. Work is only one of them. Health, inner life, close relationships and friendships all carry into the working day, and when one slips, the others feel it.
           </p>
@@ -400,7 +400,7 @@ class YourPeople extends React.Component {
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(72px,8vw,112px)`)}>
           <div style={s(`text-align:center`)}>
             <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(20,35,26,.6)`)}>The monthly check-in</span>
-            <h2 style={s(`margin:14px auto 0;max-width:13em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Once a month, a few minutes.</h2>
+            <h2 style={s(`margin:14px auto 0;max-width:13em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Once a month, <span className="nrm-mark">a few minutes</span>.</h2>
             <p style={s(`margin:20px auto 0;max-width:34em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
               The check-in is an awareness tool that works both ways. Each person gets their own picture first, a starting point for the month. Only then does it become the group signal leaders see.
             </p>
@@ -461,7 +461,7 @@ class YourPeople extends React.Component {
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(144px,16vw,216px)`)}>
           <div style={s(`text-align:center`)}>
             <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(20,35,26,.6)`)}>From person to team</span>
-            <h2 style={s(`margin:14px auto 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Every life has its own score. Together, they land as one team signal.</h2>
+            <h2 style={s(`margin:14px auto 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Every life has its own score. Together, they land as one <span className="nrm-mark">team signal</span>.</h2>
             <p style={s(`margin:20px auto 0;max-width:32em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>Laura’s picture stays hers. What travels is her score, added in with everyone else’s.</p>
           </div>
           <div style={s(`position:relative;margin-top:clamp(48px,6vw,72px)`)}>
@@ -631,7 +631,7 @@ class YourPeople extends React.Component {
         <div aria-hidden="true" style={s(`position:absolute;right:-18%;top:0;width:70%;height:100%;background:radial-gradient(50% 40% at 50% 30%,rgba(217,234,110,.07),rgba(217,234,110,0) 70%);pointer-events:none`)}></div>
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(112px,13vw,176px)`)}>
           <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#DCEC85`)}>Between check-ins</span>
-          <h2 style={s(`margin:14px 0 0;max-width:13em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Powerful features for personal growth.</h2>
+          <h2 style={s(`margin:14px 0 0;max-width:13em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Powerful features for <span className="nrm-mark nrm-mark-dark">personal growth</span>.</h2>
           <p style={s(`margin:22px 0 0;max-width:34em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.88);text-wrap:pretty`)}>
             The check-in shows where they are. Between check-ins is where they move the needle: small, regular actions that lift their fulfilment and keep them away from the slow slide towards burnout.
           </p>
@@ -874,7 +874,7 @@ class YourPeople extends React.Component {
           <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(48px,6vw,80px);align-items:center`)}>
             <div style={s(`min-width:0`)}>
               <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#4A6B3A`)}>Growth journeys</span>
-              <h2 style={s(`margin:14px 0 0;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Not training. Short chapters people actually want to open.</h2>
+              <h2 style={s(`margin:14px 0 0;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Not training. Short chapters people actually <span className="nrm-mark">want to open</span>.</h2>
               <p style={s(`margin:20px 0 0;max-width:32em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.72);text-wrap:pretty`)}>
                 Short, beautifully illustrated chapters that deepen their understanding of the five pillars: what really moves the needle in each one, and how they all connect. Every chapter ends with one thing to try.
               </p>
@@ -939,7 +939,7 @@ class YourPeople extends React.Component {
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(112px,13vw,176px)`)}>
           <div style={s(`margin:0 calc(-1 * clamp(0px,2.6vw,32px));padding:clamp(32px,5vw,64px);border-radius:36px 24px 34px 22px / 24px 36px 22px 34px;background:radial-gradient(60% 90% at 6% 0%,rgba(217,234,110,.17) 0%,rgba(217,234,110,.05) 45%,rgba(217,234,110,0) 72%),linear-gradient(165deg,#1C3826,#142A1C 72%);box-shadow:inset 0 1px 0 rgba(234,247,155,.12),0 18px 44px rgba(0,0,0,.28);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(40px,5vw,72px);align-items:center`)}>
             <div style={s(`min-width:0`)}>
-              <h2 style={s(`margin:0;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Theirs. Only theirs.</h2>
+              <h2 style={s(`margin:0;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Theirs. <span className="nrm-mark nrm-mark-dark">Only theirs</span>.</h2>
               <p style={s(`margin:18px 0 0;max-width:32em;font:400 17px/1.65 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>
                 Nobody where someone works can read their check-in answers, reflections or recordings. Answers become a group figure before anything reaches a dashboard, and groups below five never appear.
               </p>

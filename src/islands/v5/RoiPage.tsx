@@ -451,7 +451,7 @@ class RoiPage extends React.Component {
                 <span style={s(`font:400 clamp(52px,6vw,80px)/1 'DM Serif Display',serif;letter-spacing:-1px;color:#F0A58C`)}>{V.totalMoney}</span>
                 <span style={s(`font:400 18px 'DM Sans',sans-serif;color:rgba(201,212,194,.9)`)}>a year <span style={s(`margin-left:4px;padding:2px 7px;border-radius:999px;background:rgba(228,240,214,.08);font:600 11px 'DM Sans',sans-serif;letter-spacing:1px;vertical-align:3px`)}>{V.cur}</span></span>
               </p>
-              <div style={s(`margin-top:auto;padding-top:28px`)}>
+              <div style={s(`padding-top:28px`)}>
                 <div style={s(`position:relative;display:flex;align-items:center;gap:14px;padding:20px 0;border-top:1px solid rgba(228,240,214,.1)`)}>
                   <span style={s(`flex:none;width:40px;height:40px;border-radius:50% 50% 48% 52% / 46% 50% 54% 50%;background:rgba(240,165,140,.14);display:flex;align-items:center;justify-content:center;color:#F5B9A4`)}>
                     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -584,7 +584,7 @@ class RoiPage extends React.Component {
                   ) : null}
                 </span>
               </p>
-              <ul style={s(`list-style:none;margin:auto 0 0;padding:28px 0 0`)}>
+              <ul style={s(`list-style:none;margin:0;padding:28px 0 0`)}>
                 <li style={s(`display:flex;align-items:center;gap:14px;padding:20px 0;border-top:1px solid rgba(217,234,110,.14)`)}>
                   <span style={s(`flex:none;width:40px;height:40px;border-radius:50% 50% 48% 52% / 46% 50% 54% 50%;background:rgba(217,234,110,.16);display:flex;align-items:center;justify-content:center;color:#EAF79B`)}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>

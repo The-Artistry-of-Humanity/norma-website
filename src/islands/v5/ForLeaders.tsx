@@ -196,7 +196,7 @@ class ForLeaders extends React.Component {
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(112px,13vw,176px)`)}>
           <div style={s(`text-align:center`)}>
             <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#DCEC85`)}>How it comes together</span>
-            <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance;margin-left:auto;margin-right:auto`)}>Your people use the app. You see the whole picture.</h2>
+            <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance;margin-left:auto;margin-right:auto`)}>Your people use the app. You see <span className="nrm-mark nrm-mark-dark">the whole picture</span>.</h2>
             <p style={s(`margin:20px auto 0;max-width:34em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty;`)}>
               Once a month, each person checks in on their life and their work. In between, the app is their companion: reflecting, building habits, resetting when they need to. All of it comes together in your dashboard as one picture of your organisation.
             </p>
@@ -824,7 +824,7 @@ class ForLeaders extends React.Component {
           <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(20px,4vw,64px);align-items:end`)}>
             <div>
               <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#4A6B3A`)}>Where to look</span>
-              <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance;`)}>nørma points you to what needs attention.</h2>
+              <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance;`)}>nørma points you to what <span className="nrm-mark">needs attention</span>.</h2>
             </div>
             <p style={s(`margin:0;max-width:34em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.72);text-wrap:pretty;`)}>
               No digging through reports. Departments that need a look stand out, and the focus area tells you where to start and why. This month it’s Field Services: Fulfilment and Culture both fell again, and feeling safe is the lowest answer in the company.
@@ -1102,7 +1102,7 @@ class ForLeaders extends React.Component {
           <div style={s(`display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,5vw,72px);align-items:center`)}>
             <div style={s(`min-width:0;order:2`)}>
               <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#DCEC85`)}>Psychosocial safety</span>
-              <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Show what you knew, and what you did about it.</h2>
+              <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Meet the law on psychosocial safety, and protect yourself.</h2>
               <p style={s(`margin:20px 0 0;max-width:30em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>
                 Work health and safety laws increasingly cover psychosocial hazards, and they come down to four questions. nørma answers all four as you go.
               </p>
@@ -1209,7 +1209,7 @@ class ForLeaders extends React.Component {
       <section id="day-to-day" style={s(`position:relative;z-index:1;margin-top:calc(-1 * clamp(40px,5.5vw,80px));border-radius:clamp(28px,4vw,56px) clamp(52px,7.5vw,112px) 0 0 / clamp(24px,3.5vw,48px) clamp(40px,5.5vw,80px) 0 0;background:#F4F2E6;color:#14231A`)}>
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(112px,13vw,176px)`)}>
           <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#4A6B3A`)}>Day to day</span>
-          <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance;`)}>See your people putting in the work.</h2>
+          <h2 style={s(`margin:14px 0 0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance;`)}>See your people <span className="nrm-mark">putting in the work</span>.</h2>
           <p style={s(`margin:20px 0 0;max-width:34em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.72);text-wrap:pretty;`)}>
             The check-in shows where things stand. Day to day shows what happens next: how many people used the app this month, and how often they kept a habit, reflected, reset or opened a growth journey.
           </p>

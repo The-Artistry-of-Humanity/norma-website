@@ -175,6 +175,7 @@ class HomePage extends React.Component {
     this.lit = true; this.armed = false;
     const setLit = on => {
       this.lit = on;
+      const mk = s.querySelector('.nrm-mark'); if (mk) mk.classList.toggle('is-on', on);
       s.style.backgroundColor = on ? '#F4F2E6' : '#0D1B12'; s.style.color = on ? '#14231A' : '#F4F2E6';
       if (g) { g.style.opacity = on ? '1' : '0'; g.style.transform = on ? 'translateX(-50%) scale(1)' : 'translateX(-50%) scale(.5)'; }
     };
@@ -182,7 +183,7 @@ class HomePage extends React.Component {
       const r = s.getBoundingClientRect(), vh = window.innerHeight;
       if (!this.armed) {
         if ((this.props.lightsSwitch ?? true) && !this.reduced && r.top > vh * 0.9) { this.armed = true; s.style.transition = 'none'; if (g) g.style.transition = 'none'; setLit(false); s.offsetHeight; s.style.transition = ''; if (g) g.style.transition = ''; }
-        else { document.removeEventListener('scroll', this.onScroll, true); return; }
+        else { const mk = s.querySelector('.nrm-mark'); if (mk) mk.classList.add('is-on'); document.removeEventListener('scroll', this.onScroll, true); return; }
       }
       if (!this.lit && r.top < vh * 0.6) { setLit(true); document.removeEventListener('scroll', this.onScroll, true); }
     };
@@ -355,7 +356,7 @@ class HomePage extends React.Component {
       <section id="dark" style={s(`position:relative;background:#0F2015;color:#F4F2E6;overflow:hidden`)}>
         <div aria-hidden="true" style={s(`position:absolute;left:-10%;top:-30%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.06),rgba(217,234,110,0) 70%);pointer-events:none`)}></div>
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(72px,9vw,128px)`)}>
-          <h2 style={s(`margin:0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Somewhere in your organisation, this is happening today.</h2>
+          <h2 style={s(`margin:0;max-width:15em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Somewhere in your organisation, this is <span className="nrm-mark nrm-mark-dark">happening today</span>.</h2>
         </div>
         <div ref={V.viewRef} tabIndex="0" aria-label="Moments, drag or use the arrows" style={s(`position:relative;margin-top:clamp(52px,7vw,88px);overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;outline:none;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,#000 6%,#000 94%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,#000 6%,#000 94%,rgba(0,0,0,0) 100%)`)}>
           <div ref={V.trackRef} style={s(`display:flex;gap:clamp(20px,2.4vw,32px);width:max-content;padding-left:clamp(20px,5vw,48px);will-change:transform`)}>
@@ -844,7 +845,7 @@ class HomePage extends React.Component {
           <span style={s(`position:absolute;left:78%;top:84%;font:400 19px 'DM Serif Display',serif;color:rgba(246,244,233,.85)`)}>“It just built up.”</span>
         </div>
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;min-height:clamp(520px,82vh,760px);display:flex;flex-direction:column;justify-content:center;padding-top:112px;padding-bottom:112px`)}>
-          <h2 style={s(`margin:0;max-width:10.5em;font:400 clamp(40px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#F6F4E9;text-wrap:balance`)}>Right now, you’re running in the dark. 🔦</h2>
+          <h2 style={s(`margin:0;max-width:10.5em;font:400 clamp(40px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#F6F4E9;text-wrap:balance`)}>Right now, you’re running <span className="nrm-mark nrm-mark-dark">in the dark</span>. 🔦</h2>
           <p style={s(`margin:26px 0 0;max-width:31em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.86);text-wrap:pretty`)}>
             An annual survey is a photograph of a year ago. An EAP is used by one in twenty. In between, nothing tells you which team is sliding, so you find out at the resignation.
           </p>
@@ -854,7 +855,7 @@ class HomePage extends React.Component {
         <div ref={V.glowRef} aria-hidden="true" style={s(`position:absolute;left:50%;top:-520px;width:min(1500px,190vw);height:1040px;transform:translateX(-50%) scale(1);border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.5),rgba(217,234,110,.16) 48%,rgba(217,234,110,0) 76%);pointer-events:none;opacity:1;transition:opacity 1.6s ease,transform 1.8s cubic-bezier(.2,.7,.2,1)`)}></div>
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(88px,11vw,152px);padding-bottom:clamp(72px,9vw,120px)`)}>
           <div style={s(`text-align:center`)}>
-            <h2 style={s(`margin:0 auto;max-width:11em;font:400 clamp(40px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:inherit;text-wrap:balance`)}>nørma turns the lights on.</h2>
+            <h2 style={s(`margin:0 auto;max-width:11em;font:400 clamp(40px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:inherit;text-wrap:balance`)}>nørma turns the <span className="nrm-mark" data-manual="">lights on</span>.</h2>
             <p style={s(`margin:20px auto 0;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:inherit;opacity:.7`)}>Every month, for every team.</p>
           </div>
           <ol ref={V.stepsRef} style={s(`position:relative;list-style:none;margin:clamp(48px,6vw,72px) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(40px,4vw,48px) clamp(28px,3.4vw,48px)`)}>
@@ -992,7 +993,7 @@ class HomePage extends React.Component {
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(80px,10vw,136px);padding-bottom:clamp(80px,10vw,136px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:clamp(56px,7vw,96px)`)}>
           <div style={s(`flex:1 1 400px;min-width:0;max-width:600px`)}>
             <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(20,35,26,.6)`)}>Their side · your people</span>
-            <h2 style={s(`margin:14px 0 0;max-width:12em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Their life comes to work with them.</h2>
+            <h2 style={s(`margin:14px 0 0;max-width:12em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>Their life comes to work <span className="nrm-mark">with them</span>.</h2>
             <p style={s(`margin:22px 0 0;max-width:31em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
               Work is one pillar of five. Once a month, a short check-in shows each person where they are across all five and where the gaps are, and nørma helps them work on them. It’s theirs. Nobody at work can read it. Together, those check-ins become the anonymous signal leaders see.
             </p>
@@ -1079,7 +1080,7 @@ class HomePage extends React.Component {
         <div aria-hidden="true" style={s(`position:absolute;right:-20%;top:-40%;width:80%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(217,234,110,.07),rgba(217,234,110,0) 70%);pointer-events:none`)}></div>
         <div style={s(`position:relative;max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(80px,10vw,136px);padding-bottom:clamp(80px,10vw,136px)`)}>
           <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(201,212,194,.75)`)}>Your side · leaders</span>
-          <h2 style={s(`margin:14px 0 0;max-width:13em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>The culture they walk into is yours to shape.</h2>
+          <h2 style={s(`margin:14px 0 0;max-width:13em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>The culture they walk into is <span className="nrm-mark nrm-mark-dark">yours to shape</span>.</h2>
           <p style={s(`margin:22px 0 0;max-width:34em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.88);text-wrap:pretty`)}>
             You see both sides as group figures: how fulfilled your people are, and the culture they work in. They meet in one number for each group, the nørma Score, so you know where to look first and what to do.
           </p>
@@ -1131,7 +1132,7 @@ class HomePage extends React.Component {
                   <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path>
                 </svg>
               </span>
-              <h3 style={s(`margin:24px 0 0;max-width:10em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Leaders see patterns, never people.</h3>
+              <h3 style={s(`margin:24px 0 0;max-width:10em;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#F6F4E9;text-wrap:balance`)}>Leaders see patterns, <span className="nrm-mark nrm-mark-dark">never people</span>.</h3>
             </div>
             <div style={s(`padding-top:clamp(0px,1vw,76px)`)}>
               <p style={s(`margin:0;max-width:34em;font:400 17px/1.65 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>

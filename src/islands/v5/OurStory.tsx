@@ -175,7 +175,7 @@ class OurStory extends React.Component {
           <div style={s(`position:relative;${W};padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(110px,13vw,180px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(48px,6vw,96px)`)}>
             <div style={s(`flex:1 1 420px;min-width:0;max-width:600px`)}>
               <span style={s(`${EYEBROW};color:#DCEC85`)}>Where it starts</span>
-              <h2 style={s(`${H2};color:#F6F4E9`)}>Most problems at work start with a cluttered mind.</h2>
+              <h2 style={s(`${H2};color:#F6F4E9`)}>Most problems at work start with a <span className="nrm-mark nrm-mark-dark">cluttered mind</span>.</h2>
               <p style={s(`${BODY};color:rgba(201,212,194,.9)`)}>
                 Disengagement, poor productivity, good people running on empty. We’ve seen all of it up close, and it nearly always leads back to the same place: a person who isn’t firing on all cylinders.
               </p>
@@ -213,7 +213,7 @@ class OurStory extends React.Component {
           <div style={s(`${W};padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(110px,13vw,180px)`)}>
             <div style={s(`max-width:900px;margin:0 auto;text-align:center`)}>
               <span style={s(`${EYEBROW};color:#4A6B3A`)}>A responsibility</span>
-              <h2 style={s(`margin:16px auto 0;font:400 clamp(36px,4.8vw,60px)/1.06 'DM Serif Display',serif;letter-spacing:-.8px;color:#14231A;text-wrap:balance`)}>The greatest gift an organisation can give its people is access to themselves.</h2>
+              <h2 style={s(`margin:16px auto 0;font:400 clamp(36px,4.8vw,60px)/1.06 'DM Serif Display',serif;letter-spacing:-.8px;color:#14231A;text-wrap:balance`)}>The greatest gift an organisation can give its people is <span className="nrm-mark">access to themselves</span>.</h2>
             </div>
             <div style={s(`display:flex;flex-wrap:wrap;align-items:center;gap:clamp(40px,6vw,88px);margin-top:clamp(56px,7vw,96px)`)}>
               <div data-m="os-pic" ref={this.at('gift')} style={s(`flex:1 1 340px;min-width:0;max-width:460px;margin:0 auto`)}>
@@ -318,7 +318,7 @@ class OurStory extends React.Component {
             </figure>
             <div style={s(`flex:1 1 380px;min-width:0;max-width:560px`)}>
               <span style={s(`${EYEBROW};color:#4A6B3A`)}>Meet Ian</span>
-              <h2 style={s(`${H2};color:#14231A`)}>Leading people since he was seventeen.</h2>
+              <h2 style={s(`${H2};color:#14231A`)}><span className="nrm-mark">Leading people</span> since he was seventeen.</h2>
               <p style={s(`${BODY};color:rgba(20,35,26,.72)`)}>
                 Ian Williams stepped into his first leadership role at seventeen, growing up in Liverpool. Since then he has spent more than two decades leading teams in some of the world’s largest organisations, across three continents.
               </p>
@@ -361,7 +361,7 @@ class OurStory extends React.Component {
               <div aria-hidden="true" style={s(`position:absolute;inset:0;border-radius:310px 310px 32px 26px / 310px 310px 32px 26px;background:radial-gradient(62% 40% at 50% 16%,rgba(217,234,110,.5) 0%,rgba(217,234,110,.14) 55%,rgba(217,234,110,0) 82%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 50%,#ECE8D7 100%)`)}></div>
               <div style={s(`position:relative`)}>
                 <img src="/assets/v5/norma-happy.png" alt="" width="92" height="124" style={s(`display:block;margin:0 auto;filter:drop-shadow(0 0 1px rgba(20,35,26,.7)) drop-shadow(0 14px 20px rgba(20,35,26,.16))`)} />
-                <h2 style={s(`margin:26px auto 0;max-width:11em;font:400 clamp(40px,5.4vw,66px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;text-wrap:balance`)}>Give your people access to themselves.</h2>
+                <h2 style={s(`margin:26px auto 0;max-width:11em;font:400 clamp(40px,5.4vw,66px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;text-wrap:balance`)}>Give your people <span className="nrm-mark">access to themselves</span>.</h2>
                 <p style={s(`margin:20px auto 0;max-width:24em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>Thirty minutes with the team behind nørma. We’ll show you the app your people use and the dashboard you’d use alongside it.</p>
                 <div style={s(`display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px`)}>
                   <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.24)`)} className="os-press">Book a demo</a>
