@@ -1,0 +1,18 @@
+---
+/* Our story (28 Oct 2026): Ian's account of why nørma exists, and the name.
+   Written here in the round 5 system rather than generated from a handoff. */
+import LayoutV5 from '../layouts/LayoutV5.astro';
+import OurStory from '../islands/v5/OurStory';
+const page = { '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Our story', url: 'https://joinnorma.com/our-story/', about: { '@id': 'https://joinnorma.com/#org' } };
+---
+<LayoutV5 title={'Our story · nørma, from leaders for leaders'} description={'Why nørma exists, in Ian Williams’ words: the cluttered mind, awareness on both sides of an organisation, and where the name nørma comes from.'} canonical="https://joinnorma.com/our-story/" og="/og/our-story.jpg" jsonld={[page]}>
+  <OurStory client:load />
+</LayoutV5>
+<style is:global>
+/* Phone pass: Ian's arch sits under the copy at a comfortable width, and the
+   loop picture stays small enough to keep the quote close. */
+@media (max-width:760px){
+  [data-m=os-portrait]{flex-basis:100%!important;max-width:360px}
+  [data-m=os-loop]{max-width:320px!important}
+}
+</style>

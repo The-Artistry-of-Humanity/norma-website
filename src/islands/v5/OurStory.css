@@ -1,0 +1,9 @@
+/* Hover and press states for Our story, matching the generated pages' classes. */
+.os-nav:hover{color:#14231A!important}
+.os-press:active{transform:scale(.985)!important}
+.os-dark:hover{background:#223527!important}
+.os-link:hover{color:#4A6B3A!important}
+.os-link-dark:hover{color:#F6F4E9!important}
+@media (prefers-reduced-motion:reduce){
+  #cluttered-mind svg *{transition:none!important}
+}

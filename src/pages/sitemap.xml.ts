@@ -6,7 +6,7 @@ const BASE = 'https://joinnorma.com';
 export function GET() {
   const today = new Date().toISOString().slice(0, 10);
   const pages: [string, string][] = [
-    ['/', today], ['/your-people/', today], ['/for-leaders/', today], ['/roi/', today], ['/book-a-demo/', today], ['/help/', today], [PATH_URL.app, today], [PATH_URL.dash, today], ['/privacy/', today], ['/terms/', today],
+    ['/', today], ['/your-people/', today], ['/for-leaders/', today], ['/roi/', today], ['/our-story/', today], ['/book-a-demo/', today], ['/help/', today], [PATH_URL.app, today], [PATH_URL.dash, today], ['/privacy/', today], ['/terms/', today],
     ...ALL.map((a) => [a.url, a.updated || today] as [string, string]),
   ];
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages

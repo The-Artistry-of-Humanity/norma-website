@@ -189,6 +189,7 @@ class YourPeople extends React.Component {
                   <a href="/your-people/" style={s(`color:#14231A;padding:4px 0 2px;border-bottom:2px solid #D3E45F`)} className="yp-ho789e87">Your people</a>
                   <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">For leaders</a>
                   <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">ROI</a>
+                  <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">Our story</a>
                 </nav>
               </>
             ) : null}
@@ -212,7 +213,8 @@ class YourPeople extends React.Component {
             <nav style={s(`padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column;border-top:1px solid rgba(20,35,26,.07);font:400 22px 'DM Serif Display',serif`)}>
               <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>Your people</a>
               <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>For leaders</a>
-              <a href="/roi/" style={s(`padding:12px 0;color:#14231A`)}>ROI</a>
+              <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>ROI</a>
+              <a href="/our-story/" style={s(`padding:12px 0;color:#14231A`)}>Our story</a>
             </nav>
           </>
         ) : null}
@@ -1026,6 +1028,7 @@ class YourPeople extends React.Component {
               <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">Your people</a>
               <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">For leaders</a>
               <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">ROI</a>
+              <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">Our story</a>
               <a href="/help/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">Help</a>
               <a href="/book-a-demo/" style={s(`color:rgba(20,35,26,.72)`)} className="yp-ho789e87">Book a demo</a>
             </nav>

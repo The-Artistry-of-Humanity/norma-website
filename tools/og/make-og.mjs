@@ -1,7 +1,8 @@
 // Social preview images (Open Graph, 1200 x 630) for each page, in the round 5
 // look. Renders HTML with the site's fonts and assets in headless Chrome and
 // writes public/og/<name>.jpg. Rerun after a design change:
-//   node tools/og/make-og.mjs
+//   node tools/og/make-og.mjs            (all pages)
+//   node tools/og/make-og.mjs our-story  (just one)
 import puppeteer from 'puppeteer-core';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -71,6 +72,9 @@ const PAGES = {
   'book-a-demo': { h: left({ eyebrow: 'Book a demo', h1: 'Let’s turn the lights on.', sub: 'Thirty minutes with the team behind nørma.', hs: 80, lw: 560, cta: 'Pick a time' })
       + `<div class="glow" style="left:690px;top:70px;width:480px;height:480px;background:radial-gradient(closest-side,rgba(217,234,110,.75),rgba(217,234,110,.2) 55%,rgba(217,234,110,0) 74%)"></div>
          <img src="${A('norma-point.png')}" style="position:absolute;left:800px;top:150px;width:253px;filter:drop-shadow(0 0 1px rgba(20,35,26,.6)) drop-shadow(0 24px 30px rgba(20,35,26,.2))">` },
+  'our-story': { h: left({ eyebrow: 'Our story', h1: 'From leaders, for leaders.', sub: 'Why nørma exists, and where the name comes from.', hs: 76, lw: 520, cta: '' })
+      + `<div style="position:absolute;left:716px;top:64px;width:400px;height:502px;overflow:hidden;border-radius:200px 200px 30px 24px / 200px 200px 30px 24px;background:radial-gradient(64% 42% at 50% 22%,rgba(217,234,110,.6) 0%,rgba(217,234,110,.16) 55%,rgba(217,234,110,0) 82%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 52%,#E4DFCA 100%)">
+           <img src="${A('story/ian-portrait.webp')}" style="position:absolute;left:50%;bottom:0;width:128%;transform:translateX(-50%)"></div>` },
   help: { dark: true, h: left({ eyebrow: 'nørma help centre', h1: 'How can we help?', sub: 'Help for the nørma app and the leader dashboard.', hs: 82, lw: 560, cta: '' })
       + `<div class="glow" style="right:-160px;top:-240px;width:820px;height:820px;background:radial-gradient(closest-side,rgba(217,234,110,.2),rgba(217,234,110,0) 72%)"></div>
          <img src="${A('norma-happy.png')}" style="position:absolute;left:860px;top:118px;width:220px;filter:drop-shadow(0 24px 30px rgba(0,0,0,.45))">
@@ -80,7 +84,9 @@ const PAGES = {
 };
 
 const b = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new', args: ['--allow-file-access-from-files'] });
-for (const [name, cfg] of Object.entries(PAGES)) {
+// Pass page names to render only those, e.g. `node tools/og/make-og.mjs our-story`.
+const ONLY = process.argv.slice(2);
+for (const [name, cfg] of Object.entries(PAGES).filter(([n]) => !ONLY.length || ONLY.includes(n))) {
   const p = await b.newPage();
   await p.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
   const html = `<!doctype html><html class="${cfg.dark ? 'dark' : ''}"><head><meta charset="utf-8">${FONTS}<style>${BASE}</style></head><body><div class="og">${cfg.dark ? '' : glowCream}${cfg.h}</div></body></html>`;
