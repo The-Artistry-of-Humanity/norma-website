@@ -320,7 +320,7 @@ class OurStory extends React.Component {
               <span style={s(`${EYEBROW};color:#4A6B3A`)}>Meet Ian</span>
               <h2 style={s(`${H2};color:#14231A`)}><span className="nrm-mark">Leading people</span> since he was seventeen.</h2>
               <p style={s(`${BODY};color:rgba(20,35,26,.72)`)}>
-                Ian Williams stepped into his first leadership role at seventeen, growing up in Liverpool. Since then he has spent more than two decades leading teams in some of the world’s largest organisations, across three continents.
+                Ian Williams stepped into his first leadership role at seventeen, growing up in Liverpool. Since then he has spent more than thirty years leading teams in some of the world’s largest organisations, across three continents.
               </p>
               <p style={s(`${BODY};color:rgba(20,35,26,.72)`)}>
                 Today he’s the founder and CEO of The Artistry of Humanity, the team behind nørma, and works with leadership teams as a consultant, facilitator and speaker. The thinking on this page is what he brings into those rooms.
