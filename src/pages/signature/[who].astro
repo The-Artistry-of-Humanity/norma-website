@@ -1,23 +1,31 @@
 ---
-/* Ian's email signature (28 Oct 2026, from the Claude Design mock-up), with a
-   one-click copy for pasting into Gmail. Unlisted: noindex and not in the
-   sitemap. Email-safe on purpose: tables, inline styles, Georgia and Arial,
-   and images at absolute joinnorma.com addresses (public/signature/, made by
-   tools/signature/make-assets.mjs). Gmail caches images, so give a changed
-   image a new file name. */
+/* Email signatures (28 Oct 2026, from the Claude Design mock-up for Ian), one
+   page per person in src/data/signatures.ts, each with a one-click copy for
+   pasting into Gmail. Unlisted: noindex and not in the sitemap. A page is
+   built only once that person's photo tile is in public/signature/.
+   Email-safe on purpose: tables, inline styles, Georgia and Arial, and images
+   at absolute joinnorma.com addresses (made by tools/signature/make-assets.mjs).
+   Gmail caches images, so give a changed image a new file name. */
+import fs from 'node:fs';
+import { PEOPLE, type Person } from '../../data/signatures';
+export function getStaticPaths() {
+  return PEOPLE.filter((p) => fs.existsSync(`public/signature/${p.photo}`)).map((p) => ({ params: { who: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: Person };
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const IMG = 'https://joinnorma.com/signature';
 const F = "Arial,Helvetica,sans-serif", SERIF = "Georgia,'Times New Roman',serif";
 const link = 'color:#14231A;text-decoration:none';
 const sig = `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:500px;font-family:${F};color:#14231A">
 <tr>
-<td style="padding:0 22px 0 0;vertical-align:top;width:88px"><img src="${IMG}/ian-williams.png" width="88" height="88" alt="Ian Williams" style="display:block;border:0;width:88px;height:88px"></td>
+<td style="padding:0 22px 0 0;vertical-align:top;width:88px"><img src="${IMG}/${p.photo}" width="88" height="88" alt="${esc(p.name)}" style="display:block;border:0;width:88px;height:88px"></td>
 <td style="padding:0 0 0 22px;vertical-align:top;border-left:3px solid #DCEB7F">
 <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse"><tr>
-<td style="padding:0 10px 0 0;font-family:${SERIF};font-size:27px;line-height:30px;color:#14231A;white-space:nowrap">Ian Williams</td>
-<td style="vertical-align:middle"><a href="https://www.linkedin.com/in/ian-williams077/" style="text-decoration:none"><img src="${IMG}/linkedin.png" width="22" height="22" alt="LinkedIn" style="display:block;border:0;width:22px;height:22px"></a></td>
+<td style="padding:0 10px 0 0;font-family:${SERIF};font-size:27px;line-height:30px;color:#14231A;white-space:nowrap">${esc(p.name)}</td>${p.linkedin ? `
+<td style="vertical-align:middle"><a href="${p.linkedin}" style="text-decoration:none"><img src="${IMG}/linkedin.png" width="22" height="22" alt="LinkedIn" style="display:block;border:0;width:22px;height:22px"></a></td>` : ''}
 </tr></table>
-<div style="padding:7px 0 10px;font-family:${F};font-size:11px;line-height:15px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#4A6B3A">Founder &amp; CEO, The Artistry of Humanity</div>
-<div style="font-family:${F};font-size:14px;line-height:22px;color:#14231A"><a href="tel:+61478686130" style="${link}">+61 478 686 130</a><br><a href="mailto:ian@artistry-of-humanity.com" style="${link}">ian@artistry-of-humanity.com</a><br><a href="https://artistry-of-humanity.com" style="${link}">artistry-of-humanity.com</a></div>
+<div style="padding:7px 0 10px;font-family:${F};font-size:11px;line-height:15px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#4A6B3A">${p.role.map(esc).join('<br>')}</div>
+<div style="font-family:${F};font-size:14px;line-height:22px;color:#14231A"><a href="tel:${p.tel}" style="${link}">${p.phone}</a><br><a href="mailto:${p.email}" style="${link}">${p.email}</a><br><a href="https://artistry-of-humanity.com" style="${link}">artistry-of-humanity.com</a></div>
 </td>
 </tr>
 <tr><td colspan="2" style="padding:20px 0 0">
@@ -42,7 +50,7 @@ const sig = `<table cellpadding="0" cellspacing="0" border="0" style="border-col
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="color-scheme" content="only light" />
-  <title>Email signature · Ian Williams</title>
+  <title>{`Email signature · ${p.name}`}</title>
   <link rel="icon" href="/assets/v5/norma-icon.png" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
   <style>
@@ -72,9 +80,9 @@ const sig = `<table cellpadding="0" cellspacing="0" border="0" style="border-col
     <h2>Then, in Gmail</h2>
     <ol>
       <li>Click the <b>cog</b> at the top right, then <b>See all settings</b>.</li>
-      <li>On the <b>General</b> tab, scroll down to <b>Signature</b> and click <b>Create new</b>. Name it “Ian”.</li>
+      <li>On the <b>General</b> tab, scroll down to <b>Signature</b> and click <b>Create new</b>. Name it “{p.first}”.</li>
       <li>Click into the empty box and paste: <b>Cmd + V</b> on a Mac, <b>Ctrl + V</b> on Windows.</li>
-      <li>Under <b>Signature defaults</b>, choose “Ian” for new emails and for replies.</li>
+      <li>Under <b>Signature defaults</b>, choose “{p.first}” for new emails and for replies.</li>
       <li>Scroll to the very bottom and click <b>Save Changes</b>.</li>
     </ol>
     <p class="note">The Gmail phone app keeps its own, simpler signature. This one is for Gmail on a computer.</p>

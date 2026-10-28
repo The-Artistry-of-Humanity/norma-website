@@ -8,3 +8,6 @@ design_handoff_v3/
 design_handoff_v5/
 *.local.py
 design_handoff_shots/
+
+# Raw and cut-out photos for the email signature tiles (only the tiles are published)
+signature_sources/
