@@ -93,7 +93,11 @@ class ForLeaders extends React.Component {
     const extra = { levelsRef: this.levelsRef, levels, penD: soft(pts(pv)), cmpD: soft(pts(pc)), cmpOp: L.cmp == null ? 0 : 1, deptD: soft(pts(pd)), deptOp: lv === 2 ? 1 : 0,
       dots: pts(pv).map((p, i) => ({ left: (p[0] / 2).toFixed(2) + '%', top: (p[1] / 2).toFixed(2) + '%', c: PCL[i] })),
       lvlScore: score, lvlCol: bandL(score), lvlName: L.name, cmpLabel: L.cmp == null ? '' : LV[L.cmp].name,
-      rows: PILLARS.map((n, i) => ({ name: n, c: PCL[i], v: Math.round(pv[i]), col: bandL(pv[i]), cmp: L.cmp == null ? '' : Math.round(pc[i]) })) };
+      // Legend and table columns run organisation, department, team, up to the
+      // level that's open; that level is solid, the org dashed, the department dotted.
+      legend: LV.slice(0, lv + 1).map((l, j) => ({ name: l.name, sw: j === lv ? 'width:14px;height:2px;border-radius:2px;background:#4E9A63' : j === 0 ? 'width:14px;height:0;border-top:2px dashed rgba(20,35,26,.4)' : 'width:14px;height:0;border-top:2px dotted #9AAE84' })),
+      gridCols: `minmax(0,1fr) repeat(${lv + 1},minmax(44px,58px))`,
+      rows: PILLARS.map((n, i) => ({ name: n, c: PCL[i], vals: LV.slice(0, lv + 1).map((_, j) => { const x = j === lv ? pv[i] : j === 0 ? pc[i] : pd[i]; return { v: Math.round(x), st: j === lv ? `text-align:right;font:400 20px/1 'DM Serif Display',serif;color:${bandL(x)}` : `text-align:right;font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.5)` }; }) })) };
     return { ...extra, swarmRef: this.swarmRef, rootRef: this.rootRef, tourRef: this.tourRef, tourImg: this.tourImg, wide: !narrow, narrow, menuOpen: narrow && menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })) };
   }
 
@@ -149,7 +153,7 @@ class ForLeaders extends React.Component {
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(40px,7vw,96px);padding-bottom:clamp(104px,12vw,160px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(40px,5vw,64px)`)}>
           <div style={s(`flex:1 1 340px;min-width:0;max-width:480px`)}>
             <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(20,35,26,.6)`)}>For leaders · the dashboard</span>
-            <h1 style={s(`margin:16px 0 0;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance;padding-bottom:.14em;margin-bottom:-.14em`)}>See how your people are really doing.</h1>
+            <h1 style={s(`margin:16px 0 0;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance;padding-bottom:.14em;margin-bottom:-.14em`)}>See how your people are <span className="nrm-mark">really doing</span>.</h1>
             <p style={s(`margin:28px 0 0;max-width:27em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
               nørma brings Fulfilment and Culture together in one dashboard. You see where to look, what to do about it, and whether it worked.
             </p>
@@ -879,18 +883,12 @@ class ForLeaders extends React.Component {
               <div style={s(`display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap`)}>
                 <span style={s(`font:400 24px 'DM Serif Display',serif;color:#14231A`)}>Fulfilment</span>
                 <span style={s(`display:flex;flex-wrap:wrap;gap:4px 16px;font:500 12px 'DM Sans',sans-serif;color:rgba(20,35,26,.6)`)}>
-                  <span style={s(`display:inline-flex;align-items:center;gap:7px`)}>
-                    <span style={s(`width:14px;height:2px;border-radius:2px;background:#4E9A63`)}></span>
-                    {V.lvlName}
-                  </span>
-                  <span style={s(`display:inline-flex;align-items:center;gap:7px;opacity:${V.cmpOp ?? ''};transition:opacity .4s ease`)}>
-                    <span style={s(`width:14px;height:0;border-top:2px dashed rgba(20,35,26,.4)`)}></span>
-                    {V.cmpLabel}
-                  </span>
-                  <span style={s(`display:inline-flex;align-items:center;gap:7px;opacity:${V.deptOp ?? ''};transition:opacity .4s ease`)}>
-                    <span style={s(`width:14px;height:0;border-top:2px dotted #9AAE84`)}></span>
-                    Field Services
-                  </span>
+                  {(V.legend || []).map((l, $index) => (
+                    <span key={l.name} style={s(`display:inline-flex;align-items:center;gap:7px`)}>
+                      <span style={s(l.sw)}></span>
+                      {l.name}
+                    </span>
+                  ))}
                 </span>
               </div>
               <div style={s(`position:relative;width:min(100%,320px);aspect-ratio:1;margin:18px auto 0`)}>
@@ -909,15 +907,23 @@ class ForLeaders extends React.Component {
                 <span style={s(`position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);font:400 clamp(36px,4vw,48px)/1 'DM Serif Display',serif;color:${V.lvlCol ?? ''}`)}>{V.lvlScore}</span>
               </div>
               <div style={s(`margin-top:18px;display:flex;flex-direction:column`)}>
+                <div aria-hidden="true" style={s(`display:grid;grid-template-columns:${V.gridCols};align-items:end;gap:10px;padding:0 0 8px`)}>
+                  <span></span>
+                  {(V.legend || []).map(l => (
+                    <span key={l.name} style={s(`display:flex;flex-direction:column;align-items:flex-end;gap:5px;text-align:right;font:500 10.5px/1.2 'DM Sans',sans-serif;color:rgba(20,35,26,.55)`)}>
+                      <span style={s(l.sw)}></span>
+                      {l.name}
+                    </span>
+                  ))}
+                </div>
                 {(V.rows || []).map((r, $index) => (
                   <React.Fragment key={$index}>
-                    <div style={s(`display:grid;grid-template-columns:minmax(0,1fr) 48px 48px;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(20,35,26,.08)`)}>
+                    <div style={s(`display:grid;grid-template-columns:${V.gridCols};align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(20,35,26,.08)`)}>
                       <span style={s(`display:flex;align-items:center;gap:10px;min-width:0;font:500 14.5px 'DM Sans',sans-serif;color:#14231A`)}>
                         <span style={s(`flex:none;width:8px;height:8px;border-radius:50%;background:${r.c ?? ''}`)}></span>
                         {r.name}
                       </span>
-                      <span style={s(`text-align:right;font:400 20px/1 'DM Serif Display',serif;color:${r.col ?? ''}`)}>{r.v}</span>
-                      <span style={s(`text-align:right;font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.5)`)}>{r.cmp}</span>
+                      {r.vals.map((c, j) => <span key={j} style={s(c.st)}>{c.v}</span>)}
                     </div>
                   </React.Fragment>
                 ))}

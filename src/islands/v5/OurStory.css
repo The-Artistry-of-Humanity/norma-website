@@ -1,9 +1,40 @@
-/* Hover and press states for Our story, matching the generated pages' classes. */
+/* Our story: hover and press states (matching the generated pages' classes),
+   plus the three pieces of motion that play once on arrival. */
 .os-nav:hover{color:#14231A!important}
 .os-press:active{transform:scale(.985)!important}
 .os-dark:hover{background:#223527!important}
 .os-link:hover{color:#4A6B3A!important}
 .os-link-dark:hover{color:#F6F4E9!important}
+
+/* Shared language: a wire from each side draws towards the shared words,
+   which light up one after another. */
+.os-wire{display:block;width:2px;height:clamp(36px,5vw,56px);margin:10px 0;border-radius:2px;background:linear-gradient(180deg,rgba(244,242,230,.4),#D9EA6E);transform:scaleY(0);transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.os-wire-down{transform-origin:top}
+.os-wire-up{transform-origin:bottom;background:linear-gradient(0deg,#D9EA6E,rgba(244,242,230,.4))}
+.os-on .os-wire{transform:scaleY(1)}
+.os-chip{opacity:0;transform:translateY(8px) scale(.96);transition:opacity .6s ease var(--d),transform .7s cubic-bezier(.22,.61,.36,1) var(--d)}
+.os-on .os-chip{opacity:1;transform:none}
+
+/* The name: the word sits in the dark until a torch sweeps across it, left to
+   right, and leaves it lit. The lit copy is revealed by a soft-edged mask that
+   slides with the beam. */
+.os-word{position:relative;display:inline-block;margin:clamp(22px,3vw,36px) 0 0;font:400 clamp(104px,19vw,240px)/1.08 'DM Serif Display',serif;letter-spacing:-.04em;white-space:nowrap}
+.os-word .os-o{display:inline-block;padding:0 .1em .06em;margin:0 -.1em -.06em}
+.os-word-base{color:rgba(246,244,233,.08)}
+.os-word-base .os-o{color:rgba(217,234,110,.12)}
+.os-word-lit{position:absolute;inset:0;color:#F6F4E9;
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 34%,transparent 46%);mask-image:linear-gradient(90deg,#000 0,#000 34%,transparent 46%);
+  -webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:100% 0;mask-position:100% 0}
+.os-word-lit .os-o{background:linear-gradient(160deg,#F1FAB4 10%,#D9EA6E 55%,#A9C23A 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.os-beam{position:absolute;top:-35%;bottom:-35%;left:0;width:42%;border-radius:50%;background:radial-gradient(closest-side,rgba(246,250,214,.34),rgba(217,234,110,.12) 50%,rgba(217,234,110,0) 100%);mix-blend-mode:screen;opacity:0;pointer-events:none;transform:translateX(-90%)}
+.os-lit .os-word-lit{animation:osReveal 2.4s cubic-bezier(.45,.05,.4,1) .25s forwards}
+.os-lit .os-beam{animation:osBeam 2.4s cubic-bezier(.45,.05,.4,1) .25s forwards}
+@keyframes osReveal{to{-webkit-mask-position:0 0;mask-position:0 0}}
+@keyframes osBeam{0%{opacity:0;transform:translateX(-90%)}12%{opacity:1}78%{opacity:1}100%{opacity:0;transform:translateX(250%)}}
+
 @media (prefers-reduced-motion:reduce){
-  #cluttered-mind svg *{transition:none!important}
+  #cluttered-mind svg *,#the-gift svg *,.os-wire,.os-chip{transition:none!important}
+  .os-word-lit{-webkit-mask-image:none;mask-image:none;animation:none!important}
+  .os-beam{display:none}
 }

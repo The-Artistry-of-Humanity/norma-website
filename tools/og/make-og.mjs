@@ -73,8 +73,8 @@ const PAGES = {
       + `<div class="glow" style="left:690px;top:70px;width:480px;height:480px;background:radial-gradient(closest-side,rgba(217,234,110,.75),rgba(217,234,110,.2) 55%,rgba(217,234,110,0) 74%)"></div>
          <img src="${A('norma-point.png')}" style="position:absolute;left:800px;top:150px;width:253px;filter:drop-shadow(0 0 1px rgba(20,35,26,.6)) drop-shadow(0 24px 30px rgba(20,35,26,.2))">` },
   'our-story': { h: left({ eyebrow: 'Our story', h1: 'From leaders, for leaders.', sub: 'Why nørma exists, and where the name comes from.', hs: 76, lw: 520, cta: '' })
-      + `<div style="position:absolute;left:716px;top:64px;width:400px;height:502px;overflow:hidden;border-radius:200px 200px 30px 24px / 200px 200px 30px 24px;background:radial-gradient(64% 42% at 50% 22%,rgba(217,234,110,.6) 0%,rgba(217,234,110,.16) 55%,rgba(217,234,110,0) 82%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 52%,#E4DFCA 100%)">
-           <img src="${A('story/ian-portrait.webp')}" style="position:absolute;left:50%;bottom:0;width:128%;transform:translateX(-50%)"></div>` },
+      + `<div style="position:absolute;left:716px;top:64px;width:400px;height:502px;overflow:hidden;border-radius:200px 200px 30px 24px / 200px 200px 30px 24px;background:#ECE8D7;box-shadow:0 40px 80px -40px rgba(20,35,26,.45)">
+           <img src="${A('story/ian-speaking.webp')}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%"></div>` },
   help: { dark: true, h: left({ eyebrow: 'nørma help centre', h1: 'How can we help?', sub: 'Help for the nørma app and the leader dashboard.', hs: 82, lw: 560, cta: '' })
       + `<div class="glow" style="right:-160px;top:-240px;width:820px;height:820px;background:radial-gradient(closest-side,rgba(217,234,110,.2),rgba(217,234,110,0) 72%)"></div>
          <img src="${A('norma-happy.png')}" style="position:absolute;left:860px;top:118px;width:220px;filter:drop-shadow(0 24px 30px rgba(0,0,0,.45))">

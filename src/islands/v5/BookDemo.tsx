@@ -112,7 +112,7 @@ class BookDemo extends React.Component {
           <div style={s(`display:flex;flex-direction:column;gap:clamp(40px,5vw,64px)`)}>
             <div style={s(`min-width:0;max-width:760px;margin:0 auto;text-align:center`)}>
               <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(20,35,26,.6)`)}>Book a demo</span>
-              <h1 style={s(`margin:16px auto 0;max-width:12em;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance;padding-bottom:.14em;margin-bottom:-.14em`)}>Let’s turn the lights on.</h1>
+              <h1 style={s(`margin:16px auto 0;max-width:12em;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance;padding-bottom:.14em;margin-bottom:-.14em`)}>Let’s turn <span className="nrm-mark">the lights on</span>.</h1>
               <p style={s(`margin:24px auto 0;max-width:30em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
                 Thirty minutes with the team behind nørma. Pick a time that suits you, or tell us about your organisation and we’ll come back to you.
               </p>

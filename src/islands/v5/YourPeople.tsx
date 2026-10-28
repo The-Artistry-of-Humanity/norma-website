@@ -223,7 +223,7 @@ class YourPeople extends React.Component {
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(40px,7vw,96px);padding-bottom:clamp(72px,9vw,120px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(40px,5vw,64px)`)}>
           <div style={s(`flex:1 1 340px;min-width:0;max-width:540px`)}>
             <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(20,35,26,.6)`)}>Your people · the app</span>
-            <h1 style={s(`margin:16px 0 0;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance`)}>A private companion for their whole life.</h1>
+            <h1 style={s(`margin:16px 0 0;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance`)}>A private companion for <span className="nrm-mark">their whole life</span>.</h1>
             <p style={s(`margin:28px 0 0;max-width:28em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
               Once a month, your people check in across the five pillars of their life. In between, there’s always one small thing to do: say what’s on their mind, take a breath, keep a habit, open a chapter.
             </p>

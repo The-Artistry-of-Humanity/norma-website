@@ -328,7 +328,7 @@ class HomePage extends React.Component {
       <section style={s(`position:relative`)}>
         <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(40px,7vw,96px);padding-bottom:clamp(72px,9vw,128px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(40px,5vw,64px)`)}>
           <div style={s(`flex:1 1 340px;min-width:0;max-width:540px`)}>
-            <h1 style={s(`margin:0;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance`)}>Nobody leaves their life at the door.</h1>
+            <h1 style={s(`margin:0;font:400 clamp(44px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;background:linear-gradient(105deg,#14231A 12%,#2C4A24 52%,#6E8A1C 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-wrap:balance`)}>Nobody leaves <span className="nrm-mark">their life</span> at the door.</h1>
             <p style={s(`margin:28px 0 0;max-width:27em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
               nørma is an app for your people and a dashboard for you. They see where their life is at. You see where your culture is at, and what to do about it.
             </p>
