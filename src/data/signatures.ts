@@ -32,7 +32,7 @@ export const PEOPLE: Person[] = [
   {
     slug: 'kevin', name: 'Kevin Wilder', first: 'Kevin',
     role: ['Head of US, The Artistry of Humanity'],
-    phone: '+1 401 465 2317', tel: '+14014652317', email: 'kevin@artistry-of-humanity.com',
+    phone: '+1 401-465-2317', tel: '+14014652317', email: 'kevin@artistry-of-humanity.com',
     photo: 'kevin-wilder.png',
   },
 ];
