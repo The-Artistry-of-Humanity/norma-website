@@ -27,12 +27,12 @@ export const PEOPLE: Person[] = [
     slug: 'sophia', name: 'Sophia Apostolou', first: 'Sophia',
     role: ['Strategy Client Partner | Facilitator', 'The Artistry of Humanity'],
     phone: '+61 422 339 063', tel: '+61422339063', email: 'sophia@artistry-of-humanity.com',
-    photo: 'sophia-apostolou.png',
+    linkedin: 'https://www.linkedin.com/in/sophia-apostolou-57756350/', photo: 'sophia-apostolou.png',
   },
   {
     slug: 'kevin', name: 'Kevin Wilder', first: 'Kevin',
     role: ['Head of US, The Artistry of Humanity'],
     phone: '+1 401-465-2317', tel: '+14014652317', email: 'kevin@artistry-of-humanity.com',
-    photo: 'kevin-wilder.png',
+    linkedin: 'https://www.linkedin.com/in/kevinwilder/', photo: 'kevin-wilder.png',
   },
 ];
