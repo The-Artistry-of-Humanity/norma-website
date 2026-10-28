@@ -1,0 +1,38 @@
+// Images for the email signatures at /signature/<name>/ (Gmail needs every
+// image at a public address, so they live in public/signature/). Rendered at
+// 3x their display size with transparent rounded corners, which every mail
+// app shows correctly (Outlook ignores CSS border-radius). Rerun with:
+//   node tools/signature/make-assets.mjs
+import puppeteer from 'puppeteer-core';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import fs from 'fs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const OUT = path.join(ROOT, 'public/signature');
+const A = f => 'file://' + path.join(ROOT, 'public/assets/v5', f);
+fs.mkdirSync(OUT, { recursive: true });
+
+const ASSETS = {
+  // Ian on the nørma app icon's green, with its lighter hill behind him.
+  'ian-williams.png': [264, 264, `<div style="position:relative;width:264px;height:264px;border-radius:60px;overflow:hidden;background:linear-gradient(180deg,#2A4B36 0%,#203A28 70%,#1B2E1E 100%)">
+      <div style="position:absolute;left:-40%;right:-40%;bottom:-30%;height:62%;border-radius:50%;background:linear-gradient(180deg,#4A6B45,#3D5B39 40%)"></div>
+      <img src="${A('story/ian-portrait.webp')}" style="position:absolute;left:50%;top:18px;width:126%;transform:translateX(-50%)">
+    </div>`],
+  'linkedin.png': [66, 66, `<div style="width:66px;height:66px;border-radius:15px;background:#243D2C;display:flex;align-items:center;justify-content:center;font:700 34px/1 Arial,Helvetica,sans-serif;color:#fff;letter-spacing:-.5px">in</div>`],
+  'norma-icon.png': [192, 192, `<img src="${A('norma-app-icon.png')}" style="display:block;width:192px;height:192px;border-radius:44px">`],
+};
+
+const b = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new', args: ['--allow-file-access-from-files'] });
+for (const [name, [w, h, html]] of Object.entries(ASSETS)) {
+  const p = await b.newPage();
+  await p.setViewport({ width: w, height: h, deviceScaleFactor: 1 });
+  const file = path.join(OUT, `.${name}.html`);
+  fs.writeFileSync(file, `<!doctype html><html><head><meta charset="utf-8"><style>*{margin:0;padding:0}html,body{background:transparent}</style></head><body>${html}</body></html>`);
+  await p.goto('file://' + file, { waitUntil: 'networkidle0' });
+  await p.screenshot({ path: path.join(OUT, name), omitBackground: true, clip: { x: 0, y: 0, width: w, height: h } });
+  fs.unlinkSync(file);
+  console.log('signature', name, Math.round(fs.statSync(path.join(OUT, name)).size / 1024) + ' KB');
+  await p.close();
+}
+await b.close();
