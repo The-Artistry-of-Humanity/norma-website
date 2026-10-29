@@ -1,43 +1,57 @@
 ---
 /* Email signatures (28 Oct 2026, from the Claude Design mock-up for Ian), one
    page per person in src/data/signatures.ts, each with a one-click copy for
-   pasting into Gmail. Unlisted: noindex and not in the sitemap. A page is
-   built only once that person's photo tile is in public/signature/.
-   Email-safe on purpose: tables, inline styles, Georgia and Arial, and images
-   at absolute joinnorma.com addresses (made by tools/signature/make-assets.mjs).
-   Gmail caches images, so give a changed image a new file name. */
-import fs from 'node:fs';
+   pasting into Gmail. Unlisted: noindex and not in the sitemap.
+   Email-safe on purpose, so it holds up in classic Outlook too: tables and
+   inline styles only, spacing on table cells and the button as a cell (Outlook
+   ignores padding on div and a). Fonts and colours sit on the cells that hold
+   text, never on the tables around them: pasting into Gmail drops any style a
+   parent already has, and Outlook doesn't pass fonts into nested tables. For
+   the same reason it's Helvetica, not Arial, which matches Gmail's own default
+   (Windows shows Helvetica as Arial).
+   Images live at artistry-of-humanity.com, the domain the emails come from
+   (made by tools/signature/make-assets.mjs). Outlook holds them back until
+   the reader trusts the sender, so the photo and icon have empty alt text:
+   the name and the card's words already say it. Gmail caches images, so give
+   a changed image a new file name. */
 import { PEOPLE, type Person } from '../../data/signatures';
 export function getStaticPaths() {
-  return PEOPLE.filter((p) => fs.existsSync(`public/signature/${p.photo}`)).map((p) => ({ params: { who: p.slug }, props: { p } }));
+  return PEOPLE.map((p) => ({ params: { who: p.slug }, props: { p } }));
 }
 const { p } = Astro.props as { p: Person };
 const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-const IMG = 'https://joinnorma.com/signature';
-const F = "Arial,Helvetica,sans-serif", SERIF = "Georgia,'Times New Roman',serif";
+const IMG = 'https://artistry-of-humanity.com/signature';
+const F = "Helvetica,Arial,sans-serif", SERIF = "Georgia,'Times New Roman',serif";
+const T = 'cellpadding="0" cellspacing="0" border="0" role="presentation"';
 const link = 'color:#14231A;text-decoration:none';
-const sig = `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:500px;font-family:${F};color:#14231A">
+const sig = `<table ${T} width="500" style="border-collapse:collapse;width:500px">
 <tr>
-<td style="padding:0 22px 0 0;vertical-align:top;width:88px"><img src="${IMG}/${p.photo}" width="88" height="88" alt="${esc(p.name)}" style="display:block;border:0;width:88px;height:88px"></td>
-<td style="padding:0 0 0 22px;vertical-align:top;border-left:3px solid #DCEB7F">
-<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse"><tr>
+<td width="88" valign="top" style="padding:0 22px 0 0;vertical-align:top;width:88px"><img src="${IMG}/${p.photo}" width="88" height="88" alt="" style="display:block;border:0;width:88px;height:88px"></td>
+<td valign="top" style="padding:0 0 0 22px;vertical-align:top;border-left:3px solid #DCEB7F">
+<table ${T} style="border-collapse:collapse"><tr>
 <td style="padding:0 10px 0 0;font-family:${SERIF};font-size:27px;line-height:30px;color:#14231A;white-space:nowrap">${esc(p.name)}</td>${p.linkedin ? `
-<td style="vertical-align:middle"><a href="${p.linkedin}" style="text-decoration:none"><img src="${IMG}/linkedin.png" width="22" height="22" alt="LinkedIn" style="display:block;border:0;width:22px;height:22px"></a></td>` : ''}
+<td valign="middle" style="vertical-align:middle"><a href="${p.linkedin}" style="text-decoration:none"><img src="${IMG}/linkedin.png" width="22" height="22" alt="LinkedIn" style="display:block;border:0;width:22px;height:22px;font-family:${F};font-size:10px;color:#4A6B3A"></a></td>` : ''}
 </tr></table>
-<div style="padding:7px 0 10px;font-family:${F};font-size:11px;line-height:15px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#4A6B3A">${p.role.map(esc).join('<br>')}</div>
-<div style="font-family:${F};font-size:14px;line-height:22px;color:#14231A"><a href="tel:${p.tel}" style="${link}">${p.phone}</a><br><a href="mailto:${p.email}" style="${link}">${p.email}</a><br><a href="https://artistry-of-humanity.com" style="${link}">artistry-of-humanity.com</a></div>
+<table ${T} style="border-collapse:collapse">
+<tr><td style="padding:7px 0 10px;font-family:${F};font-size:11px;line-height:15px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#4A6B3A">${p.role.map(esc).join('<br>')}</td></tr>
+<tr><td style="font-family:${F};font-size:14px;line-height:22px;color:#14231A"><a href="tel:${p.tel}" style="${link}">${p.phone}</a><br><a href="mailto:${p.email}" style="${link}">${p.email}</a><br><a href="https://artistry-of-humanity.com" style="${link}">artistry-of-humanity.com</a></td></tr>
+</table>
 </td>
 </tr>
 <tr><td colspan="2" style="padding:20px 0 0">
-<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate;width:500px;background:#243D2C;border-radius:18px">
+<table ${T} width="500" bgcolor="#243D2C" style="border-collapse:separate;width:500px;background-color:#243D2C;border-radius:18px">
 <tr>
-<td style="padding:18px 0 18px 20px;vertical-align:middle;width:64px"><a href="https://joinnorma.com/" style="text-decoration:none"><img src="${IMG}/norma-icon.png" width="64" height="64" alt="nørma" style="display:block;border:0;width:64px;height:64px"></a></td>
-<td style="padding:16px 12px 16px 14px;vertical-align:middle">
-<div style="font-family:${F};font-size:9.5px;line-height:14px;font-weight:bold;letter-spacing:1.6px;text-transform:uppercase;color:#DCEB7F;white-space:nowrap">New from Artistry of Humanity</div>
-<div style="padding:4px 0 0;font-family:${SERIF};font-size:23px;line-height:28px;color:#F6F4E9">Meet <i>nørma</i>.</div>
-<div style="padding:4px 0 0;font-family:${F};font-size:12px;line-height:18px;color:#C9D4C2">Give your people access to themselves and watch what it does for your business.</div>
+<td width="64" valign="middle" style="padding:18px 0 18px 20px;vertical-align:middle;width:64px"><img src="${IMG}/norma-icon.png" width="64" height="64" alt="" style="display:block;border:0;width:64px;height:64px"></td>
+<td valign="middle" style="padding:16px 12px 16px 14px;vertical-align:middle">
+<table ${T} style="border-collapse:collapse">
+<tr><td style="font-family:${F};font-size:9.5px;line-height:14px;font-weight:bold;letter-spacing:1.6px;text-transform:uppercase;color:#DCEB7F;white-space:nowrap">New from Artistry of Humanity</td></tr>
+<tr><td style="padding:4px 0 0;font-family:${SERIF};font-size:23px;line-height:28px;color:#F6F4E9">Meet <i>nørma</i>.</td></tr>
+<tr><td style="padding:4px 0 0;font-family:${F};font-size:12px;line-height:18px;color:#C9D4C2">Give your people access to themselves and watch what it does for your business.</td></tr>
+</table>
 </td>
-<td style="padding:0 20px 0 0;vertical-align:middle;white-space:nowrap"><a href="https://joinnorma.com/" style="display:inline-block;padding:10px 16px;border-radius:999px;background:#DCEB7F;font-family:${F};font-size:13px;line-height:16px;font-weight:bold;color:#14231A;text-decoration:none">joinnorma.com&nbsp;›</a></td>
+<td valign="middle" style="padding:0 20px 0 0;vertical-align:middle">
+<table ${T} style="border-collapse:separate"><tr><td bgcolor="#DCEB7F" style="padding:10px 16px;border-radius:999px;background-color:#DCEB7F;white-space:nowrap"><a href="https://joinnorma.com/" style="font-family:${F};font-size:13px;line-height:16px;font-weight:bold;color:#14231A;text-decoration:none;white-space:nowrap">joinnorma.com&nbsp;›</a></td></tr></table>
+</td>
 </tr>
 </table>
 </td></tr>
@@ -80,8 +94,8 @@ const sig = `<table cellpadding="0" cellspacing="0" border="0" style="border-col
     <h2>Then, in Gmail</h2>
     <ol>
       <li>Click the <b>cog</b> at the top right, then <b>See all settings</b>.</li>
-      <li>On the <b>General</b> tab, scroll down to <b>Signature</b> and click <b>Create new</b>. Name it “{p.first}”.</li>
-      <li>Click into the empty box and paste: <b>Cmd + V</b> on a Mac, <b>Ctrl + V</b> on Windows.</li>
+      <li>On the <b>General</b> tab, scroll down to <b>Signature</b> and click <b>Create new</b>. Name it “{p.first}”. Already have one from this page? Click it instead and delete what’s in the box.</li>
+      <li>Click into the box and paste: <b>Cmd + V</b> on a Mac, <b>Ctrl + V</b> on Windows.</li>
       <li>Under <b>Signature defaults</b>, choose “{p.first}” for new emails and for replies.</li>
       <li>Scroll to the very bottom and click <b>Save Changes</b>.</li>
     </ol>

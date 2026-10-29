@@ -1,6 +1,6 @@
-// People with an email signature page at /signature/<slug>/. A page is only
-// built once its photo tile exists in public/signature/ (made by
-// tools/signature/make-assets.mjs). Business contact details only, as they
+// People with an email signature page at /signature/<slug>/. Each photo tile is
+// made by tools/signature/make-assets.mjs and served from
+// artistry-of-humanity.com/signature/. Business contact details only, as they
 // appear on every email these people send.
 export interface Person {
   slug: string;
