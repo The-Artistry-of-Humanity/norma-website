@@ -1,10 +1,10 @@
-// Images for the email signatures at /signature/<name>/. Gmail needs every
-// image at a public address, and they're served from artistry-of-humanity.com,
-// the domain the emails come from, so they're written into the AOH website
-// repo (cloned next to this one) and go live when that site deploys. Rendered
-// at 3x their display size with transparent rounded corners, which every mail
-// app shows correctly (Outlook ignores CSS border-radius), then saved as
-// palette PNGs, about a third of the size. Rerun with:
+// Images for the email signatures at artistry-of-humanity.com/signature/<name>/.
+// The pages and images live in the AOH website repo (cloned next to this one),
+// as the images must come from the domain the emails come from; they're made
+// here because this repo has the nørma artwork. Rendered at 3x their display
+// size with transparent rounded corners, which every mail app shows correctly
+// (Outlook ignores CSS border-radius), then saved as palette PNGs, about a
+// third of the size. Rerun with:
 //   node tools/signature/make-assets.mjs
 // public/signature/ on this site keeps the first set: emails already sent
 // still load them, so leave those files alone.

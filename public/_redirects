@@ -60,3 +60,12 @@
 /help/dashboard/sso/  /help/dashboard/sign-in-and-sso/  301
 /help/dashboard/billing  /help/dashboard/seats-and-billing/  301
 /help/dashboard/billing/  /help/dashboard/seats-and-billing/  301
+
+# Email signature pages moved to the AOH website (29 Oct 2026). The images in
+# public/signature/ stay here for emails already sent.
+/signature/ian  https://artistry-of-humanity.com/signature/ian  301
+/signature/ian/  https://artistry-of-humanity.com/signature/ian  301
+/signature/sophia  https://artistry-of-humanity.com/signature/sophia  301
+/signature/sophia/  https://artistry-of-humanity.com/signature/sophia  301
+/signature/kevin  https://artistry-of-humanity.com/signature/kevin  301
+/signature/kevin/  https://artistry-of-humanity.com/signature/kevin  301
