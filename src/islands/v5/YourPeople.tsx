@@ -5,11 +5,12 @@
    hand-tuning values here. */
 import React from 'react';
 import { s } from '../../lib/s';
+import HeroFilm from './HeroFilm';
 import './YourPeople.dc.css';
 
 
 class YourPeople extends React.Component {
-  state = { narrow: false, stack: false, cols: 5, ready: false, menu: false, pillar: null, feat: 0, filmPlaying: false };
+  state = { narrow: false, stack: false, cols: 5, ready: false, menu: false, pillar: null, feat: 0, filmPlaying: false, heroOn: false };
   rootRef = React.createRef(); polyRef = React.createRef(); featRef = React.createRef();
   filmCanvasRef = React.createRef(); filmSeekRef = React.createRef(); filmTimeRef = React.createRef();
   P = [
@@ -60,8 +61,10 @@ class YourPeople extends React.Component {
     const root = this.rootRef.current;
     if (root) root.querySelectorAll('[data-fit]').forEach(el => { this.ro.observe(el.parentElement); this.fit(el.parentElement); });
     this.initPoly(); this.initFeatures(); this.bootFilm();
+    this.markTimer = setTimeout(() => root && root.querySelector('[data-hero-mark]')?.classList.add('is-on'), 900);
   }
-  componentDidUpdate() {
+  componentDidUpdate(_, prev) {
+    if (prev.narrow !== this.state.narrow && this.rootRef.current) this.rootRef.current.querySelectorAll('[data-fit]').forEach(el => this.fit(el.parentElement));
     const grid = this.rootRef.current && this.rootRef.current.querySelector('[data-ppl-grid]'); if (!grid) return;
     this.pplSet(this.pplPlayed, false, true);
     if (grid === this.pplGrid) return;
@@ -88,12 +91,13 @@ class YourPeople extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onFeatScroll); if (this.ioPpl) this.ioPpl.disconnect(); if (this.ro) this.ro.disconnect();
     [this.ioP, this.ioFilm].forEach(o => o && o.disconnect());
-    cancelAnimationFrame(this.raf); cancelAnimationFrame(this.fRaf); clearTimeout(this.filmTimer);
+    cancelAnimationFrame(this.raf); cancelAnimationFrame(this.fRaf); clearTimeout(this.filmTimer); clearTimeout(this.markTimer);
   }
   fit(wrap) {
     const el = wrap.querySelector('[data-fit]'); if (!el || !wrap.clientWidth) return;
     const [w, h] = el.getAttribute('data-fit').split('x').map(Number), s = Math.min(1, wrap.clientWidth / w);
-    el.style.transform = 'scale(' + s + ')'; el.style.left = Math.max(0, (wrap.clientWidth - w * s) / 2) + 'px'; wrap.style.height = (h * s) + 'px';
+    // data-fit-x crops that much off the left, for pictures that run off a phone's edges.
+    el.style.transform = 'scale(' + s + ')'; el.style.left = (Math.max(0, (wrap.clientWidth - w * s) / 2) - (+el.getAttribute('data-fit-x') || 0) * s) + 'px'; wrap.style.height = (h * s) + 'px';
   }
   // Laura's shape grows out from the centre the first time it's seen.
   initPoly() {
@@ -156,7 +160,8 @@ class YourPeople extends React.Component {
       flowD: Array.from({ length: cols }, (_, c) => { const x = ((c + .5) / cols * 100).toFixed(2); return 'M' + x + ' 0 C' + x + ' 55 50 45 50 100'; }).join(' '),
       toggleFilm: () => (this.playing ? this.pauseFilm() : this.playFilm()),
       seekFilm: e => { this.t = Math.min(this.FILM_LEN, Math.max(0, +e.target.value)); this.drawFilm(); },
-      filmPlaying: this.state.filmPlaying, filmPaused: !this.state.filmPlaying };
+      filmPlaying: this.state.filmPlaying, filmPaused: !this.state.filmPlaying,
+      heroOn: this.state.heroOn, onHero: on => this.setState({ heroOn: on }) };
     this.P.forEach((_, i) => {
       const on = i === sel;
       v['pk' + i] = () => this.setState({ pillar: i });
@@ -231,20 +236,13 @@ class YourPeople extends React.Component {
               <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:54px;padding:0 24px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.24)`)} className="yp-ac3e8255">Book a demo</a>
               <a href="#pillars" style={s(`display:inline-flex;align-items:center;height:54px;box-sizing:border-box;padding:0 24px;border-radius:999px;border:1px solid rgba(20,35,26,.2);color:#14231A;font:600 15.5px 'DM Sans',sans-serif`)} className="yp-ho2976a3">See the five pillars</a>
             </div>
-            <p style={s(`margin:28px 0 0;display:flex;align-items:center;gap:10px;font:500 14px 'DM Sans',sans-serif;color:rgba(20,35,26,.72)`)}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="5.5" y="10.5" width="13" height="9" rx="2.5"></rect>
-                <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path>
-              </svg>
-              Only they can read what they write, say or answer.
-            </p>
           </div>
-          <div style={s(`flex:1.4 1 420px;min-width:0;position:relative;height:620px`)}>
-            <div data-fit="640x620" style={s(`position:absolute;left:0;top:0;width:640px;height:620px;transform-origin:0 0`)}>
-              <div aria-hidden="true" style={s(`position:absolute;left:110px;top:0;width:420px;height:610px;border-radius:210px 210px 30px 24px / 210px 210px 30px 24px;background:radial-gradient(62% 40% at 50% 16%,rgba(217,234,110,.5) 0%,rgba(217,234,110,.14) 55%,rgba(217,234,110,0) 82%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 60%)`)}></div>
+          <div style={s(V.narrow ? `flex:1.4 1 420px;min-width:0;position:relative;height:730px;margin:0 calc(-1 * clamp(20px,5vw,48px));overflow:hidden` : `flex:1.4 1 420px;min-width:0;position:relative;height:730px`)}>
+            <div data-fit={V.narrow ? '470x730' : '640x730'} data-fit-x={V.narrow ? 85 : 0} style={s(`position:absolute;left:0;top:0;width:640px;height:730px;transform-origin:0 0`)}>
+              <div aria-hidden="true" style={s(`position:absolute;left:110px;top:0;width:420px;height:724px;border-radius:210px 210px 64px 48px / 210px 210px 64px 48px;background:radial-gradient(62% 34% at 50% 14%,rgba(217,234,110,.5) 0%,rgba(217,234,110,.14) 55%,rgba(217,234,110,0) 82%),radial-gradient(80% 26% at 50% 100%,rgba(217,234,110,.3) 0%,rgba(217,234,110,0) 100%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 60%)`)}></div>
               <div style={s(`position:absolute;left:34px;top:118px;transform:rotate(-7deg);width:214px;aspect-ratio:390/844;box-sizing:border-box;padding:6px;border-radius:35px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
                 <div style={s(`width:100%;height:100%;border-radius:30px;overflow:hidden;background:#0F2015`)}>
-                  <img src="/assets/v5/light/app-reflect.webp" alt="Reflect: What’s on your mind? nørma listening" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                  <img src="/assets/v5/light/app-home.webp" alt="nørma Home: Good evening, Fulfilment 67 with the five pillars" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
                 </div>
               </div>
               <div style={s(`position:absolute;left:392px;top:118px;transform:rotate(7deg);width:214px;aspect-ratio:390/844;box-sizing:border-box;padding:6px;border-radius:35px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
@@ -254,8 +252,18 @@ class YourPeople extends React.Component {
               </div>
               <div style={s(`position:absolute;left:189px;top:36px;width:262px;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:43px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
                 <div style={s(`width:100%;height:100%;border-radius:37px;overflow:hidden;background:#0F2015`)}>
-                  <img src="/assets/v5/light/app-home.webp" alt="nørma Home: Good evening, Fulfilment 67 with the five pillars" style={s(`display:block;width:100%;height:100%;object-fit:cover`)} />
+                  <HeroFilm onPlaying={V.onHero} />
                 </div>
+              </div>
+              <div style={s(`position:absolute;left:110px;top:612px;width:420px;height:104px;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease;opacity:${V.heroOn ? 0 : 1}`)}>
+                <p style={s(`margin:0;font:400 28px/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#14231A;text-align:center`)}>
+                  <svg className="nrm-nudge" viewBox="0 0 34 30" fill="none" stroke="#4A6B3A" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:1.05em;height:.92em;margin-right:.3em;vertical-align:-.04em`)}>
+                    <path d="M31 25C20 26 11 21 7 7"></path>
+                    <path d="M3 15L6.5 4.5L16 10"></path>
+                  </svg>
+                  <span className="nrm-mark" data-manual data-hero-mark style={{ '--mk': '#CBE04F' }}>Press play</span><br />
+                  and get to know nørma.
+                </p>
               </div>
             </div>
           </div>
