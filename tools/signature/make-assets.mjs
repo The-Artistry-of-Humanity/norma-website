@@ -1,13 +1,12 @@
 // Images for the email signatures at artistry-of-humanity.com/signature/<name>/.
-// The pages and images live in the AOH website repo (cloned next to this one),
-// as the images must come from the domain the emails come from; they're made
-// here because this repo has the nørma artwork. Rendered at 3x their display
-// size with transparent rounded corners, which every mail app shows correctly
-// (Outlook ignores CSS border-radius), then saved as palette PNGs, about a
-// third of the size. Rerun with:
+// They're made here because this repo has the nørma artwork, and written into
+// the AOH website repo (cloned next to this one), whose pages embed them in the
+// signature. Rendered with transparent rounded corners, which every mail app
+// shows correctly (Outlook ignores CSS border-radius), then saved at 2x their
+// display size as palette PNGs, to keep every email light. Rerun with:
 //   node tools/signature/make-assets.mjs
-// public/signature/ on this site keeps the first set: emails already sent
-// still load them, so leave those files alone.
+// public/signature/ on this site and on the AOH site keeps the earlier linked
+// images: emails already sent still load them, so leave those files alone.
 import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
@@ -15,7 +14,7 @@ import path from 'path';
 import fs from 'fs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const OUT = path.resolve(ROOT, '../aoh-website/public/signature');
+const OUT = path.resolve(ROOT, '../aoh-website/src/assets/signature');
 const A = f => 'file://' + path.join(ROOT, 'public/assets/v5', f);
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -54,7 +53,7 @@ for (const [name, [w, h, html]] of Object.entries(ASSETS).filter(([n]) => !ONLY.
   fs.writeFileSync(file, `<!doctype html><html><head><meta charset="utf-8"><style>*{margin:0;padding:0}html,body{background:transparent}</style></head><body>${html}</body></html>`);
   await p.goto('file://' + file, { waitUntil: 'networkidle0' });
   const shot = await p.screenshot({ omitBackground: true, clip: { x: 0, y: 0, width: w, height: h } });
-  await sharp(shot).png({ palette: true, quality: 95, effort: 10, compressionLevel: 9 }).toFile(path.join(OUT, name));
+  await sharp(shot).resize(w * 2 / 3, h * 2 / 3, { kernel: 'lanczos3' }).png({ palette: true, quality: 95, effort: 10, compressionLevel: 9 }).toFile(path.join(OUT, name));
   fs.unlinkSync(file);
   console.log('signature', name, Math.round(fs.statSync(path.join(OUT, name)).size / 1024) + ' KB');
   await p.close();
