@@ -11,7 +11,7 @@ import './YourPeople.dc.css';
 
 class YourPeople extends React.Component {
   state = { narrow: false, stack: false, cols: 5, ready: false, menu: false, pillar: null, feat: 0, filmPlaying: false, heroOn: false };
-  rootRef = React.createRef(); polyRef = React.createRef(); featRef = React.createRef();
+  rootRef = React.createRef(); polyRef = React.createRef(); featRef = React.createRef(); storeRef = React.createRef();
   filmCanvasRef = React.createRef(); filmSeekRef = React.createRef(); filmTimeRef = React.createRef();
   P = [
     { name: 'Health & Fitness', line: 'Sleep, movement, nutrition and energy: the physical base every other pillar rests on.', themes: ['Exercise', 'Nutrition', 'Body', 'Energy'], score: 71, q: 'Do you exercise regularly each week?', laura: '“I’m out walking before work most mornings, and I’ve kept my Thursday yoga class going since spring. Some weeks it’s the only hour that’s properly mine.”' },
@@ -31,6 +31,8 @@ class YourPeople extends React.Component {
     { name: 'Leila', img: 'leila', sc: [70, 64, 80, 67, 59] }];
   SHAPES = ['30px 20px 32px 22px / 22px 32px 20px 30px', '22px 32px 20px 30px / 30px 20px 32px 22px', '32px 22px 30px 20px / 20px 30px 22px 32px', '20px 30px 22px 32px / 32px 22px 30px 20px'];
   WEAK = 3; FILM_LEN = 36;
+  // The App Store screenshots, in listing order, with each one's headline.
+  STORE = [['01-whole-of-you', 'Look after the whole of you.'], ['02-find-out-why', 'Find out why you feel the way you do.'], ['03-just-talk', 'Journaling for people who hate writing.'], ['04-safety-net', 'Build a safety net for the hard weeks.'], ['05-gratitude', 'Rewire your brain with gratitude.'], ['06-reset', 'The right reset for how you feel.'], ['07-short-films', 'Short films that make it click.'], ['08-how-far', 'See how far you’ve come.'], ['09-private', 'No one at work sees what you share.']];
   band(s) {
     if (s >= 70) return { band: 'Thriving', col: '#2F8F5B', chipBg: 'rgba(78,154,99,.14)' };
     if (s >= 55) return { band: 'Steady', col: '#14231A', chipBg: 'rgba(20,35,26,.07)' };
@@ -139,6 +141,11 @@ class YourPeople extends React.Component {
   playFilm = () => { if (this.playing || !this.film) return; this.playing = true; this.prev = performance.now(); this.raf = requestAnimationFrame(this.tick); this.setState({ filmPlaying: true }); };
   pauseFilm = () => { if (!this.playing) return; this.playing = false; cancelAnimationFrame(this.raf); this.setState({ filmPlaying: false }); };
 
+  scrollStore(dir) {
+    const el = this.storeRef.current; if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * .8, behavior: this.reduced ? 'auto' : 'smooth' });
+  }
+
   renderVals() {
     const { narrow, stack, menu, feat, cols } = this.state;
     const start = (this.props.startPillar ?? 'Health') === 'Weakest' ? this.WEAK : 0;
@@ -161,7 +168,9 @@ class YourPeople extends React.Component {
       toggleFilm: () => (this.playing ? this.pauseFilm() : this.playFilm()),
       seekFilm: e => { this.t = Math.min(this.FILM_LEN, Math.max(0, +e.target.value)); this.drawFilm(); },
       filmPlaying: this.state.filmPlaying, filmPaused: !this.state.filmPlaying,
-      heroOn: this.state.heroOn, onHero: on => this.setState({ heroOn: on }) };
+      heroOn: this.state.heroOn, onHero: on => this.setState({ heroOn: on }),
+      storeRef: this.storeRef, store: this.STORE,
+      storeBack: () => this.scrollStore(-1), storeOn: () => this.scrollStore(1) };
     this.P.forEach((_, i) => {
       const on = i === sel;
       v['pk' + i] = () => this.setState({ pillar: i });
@@ -1003,6 +1012,45 @@ class YourPeople extends React.Component {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section id="the-app" style={s(`position:relative;z-index:1;margin-top:calc(-1 * clamp(40px,5.5vw,80px));border-radius:clamp(28px,4vw,56px) clamp(52px,7.5vw,112px) 0 0 / clamp(24px,3.5vw,48px) clamp(40px,5.5vw,80px) 0 0;background:#F4F2E6`)}>
+        <div style={s(`max-width:1200px;margin:0 auto;padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px);box-sizing:border-box;padding-top:clamp(96px,11vw,152px);padding-bottom:clamp(72px,8.5vw,120px)`)}>
+          <div style={s(`display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px clamp(32px,5vw,64px)`)}>
+            <div style={s(`flex:1 1 420px;min-width:0;max-width:640px`)}>
+              <span style={s(`font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:#4A6B3A`)}>The app</span>
+              <h2 style={s(`margin:14px 0 0;font:400 clamp(34px,4.2vw,50px)/1.08 'DM Serif Display',serif;letter-spacing:-.6px;color:#14231A;text-wrap:balance`)}>A real app, always <span className="nrm-mark">in their pocket</span>.</h2>
+              <p style={s(`margin:20px 0 0;max-width:32em;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.72);text-wrap:pretty`)}>
+                No web portal, no link to dig out. nørma is a native app, on their phone like any other.
+              </p>
+            </div>
+            {/* Not linked yet: the app isn't in the stores. Wrap each badge in its store link when it is. */}
+            <div style={s(`display:flex;flex-wrap:wrap;align-items:center;gap:12px`)}>
+              <img src="/assets/v5/appstore/badge-app-store.svg" alt="Download on the App Store" width="162" height="54" style={s(`display:block;height:54px;width:auto`)} />
+              <img src="/assets/v5/appstore/badge-google-play.png" alt="Get it on Google Play" width="182" height="54" loading="lazy" style={s(`display:block;height:54px;width:auto`)} />
+            </div>
+          </div>
+          <div style={s(`position:relative;margin-top:clamp(36px,4.5vw,56px);border-radius:28px;background:#fff;box-shadow:0 30px 70px -36px rgba(20,35,26,.4),0 0 0 1px rgba(20,35,26,.06);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,Helvetica,Arial,sans-serif`)}>
+            <div style={s(`display:flex;align-items:center;gap:clamp(14px,2vw,22px);padding:clamp(20px,2.6vw,32px)`)}>
+              <img src="/assets/v5/norma-app-icon.png" alt="" width="104" height="104" loading="lazy" style={s(`flex:none;display:block;width:clamp(72px,8vw,104px);height:auto;border-radius:22.5%;box-shadow:0 0 0 1px rgba(0,0,0,.06)`)} />
+              <div style={s(`flex:1;min-width:0`)}>
+                <div style={s(`font-size:clamp(20px,2.2vw,26px);font-weight:600;letter-spacing:-.3px;color:#1D1D1F`)}>nørma</div>
+                <div style={s(`margin-top:3px;font-size:clamp(13.5px,1.3vw,16px);line-height:1.3;color:#6E6E73`)}>Companion for your whole life</div>
+              </div>
+            </div>
+            <div style={s(`height:1px;margin:0 clamp(20px,2.6vw,32px);background:rgba(0,0,0,.08)`)}></div>
+            <div ref={V.storeRef} className="nrm-noscroll" tabIndex={0} role="region" aria-label="App Store screenshots" style={s(`display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-left:clamp(20px,2.6vw,32px);padding:clamp(20px,2.6vw,28px) clamp(20px,2.6vw,32px) clamp(24px,3vw,36px)`)}>
+              {V.store.map(([file, line]) => (
+                <img key={file} src={'/assets/v5/appstore/' + file + '.webp'} alt={line} width="500" height="1086" loading="lazy" style={s(`flex:none;display:block;width:clamp(190px,18.5vw,236px);height:auto;border-radius:20px;scroll-snap-align:start;box-shadow:0 0 0 1px rgba(0,0,0,.07)`)} />
+              ))}
+            </div>
+            {(V.wide) ? (
+              <>
+                <button type="button" onClick={V.storeBack} aria-label="Previous screenshots" className="yp-ac3e8255" style={s(`position:absolute;left:12px;bottom:calc(50% - 150px);width:44px;height:44px;border-radius:999px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;background:rgba(255,255,255,.92);color:#1D1D1F;box-shadow:0 6px 18px rgba(20,35,26,.2)`)}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+                <button type="button" onClick={V.storeOn} aria-label="More screenshots" className="yp-ac3e8255" style={s(`position:absolute;right:12px;bottom:calc(50% - 150px);width:44px;height:44px;border-radius:999px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;background:rgba(255,255,255,.92);color:#1D1D1F;box-shadow:0 6px 18px rgba(20,35,26,.2)`)}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+              </>
+            ) : null}
           </div>
         </div>
       </section>
