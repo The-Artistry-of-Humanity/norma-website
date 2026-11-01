@@ -73,15 +73,15 @@ class BookDemo extends React.Component {
             {(V.wide) ? (
               <>
                 <nav style={s(`display:flex;align-items:center;gap:28px;font:500 14px 'DM Sans',sans-serif`)}>
-                  <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Your people</a>
-                  <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">For leaders</a>
-                  <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">ROI</a>
-                  <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Our story</a>
+                  <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The app</a>
+                  <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The dashboard</a>
+                  <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The ROI</a>
+                  <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The story</a>
                 </nav>
               </>
             ) : null}
             <div style={s(`display:flex;align-items:center;gap:10px`)}>
-              <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:44px;padding:0 16px;white-space:nowrap;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 13px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(217,234,110,.22)`)} className="bd-ac3e8255">Book a demo</a>
+              <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:44px;padding:0 16px;white-space:nowrap;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 13px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(217,234,110,.22)`)} className="bd-ac3e8255">Get nørma</a>
               {(V.narrow) ? (
                 <>
                   <button type="button" onClick={V.toggleMenu} aria-label="Menu" style={s(`width:40px;height:40px;border-radius:999px;border:1px solid rgba(20,35,26,.16);background:transparent;display:flex;align-items:center;justify-content:center;color:#14231A;cursor:pointer;padding:0`)}>
@@ -98,10 +98,10 @@ class BookDemo extends React.Component {
         {(V.menuOpen) ? (
           <>
             <nav style={s(`padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column;border-top:1px solid rgba(20,35,26,.07);font:400 22px 'DM Serif Display',serif`)}>
-              <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>Your people</a>
-              <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>For leaders</a>
-              <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>ROI</a>
-              <a href="/our-story/" style={s(`padding:12px 0;color:#14231A`)}>Our story</a>
+              <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
+              <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
+              <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The ROI</a>
+              <a href="/our-story/" style={s(`padding:12px 0;color:#14231A`)}>The story</a>
             </nav>
           </>
         ) : null}
@@ -280,12 +280,12 @@ class BookDemo extends React.Component {
               <span style={s(`font:400 20px/1 'DM Serif Display',serif`)}>nørma</span>
             </a>
             <nav style={s(`display:flex;flex-wrap:wrap;gap:12px 28px;font:500 14px 'DM Sans',sans-serif`)}>
-              <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Your people</a>
-              <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">For leaders</a>
-              <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">ROI</a>
-              <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Our story</a>
+              <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The app</a>
+              <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The dashboard</a>
+              <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The ROI</a>
+              <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The story</a>
               <a href="/help/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Help</a>
-              <a href="/book-a-demo/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Book a demo</a>
+              <a href="/book-a-demo/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Get nørma</a>
             </nav>
           </div>
           <div style={s(`display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(20,35,26,.08);font:400 12.5px 'DM Sans',sans-serif;color:rgba(20,35,26,.66)`)}>

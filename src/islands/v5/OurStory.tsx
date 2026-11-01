@@ -19,7 +19,7 @@ const TOP_B = `position:relative;z-index:1;margin-top:calc(-1 * clamp(40px,5.5vw
 const ARCH = `border-radius:210px 210px 30px 24px / 210px 210px 30px 24px`;
 const EASE = `cubic-bezier(.22,.61,.36,1)`;
 
-const NAV = [['/your-people/', 'Your people'], ['/for-leaders/', 'For leaders'], ['/roi/', 'ROI'], ['/our-story/', 'Our story']];
+const NAV = [['/your-people/', 'The app'], ['/for-leaders/', 'The dashboard'], ['/roi/', 'The ROI'], ['/our-story/', 'The story']];
 
 const Quote = ({ text, dark }) => (
   <figure style={s(`margin:clamp(32px,4vw,44px) 0 0;padding:0`)}>
@@ -130,7 +130,7 @@ class OurStory extends React.Component {
                 </nav>
               ) : null}
               <div style={s(`display:flex;align-items:center;gap:10px`)}>
-                <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:44px;padding:0 16px;white-space:nowrap;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 13px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(217,234,110,.22)`)} className="os-press">Book a demo</a>
+                <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:44px;padding:0 16px;white-space:nowrap;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 13px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(217,234,110,.22)`)} className="os-press">Get nørma</a>
                 {narrow ? (
                   <button type="button" onClick={() => this.setState(st => ({ menu: !st.menu }))} aria-label="Menu" aria-expanded={menu} style={s(`width:40px;height:40px;border-radius:999px;border:1px solid rgba(20,35,26,.16);background:transparent;display:flex;align-items:center;justify-content:center;color:#14231A;cursor:pointer;padding:0`)}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M4 8h16"></path><path d="M4 16h16"></path></svg>
@@ -364,7 +364,7 @@ class OurStory extends React.Component {
                 <h2 style={s(`margin:26px auto 0;max-width:11em;font:400 clamp(40px,5.4vw,66px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:#14231A;text-wrap:balance`)}>Give your people <span className="nrm-mark">access to themselves</span>.</h2>
                 <p style={s(`margin:20px auto 0;max-width:24em;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>Thirty minutes with the team behind nørma. We’ll show you the app your people use and the dashboard you’d use alongside it.</p>
                 <div style={s(`display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px`)}>
-                  <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.24)`)} className="os-press">Book a demo</a>
+                  <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.24)`)} className="os-press">Get nørma</a>
                   <a href="/roi/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15.5px 'DM Sans',sans-serif`)} className="os-dark os-press">
                     Work out your ROI
                     <span aria-hidden="true">›</span>
@@ -383,7 +383,7 @@ class OurStory extends React.Component {
                 <span style={s(`font:400 20px/1 'DM Serif Display',serif`)}>nørma</span>
               </a>
               <nav style={s(`display:flex;flex-wrap:wrap;gap:12px 28px;font:500 14px 'DM Sans',sans-serif`)}>
-                {[...NAV, ['/help/', 'Help'], ['/book-a-demo/', 'Book a demo']].map(([href, label]) => <a key={href} href={href} style={s(`color:rgba(20,35,26,.72)`)} className="os-nav">{label}</a>)}
+                {[...NAV, ['/help/', 'Help'], ['/book-a-demo/', 'Get nørma']].map(([href, label]) => <a key={href} href={href} style={s(`color:rgba(20,35,26,.72)`)} className="os-nav">{label}</a>)}
               </nav>
             </div>
             <div style={s(`display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(20,35,26,.08);font:400 12.5px 'DM Sans',sans-serif;color:rgba(20,35,26,.66)`)}>
