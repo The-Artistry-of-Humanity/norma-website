@@ -293,8 +293,8 @@ class HomePage extends React.Component {
             {(V.wide) ? (
               <>
                 <nav style={s(`display:flex;align-items:center;gap:28px;font:500 14px 'DM Sans',sans-serif`)}>
-                  <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The app</a>
-                  <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The dashboard</a>
+                  <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The app</a>
+                  <a href="/dashboard/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The dashboard</a>
                   <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The ROI</a>
                   <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The story</a>
                 </nav>
@@ -318,8 +318,8 @@ class HomePage extends React.Component {
         {(V.menuOpen) ? (
           <>
             <nav style={s(`padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column;border-top:1px solid rgba(20,35,26,.07);font:400 22px 'DM Serif Display',serif`)}>
-              <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
-              <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
+              <a href="/app/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
+              <a href="/dashboard/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
               <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The ROI</a>
               <a href="/our-story/" style={s(`padding:12px 0;color:#14231A`)}>The story</a>
             </nav>
@@ -1063,7 +1063,7 @@ class HomePage extends React.Component {
                 {' '}She’s their companion, following their growth and supporting them along the way.
               </p>
             </div>
-            <a href="/your-people/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;margin-top:32px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15.5px 'DM Sans',sans-serif`)} className="hm-ho3cfe08 hm-ac3e8255">
+            <a href="/app/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;margin-top:32px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15.5px 'DM Sans',sans-serif`)} className="hm-ho3cfe08 hm-ac3e8255">
               See the whole app
               <span aria-hidden="true">›</span>
             </a>
@@ -1120,7 +1120,7 @@ class HomePage extends React.Component {
               <img src="/assets/v5/light/m-culture-card.webp" alt="" width="396" height="310" loading="lazy" />
             </div>
           </div>
-          <a href="/for-leaders/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;margin-top:32px;padding:0 24px;border-radius:999px;background:#F4F2E6;color:#14231A;font:600 15.5px 'DM Sans',sans-serif`)} className="hm-hof85d92 hm-ac3e8255">
+          <a href="/dashboard/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;margin-top:32px;padding:0 24px;border-radius:999px;background:#F4F2E6;color:#14231A;font:600 15.5px 'DM Sans',sans-serif`)} className="hm-hof85d92 hm-ac3e8255">
             See the dashboard
             <span aria-hidden="true">›</span>
           </a>
@@ -1167,8 +1167,8 @@ class HomePage extends React.Component {
               <span style={s(`font:400 20px/1 'DM Serif Display',serif`)}>nørma</span>
             </a>
             <nav style={s(`display:flex;flex-wrap:wrap;gap:12px 28px;font:500 14px 'DM Sans',sans-serif`)}>
-              <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The app</a>
-              <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The dashboard</a>
+              <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The app</a>
+              <a href="/dashboard/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The dashboard</a>
               <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The ROI</a>
               <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">The story</a>
               <a href="/help/" style={s(`color:rgba(20,35,26,.72)`)} className="hm-ho789e87">Help</a>

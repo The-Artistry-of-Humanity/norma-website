@@ -19,7 +19,7 @@ const TOP_B = `position:relative;z-index:1;margin-top:calc(-1 * clamp(40px,5.5vw
 const ARCH = `border-radius:210px 210px 30px 24px / 210px 210px 30px 24px`;
 const EASE = `cubic-bezier(.22,.61,.36,1)`;
 
-const NAV = [['/your-people/', 'The app'], ['/for-leaders/', 'The dashboard'], ['/roi/', 'The ROI'], ['/our-story/', 'The story']];
+const NAV = [['/app/', 'The app'], ['/dashboard/', 'The dashboard'], ['/roi/', 'The ROI'], ['/our-story/', 'The story']];
 
 const Quote = ({ text, dark }) => (
   <figure style={s(`margin:clamp(32px,4vw,44px) 0 0;padding:0`)}>
@@ -252,7 +252,7 @@ class OurStory extends React.Component {
                 <span style={s(`${EYEBROW};color:#4A6B3A`)}>For your people</span>
                 <h3 style={s(`margin:12px 0 0;font:400 clamp(28px,3vw,36px)/1.1 'DM Serif Display',serif;letter-spacing:-.4px;text-wrap:balance;color:#14231A`)}>Where their life is at.</h3>
                 <p style={s(`margin:12px 0 0;font:400 16.5px/1.6 'DM Sans',sans-serif;color:rgba(20,35,26,.72);text-wrap:pretty`)}>Their own app. A three-minute monthly check-in shows where they stand across five pillars of life, and the app helps them act on it. It all stays theirs.</p>
-                <a href="/your-people/" style={s(`margin-top:auto;padding-top:22px;display:inline-flex;align-items:center;gap:6px;font:600 15px 'DM Sans',sans-serif;color:#14231A`)} className="os-link">Meet the app <span aria-hidden="true">›</span></a>
+                <a href="/app/" style={s(`margin-top:auto;padding-top:22px;display:inline-flex;align-items:center;gap:6px;font:600 15px 'DM Sans',sans-serif;color:#14231A`)} className="os-link">Meet the app <span aria-hidden="true">›</span></a>
               </div>
               <div style={s(`position:relative;overflow:hidden;box-sizing:border-box;padding:${PAD};border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;background:linear-gradient(150deg,rgba(11,24,16,.97),rgba(15,32,21,.92));color:#F4F2E6;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.08),0 36px 70px -30px rgba(20,35,26,.5);display:flex;flex-direction:column`)}>
                 <div aria-hidden="true" style={s(`position:relative;height:clamp(230px,24vw,270px);margin:calc(-1 * ${PAD}) calc(-1 * ${PAD}) 30px;overflow:hidden;background:radial-gradient(60% 80% at 50% 100%,rgba(217,234,110,.2),rgba(217,234,110,0) 75%),#13261A`)}>
@@ -266,7 +266,7 @@ class OurStory extends React.Component {
                 <span style={s(`position:relative;${EYEBROW};color:#DCEC85`)}>For you</span>
                 <h3 style={s(`position:relative;margin:12px 0 0;font:400 clamp(28px,3vw,36px)/1.1 'DM Serif Display',serif;letter-spacing:-.4px;text-wrap:balance;color:#F6F4E9`)}>Where your culture is at.</h3>
                 <p style={s(`position:relative;margin:12px 0 0;font:400 16.5px/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>A dashboard for the organisation, each department and each team, from groups of five or more. Where to look, what to try, and whether it worked.</p>
-                <a href="/for-leaders/" style={s(`position:relative;margin-top:auto;padding-top:22px;display:inline-flex;align-items:center;gap:6px;font:600 15px 'DM Sans',sans-serif;color:#EAF79B`)} className="os-link-dark">See the dashboard <span aria-hidden="true">›</span></a>
+                <a href="/dashboard/" style={s(`position:relative;margin-top:auto;padding-top:22px;display:inline-flex;align-items:center;gap:6px;font:600 15px 'DM Sans',sans-serif;color:#EAF79B`)} className="os-link-dark">See the dashboard <span aria-hidden="true">›</span></a>
               </div>
             </div>
             <p style={s(`margin:clamp(44px,5.5vw,64px) auto 0;max-width:22em;text-align:center;font:400 clamp(24px,2.6vw,32px)/1.25 'DM Serif Display',serif;letter-spacing:-.3px;color:#14231A;text-wrap:balance`)}>

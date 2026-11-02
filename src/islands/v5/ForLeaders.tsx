@@ -118,8 +118,8 @@ class ForLeaders extends React.Component {
             {(V.wide) ? (
               <>
                 <nav style={s(`display:flex;align-items:center;gap:28px;font:500 14px 'DM Sans',sans-serif`)}>
-                  <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The app</a>
-                  <a href="/for-leaders/" style={s(`color:#14231A;padding:4px 0 2px;border-bottom:2px solid #D3E45F`)} className="fl-ho789e87">The dashboard</a>
+                  <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The app</a>
+                  <a href="/dashboard/" style={s(`color:#14231A;padding:4px 0 2px;border-bottom:2px solid #D3E45F`)} className="fl-ho789e87">The dashboard</a>
                   <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The ROI</a>
                   <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The story</a>
                 </nav>
@@ -143,8 +143,8 @@ class ForLeaders extends React.Component {
         {(V.menuOpen) ? (
           <>
             <nav style={s(`padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column;border-top:1px solid rgba(20,35,26,.07);font:400 22px 'DM Serif Display',serif`)}>
-              <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
-              <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
+              <a href="/app/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
+              <a href="/dashboard/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
               <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The ROI</a>
               <a href="/our-story/" style={s(`padding:12px 0;color:#14231A`)}>The story</a>
             </nav>
@@ -1216,7 +1216,7 @@ class ForLeaders extends React.Component {
             The check-in shows where things stand. Day to day shows what happens next: how many people used the app this month, and how often they kept a habit, reflected, reset or opened a growth journey.
           </p>
           <p style={s(`margin:18px 0 0;font:500 16px/1.5 'DM Sans',sans-serif`)}>
-            <a href="/your-people/#features" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="fl-hodb1b46">Explore everything in the app ›</a>
+            <a href="/app/#features" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="fl-hodb1b46">Explore everything in the app ›</a>
           </p>
           <div style={s(`margin-top:clamp(40px,5vw,64px)`)}>
             {(V.wide) ? (
@@ -1305,8 +1305,8 @@ class ForLeaders extends React.Component {
               <span style={s(`font:400 20px/1 'DM Serif Display',serif`)}>nørma</span>
             </a>
             <nav style={s(`display:flex;flex-wrap:wrap;gap:12px 28px;font:500 14px 'DM Sans',sans-serif`)}>
-              <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The app</a>
-              <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The dashboard</a>
+              <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The app</a>
+              <a href="/dashboard/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The dashboard</a>
               <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The ROI</a>
               <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">The story</a>
               <a href="/help/" style={s(`color:rgba(20,35,26,.72)`)} className="fl-ho789e87">Help</a>

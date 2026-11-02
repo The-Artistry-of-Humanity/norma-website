@@ -189,8 +189,8 @@ class RoiPage extends React.Component {
             {(V.wide) ? (
               <>
                 <nav style={s(`display:flex;align-items:center;gap:28px;font:500 14px 'DM Sans',sans-serif`)}>
-                  <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The app</a>
-                  <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The dashboard</a>
+                  <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The app</a>
+                  <a href="/dashboard/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The dashboard</a>
                   <a href="/roi/" style={s(`color:#14231A;padding:4px 0 2px;border-bottom:2px solid #D3E45F`)} className="ri-ho789e87">The ROI</a>
                   <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The story</a>
                 </nav>
@@ -214,8 +214,8 @@ class RoiPage extends React.Component {
         {(V.menuOpen) ? (
           <>
             <nav style={s(`padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column;border-top:1px solid rgba(20,35,26,.07);font:400 22px 'DM Serif Display',serif`)}>
-              <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
-              <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
+              <a href="/app/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
+              <a href="/dashboard/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
               <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The ROI</a>
               <a href="/our-story/" style={s(`padding:12px 0;color:#14231A`)}>The story</a>
             </nav>
@@ -648,7 +648,7 @@ class RoiPage extends React.Component {
               <span style={s(`display:block;font:400 22px 'DM Serif Display',serif;color:#14231A`)}>One check-in a month</span>
               <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
                 Your people get their own picture first. You get the group signal.{' '}
-                <a href="/your-people/" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="ri-hodb1b46">See the app ›</a>
+                <a href="/app/" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="ri-hodb1b46">See the app ›</a>
               </p>
             </div>
             <div style={s(`padding-top:22px;border-top:1px solid rgba(20,35,26,.12)`)}>
@@ -661,7 +661,7 @@ class RoiPage extends React.Component {
               <span style={s(`display:block;font:400 22px 'DM Serif Display',serif;color:#14231A`)}>Knowing, doing, proving</span>
               <p style={s(`margin:8px 0 0;font:400 15.5px/1.55 'DM Sans',sans-serif;color:rgba(20,35,26,.7);text-wrap:pretty`)}>
                 Where to look, what to do, and a dated record of both.{' '}
-                <a href="/for-leaders/" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="ri-hodb1b46">See the dashboard ›</a>
+                <a href="/dashboard/" style={s(`color:#14231A;border-bottom:1px solid rgba(20,35,26,.3)`)} className="ri-hodb1b46">See the dashboard ›</a>
               </p>
             </div>
           </div>
@@ -675,7 +675,7 @@ class RoiPage extends React.Component {
               </p>
               <div style={s(`display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px`)}>
                 <a href="/book-a-demo/" style={s(`display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:999px;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;font:600 15.5px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 12px 32px rgba(217,234,110,.24)`)} className="ri-ac3e8255">Get nørma</a>
-                <a href="/for-leaders/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15.5px 'DM Sans',sans-serif`)} className="ri-ho3cfe08 ri-ac3e8255">
+                <a href="/dashboard/" style={s(`display:inline-flex;align-items:center;gap:8px;height:54px;padding:0 24px;border-radius:999px;background:#14231A;color:#F4F2E6;font:600 15.5px 'DM Sans',sans-serif`)} className="ri-ho3cfe08 ri-ac3e8255">
                   See the dashboard
                   <span aria-hidden="true">›</span>
                 </a>
@@ -692,8 +692,8 @@ class RoiPage extends React.Component {
               <span style={s(`font:400 20px/1 'DM Serif Display',serif`)}>nørma</span>
             </a>
             <nav style={s(`display:flex;flex-wrap:wrap;gap:12px 28px;font:500 14px 'DM Sans',sans-serif`)}>
-              <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The app</a>
-              <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The dashboard</a>
+              <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The app</a>
+              <a href="/dashboard/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The dashboard</a>
               <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The ROI</a>
               <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">The story</a>
               <a href="/help/" style={s(`color:rgba(20,35,26,.72)`)} className="ri-ho789e87">Help</a>

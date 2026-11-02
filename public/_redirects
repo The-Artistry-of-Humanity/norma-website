@@ -1,3 +1,10 @@
+# The app and dashboard pages moved on 2 Nov 2026 to match the menu. Keep these:
+# emails, posts, decks and search results still use the old addresses.
+/your-people  /app/  301
+/your-people/  /app/  301
+/for-leaders  /dashboard/  301
+/for-leaders/  /dashboard/  301
+
 # Old help article addresses (first version, Oct 2026) moved to descriptive slugs.
 # Keep these when renaming again: links from the app and search results may still use them.
 /help/app/crisis  /help/app/when-you-need-more-support/  301

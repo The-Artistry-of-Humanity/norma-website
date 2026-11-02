@@ -73,8 +73,8 @@ class BookDemo extends React.Component {
             {(V.wide) ? (
               <>
                 <nav style={s(`display:flex;align-items:center;gap:28px;font:500 14px 'DM Sans',sans-serif`)}>
-                  <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The app</a>
-                  <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The dashboard</a>
+                  <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The app</a>
+                  <a href="/dashboard/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The dashboard</a>
                   <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The ROI</a>
                   <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The story</a>
                 </nav>
@@ -98,8 +98,8 @@ class BookDemo extends React.Component {
         {(V.menuOpen) ? (
           <>
             <nav style={s(`padding:8px clamp(20px,5vw,48px) 20px;display:flex;flex-direction:column;border-top:1px solid rgba(20,35,26,.07);font:400 22px 'DM Serif Display',serif`)}>
-              <a href="/your-people/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
-              <a href="/for-leaders/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
+              <a href="/app/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The app</a>
+              <a href="/dashboard/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The dashboard</a>
               <a href="/roi/" style={s(`padding:12px 0;border-bottom:1px solid rgba(20,35,26,.08);color:#14231A`)}>The ROI</a>
               <a href="/our-story/" style={s(`padding:12px 0;color:#14231A`)}>The story</a>
             </nav>
@@ -280,8 +280,8 @@ class BookDemo extends React.Component {
               <span style={s(`font:400 20px/1 'DM Serif Display',serif`)}>nørma</span>
             </a>
             <nav style={s(`display:flex;flex-wrap:wrap;gap:12px 28px;font:500 14px 'DM Sans',sans-serif`)}>
-              <a href="/your-people/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The app</a>
-              <a href="/for-leaders/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The dashboard</a>
+              <a href="/app/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The app</a>
+              <a href="/dashboard/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The dashboard</a>
               <a href="/roi/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The ROI</a>
               <a href="/our-story/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">The story</a>
               <a href="/help/" style={s(`color:rgba(20,35,26,.72)`)} className="bd-ho789e87">Help</a>
