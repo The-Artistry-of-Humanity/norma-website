@@ -17,6 +17,9 @@ select,input,textarea{font-family:'DM Sans',sans-serif}
 @keyframes nrmNudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .nrm-nudge{animation:nrmNudge 2.4s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.nrm-nudge{animation:none}}
+/* Hero films fill their frame (cover); full screen shows the whole picture. Two rules: one unknown selector would void both. */
+video:fullscreen{object-fit:contain!important}
+video:-webkit-full-screen{object-fit:contain!important}
 /* Phone pass (after the handoff): call-to-action buttons (the 54px pills) take
    the full width under 520px, stacked when there are two. The booking card's
    slot button stays beside nørma. */

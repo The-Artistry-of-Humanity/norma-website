@@ -6,6 +6,7 @@
    from the reference would drop them: diff before rerunning build-v5.sh. */
 import React from 'react';
 import { s } from '../../lib/s';
+import HeroFilm from './HeroFilm';
 import './ForLeaders.dc.css';
 
 
@@ -23,7 +24,7 @@ const PCL = ['#4E9A63', '#7A70C4', '#C9705F', '#C99A3F', '#4C9CB3'];
 const pts = v => v.map((x, i) => { const a = (-90 + 72 * i) * Math.PI / 180, r = 80 * x / 100; return [100 + r * Math.cos(a), 100 + r * Math.sin(a)]; });
 const soft = (p, t = .16) => { const n = p.length, L = (a, b) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t], f = q => q[0].toFixed(1) + ' ' + q[1].toFixed(1); let d = ''; for (let i = 0; i < n; i++) { const P = p[i], A = L(P, p[(i + n - 1) % n]), B = L(P, p[(i + 1) % n]); d += (i ? ' L' : 'M') + f(A) + ' Q' + f(P) + ' ' + f(B); } return d + ' Z'; };
 class ForLeaders extends React.Component {
-  state = { narrow: false, menu: false, lv: 0, pv: LV[0].vals.slice(), pc: LV[0].vals.slice(), pd: LV[0].vals.slice() };
+  state = { narrow: false, menu: false, filmOn: false, lv: 0, pv: LV[0].vals.slice(), pc: LV[0].vals.slice(), pd: LV[0].vals.slice() };
   rootRef = React.createRef(); tourRef = React.createRef(); tourImg = React.createRef(); levelsRef = React.createRef(); swarmRef = React.createRef();
   componentDidMount() {
     this.motion = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -35,10 +36,11 @@ class ForLeaders extends React.Component {
     this.armReveals();
     this.lio = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting && !this.cycle && !this.picked) this.cycle = setInterval(() => this.setLevel((this.state.lv + 1) % 3), 3800); else if (!en.isIntersecting && this.cycle) { clearInterval(this.cycle); this.cycle = 0; } }), { threshold: .35 });
     if (this.levelsRef.current) this.lio.observe(this.levelsRef.current);
+    this.markTimer = setTimeout(() => this.rootRef.current?.querySelector('[data-hero-mark]')?.classList.add('is-on'), 900);
     this.safety = setTimeout(() => { const r = this.rootRef.current; if (r && !this.ioFired) r.querySelectorAll('[data-reveal]').forEach(el => { if (el.style.opacity === '0' || el.style.strokeDashoffset === '1') this.show(el); }); }, 4000);
   }
   componentDidUpdate() { this.armReveals(); this.tour(); }
-  componentWillUnmount() { window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); cancelAnimationFrame(this.raf); clearTimeout(this.safety); clearInterval(this.cycle); cancelAnimationFrame(this.lraf); if (this.lio) this.lio.disconnect(); if (this.io) this.io.disconnect(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); cancelAnimationFrame(this.raf); clearTimeout(this.safety); clearTimeout(this.markTimer); clearInterval(this.cycle); cancelAnimationFrame(this.lraf); if (this.lio) this.lio.disconnect(); if (this.io) this.io.disconnect(); }
   // Elements below the fold start hidden and settle in once, when they scroll into view.
   armReveals() {
     const root = this.rootRef.current; if (!root || !this.io) return;
@@ -98,7 +100,7 @@ class ForLeaders extends React.Component {
       legend: LV.slice(0, lv + 1).map((l, j) => ({ name: l.name, sw: j === lv ? 'width:14px;height:2px;border-radius:2px;background:#4E9A63' : j === 0 ? 'width:14px;height:0;border-top:2px dashed rgba(20,35,26,.4)' : 'width:14px;height:0;border-top:2px dotted #9AAE84' })),
       gridCols: `minmax(0,1fr) repeat(${lv + 1},minmax(44px,58px))`,
       rows: PILLARS.map((n, i) => ({ name: n, c: PCL[i], vals: LV.slice(0, lv + 1).map((_, j) => { const x = j === lv ? pv[i] : j === 0 ? pc[i] : pd[i]; return { v: Math.round(x), st: j === lv ? `text-align:right;font:400 20px/1 'DM Serif Display',serif;color:${bandL(x)}` : `text-align:right;font:500 13px 'DM Sans',sans-serif;color:rgba(20,35,26,.5)` }; }) })) };
-    return { ...extra, swarmRef: this.swarmRef, rootRef: this.rootRef, tourRef: this.tourRef, tourImg: this.tourImg, wide: !narrow, narrow, menuOpen: narrow && menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })) };
+    return { ...extra, swarmRef: this.swarmRef, rootRef: this.rootRef, tourRef: this.tourRef, tourImg: this.tourImg, filmOn: this.state.filmOn, onFilm: on => this.setState({ filmOn: on }), wide: !narrow, narrow, menuOpen: narrow && menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })) };
   }
 
   render() {
@@ -163,31 +165,31 @@ class ForLeaders extends React.Component {
             </div>
           </div>
           <div style={s(`flex:1.5 1 460px;min-width:0;position:relative`)}>
-            <div aria-hidden="true" style={s(`position:absolute;left:10%;right:-4%;top:-10%;bottom:-14%;border-radius:999px 999px 30px 24px / 480px 480px 30px 24px;background:radial-gradient(64% 36% at 50% 10%,rgba(217,234,110,.5) 0%,rgba(217,234,110,.14) 55%,rgba(217,234,110,0) 82%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 60%)`)}></div>
-            {(V.wide) ? (
-              <>
-                <div style={s(`position:relative;padding-bottom:12%`)}>
-                  <div style={s(`position:relative;aspect-ratio:16/10;border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;overflow:hidden;background:#F6F5EE;box-shadow:0 46px 90px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.12)`)}>
-                    <div style={s(`height:26px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#ECEBE1;border-bottom:1px solid rgba(20,35,26,.08)`)}>
-                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
-                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
-                      <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
-                    </div>
-                    <img src="/assets/v5/light/dash-home-full.webp" alt="The nørma leader dashboard for Northwind: nørma Score 6.5, Fulfilment 61, Culture 68, a focus area and every department" style={s(`display:block;width:100%;height:auto`)} />
+            <div aria-hidden="true" style={s(`position:absolute;left:-4%;right:-4%;top:-10%;bottom:-18px;border-radius:999px 999px 30px 24px / 480px 480px 30px 24px;background:radial-gradient(64% 36% at 50% 10%,rgba(217,234,110,.5) 0%,rgba(217,234,110,.14) 55%,rgba(217,234,110,0) 82%),linear-gradient(180deg,#E8EACB 0%,#ECE8D7 60%)`)}></div>
+            <div style={s(`position:relative;padding-bottom:${V.wide ? 64 : 52}px`)}>
+              <div style={s(`position:relative`)}>
+                <div style={s(`position:relative;border-radius:22px 16px 24px 14px / 16px 24px 14px 22px;overflow:hidden;background:#F6F5EE;box-shadow:0 46px 90px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.12)`)}>
+                  <div style={s(`height:26px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#ECEBE1;border-bottom:1px solid rgba(20,35,26,.08)`)}>
+                    <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
+                    <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
+                    <span style={s(`width:8px;height:8px;border-radius:50%;background:rgba(20,35,26,.16)`)}></span>
                   </div>
-                  <div data-reveal="up" data-delay=".5" style={s(`position:absolute;right:-5%;bottom:0;width:30%;border-radius:26px 18px 28px 16px / 18px 28px 16px 26px;overflow:hidden;background:#FBFAF4;box-shadow:0 30px 60px -24px rgba(20,35,26,.45),0 0 0 1px rgba(20,35,26,.06)`)}>
-                    <img src="/assets/v5/light/department-pentagon.webp" alt="Fulfilment for Field Services, 44, drawn over Northwind’s 61" width="260" height="362" loading="lazy" style={s(`display:block;width:100%;height:auto`)} />
+                  <div style={s(`aspect-ratio:16/9`)}>
+                    <HeroFilm src="/assets/v5/film/dashboard.mp4" poster="/assets/v5/film/dashboard-poster.webp" full onPlaying={V.onFilm}
+                      label="nørma shows the dashboard with a sample organisation, Northwind: where to look, what to do about it, and whether it worked" />
                   </div>
                 </div>
-              </>
-            ) : null}
-            {(V.narrow) ? (
-              <>
-                <div style={s(`position:relative;max-width:360px;margin:0 auto;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;overflow:hidden;background:#0F2015;box-shadow:0 46px 90px -34px rgba(20,35,26,.6)`)}>
-                  <img src="/assets/v5/light/m-score-card.webp" alt="The nørma Score dial: 6.5, steady" style={s(`display:block;width:100%;height:auto`)} />
+                <div style={s(`position:absolute;left:${V.narrow ? 17 : 27}px;top:calc(100% + 16px);transition:opacity .3s ease;opacity:${V.filmOn ? 0 : 1}`)}>
+                  <p style={s(`margin:0;font:400 clamp(22px,2.2vw,26px)/1.2 'DM Serif Display',serif;letter-spacing:-.2px;color:#14231A;white-space:nowrap`)}>
+                    <svg className="nrm-nudge" viewBox="0 0 34 30" fill="none" stroke="#4A6B3A" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={s(`width:1.05em;height:.92em;margin-right:.3em;vertical-align:-.04em`)}>
+                      <path d="M31 25C20 26 11 21 7 7"></path>
+                      <path d="M3 15L6.5 4.5L16 10"></path>
+                    </svg>
+                    <span className="nrm-mark" data-manual data-hero-mark style={{ '--mk': '#CBE04F' }}>Press play</span> and take the tour.
+                  </p>
                 </div>
-              </>
-            ) : null}
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -261,7 +261,8 @@ class YourPeople extends React.Component {
               </div>
               <div style={s(`position:absolute;left:189px;top:36px;width:262px;aspect-ratio:390/844;box-sizing:border-box;padding:7px;border-radius:43px;background:#0B140E;box-shadow:0 44px 80px -34px rgba(20,35,26,.6),0 0 0 1px rgba(20,35,26,.14)`)}>
                 <div style={s(`width:100%;height:100%;border-radius:37px;overflow:hidden;background:#0F2015`)}>
-                  <HeroFilm onPlaying={V.onHero} />
+                  <HeroFilm src="/assets/v5/film/onboarding.mp4" poster="/assets/v5/film/onboarding-poster.webp" scaled onPlaying={V.onHero}
+                    label="nørma introduces the app: the five pillars, the monthly check-in and what to do in between" />
                 </div>
               </div>
               <div style={s(`position:absolute;left:110px;top:612px;width:420px;height:104px;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease;opacity:${V.heroOn ? 0 : 1}`)}>

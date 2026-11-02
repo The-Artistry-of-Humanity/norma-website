@@ -1,19 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { s } from '../../lib/s';
 
-/* The onboarding film, in the hero's centre phone. It never starts by itself: a
-   lime button plays it with sound on, so nobody misses the beginning, and nothing
-   downloads until then. While it plays there are pause and sound buttons on the
-   phone. It pauses when scrolled away and goes back to its poster at the end. On
-   phones the hero scales down too far to read, so the same button plays it full
+/* A film in a hero frame: the onboarding film in the centre phone on Your People,
+   the dashboard film in the browser window on the dashboard page. It never starts
+   by itself: a lime button plays it with sound on, so nobody misses the
+   beginning, and nothing downloads until then. While it plays there are pause and
+   sound buttons on the frame; `full` adds a full-screen button, which also plays
+   it. It pauses when scrolled away and goes back to its poster at the end. On
+   phones the frame is too small to read, so the same button plays it full
    screen. */
-const SRC = '/assets/v5/film/onboarding.mp4', POSTER = '/assets/v5/film/onboarding-poster.webp';
 const NARROW = 760;
 const glass = `border:0;cursor:pointer;color:#F6F4E9;background:rgba(27,50,37,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)`;
 const round = `position:absolute;bottom:14px;width:38px;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0;${glass}`;
 // Bottom left, where the pause button sits once it's playing: clear of nørma's
-// face and the captions. Larger on phones, where the whole hero scales down.
-const big = (px: number) => `position:absolute;left:${43 - px / 2 - 10}px;bottom:${43 - px / 2 - 10}px;width:${px}px;height:${px}px;border-radius:999px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 0 2px;color:#152213;background:linear-gradient(180deg,#E9F693,#D3E45F);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 20px rgba(20,35,26,.28)`;
+// face and the captions. On phones the whole picture plays it, so the button is
+// a cue: larger when the whole hero scales down there, otherwise smaller and
+// tucked into the corner, below nørma.
+const big = (px: number, at = 43 - px / 2 - 10) => `position:absolute;left:${at}px;bottom:${at}px;width:${px}px;height:${px}px;border-radius:999px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 0 2px;color:#152213;background:linear-gradient(180deg,#E9F693,#D3E45F);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 20px rgba(20,35,26,.28)`;
 
 const Svg = ({ children, size = 18 }: { children: React.ReactNode; size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{children}</svg>
@@ -26,8 +29,13 @@ const Sound = ({ on }: { on: boolean }) => (
     {on ? <path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11" /> : <path d="m16 9.5 5 5m0-5-5 5" />}
   </svg>
 );
+const Full = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" />
+  </svg>
+);
 
-export default function HeroFilm({ onPlaying }: { onPlaying?: (on: boolean) => void }) {
+export default function HeroFilm({ src, poster, label, scaled, full, onPlaying }: { src: string; poster: string; label: string; scaled?: boolean; full?: boolean; onPlaying?: (on: boolean) => void }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [narrow, setNarrow] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -48,7 +56,11 @@ export default function HeroFilm({ onPlaying }: { onPlaying?: (on: boolean) => v
     }
     const io = new IntersectionObserver(([e]) => { if (!e.isIntersecting) v.pause(); }, { threshold: .4 });
     io.observe(v);
-    return () => io.disconnect();
+    // Out of full screen it carries on in the frame, with our buttons again.
+    const onFull = () => { if (!document.fullscreenElement) v.controls = false; };
+    document.addEventListener('fullscreenchange', onFull);
+    v.addEventListener('webkitendfullscreen', onFull);
+    return () => { io.disconnect(); document.removeEventListener('fullscreenchange', onFull); v.removeEventListener('webkitendfullscreen', onFull); };
   }, []);
 
   const play = () => {
@@ -59,7 +71,15 @@ export default function HeroFilm({ onPlaying }: { onPlaying?: (on: boolean) => v
     v.controls = true;
     v.requestFullscreen?.().catch(() => {});
   };
-  const toggle = () => { if (ref.current?.paused) play(); else ref.current?.pause(); };
+  // Full screen has the browser's own controls (seeking too), so clicks are theirs.
+  const toggle = () => { const v = ref.current; if (!v || v.controls) return; if (v.paused) play(); else v.pause(); };
+  const fullScreen = () => {
+    const v = ref.current; if (!v) return;
+    v.play().catch(() => {});
+    v.controls = true;
+    if (v.requestFullscreen) v.requestFullscreen().catch(() => { v.controls = false; });
+    else (v as any).webkitEnterFullscreen?.();
+  };
   const toggleSound = () => {
     const v = ref.current; if (!v) return;
     v.muted = !v.muted; setMuted(v.muted);
@@ -68,13 +88,13 @@ export default function HeroFilm({ onPlaying }: { onPlaying?: (on: boolean) => v
 
   return (
     <div style={s(`position:relative;width:100%;height:100%`)}>
-      <video ref={ref} src={SRC} poster={POSTER} playsInline={!narrow} preload="none"
-        aria-label="nørma introduces the app: the five pillars, the monthly check-in and what to do in between"
+      <video ref={ref} src={src} poster={poster} playsInline={!narrow} preload="none" aria-label={label}
         onPlay={() => { show(true); setBegun(true); }} onPause={() => show(false)} onEnded={onEnded} onClick={toggle}
         style={s(`display:block;width:100%;height:100%;object-fit:cover;cursor:pointer`)} />
-      {!playing && <button type="button" onClick={play} aria-label="Play the film with sound" style={s(big(narrow ? 56 : 46))}><Play size={narrow ? 27 : 22} /></button>}
+      {!playing && <button type="button" onClick={play} aria-label="Play the film with sound" style={s(!narrow ? big(46) : scaled ? big(56) : big(34, 6))}><Play size={!narrow ? 22 : scaled ? 27 : 17} /></button>}
       {!narrow && playing && <button type="button" onClick={() => ref.current?.pause()} aria-label="Pause the film" style={s(`left:14px;${round}`)}><Pause /></button>}
-      {!narrow && begun && <button type="button" onClick={toggleSound} aria-label={muted ? 'Turn sound on' : 'Turn sound off'} style={s(`right:14px;${round}`)}><Sound on={!muted} /></button>}
+      {!narrow && begun && <button type="button" onClick={toggleSound} aria-label={muted ? 'Turn sound on' : 'Turn sound off'} style={s(`right:${full ? 60 : 14}px;${round}`)}><Sound on={!muted} /></button>}
+      {!narrow && full && <button type="button" onClick={fullScreen} aria-label="Watch full screen" style={s(`right:14px;${round}`)}><Full /></button>}
     </div>
   );
 }
