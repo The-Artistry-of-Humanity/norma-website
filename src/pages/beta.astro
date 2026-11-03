@@ -1,0 +1,131 @@
+---
+/* For our beta testers (Nov 2026): how to get the app and how to give feedback.
+   iPhone goes through TestFlight's public link; Android testers reach out and
+   we add them to Google Play's internal test by hand. Only reached from the
+   email we send them: not in the menu, the sitemap or search. The phone is
+   guessed from the browser and can be switched; #feedback opens the second tab. */
+import LayoutV5 from '../layouts/LayoutV5.astro';
+
+const TESTFLIGHT = 'https://testflight.apple.com/join/ADuF9epU';  // the "beta" external group's public link
+const TESTFLIGHT_APP = 'https://apps.apple.com/app/testflight/id899247664';
+---
+<LayoutV5 title="Testing nørma" description="How to get the nørma beta and send us your feedback." canonical="https://joinnorma.com/beta/">
+  <meta slot="head" name="robots" content="noindex" />
+  <main class="bt">
+    <a class="bt-logo" href="/"><img src="/assets/v5/norma-icon.png" alt="" width="30" height="30" /><span>nørma</span></a>
+
+    <span class="bt-eyebrow">For our testers</span>
+    <h1>Thanks for testing <span class="nrm-mark">nørma</span>.</h1>
+
+    <div class="bt-tabs" role="tablist" aria-label="What you need">
+      <button type="button" role="tab" id="tab-get" aria-controls="get" aria-selected="true">Get the app</button>
+      <button type="button" role="tab" id="tab-feedback" aria-controls="feedback" aria-selected="false">Give feedback</button>
+    </div>
+
+    <div class="bt-os" role="group" aria-label="Your phone">
+      <span>Your phone</span>
+      <button type="button" data-os="ios" aria-pressed="true">iPhone</button>
+      <button type="button" data-os="android" aria-pressed="false">Android</button>
+    </div>
+    <p class="bt-desk">Open this page on your phone: the links only work there.</p>
+
+    <section id="get" role="tabpanel" aria-labelledby="tab-get">
+      <ol class="bt-steps" data-for="ios">
+        <li>
+          <b>Install TestFlight.</b> It’s Apple’s app for trying apps before they’re in the App Store.
+          <a class="bt-btn" href={TESTFLIGHT_APP}>TestFlight on the App Store</a>
+        </li>
+        <li>
+          <b>Open the nørma beta.</b> Tap the button, then Accept and Install.
+          <a class="bt-btn bt-lime" href={TESTFLIGHT}>Open nørma in TestFlight</a>
+        </li>
+        <li>
+          <b>Sign in.</b> In the email “Your space in nørma is ready”, tap “Set your password”. Then open nørma and sign in with that email.
+        </li>
+      </ol>
+      <p class="bt-card" data-for="android" hidden>Reach out to us and we’ll set you up.</p>
+    </section>
+
+    <section id="feedback" role="tabpanel" aria-labelledby="tab-feedback" hidden>
+      <h2>Tell us about anything</h2>
+      <ul class="bt-look">
+        <li>you don’t understand</li>
+        <li>you struggle with</li>
+        <li>that looks broken or doesn’t work</li>
+        <li>else that comes to mind</li>
+      </ul>
+      <ol class="bt-steps" data-for="ios">
+        <li><b>Take a screenshot</b> where it happens.</li>
+        <li><b>Tap the preview</b> in the bottom-left corner. Draw on it if that helps.
+          <span class="bt-wide"><span class="bt-phone"><img src="/assets/v5/beta/feedback-preview.webp" alt="nørma on an iPhone, with the new screenshot’s preview in the bottom-left corner highlighted" width="540" height="1187" loading="lazy" /></span></span></li>
+        <li><b>Tap the share button</b> at the top.
+          <span class="bt-wide"><span class="bt-phone"><img src="/assets/v5/beta/feedback-share.webp" alt="The screenshot open on the iPhone, with the share button at the top highlighted" width="540" height="1169" loading="lazy" /></span></span></li>
+        <li><b>Tap Share Beta Feedback.</b>
+          <img src="/assets/v5/beta/feedback-beta.webp" alt="The share options, with Share Beta Feedback highlighted" width="760" height="291" loading="lazy" /></li>
+        <li><b>Say what happened</b> and tap the blue arrow.
+          <img src="/assets/v5/beta/feedback-send.webp" alt="The Send Feedback form, with the blue send arrow highlighted" width="700" height="740" loading="lazy" /></li>
+      </ol>
+      <p class="bt-note" data-for="ios">Nothing to show? Open TestFlight, tap nørma, then Send Beta Feedback.</p>
+      <p class="bt-card" data-for="android" hidden>Take a screenshot where it happens and send it to us with a line on what happened.</p>
+    </section>
+  </main>
+
+  <script is:inline>(() => {
+    const tabs = [...document.querySelectorAll('.bt-tabs [role=tab]')];
+    const showTab = id => tabs.forEach(t => {
+      const on = t.getAttribute('aria-controls') === id;
+      t.setAttribute('aria-selected', on);
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    tabs.forEach(t => t.addEventListener('click', () => { const id = t.getAttribute('aria-controls'); showTab(id); history.replaceState(null, '', id === 'feedback' ? '#feedback' : location.pathname); }));
+    if (location.hash === '#feedback') showTab('feedback');
+
+    const ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
+    const showOs = os => {
+      document.querySelectorAll('.bt-os [data-os]').forEach(b => b.setAttribute('aria-pressed', b.dataset.os === os));
+      document.querySelectorAll('[data-for]').forEach(el => { el.hidden = el.dataset.for !== os; });
+    };
+    document.querySelectorAll('.bt-os [data-os]').forEach(b => b.addEventListener('click', () => showOs(b.dataset.os)));
+    showOs(android ? 'android' : 'ios');
+    if (ios || android) document.querySelector('.bt-desk').hidden = true;
+  })();</script>
+</LayoutV5>
+
+<style>
+  .bt{max-width:560px;margin:0 auto;padding:28px 20px 96px;box-sizing:border-box;font:400 17px/1.55 'DM Sans',sans-serif;color:#14231A}
+  .bt-logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:48px}
+  .bt-logo img{display:block;border-radius:9px}
+  .bt-logo span{font:400 23px/1 'DM Serif Display',serif;letter-spacing:-.2px}
+  .bt-eyebrow{display:block;font:600 11px 'DM Sans',sans-serif;letter-spacing:2.4px;text-transform:uppercase;color:rgba(20,35,26,.6)}
+  .bt h1{margin:14px 0 32px;font:400 clamp(38px,9vw,52px)/1.06 'DM Serif Display',serif;letter-spacing:-.6px;text-wrap:balance}
+  .bt h2{margin:0 0 6px;font:400 24px/1.2 'DM Serif Display',serif}
+
+  .bt-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:999px;background:#E8E6D6}
+  .bt-tabs button{height:48px;border:0;border-radius:999px;background:transparent;color:rgba(20,35,26,.7);font:600 15px 'DM Sans',sans-serif;cursor:pointer}
+  .bt-tabs button[aria-selected=true]{background:#14231A;color:#F6F4E9}
+
+  .bt-os{display:flex;align-items:center;gap:8px;margin:22px 0 8px;font:500 14px 'DM Sans',sans-serif;color:rgba(20,35,26,.6)}
+  .bt-os span{margin-right:4px}
+  .bt-os button{height:36px;padding:0 16px;border-radius:999px;border:1px solid rgba(20,35,26,.2);background:transparent;color:#14231A;font:600 14px 'DM Sans',sans-serif;cursor:pointer}
+  .bt-os button[aria-pressed=true]{border-color:transparent;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213}
+  .bt-desk{margin:0 0 4px;font-size:14px;color:rgba(20,35,26,.6)}
+
+  .bt section{margin-top:22px}
+  .bt-steps{margin:0;padding:0;list-style:none;counter-reset:step;display:grid;gap:12px}
+  .bt-steps li{counter-increment:step;position:relative;padding:18px 20px 18px 62px;border-radius:22px;background:#FBFAF4;box-shadow:0 0 0 1px rgba(20,35,26,.07)}
+  .bt-steps li::before{content:counter(step);position:absolute;left:18px;top:16px;width:30px;height:30px;border-radius:999px;background:#14231A;color:#F6F4E9;font:400 17px/30px 'DM Serif Display',serif;text-align:center}
+  .bt-steps b{font-weight:600}
+  .bt-btn{display:flex;align-items:center;justify-content:center;height:50px;margin-top:14px;border-radius:999px;border:1px solid rgba(20,35,26,.2);font:600 15px 'DM Sans',sans-serif;color:#14231A}
+  .bt-lime{border-color:transparent;background:linear-gradient(180deg,#E9F693,#D3E45F);color:#152213;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(217,234,110,.22)}
+  .bt-steps img{display:block;width:calc(100% + 42px);height:auto;margin:14px 0 2px -42px;border-radius:14px;box-shadow:0 0 0 1px rgba(20,35,26,.08)}
+  /* Whole-screen shots sit in a phone, centred across the card. */
+  .bt-wide{display:block;width:calc(100% + 42px);margin:16px 0 4px -42px}
+  .bt-phone{display:block;width:min(230px,72%);margin:0 auto;padding:5px;border-radius:32px;background:#0B140E;box-shadow:0 22px 44px -26px rgba(20,35,26,.55)}
+  .bt-steps .bt-phone img{width:100%;margin:0;border-radius:27px;box-shadow:none}
+  .bt-card{margin:0;padding:18px 20px;border-radius:22px;background:#FBFAF4;box-shadow:0 0 0 1px rgba(20,35,26,.07)}
+
+  .bt-look{margin:0 0 22px;padding-left:1.2em}
+  .bt-look li{margin:2px 0}
+  .bt-note{margin:16px 0 0;font-size:15px;color:rgba(20,35,26,.7)}
+  [hidden]{display:none!important}
+</style>
