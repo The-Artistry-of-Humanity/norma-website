@@ -859,8 +859,8 @@ class HomePage extends React.Component {
             <h2 style={s(`margin:0 auto;max-width:11em;font:400 clamp(40px,5.4vw,68px)/1.04 'DM Serif Display',serif;letter-spacing:-.9px;color:inherit;text-wrap:balance`)}>nørma turns the <span className="nrm-mark" data-manual="">lights on</span>.</h2>
             <p style={s(`margin:20px auto 0;font:400 clamp(17px,1.4vw,19px)/1.6 'DM Sans',sans-serif;color:inherit;opacity:.7`)}>Every month, for every team.</p>
           </div>
-          <div style={s(`position:relative;z-index:1;max-width:980px;margin:clamp(40px,5vw,64px) auto 0;aspect-ratio:16/9;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;overflow:hidden;background:#F6F5EE;box-shadow:0 34px 64px -34px rgba(20,35,26,.55),0 0 0 1px rgba(20,35,26,.08)`)}>
-            <HeroFilm src="/assets/v5/film/intro.mp4" poster="/assets/v5/film/intro-poster.webp" full
+          <div style={s(`position:relative;z-index:1;max-width:980px;margin:clamp(40px,5vw,64px) auto 0;aspect-ratio:16/9;border-radius:30px 20px 32px 22px / 22px 32px 20px 30px;overflow:hidden;background:#0B111A;box-shadow:0 34px 64px -34px rgba(20,35,26,.55),0 0 0 1px rgba(20,35,26,.08)`)}>
+            <HeroFilm src="/assets/v5/film/intro.mp4" poster="/assets/v5/film/intro-poster.webp" full center
               label="A short film about nørma: the app for your people and the dashboard for you" />
           </div>
           <ol ref={V.stepsRef} style={s(`position:relative;list-style:none;margin:clamp(48px,6vw,72px) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(40px,4vw,48px) clamp(28px,3.4vw,48px)`)}>

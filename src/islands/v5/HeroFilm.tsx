@@ -12,11 +12,15 @@ import { s } from '../../lib/s';
 const NARROW = 760;
 const glass = `border:0;cursor:pointer;color:#F6F4E9;background:rgba(27,50,37,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)`;
 const round = `position:absolute;bottom:14px;width:38px;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0;${glass}`;
+const lime = `border-radius:999px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#152213;background:linear-gradient(180deg,#E9F693,#D3E45F)`;
 // Bottom left, where the pause button sits once it's playing: clear of nørma's
 // face and the captions. On phones the whole picture plays it, so the button is
 // a cue: larger when the whole hero scales down there, otherwise smaller and
 // tucked into the corner, below nørma.
-const big = (px: number, at = 43 - px / 2 - 10) => `position:absolute;left:${at}px;bottom:${at}px;width:${px}px;height:${px}px;border-radius:999px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 0 2px;color:#152213;background:linear-gradient(180deg,#E9F693,#D3E45F);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 20px rgba(20,35,26,.28)`;
+const big = (px: number, at = 43 - px / 2 - 10) => `position:absolute;left:${at}px;bottom:${at}px;width:${px}px;height:${px}px;padding:0 0 0 2px;${lime};box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 20px rgba(20,35,26,.28)`;
+// `center`: in the middle and larger, with a lime halo, where the film sits mid-page
+// and nothing else points at it (the home page).
+const mid = (px: number) => `position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:${px}px;height:${px}px;padding:0 0 0 4px;${lime};box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 0 ${Math.round(px / 7)}px rgba(217,234,110,.28),0 14px 34px rgba(0,0,0,.35)`;
 
 const Svg = ({ children, size = 18 }: { children: React.ReactNode; size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{children}</svg>
@@ -35,7 +39,7 @@ const Full = () => (
   </svg>
 );
 
-export default function HeroFilm({ src, poster, label, scaled, full, onPlaying }: { src: string; poster: string; label: string; scaled?: boolean; full?: boolean; onPlaying?: (on: boolean) => void }) {
+export default function HeroFilm({ src, poster, label, scaled, full, center, onPlaying }: { src: string; poster: string; label: string; scaled?: boolean; full?: boolean; center?: boolean; onPlaying?: (on: boolean) => void }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [narrow, setNarrow] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -91,7 +95,7 @@ export default function HeroFilm({ src, poster, label, scaled, full, onPlaying }
       <video ref={ref} src={src} poster={poster} playsInline={!narrow} preload="none" aria-label={label}
         onPlay={() => { show(true); setBegun(true); }} onPause={() => show(false)} onEnded={onEnded} onClick={toggle}
         style={s(`display:block;width:100%;height:100%;object-fit:cover;cursor:pointer`)} />
-      {!playing && <button type="button" onClick={play} aria-label="Play the film with sound" style={s(!narrow ? big(46) : scaled ? big(56) : big(34, 6))}><Play size={!narrow ? 22 : scaled ? 27 : 17} /></button>}
+      {!playing && <button type="button" onClick={play} aria-label="Play the film with sound" style={s(center ? mid(narrow ? 46 : 84) : !narrow ? big(46) : scaled ? big(56) : big(34, 6))}><Play size={center ? (narrow ? 21 : 36) : !narrow ? 22 : scaled ? 27 : 17} /></button>}
       {!narrow && playing && <button type="button" onClick={() => ref.current?.pause()} aria-label="Pause the film" style={s(`left:14px;${round}`)}><Pause /></button>}
       {!narrow && begun && <button type="button" onClick={toggleSound} aria-label={muted ? 'Turn sound on' : 'Turn sound off'} style={s(`right:${full ? 60 : 14}px;${round}`)}><Sound on={!muted} /></button>}
       {!narrow && full && <button type="button" onClick={fullScreen} aria-label="Watch full screen" style={s(`right:14px;${round}`)}><Full /></button>}
