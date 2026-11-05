@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { s } from '../../lib/s';
 
-/* A film in a hero frame: the onboarding film in the centre phone on Your People,
-   the dashboard film in the browser window on the dashboard page. It never starts
-   by itself: a lime button plays it with sound on, so nobody misses the
-   beginning, and nothing downloads until then. While it plays there are pause and
-   sound buttons on the frame; `full` adds a full-screen button, which also plays
-   it. It pauses when scrolled away and goes back to its poster at the end. On
-   phones the frame is too small to read, so the same button plays it full
-   screen. */
+/* A film in a frame: the onboarding film in the centre phone on Your People, the
+   dashboard film in the browser window on the dashboard page, and the intro film
+   under "nørma turns the lights on" on the home page. It never starts by itself:
+   a lime button plays it with sound on, so nobody misses the beginning, and
+   nothing downloads until then. While it plays there are pause and sound buttons
+   on the frame; `full` adds a full-screen button, which also plays it. It pauses
+   when scrolled away and goes back to its poster at the end. On phones the frame
+   is too small to read, so the same button plays it full screen. */
 const NARROW = 760;
 const glass = `border:0;cursor:pointer;color:#F6F4E9;background:rgba(27,50,37,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)`;
 const round = `position:absolute;bottom:14px;width:38px;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0;${glass}`;
