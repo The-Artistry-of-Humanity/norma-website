@@ -619,7 +619,7 @@ class RoiPage extends React.Component {
             </div>
           </div>
           <p style={s(`margin:clamp(40px,5vw,64px) auto 0;max-width:34em;text-align:center;font:400 clamp(17px,1.35vw,18px)/1.6 'DM Sans',sans-serif;color:rgba(201,212,194,.9);text-wrap:pretty`)}>
-            Turnover, absence and presenteeism are where the human case shows up in your numbers, and where it comes back. Human strategy comes first. Business strategy follows from it.
+            Turnover, absence and presenteeism are where the human case shows up in your numbers, and where it comes back. People strategy comes first. Business strategy follows from it.
           </p>
         </div>
       </section>
